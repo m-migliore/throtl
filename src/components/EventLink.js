@@ -3,9 +3,13 @@ import React, { Component } from 'react';
 
 class EventLink extends Component {
 
+  handleClick(e) {
+    
+  }
+
   render() {
     return (
-      <li>{this.props.title}</li>
+      <li onClick={this.handleClick}>{this.props.title}</li>
     );
   }
 
