@@ -1,13 +1,13 @@
 const defaultState = {
-  meh: "heh"
+  f1Data: []
 }
 
 export default function reducer(state = defaultState, action) {
   switch(action.type) {
-    case "TEST":
+    case "LOAD_F1_DATA":
     return {
       ...state,
-      meh: action.payload
+      f1Data: action.payload
     }
     default:
       return defaultState
