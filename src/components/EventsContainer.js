@@ -4,14 +4,19 @@ import { connect } from 'react-redux'
 class EventsContainer extends Component {
   render() {
     return (
-      <h2>Events Container</h2>
+      <div>
+        <h2>Events</h2>
+        <ul>
+          {this.props.events.map(event => <li key={event.idEvent}>{event.strEvent}</li>)}
+        </ul>
+      </div>
     )
   }
 }
 
 const mapStateToProps = state => {
   return {
-    eventDetails: state.eventDetails
+    events: state.events
   }
 }
 

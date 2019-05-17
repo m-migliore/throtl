@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import { connect } from 'react-redux'
+import EventsContainer from './components/EventsContainer'
 
 class App extends Component {
   componentDidMount() {
@@ -18,7 +19,7 @@ class App extends Component {
       console.log(data.events)
     })
   }
-  
+
   render() {
     return (
       <div className={"container mx-auto"}>
@@ -27,10 +28,7 @@ class App extends Component {
         <p>{this.props.about.strDescriptionEN}</p>
         <br />
         <br />
-        <h2>Events</h2>
-        <ul>
-          {this.props.events.map(event => <li key={event.idEvent}>{event.strEvent}</li>)}
-        </ul>
+        <EventsContainer />
       </div>
     )
   }
@@ -38,8 +36,7 @@ class App extends Component {
 
 const mapStateToProps = state => {
   return {
-    about: state.about,
-    events: state.events
+    about: state.about
   }
 }
 
