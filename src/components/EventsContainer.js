@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import EventLink from './EventLink'
 
 class EventsContainer extends Component {
   render() {
@@ -7,7 +8,7 @@ class EventsContainer extends Component {
       <div>
         <h2>Events</h2>
         <ul>
-          {this.props.events.map(event => <li key={event.idEvent}>{event.strEvent}</li>)}
+          {this.props.events.map(event => <EventLink key={event.idEvent} title={event.strEvent}/>)}
         </ul>
       </div>
     )
