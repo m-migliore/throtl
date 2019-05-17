@@ -4,9 +4,6 @@ import { connect } from 'react-redux'
 
 class App extends Component {
   componentDidMount() {
-    // fetch('https://www.thesportsdb.com/api/v1/json/1/lookupleague.php?id=4370')
-    // .then(r => r.json())
-    // .then(data => this.props.loadf1Data(data))
     fetch('https://www.thesportsdb.com/api/v1/json/1/lookupleague.php?id=4370')
     .then(r => r.json())
     .then(data => {
@@ -21,6 +18,7 @@ class App extends Component {
       console.log(data.events)
     })
   }
+  
   render() {
     return (
       <div className={"container mx-auto"}>
