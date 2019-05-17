@@ -1,13 +1,19 @@
 const defaultState = {
-  f1Data: []
+  about: [],
+  events: []
 }
 
 export default function reducer(state = defaultState, action) {
   switch(action.type) {
-    case "LOAD_F1_DATA":
+    case "LOAD_ABOUT":
     return {
       ...state,
-      f1Data: action.payload
+      about: action.payload
+    }
+    case "LOAD_EVENTS":
+    return {
+      ...state,
+      events: action.payload
     }
     default:
       return defaultState

@@ -10,16 +10,29 @@ class App extends Component {
     fetch('https://www.thesportsdb.com/api/v1/json/1/lookupleague.php?id=4370')
     .then(r => r.json())
     .then(data => {
-      this.props.loadf1Data(data.leagues[0])
+      this.props.loadAbout(data.leagues[0])
       console.log(data.leagues[0])
+    })
+
+    fetch('https://www.thesportsdb.com/api/v1/json/1/eventsseason.php?id=4370')
+    .then(r => r.json())
+    .then(data => {
+      this.props.loadEvents(data.events)
+      console.log(data.events)
     })
   }
   render() {
     return (
       <div className={"container mx-auto"}>
-        <h1>{this.props.f1Data.strLeague}</h1>
+        <h1>{this.props.about.strLeague}</h1>
         <h2>About</h2>
-        <p>{this.props.f1Data.strDescriptionEN}</p>
+        <p>{this.props.about.strDescriptionEN}</p>
+        <br />
+        <br />
+        <h2>Events</h2>
+        <ul>
+          {this.props.events.map(event => <li key={event.idEvent}>{event.strEvent}</li>)}
+        </ul>
       </div>
     )
   }
@@ -27,13 +40,15 @@ class App extends Component {
 
 const mapStateToProps = state => {
   return {
-    f1Data: state.f1Data
+    about: state.about,
+    events: state.events
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    loadf1Data: data => dispatch({type: "LOAD_F1_DATA", payload: data})
+    loadAbout: data => dispatch({type: "LOAD_ABOUT", payload: data}),
+    loadEvents: data =>  dispatch({type: "LOAD_EVENTS", payload: data})
   }
 }
 
