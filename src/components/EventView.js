@@ -6,12 +6,17 @@ class EventView extends Component {
     let eventId = this.props.eventId
     fetch(`https://www.thesportsdb.com/api/v1/json/1/lookupevent.php?id=${eventId}`)
     .then(r => r.json())
-    .then(data => console.log(data.events[0]))
+    .then(data => this.props.loadEventData(data.events[0]))
   }
 
   render() {
+    const eventData = this.props.eventData
+
     return (
-      <div><h1>EventView</h1></div>
+      <div className="event-view">
+        <h1>{eventData.strEvent}</h1>
+        <h3>{eventData.dateEvent} {eventData.strTime}</h3>
+      </div>
     );
   }
 
@@ -19,8 +24,15 @@ class EventView extends Component {
 
 const mapStateToProps = state => {
   return {
-    eventId: state.eventId
+    eventId: state.eventId,
+    eventData: state.eventData
   }
 }
 
-export default connect(mapStateToProps)(EventView);
+const mapDispatchToProps = dispatch => {
+  return {
+    loadEventData: eventData => dispatch({type: "LOAD_EVENT_DATA", payload: eventData})
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(EventView);
