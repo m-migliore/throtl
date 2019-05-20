@@ -1,25 +1,25 @@
 import React, { Component } from 'react';
-// import { connect } from 'react-redux'
+import { connect } from 'react-redux'
 
 class EventLink extends Component {
 
-  handleClick(e) {
-    
+  handleClick() {
+    console.log(this.props.eventId);
+    this.props.addEventId(this.props.eventId)
   }
 
   render() {
     return (
-      <li onClick={this.handleClick}>{this.props.title}</li>
+      <li onClick={this.handleClick.bind(this)}>{this.props.title}</li>
     );
   }
 
 }
 
-// const mapStateToProps = state => {
-//   return {
-//     event: state.event
-//   }
-// }
+const mapDispatchToProps = dispatch => {
+  return {
+    addEventId: eventId => dispatch({type:"ADD_EVENT_ID", payload: eventId})
+  }
+}
 
-// export default connect(mapStateToProps)(EventLink)
-export default EventLink
+export default connect(null,mapDispatchToProps)(EventLink)

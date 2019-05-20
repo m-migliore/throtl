@@ -20,6 +20,12 @@ class App extends Component {
     })
   }
 
+  componentDidUpdate() {
+    if (this.props.eventId) {
+      console.log("event id added:", this.props.eventId);
+    }
+  }
+
   render() {
     return (
       <div className={"container mx-auto"}>
@@ -36,7 +42,8 @@ class App extends Component {
 
 const mapStateToProps = state => {
   return {
-    about: state.about
+    about: state.about,
+    eventId: state.eventId
   }
 }
 

@@ -1,7 +1,7 @@
 const defaultState = {
   about: [],
   events: [],
-  event: null
+  eventId: null
 }
 
 export default function reducer(state = defaultState, action) {
@@ -16,15 +16,15 @@ export default function reducer(state = defaultState, action) {
       ...state,
       events: action.payload
     }
-    case "LOAD_EVENT":
+    case "ADD_EVENT_ID":
     return {
       ...state,
-      event: action.payload
+      eventId: action.payload
     }
-    case "CLEAR_EVENT":
+    case "CLEAR_EVENT_ID":
     return {
       ...state,
-      event: null
+      eventId: null
     }
     default:
       return defaultState
