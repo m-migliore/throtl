@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
 import { connect } from 'react-redux'
+import About from './components/About'
 import EventsContainer from './components/EventsContainer'
+import EventView from './components/EventView'
 
 class App extends Component {
   componentDidMount() {
@@ -29,12 +31,7 @@ class App extends Component {
   render() {
     return (
       <div className={"container mx-auto"}>
-        <h1>{this.props.about.strLeague}</h1>
-        <h2>About</h2>
-        <p>{this.props.about.strDescriptionEN}</p>
-        <br />
-        <br />
-        <EventsContainer />
+        {this.props.eventId ? <EventView /> : <><About /> <EventsContainer /></>}
       </div>
     )
   }
