@@ -36,6 +36,7 @@ class EventView extends Component {
 
     return (
       <div className="event-view">
+        <button onClick={this.props.clearEventId}>ClearEvent</button>
         <h1>{eventData.strEvent}</h1>
         <h3><Moment date={eventData.dateEvent} format="MMMM Do YYYY"/></h3>
         {results.length > 0 ? results.map(row => <p>{row}</p>) : null}
@@ -54,7 +55,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    loadEventData: eventData => dispatch({type: "LOAD_EVENT_DATA", payload: eventData})
+    loadEventData: eventData => dispatch({type: "LOAD_EVENT_DATA", payload: eventData}),
+    clearEventId: () => dispatch({type: "CLEAR_EVENT_ID"})
   }
 }
 
