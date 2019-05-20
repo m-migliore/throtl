@@ -5,21 +5,18 @@ import About from './components/About'
 import EventsContainer from './components/EventsContainer'
 import EventView from './components/EventView'
 
-
 class App extends Component {
   componentDidMount() {
     fetch('https://www.thesportsdb.com/api/v1/json/1/lookupleague.php?id=4370')
     .then(r => r.json())
     .then(data => {
       this.props.loadAbout(data.leagues[0])
-      console.log(data.leagues[0])
     })
 
     fetch('https://www.thesportsdb.com/api/v1/json/1/eventsseason.php?id=4370')
     .then(r => r.json())
     .then(data => {
       this.props.loadEvents(data.events)
-      console.log(data.events)
     })
   }
 
