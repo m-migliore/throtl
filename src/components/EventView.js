@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
+import Moment from 'react-moment'
 
 class EventView extends Component {
   componentDidMount() {
@@ -15,7 +16,7 @@ class EventView extends Component {
     return (
       <div className="event-view">
         <h1>{eventData.strEvent}</h1>
-        <h3>{eventData.dateEvent} {eventData.strTime}</h3>
+        <h3><Moment date={`${eventData.dateEvent}T${eventData.strTime}`} format="MMMM Do YYYY, h:mm"/></h3>
       </div>
     );
   }
