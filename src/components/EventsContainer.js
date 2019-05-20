@@ -8,7 +8,7 @@ class EventsContainer extends Component {
       <div>
         <h2>Events</h2>
         <ul>
-          {this.props.events.map(event => <EventLink key={event.idEvent} eventId={event.idEvent} title={event.strEvent}/>)}
+          {this.props.events.map(event => <EventLink key={event.idEvent} eventId={event.idEvent} title={event.strEvent} thumb={event.strThumb}/>)}
         </ul>
       </div>
     )

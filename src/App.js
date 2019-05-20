@@ -17,6 +17,7 @@ class App extends Component {
     .then(r => r.json())
     .then(data => {
       this.props.loadEvents(data.events)
+      console.log(data.events[0]);
     })
   }
 
