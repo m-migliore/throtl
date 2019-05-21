@@ -36,7 +36,7 @@ class EventView extends Component {
         <button onClick={this.props.clearEventId}>ClearEvent</button>
         <h1>{eventData.strEvent}</h1>
         <h3><Moment date={eventData.dateEvent} format="MMMM Do YYYY"/></h3>
-        {results.length > 0 ? <QualTable results={results}/> : null}
+        {this.props.results.length > 0 ? <QualTable /> : null}
       </div>
     );
   }
@@ -46,13 +46,15 @@ class EventView extends Component {
 const mapStateToProps = state => {
   return {
     eventId: state.eventId,
-    eventData: state.eventData
+    eventData: state.eventData,
+    eventResults: state.eventResults
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
     loadEventData: eventData => dispatch({type: "LOAD_EVENT_DATA", payload: eventData}),
+    loadEventResults: eventResults => dispatch({type: "LOAD_EVENT_RESULTS",payload: eventResults}),
     clearEventId: () => dispatch({type: "CLEAR_EVENT_ID"})
   }
 }
