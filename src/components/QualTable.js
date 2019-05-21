@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
+import QualRow from './QualRow'
 
 class QualTable extends Component {
-  componentDidMount() {
-
-  }
-
+  
   render() {
     return (
       <div>
         <h1>QualTable</h1>
-        {this.props.results.map(row => <p>{row}</p>)}
+        <p><strong>{this.props.results[0]}</strong></p>
+        {this.props.results.slice(1,this.props.results.length).map(row => <QualRow rowData={row} />)}
       </div>
     );
   }
