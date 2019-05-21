@@ -18,6 +18,9 @@ class App extends Component {
     .then(data => {
       this.props.loadEvents(data.events)
       console.log(data.events[0]);
+      // let noQual = data.events.filter(event => !event.strEvent.includes('Qualifying'))
+      // console.log("noQual", noQual);
+      // this.props.loadEvents(noQual)
     })
   }
 
