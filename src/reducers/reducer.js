@@ -1,8 +1,7 @@
 const defaultState = {
   about: [],
   events: [],
-  // eventId: null,
-  eventId: 598362,
+  eventId: null,
   eventData: {},
   eventResults: []
 }

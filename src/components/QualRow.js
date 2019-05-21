@@ -11,17 +11,18 @@ class QualRow extends Component {
   }
 
   render() {
+    const row = this.props.rowData.split(' ')
+
     return (
       <div>
-        <p>{this.props.rowData}</p>
-        <span>place</span>
-        <span>number</span>
-        <span>driver</span>
-        <span>constructor</span>
-        <span>q1</span>
-        <span>q2</span>
-        <span>q3</span>
-        <span>laps</span>
+        <span>{row[0]}</span>
+        <span>{row[1]}</span>
+        <span>{`${row[2]} ${row[3]}`}</span>
+        <span>{row[4]}</span>
+        <span>{row[5]}</span>
+        <span>{row[6]}</span>
+        <span>{row[7]}</span>
+        <span>{row[8]}</span>
       </div>
     );
   }
