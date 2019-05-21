@@ -1,3 +1,39 @@
-const DRIVERS = ['44 Lewis Hamilton','77 Valtteri Bottas','5 Sebastian Vettel','33 Max Verstappen','16 Charles Leclerc','8 Romain Grosjean','20 Kevin Magnussen','4 Lando Norris','7 Kimi Räikkönen','11 Sergio Perez','27 Nico Hulkenberg','3 Daniel Ricciardo','23 Alexander Albon','99 Antonio Giovinazzi','26 Daniil Kvyat','18 Lance Stroll','10 Pierre Gasly','55 Carlos Sainz','63 George Russell','88 Robert Kubica']
+// https://www.thesportsdb.com/api/v1/json/1/lookupplayer.php?id=
+const DRIVERS = {
+  'Lewis Hamilton': 34157136,
+  'Valtteri Bottas': 34157144,
+  'Sebastian Vettel': 34157138,
+  'Max Verstappen': 34157146,
+  'Charles Leclerc': 34162284,
+  'Romain Grosjean': 34157141,
+  'Kevin Magnussen': 34161249,
+  'Lando Norris': 34164004,
+  'Kimi Räikkönen': 34157139,
+  'Sergio Perez': 34157151,
+  'Nico Hulkenberg': 34157150,
+  'Daniel Ricciardo': 34157134,
+  'Alexander Albon': 34164007,
+  'Antonio Giovinazzi': 34164139,
+  'Daniil Kvyat': 34157135,
+  'Lance Stroll': 34161298,
+  'Pierre Gasly': 34162285,
+  'Carlos Sainz': 34157147,
+  'George Russell': 34164000,
+  'Robert Kubica': 34160599
+}
 
-export default DRIVERS
+//https://www.thesportsdb.com/api/v1/json/1/lookupteam.php?id=
+const CONSTRUCTORS = {
+  'Ferrari': 134806,
+  'Haas F1': 135705,
+  'McLaren': 134811,
+  'Mercedes': 134812,
+  'Racing Point': 136515,
+  'Red Bull': 134813,
+  'Renault Sport Formula One': 135706,
+  'Sauber': 134814,
+  'Toro Rosso': 134815,
+  'Williams': 134816
+}
+
+export {DRIVERS, CONSTRUCTORS}
