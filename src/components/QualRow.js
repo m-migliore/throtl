@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
+import { DRIVERS, CONSTRUCTORS } from '../constants/constants'
 
 class QualRow extends Component {
+
   componentDidMount() {
-    console.log(this.props.rowData);
+    console.log(DRIVERS);
+    console.log(CONSTRUCTORS);
+    
   }
 
   render() {
