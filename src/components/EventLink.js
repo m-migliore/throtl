@@ -10,7 +10,9 @@ class EventLink extends Component {
 
   render() {
     return (
-      <li onClick={this.handleClick.bind(this)}>{this.props.title}</li>
+      <li onClick={this.handleClick.bind(this)}>
+        <img src={this.props.thumb} alt={this.props.title}/>
+      </li>
     );
   }
 
