@@ -1,9 +1,10 @@
 const defaultState = {
   about: [],
   events: [],
-  eventId: null,
+  // eventId: null,
+  eventId: 598362,
   eventData: {},
-  eventResults: ""
+  eventResults: []
 }
 
 export default function reducer(state = defaultState, action) {

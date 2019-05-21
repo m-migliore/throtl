@@ -19,19 +19,16 @@ class EventView extends Component {
         const regex = /(\r\n|\r|\n)/
         // filtered to remove  "↵" elements in array
         const rawResults = eventData.strResult.split(regex)
-        const cleanedResults = rawResults.map(row => {
-          if (row.length > 1) {
-            return row.replace(/\s+/g, ' ').trim()
-          }
-        })
-        this.props.loadEventResults(cleanedResults)
+        const cleanedResults = rawResults.map(row => row.replace(/\s+/g, ' ').trim())
+        console.log(cleanedResults.filter(row => row.length > 0));
+        this.props.loadEventResults(cleanedResults.filter(row => row.length > 0))
       }
     })
   }
 
   render() {
     const eventData = this.props.eventData
-    
+
     return (
       <div className="event-view">
         <button onClick={this.props.clearEventId}>ClearEvent</button>

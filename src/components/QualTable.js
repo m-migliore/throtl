@@ -9,7 +9,7 @@ class QualTable extends Component {
       <div>
         <h1>QualTable</h1>
         <p><strong>{this.props.eventResults[0]}</strong></p>
-        <QualRow rowData={this.props.eventResults[1]} />
+        {this.props.eventResults.length > 0 ? <QualRow rowData={this.props.eventResults[1]} /> : null}
       </div>
     );
   }
