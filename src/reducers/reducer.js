@@ -12,7 +12,12 @@ export default function reducer(state = defaultState, action) {
       ...state,
       seasonData: action.payload
     }
-    case "RACE_RESULTS":
+    case "SELECT_ROUND":
+    return {
+      ...state,
+      selectedRound: action.payload
+    }
+    case "LOAD_RACE_RESULTS":
     return {
       ...state,
       raceResults: action.payload

@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-//import {connect} from 'react-redux'
+import {connect} from 'react-redux'
 
 class RaceLink extends Component {
   handleClick() {
-    console.log(this.props.raceData.round);
+    console.log(this.props.raceData.round)
+    this.props.selectRound(this.props.raceData.round)
   }
 
   render() {
@@ -16,5 +17,10 @@ class RaceLink extends Component {
 
 }
 
+const mapDispatchToProps = dispatch => {
+  return {
+    selectRound: roundNumber => dispatch({type: "SELECT_ROUND", payload: roundNumber})
+  }
+}
 
-export default RaceLink;
+export default connect(null, mapDispatchToProps)(RaceLink);
