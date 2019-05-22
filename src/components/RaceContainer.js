@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux'
+import {connect} from 'react-redux'
+import RaceLink from './RaceLink'
 
 class RaceContainer extends Component {
   renderRaces() {
     if (this.props.seasonData.Races) {
-      return this.props.seasonData.Races.map(race => {
-        return <li key={race.raceName}>{race.raceName}</li>
-      })
+      return this.props.seasonData.Races.map(race => <RaceLink raceData={race} />)
     }
   }
 
