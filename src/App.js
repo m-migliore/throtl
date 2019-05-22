@@ -1,26 +1,18 @@
 import React, { Component } from 'react';
 import './App.css';
 import { connect } from 'react-redux'
-import About from './components/About'
-import EventsContainer from './components/EventsContainer'
-import EventView from './components/EventView'
+// import About from './components/About'
+// import EventsContainer from './components/EventsContainer'
+// import EventView from './components/EventView'
+import RaceContainer from './components/RaceContainer'
 
 class App extends Component {
   componentDidMount() {
-    fetch('https://www.thesportsdb.com/api/v1/json/1/lookupleague.php?id=4370')
+    fetch('http://ergast.com/api/f1/current.json')
     .then(r => r.json())
     .then(data => {
-      this.props.loadAbout(data.leagues[0])
-    })
-
-    fetch('https://www.thesportsdb.com/api/v1/json/1/eventsseason.php?id=4370')
-    .then(r => r.json())
-    .then(data => {
-      this.props.loadEvents(data.events)
-      console.log(data.events[0]);
-      // let noQual = data.events.filter(event => !event.strEvent.includes('Qualifying'))
-      // console.log("noQual", noQual);
-      // this.props.loadEvents(noQual)
+      this.props.loadSeason(data.MRData.RaceTable)
+      console.log(data.MRData.RaceTable)
     })
   }
 
@@ -33,7 +25,8 @@ class App extends Component {
   render() {
     return (
       <div className={"container mx-auto"}>
-        {this.props.eventId ? <EventView /> : <><About /> <EventsContainer /></>}
+        <h1>Formula 1 {this.props.seasonData.season} Season</h1>
+        <RaceContainer />
       </div>
     )
   }
@@ -41,15 +34,13 @@ class App extends Component {
 
 const mapStateToProps = state => {
   return {
-    about: state.about,
-    eventId: state.eventId
+    seasonData: state.seasonData
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    loadAbout: data => dispatch({type: "LOAD_ABOUT", payload: data}),
-    loadEvents: data =>  dispatch({type: "LOAD_EVENTS", payload: data})
+    loadSeason: seasonData => dispatch({type: "LOAD_SEASON", payload: seasonData}),
   }
 }
 
