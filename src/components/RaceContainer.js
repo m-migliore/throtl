@@ -16,17 +16,14 @@ class RaceContainer extends Component {
 
 
   render() {
-    const raceData = this.props.raceData
-    const dateTime = raceData.date + "T" + raceData.time
 
     return (
       <div>
-
         <div className="race-title">
-          <h1>{raceData.raceName}</h1>
-          <p><Moment date={dateTime} format="LLL"/></p>
+          <h1>{this.props.raceData.raceName}</h1>
+          <p><Moment date={this.props.raceData.date} format="LLL"/></p>
         </div>
-        {raceData.length ? <CircuitInfo circuitData={raceData.Circuit} /> : null}
+        {Object.keys(this.props.raceData).length > 0 ? <CircuitInfo circuitData={this.props.raceData.Circuit} /> : null}
       </div>
     );
 
