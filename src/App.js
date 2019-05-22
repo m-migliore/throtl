@@ -4,8 +4,8 @@ import { connect } from 'react-redux'
 // import About from './components/About'
 // import EventsContainer from './components/EventsContainer'
 // import EventView from './components/EventView'
-import RaceContainer from './components/RaceContainer'
-import RaceResults from './components/RaceResults'
+import SeasonContainer from './components/SeasonContainer'
+//import RaceResults from './components/RaceResults'
 
 class App extends Component {
   componentDidMount() {
@@ -27,7 +27,7 @@ class App extends Component {
     return (
       <div className={"container mx-auto"}>
         <h1>Formula 1 {this.props.seasonData.season} Season</h1>
-        {this.props.resultView ? <RaceResults /> : <RaceContainer />}
+        <SeasonContainer />
       </div>
     )
   }
