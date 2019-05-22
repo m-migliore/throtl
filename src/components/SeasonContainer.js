@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
+import RaceContainer from './RaceContainer'
 import RaceList from './RaceList'
 
 class SeasonContainer extends Component {
   render() {
     return (
       <div>
-        <RaceList />
+        {this.props.raceView ? <RaceContainer /> : <RaceList />}
       </div>
     );
   }
@@ -15,7 +16,8 @@ class SeasonContainer extends Component {
 
 const mapStateToProps = state => {
   return {
-    seasonData: state.seasonData
+    seasonData: state.seasonData,
+    raceView: state.raceView
   }
 }
 
