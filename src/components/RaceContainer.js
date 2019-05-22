@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
+import Moment from 'react-moment'
+import CircuitInfo from './CircuitInfo'
 
 class RaceContainer extends Component {
   componentDidMount() {
@@ -11,15 +13,23 @@ class RaceContainer extends Component {
     })
   }
 
+
+
   render() {
     const raceData = this.props.raceData
+    const dateTime = raceData.date + "T" + raceData.time
 
     return (
       <div>
-        <h1>{raceData.raceName}</h1>
-        <p>{raceData.date}</p>
+
+        <div className="race-title">
+          <h1>{raceData.raceName}</h1>
+          <p><Moment date={dateTime} format="LLL"/></p>
+        </div>
+        {raceData.length ? <CircuitInfo circuitData={raceData.Circuit} /> : null}
       </div>
     );
+
   }
 
 }
