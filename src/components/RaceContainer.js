@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux'
 import Moment from 'react-moment'
 import CircuitInfo from './CircuitInfo'
+import RaceResults from './RaceResults'
 
 class RaceContainer extends Component {
   componentDidMount() {
@@ -13,17 +14,17 @@ class RaceContainer extends Component {
     })
   }
 
-
-
   render() {
+    const raceData = this.props.raceData
 
     return (
       <div>
         <div className="race-title">
-          <h1>{this.props.raceData.raceName}</h1>
-          <p><Moment date={this.props.raceData.date} format="LLL"/></p>
+          <h1>{raceData.raceName}</h1>
+          <p><Moment date={raceData.date} format="LLL"/></p>
         </div>
-        {Object.keys(this.props.raceData).length > 0 ? <CircuitInfo circuitData={this.props.raceData.Circuit} /> : null}
+        {raceData.Circuit ? <CircuitInfo circuitData={raceData.Circuit} /> : null}
+        {raceData.Results ? <RaceResults results={raceData.Results} /> : null}
       </div>
     );
 
