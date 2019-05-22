@@ -5,7 +5,7 @@ import RaceLink from './RaceLink'
 class RaceContainer extends Component {
   renderRaces() {
     if (this.props.seasonData.Races) {
-      return this.props.seasonData.Races.map(race => <RaceLink raceData={race} />)
+      return this.props.seasonData.Races.map(race => <RaceLink key={race.raceName} raceData={race} />)
     }
   }
 

@@ -3,12 +3,12 @@ import React, { Component } from 'react';
 
 class RaceLink extends Component {
   handleClick() {
-    console.log(this.props);
+    console.log(this.props.raceData.round);
   }
 
   render() {
     return (
-      <li onClick={this.handleClick}>
+      <li onClick={this.handleClick.bind(this)}>
         {this.props.raceData.raceName}
       </li>
     );
