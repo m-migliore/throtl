@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
 import RaceLink from './RaceLink'
+import RaceResults from './RaceResults'
 
 class RaceContainer extends Component {
   renderRaces() {
@@ -14,6 +15,7 @@ class RaceContainer extends Component {
       <div>
         <ul>
           {this.renderRaces()}
+          <RaceResults />
         </ul>
       </div>
     );
