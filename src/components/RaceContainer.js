@@ -5,15 +5,6 @@ import CircuitInfo from './CircuitInfo'
 import RaceResults from './RaceResults'
 
 class RaceContainer extends Component {
-  componentDidMount() {
-    fetch(`http://ergast.com/api/f1/${this.props.raceSeason}/${this.props.selectedRound}/results.json`)
-    .then(r => r.json())
-    .then(data => {
-      console.log(data.MRData.RaceTable.Races[0])
-      this.props.loadRaceData(data.MRData.RaceTable.Races[0])
-    })
-  }
-
   render() {
     const raceData = this.props.raceData
 
@@ -23,13 +14,11 @@ class RaceContainer extends Component {
           <h1>{raceData.raceName}</h1>
           <p><Moment date={raceData.date} format="LLL"/></p>
         </div>
-        {raceData.Circuit ? <CircuitInfo circuitData={raceData.Circuit} /> : null}
-        {raceData.Results ? <RaceResults results={raceData.Results} /> : null}
+        <CircuitInfo circuitData={raceData.Circuit} />
+        <RaceResults results={raceData.Results} />
       </div>
     );
-
   }
-
 }
 
 const mapStateToProps = state => {

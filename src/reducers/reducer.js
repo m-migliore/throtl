@@ -10,16 +10,6 @@ const defaultState = {
 
 export default function reducer(state = defaultState, action) {
   switch(action.type) {
-    case "START_LOADING":
-    return {
-      ...state,
-      loading: true
-    }
-    case "REMOVE_LOADING":
-    return {
-      ...state,
-      loading: false
-    }
     case "START_SEASON_FETCH":
     return {
       ...state,
@@ -31,17 +21,17 @@ export default function reducer(state = defaultState, action) {
       loading: false,
       seasonData: action.payload
     }
-    case "SELECT_ROUND":
+    case "START_RACE_FETCH":
     return {
       ...state,
-      selectedRound: action.payload,
       raceView: true,
       loading:true
     }
     case "LOAD_RACE_DATA":
     return {
       ...state,
-      raceData: action.payload
+      raceData: action.payload,
+      loading: false
     }
     case "LOAD_RACE_RESULTS":
     return {

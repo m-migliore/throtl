@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
-//import {fetchRound} from '../actions/actionCreators'
+import {fetchRaceData} from '../actions/actionCreators'
 
 class RaceLink extends Component {
   handleClick() {
-    console.log(this.props.raceData.round)
-    this.props.selectRound(this.props.raceData.round)
+    this.props.fetchRaceData(this.props.raceData.season, this.props.raceData.round)
   }
 
   render() {
@@ -15,12 +14,11 @@ class RaceLink extends Component {
       </li>
     );
   }
-
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    selectRound: roundNumber => dispatch({type: "SELECT_ROUND", payload: roundNumber})
+    fetchRaceData: (season, round) => dispatch(fetchRaceData(season, round))
   }
 }
 

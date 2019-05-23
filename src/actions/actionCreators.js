@@ -4,16 +4,24 @@ export function fetchSeason(season) {
     dispatch({type:"START_SEASON_FETCH"})
     return fetch(`http://ergast.com/api/f1/${season}.json`)
     .then(r => r.json())
-    .then(data => dispatch({ type: 'LOAD_SEASON', payload:  data.MRData.RaceTable}));
+    .then(data => dispatch({
+      type: 'LOAD_SEASON',
+      payload:  data.MRData.RaceTable
+    }));
   }
 }
 
-// export function fetchRound(round) {
-//   return dispatch => {
-//     dispatch({type: "START_ROUND_FETCH"})
-//     return
-//   }
-// }
+export function fetchRaceData(season, round) {
+  return dispatch => {
+    dispatch({type: "START_RACE_FETCH"})
+    return fetch(`http://ergast.com/api/f1/${season}/${round}/results.json`)
+    .then(r => r.json())
+    .then(data => dispatch({
+      type: "LOAD_RACE_DATA",
+      payload: data.MRData.RaceTable.Races[0]
+    }))
+  }
+}
 
 export function loadRaceData(raceData) {
   return {

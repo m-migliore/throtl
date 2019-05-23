@@ -23,6 +23,7 @@ class App extends Component {
     if (this.props.eventId) {
       console.log("event id added:", this.props.eventId);
     }
+    console.log(this.props.seasonData);
   }
 
   render() {

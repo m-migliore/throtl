@@ -7,7 +7,7 @@ class RaceResults extends Component {
 
     return (
       <ul>
-        {results.map(result => <li>{result.number}</li>)}
+        {results.map(result => <li key={result.number}>{result.number}</li>)}
       </ul>
     );
   }
