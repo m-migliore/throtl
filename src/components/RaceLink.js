@@ -4,7 +4,15 @@ import {fetchRaceData} from '../actions/actionCreators'
 
 class RaceLink extends Component {
   handleClick() {
-    this.props.fetchRaceData(this.props.raceData.season, this.props.raceData.round)
+    if (new Date(this.props.raceData.date) < Date.now()) {
+      console.log("past")
+      this.props.fetchRaceData(this.props.raceData.season, this.props.raceData.round)
+    } else {
+      console.log("future");
+      this.props.futureRace()
+    }
+
+    //this.props.fetchRaceData(this.props.raceData.season, this.props.raceData.round)
   }
 
   render() {
@@ -16,10 +24,17 @@ class RaceLink extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => {
+const mapStateToProps = state => {
   return {
-    fetchRaceData: (season, round) => dispatch(fetchRaceData(season, round))
+    seasonData: state.seasonData
   }
 }
 
-export default connect(null, mapDispatchToProps)(RaceLink);
+const mapDispatchToProps = dispatch => {
+  return {
+    fetchRaceData: (season, round) => dispatch(fetchRaceData(season, round)),
+    futureRace: () => dispatch({type: "FUTURE_RACE"})
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(RaceLink);

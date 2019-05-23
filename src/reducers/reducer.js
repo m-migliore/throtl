@@ -3,6 +3,7 @@ const defaultState = {
   seasonData: {},
   selectedRound: "last",
   raceView: false,
+  futureRace: false,
   loading: false,
   raceData: {},
   raceResults: []
@@ -37,6 +38,12 @@ export default function reducer(state = defaultState, action) {
     return {
       ...state,
       raceResults: action.payload
+    }
+    case "FUTURE_RACE":
+    return {
+      ...state,
+      raceView: true,
+      futureRace: true
     }
     default:
       return defaultState
