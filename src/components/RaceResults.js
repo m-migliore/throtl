@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import ResultRow from './ResultRow'
 
 class RaceResults extends Component {
   componentDidMount() {
@@ -10,7 +11,7 @@ class RaceResults extends Component {
 
     return (<div>
       <ul>
-        {results.map(result => <li key={result.number}>{result.number}</li>)}
+        {results.map(result => <ResultRow key={result.number} resultData={result} />)}
       </ul>
 
       <table>
