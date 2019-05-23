@@ -20,3 +20,7 @@ export function fetchRaceData(season, round) {
     })
   }
 }
+
+export function createRacePreview(previewData) {
+  return dispatch => dispatch({type: "CREATE_RACE_PREVIEW", payload: previewData})
+}

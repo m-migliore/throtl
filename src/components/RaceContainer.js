@@ -21,7 +21,7 @@ class RaceContainer extends Component {
       //   {this.props.futureRace ? <RacePreview /> : <RaceResults />}
       // </div>
       <div>
-        {this.props.futureRace ? <RacePreview /> : <RaceResults results={raceData.Results}/>}
+        {this.props.futureRace ? <RacePreview /> : <RaceResults />}
       </div>
     );
   }

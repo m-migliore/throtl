@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux'
 import ResultRow from './ResultRow'
 
 class RaceResults extends Component {
@@ -7,7 +8,7 @@ class RaceResults extends Component {
   }
 
   render() {
-    const results = this.props.results
+    const results = this.props.raceData.Results
 
     return (
       <div>
@@ -29,4 +30,10 @@ class RaceResults extends Component {
 
 }
 
-export default RaceResults;
+const mapStateToProps = state => {
+  return {
+    raceData: state.raceData
+  }
+}
+
+export default connect(mapStateToProps)(RaceResults);

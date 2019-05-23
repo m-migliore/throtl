@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
-import {fetchRaceData} from '../actions/actionCreators'
+import {fetchRaceData, createRacePreview} from '../actions/actionCreators'
 
 class RaceLink extends Component {
   handleClick() {
@@ -9,10 +9,8 @@ class RaceLink extends Component {
       this.props.fetchRaceData(this.props.raceData.season, this.props.raceData.round)
     } else {
       console.log("future");
-      this.props.futureRace()
+      this.props.createRacePreview(this.props.seasonData.Races[this.props.raceData.round - 1])
     }
-
-    //this.props.fetchRaceData(this.props.raceData.season, this.props.raceData.round)
   }
 
   render() {
@@ -33,7 +31,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     fetchRaceData: (season, round) => dispatch(fetchRaceData(season, round)),
-    futureRace: () => dispatch({type: "FUTURE_RACE"})
+    createRacePreview: previewData => dispatch(createRacePreview(previewData))
   }
 }
 
