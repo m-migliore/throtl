@@ -22,17 +22,3 @@ export function fetchRaceData(season, round) {
     }))
   }
 }
-
-export function loadRaceData(raceData) {
-  return {
-    type: "LOAD_RACE_DATA",
-    payload: raceData
-  }
-}
-
-export function loadRaceResults(raceResults) {
-  return {
-    type: "LOAD_RACE_RESULTS",
-    payload: raceResults
-  }
-}
