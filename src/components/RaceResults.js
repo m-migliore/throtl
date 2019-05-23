@@ -4,10 +4,6 @@ import RaceTitle from './RaceTitle'
 import ResultRow from './ResultRow'
 
 class RaceResults extends Component {
-  componentDidMount() {
-    console.log(this.props.results);
-  }
-
   render() {
     const results = this.props.raceData.Results
 
