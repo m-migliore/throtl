@@ -17,6 +17,13 @@ class DetailedResult extends Component {
         <div>
           <h2>{driver.givenName + " " + driver.familyName} <span>{driver.permanentNumber}</span></h2>
           <h4>{constructor.name}</h4>
+          <h3>Results</h3>
+          <p><strong>Position: </strong> {result.position}</p>
+          <p><strong>Grid:</strong> {result.grid}</p>
+          <p><strong>Time:</strong> {result.Time.time}</p>
+          <p><strong>Points:</strong> {result.points}</p>
+          <p><strong>Laps:</strong> {result.laps}</p>
+          <p><strong>Status:</strong> {result.status}</p>
           <h3>Fastest Lap</h3>
           <p><strong>Time:</strong> {fastestLap.Time.time}</p>
           <p><strong>Average Speed:</strong> {fastestLap.AverageSpeed.speed + fastestLap.AverageSpeed.units}</p>
