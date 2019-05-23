@@ -7,7 +7,9 @@ const defaultState = {
   loading: false,
   raceData: {},
   raceResults: [],
-  previewData: {}
+  previewData: {},
+  detailedResultView: false,
+  detailedResultData: {}
 }
 
 export default function reducer(state = defaultState, action) {
@@ -46,6 +48,12 @@ export default function reducer(state = defaultState, action) {
       raceView: true,
       futureRace: true,
       previewData: action.payload
+    }
+    case "LOAD_DETAILED_RESULT":
+    return {
+      ...state,
+      detailedResultView: true,
+      detailedResultData: action.payload
     }
     default:
       return defaultState

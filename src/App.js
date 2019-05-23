@@ -9,12 +9,12 @@ class App extends Component {
     this.props.fetchSeason("current")
   }
 
-  componentDidUpdate() {
-    if (this.props.eventId) {
-      console.log("event id added:", this.props.eventId);
-    }
-    console.log(this.props.seasonData);
-  }
+  // componentDidUpdate() {
+  //   if (this.props.eventId) {
+  //     console.log("event id added:", this.props.eventId);
+  //   }
+  //   console.log(this.props.seasonData);
+  // }
 
   render() {
     return (
