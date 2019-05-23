@@ -10,7 +10,7 @@ const defaultState = {
 
 export default function reducer(state = defaultState, action) {
   switch(action.type) {
-    case "START_SEASON_FETCH":
+    case "SEASON_FETCH":
     return {
       ...state,
       loading: true
@@ -21,7 +21,7 @@ export default function reducer(state = defaultState, action) {
       loading: false,
       seasonData: action.payload
     }
-    case "START_RACE_FETCH":
+    case "RACE_FETCH":
     return {
       ...state,
       raceView: true,
