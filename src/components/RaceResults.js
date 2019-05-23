@@ -9,22 +9,21 @@ class RaceResults extends Component {
   render() {
     const results = this.props.results
 
-    return (<div>
-      <ul>
-        {results.map(result => <ResultRow key={result.number} resultData={result} />)}
-      </ul>
-
-      <table>
-        <tbody>
-          <tr>
-            <th>Position</th>
-            <th>Driver</th>
-            <th>Contructor</th>
-            <th>Points</th>
-          </tr>
-        </tbody>
-      </table>
-    </div>);
+    return (
+      <div>
+        <table>
+          <tbody>
+            <tr>
+              <th>Position</th>
+              <th>Driver</th>
+              <th>Contructor</th>
+              <th>Points</th>
+            </tr>
+            {results.map(result => <ResultRow key={result.number} resultData={result} />)}
+          </tbody>
+        </table>
+      </div>
+    );
   }
 
 }
