@@ -16,7 +16,6 @@ export function fetchRaceData(season, round) {
     return fetch(`http://ergast.com/api/f1/${season}/${round}/results.json`)
     .then(r => r.json())
     .then(data => {
-      if (data.MRData.RaceTable.Races.length === 0)
       return dispatch({type: "LOAD_RACE_DATA", payload: data.MRData.RaceTable.Races[0]})
     })
   }
