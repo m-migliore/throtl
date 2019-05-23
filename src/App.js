@@ -5,16 +5,18 @@ import { connect } from 'react-redux'
 // import EventsContainer from './components/EventsContainer'
 // import EventView from './components/EventView'
 import SeasonContainer from './components/SeasonContainer'
-//import RaceResults from './components/RaceResults'
+//import RaceResults from './components/RaceResults'\
+import {fetchSeason} from './actions/actionCreators'
 
 class App extends Component {
   componentDidMount() {
-    fetch('http://ergast.com/api/f1/current.json')
-    .then(r => r.json())
-    .then(data => {
-      this.props.loadSeason(data.MRData.RaceTable)
-      console.log(data.MRData.RaceTable)
-    })
+    // fetch('http://ergast.com/api/f1/current.json')
+    // .then(r => r.json())
+    // .then(data => {
+    //   this.props.loadSeason(data.MRData.RaceTable)
+    //   console.log(data.MRData.RaceTable)
+    // })
+    this.props.fetchSeason()
   }
 
   componentDidUpdate() {
@@ -42,7 +44,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    loadSeason: seasonData => dispatch({type: "LOAD_SEASON", payload: seasonData}),
+    fetchSeason: () => dispatch(fetchSeason())
   }
 }
 
