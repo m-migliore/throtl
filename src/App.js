@@ -16,7 +16,7 @@ class App extends Component {
     //   this.props.loadSeason(data.MRData.RaceTable)
     //   console.log(data.MRData.RaceTable)
     // })
-    this.props.fetchSeason()
+    this.props.fetchSeason("current")
   }
 
   componentDidUpdate() {
@@ -28,8 +28,13 @@ class App extends Component {
   render() {
     return (
       <div className={"container mx-auto"}>
-        <h1>Formula 1 {this.props.seasonData.season} Season</h1>
-        <SeasonContainer />
+        {this.props.loading ? <p>loading</p> :
+          <>
+            <h1>Formula 1 {this.props.seasonData.season} Season</h1>
+            <SeasonContainer />
+          </>
+        }
+
       </div>
     )
   }
@@ -37,6 +42,7 @@ class App extends Component {
 
 const mapStateToProps = state => {
   return {
+    loading: state.loading,
     seasonData: state.seasonData,
     resultView: state.resultView
   }
@@ -44,7 +50,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchSeason: () => dispatch(fetchSeason())
+    fetchSeason: season => dispatch(fetchSeason(season))
   }
 }
 

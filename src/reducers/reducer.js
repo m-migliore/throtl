@@ -18,11 +18,17 @@ export default function reducer(state = defaultState, action) {
     case "REMOVE_LOADING":
     return {
       ...state,
-      laoding: false
+      loading: false
+    }
+    case "START_SEASON_FETCH":
+    return {
+      ...state,
+      loading: true
     }
     case "LOAD_SEASON":
     return {
       ...state,
+      loading: false,
       seasonData: action.payload
     }
     case "SELECT_ROUND":
