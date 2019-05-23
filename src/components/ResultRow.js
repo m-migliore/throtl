@@ -8,8 +8,9 @@ class ResultRow extends Component {
     return (
       <tr>
         <td>{result.position}</td>
-        <td>{result.Driver.familyName + " " + result.Driver.familyName}</td>
+        <td>{result.Driver.givenName + " " + result.Driver.familyName}</td>
         <td>{result.Constructor.name}</td>
+        <td>{result.points}</td>
         <td>{result.FastestLap.Time.time}</td>
       </tr>
     );

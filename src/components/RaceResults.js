@@ -18,6 +18,7 @@ class RaceResults extends Component {
               <th>Driver</th>
               <th>Contructor</th>
               <th>Points</th>
+              <th>Fastest Lap</th>
             </tr>
             {results.map(result => <ResultRow key={result.number} resultData={result} />)}
           </tbody>
