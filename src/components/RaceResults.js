@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux'
+import RaceTitle from './RaceTitle'
 import ResultRow from './ResultRow'
 
 class RaceResults extends Component {
@@ -12,6 +13,7 @@ class RaceResults extends Component {
 
     return (
       <div>
+        <RaceTitle titleData={this.props.raceData} />
         <table>
           <tbody>
             <tr>

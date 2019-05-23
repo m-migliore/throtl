@@ -1,14 +1,10 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
-import Moment from 'react-moment'
-import CircuitInfo from './CircuitInfo'
 import RaceResults from './RaceResults'
 import RacePreview from './RacePreview'
 
 class RaceContainer extends Component {
   render() {
-    const raceData = this.props.raceData
-
     return (
       // <div>
       //   <div className="race-title">

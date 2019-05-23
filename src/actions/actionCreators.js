@@ -16,11 +16,13 @@ export function fetchRaceData(season, round) {
     return fetch(`http://ergast.com/api/f1/${season}/${round}/results.json`)
     .then(r => r.json())
     .then(data => {
+      console.log(data.MRData.RaceTable.Races[0]);
       return dispatch({type: "LOAD_RACE_DATA", payload: data.MRData.RaceTable.Races[0]})
     })
   }
 }
 
 export function createRacePreview(previewData) {
+  console.log("preview", previewData);
   return dispatch => dispatch({type: "CREATE_RACE_PREVIEW", payload: previewData})
 }
