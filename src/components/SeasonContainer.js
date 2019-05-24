@@ -5,8 +5,8 @@ import RaceContainer from './RaceContainer'
 import RaceList from './RaceList'
 
 class SeasonContainer extends Component {
-  componentDidMount() {
-    console.log(this.props.seasonData);
+  componentDidUpdate() {
+    console.log("seasn",this.props.seasonData);
   }
   render() {
     return (

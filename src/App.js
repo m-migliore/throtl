@@ -2,20 +2,13 @@ import React, { Component } from 'react';
 import './App.css';
 import { connect } from 'react-redux'
 import SeasonContainer from './components/SeasonContainer'
-import {fetchSeason} from './actions/actionCreators'
+import {fetchAllSeasonData} from './actions/actionCreators'
 
 class App extends Component {
   componentDidMount() {
-    this.props.fetchSeason("current")
+    this.props.fetchAllSeasonData("current")
   }
-
-  // componentDidUpdate() {
-  //   if (this.props.eventId) {
-  //     console.log("event id added:", this.props.eventId);
-  //   }
-  //   console.log(this.props.seasonData);
-  // }
-
+  
   render() {
     return (
       <div className={"container mx-auto"}>
@@ -41,7 +34,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchSeason: season => dispatch(fetchSeason(season))
+    fetchAllSeasonData: season => dispatch(fetchAllSeasonData(season))
   }
 }
 

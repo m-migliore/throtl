@@ -16,15 +16,33 @@ const defaultState = {
 
 export default function reducer(state = defaultState, action) {
   switch(action.type) {
-    case "SEASON_FETCH":
+    case "START_ALL_SEASON_FETCH":
+    console.log("START_ALL_SEASON_FETCH");
     return {
       ...state,
       loading: true
     }
-    case "LOAD_SEASON":
+    case "FETCH_SEASON_DATA":
+    return {
+      ...state
+    }
+    case "FETCH_DRIVER_STANDINGS":
+    return {
+      ...state
+    }
+    case "FETCH_CONSTRUCTOR_STANDINGS":
+    return {
+      ...state
+    }
+    case "COMPLETE_ALL_SEASON_FETCH":
     return {
       ...state,
-      seasonData: action.payload
+      loading: false
+    }
+    case "LOAD_SEASON_DATA":
+    return {
+      ...state,
+      seasonData: action.payload,
     }
     case "RACE_FETCH":
     return {
@@ -77,8 +95,7 @@ export default function reducer(state = defaultState, action) {
     case "LOAD_CONSTRUCTOR_STANDINGS":
     return {
       ...state,
-      constructorStandings: action.payload,
-      loading: false
+      constructorStandings: action.payload
     }
     default:
       return defaultState

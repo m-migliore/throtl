@@ -3,25 +3,30 @@ import {connect} from 'react-redux'
 
 
 class DriverStandings extends Component {
-  componentDidMount(){
-    console.log(this.props.driverStandings);
-  }
+
 
   render() {
-    //const standings = this.props.driverStandings.StandingsLists
+    // const standings = this.props.driverStandings.StandingsLists[0]
+    // console.log(standings);
+    if (!this.props.driverStandings.StandingsLists) {
+      return null
+    } else {
+      const standings = this.props.driverStandings.StandingsLists[0].DriverStandings
 
-    return (
-      <div>
-        DriverStandings
-        <table>
-          <tbody>
-            <tr>
-              <th></th>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    );
+      return (
+        <div>
+          DriverStandings
+          <table>
+            <tbody>
+              <tr>
+                <th>{standings[0].points}</th>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      );
+    }
+
   }
 
 }
