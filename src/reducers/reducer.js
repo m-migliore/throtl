@@ -55,6 +55,12 @@ export default function reducer(state = defaultState, action) {
       detailedResultData: action.payload,
       detailedResultView: true
     }
+    case "CLOSE_DETAILED_RESULT":
+    return {
+      ...state,
+      detailedResultView: false,
+      detailedResultData: {}
+    }
     default:
       return defaultState
   }

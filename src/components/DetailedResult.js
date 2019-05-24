@@ -15,6 +15,7 @@ class DetailedResult extends Component {
     return (
       <div>
         <div>
+          <button onClick={this.props.closeDetailedResult}>Close</button>
           <h2>{driver.givenName + " " + driver.familyName} <span>{driver.permanentNumber}</span></h2>
           <h4>{constructor.name}</h4>
           <h3>Results</h3>
@@ -42,4 +43,10 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps)(DetailedResult);
+const mapDispatchToProps = dispatch => {
+  return {
+    closeDetailedResult: () =>  dispatch({type: "CLOSE_DETAILED_RESULT"})
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(DetailedResult);
