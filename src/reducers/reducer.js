@@ -9,7 +9,9 @@ const defaultState = {
   raceResults: [],
   previewData: {},
   detailedResultView: false,
-  detailedResultData: {}
+  detailedResultData: {},
+  driverStandings: {},
+  constructorStandings: {}
 }
 
 export default function reducer(state = defaultState, action) {
@@ -67,6 +69,16 @@ export default function reducer(state = defaultState, action) {
       ...state,
       detailedResultView: false,
       detailedResultData: {}
+    }
+    case "LOAD_DRIVER_STANDINGS":
+    return {
+      ...state,
+      driverStandings: action.payload
+    }
+    case "LOAD_CONSTRUCTOR_STANDINGS":
+    return {
+      ...state,
+      constructorStandings: action.payload
     }
     default:
       return defaultState

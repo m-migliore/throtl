@@ -4,7 +4,25 @@ export function fetchSeason(season) {
     dispatch({type:"SEASON_FETCH"})
     return fetch(`http://ergast.com/api/f1/${season}.json`)
     .then(r => r.json())
-    .then(data => dispatch({type: 'LOAD_SEASON', payload:  data.MRData.RaceTable}));
+    .then(data => dispatch({
+      type: 'LOAD_SEASON',
+      payload:  data.MRData.RaceTable
+    }))
+    .then(seasonAction => {
+      fetch(`http://ergast.com/api/f1/${seasonAction.payload.season}/driverStandings.json`)
+      .then(r => r.json())
+      .then(data =>  dispatch({
+        type: "LOAD_DRIVER_STANDINGS",
+        payload: data.MRData.StandingsTable
+      }))
+
+      fetch(`http://ergast.com/api/f1/${seasonAction.payload.season}/constructorStandings.json`)
+      .then(r => r.json())
+      .then(data =>  dispatch({
+        type: "LOAD_CONSTRUCTOR_STANDINGS",
+        payload: data.MRData.StandingsTable
+      }))
+    })
   }
 }
 

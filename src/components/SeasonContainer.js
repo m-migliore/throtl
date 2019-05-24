@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
+import StandingsContainer from './StandingsContainer'
 import RaceContainer from './RaceContainer'
 import RaceList from './RaceList'
 
@@ -10,6 +11,7 @@ class SeasonContainer extends Component {
   render() {
     return (
       <div>
+        <StandingsContainer />
         {this.props.raceView ? <RaceContainer /> : <RaceList />}
       </div>
     );
