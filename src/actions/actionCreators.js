@@ -15,13 +15,14 @@ export function fetchSeason(season) {
         type: "LOAD_DRIVER_STANDINGS",
         payload: data.MRData.StandingsTable
       }))
-
-      fetch(`http://ergast.com/api/f1/${seasonAction.payload.season}/constructorStandings.json`)
-      .then(r => r.json())
-      .then(data =>  dispatch({
-        type: "LOAD_CONSTRUCTOR_STANDINGS",
-        payload: data.MRData.StandingsTable
-      }))
+      .then(standingsAction => {
+        fetch(`http://ergast.com/api/f1/${standingsAction.payload.season}/constructorStandings.json`)
+        .then(r => r.json())
+        .then(data =>  dispatch({
+          type: "LOAD_CONSTRUCTOR_STANDINGS",
+          payload: data.MRData.StandingsTable
+        }))
+      })
     })
   }
 }

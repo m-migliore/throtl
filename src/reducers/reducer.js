@@ -24,7 +24,6 @@ export default function reducer(state = defaultState, action) {
     case "LOAD_SEASON":
     return {
       ...state,
-      loading: false,
       seasonData: action.payload
     }
     case "RACE_FETCH":
@@ -78,7 +77,8 @@ export default function reducer(state = defaultState, action) {
     case "LOAD_CONSTRUCTOR_STANDINGS":
     return {
       ...state,
-      constructorStandings: action.payload
+      constructorStandings: action.payload,
+      loading: false
     }
     default:
       return defaultState

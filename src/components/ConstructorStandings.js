@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux'
 
 class ContructorStandings extends Component {
+  componentDidMount(){
+    console.log(this.props.constructorStandings);
+  }
 
   render() {
     return (
@@ -13,7 +16,7 @@ class ContructorStandings extends Component {
 
 const mapStateToProps = state => {
   return {
-    seasonData: state.seasonData
+    constructorStandings: state.constructorStandings
   }
 }
 
