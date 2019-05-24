@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
 
 class CircuitInfo extends Component {
-  componentDidMount() {
-    console.log(this.props);
-  }
-
   render() {
     const circuit = this.props.circuitData
     return (

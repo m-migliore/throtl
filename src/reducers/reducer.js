@@ -49,6 +49,13 @@ export default function reducer(state = defaultState, action) {
       futureRace: true,
       previewData: action.payload
     }
+    case "CLOSE_RACE":
+    return {
+      ...state,
+      raceView: false,
+      raceData: {},
+      raceResults: []
+    }
     case "LOAD_DETAILED_RESULT":
     return {
       ...state,

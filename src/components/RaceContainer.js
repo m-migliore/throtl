@@ -8,6 +8,7 @@ class RaceContainer extends Component {
   render() {
     return (
       <div>
+        <button onClick={this.props.closeRace}>Close</button>
         {this.props.futureRace ? <RacePreview /> : <RaceResults />}
         {this.props.detailedResultView ? <DetailedResult /> : null}
       </div>
@@ -25,4 +26,10 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps)(RaceContainer);
+const mapDispatchToProps = dispatch => {
+  return {
+    closeRace: () => dispatch({type: "CLOSE_RACE"})
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(RaceContainer);
