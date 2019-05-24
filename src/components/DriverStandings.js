@@ -7,8 +7,6 @@ class DriverStandings extends Component {
 
 
   render() {
-    // const standings = this.props.driverStandings.StandingsLists[0]
-
     if (!this.props.driverStandings.StandingsLists) {
       return null
     } else {
