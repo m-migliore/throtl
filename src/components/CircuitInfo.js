@@ -10,7 +10,7 @@ class CircuitInfo extends Component {
     return (
       <div>
         <h2>{circuit.circuitName}</h2>
-        <p>{circuit.Location.country}, {circuit.Location.locality}</p>
+        <p>{circuit.Location.locality}, {circuit.Location.country}</p>
       </div>
     );
   }
