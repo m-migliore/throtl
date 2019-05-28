@@ -91,11 +91,16 @@ export function fetchQualData(season, round) {
 export function fetchPitData(season, round) {
   return dispatch => {
     dispatch({type: "PIT_FETCH"})
-    return fetch(`http://ergast.com/api/f1/${season}/${round}/pitstops.json`)
-    .then(r => r.json())
-    .then(data => {
-      return dispatch({type: "LOAD_PIT_DATA", payload: data.MRData.RaceTable.Races[0].PitStops})
-    })
+    if (season === "current" || season > 2011) {
+      return fetch(`http://ergast.com/api/f1/${season}/${round}/pitstops.json`)
+      .then(r => r.json())
+      .then(data => {
+        return dispatch({type: "LOAD_PIT_DATA", payload: data.MRData.RaceTable.Races[0].PitStops})
+      })
+    } else {
+      return dispatch({type: "LOAD_PIT_DATA", payload: ["No pit data available prior to 2012 season."]})
+    }
+
   }
 }
 
