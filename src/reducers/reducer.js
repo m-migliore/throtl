@@ -20,7 +20,14 @@ export default function reducer(state = defaultState, action) {
     case "START_ALL_SEASON_FETCH":
     return {
       ...state,
-      loading: true
+      loading: true,
+      raceView: false,
+      raceData: {},
+      qualData: [],
+      previewData: {},
+      pitData: [],
+      driverStandings: {},
+      constructorStandings: {}
     }
     case "SET_SEASON":
     return {

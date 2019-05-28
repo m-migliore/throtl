@@ -7,6 +7,7 @@ class PitDetail extends Component {
 
     return (
       <div>
+        <h3>Pitstops</h3>
         <p><strong>Stop:</strong> {pit.stop}</p>
         <p><strong>Lap:</strong> {pit.lap}</p>
         <p><strong>Duration:</strong> {pit.duration}</p>

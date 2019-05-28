@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
+import FastestLap from './FastestLap'
 import PitDetail from './PitDetail'
 
 class DetailedResult extends Component {
@@ -28,12 +29,7 @@ class DetailedResult extends Component {
           <p><strong>Points:</strong> {result.points}</p>
           <p><strong>Laps:</strong> {result.laps}</p>
           <p><strong>Status:</strong> {result.status}</p>
-          <h3>Fastest Lap</h3>
-          <p><strong>Time:</strong> {fastestLap.Time.time}</p>
-          <p><strong>Average Speed:</strong> {fastestLap.AverageSpeed.speed + fastestLap.AverageSpeed.units}</p>
-          <p><strong>Lap Number:</strong> {fastestLap.lap}</p>
-          <p><strong>Rank:</strong> {fastestLap.rank}</p>
-          <h3>Pitstops</h3>
+          {this.props.season === "current" || this.props.season > 2003 ? <FastestLap fastestLap={fastestLap}/> : null}
           {this.props.season === "current" || this.props.season > 2011 ? pitstops.map(pit => <PitDetail key={pit.stop} pitData={pit} />) : null}
         </div>
       </div>

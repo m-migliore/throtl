@@ -16,13 +16,18 @@ class ResultRow extends Component {
         <td>{result.Driver.givenName + " " + result.Driver.familyName}</td>
         <td>{result.Constructor.name}</td>
         <td>{result.points}</td>
-        <td>{result.FastestLap.Time.time}</td>
+        {this.props.season === "current" || this.props.season > 2003 ? <td>{result.FastestLap.Time.time}</td> : null}
         <td>{result.status}</td>
         <td><button onClick={this.handleClick.bind(this)}>Full Details</button></td>
       </tr>
     );
   }
 
+}
+const mapStateToProps = state => {
+  return {
+    season: state.season
+  }
 }
 
 const mapDispatchToProps = dispatch => {
@@ -31,4 +36,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(null, mapDispatchToProps)(ResultRow);
+export default connect(mapStateToProps, mapDispatchToProps)(ResultRow);

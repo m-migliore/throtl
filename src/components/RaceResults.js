@@ -17,7 +17,7 @@ class RaceResults extends Component {
               <th>Driver</th>
               <th>Contructor</th>
               <th>Points</th>
-              <th>Fastest Lap</th>
+              {this.props.season === "current" || this.props.season > 2003 ? <th>Fastest Lap</th> : null}
               <th>Status</th>
               <th>Detailed Results</th>
             </tr>
@@ -32,6 +32,7 @@ class RaceResults extends Component {
 
 const mapStateToProps = state => {
   return {
+    season: state.season,
     raceData: state.raceData
   }
 }

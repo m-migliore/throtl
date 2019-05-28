@@ -11,7 +11,7 @@ class RaceContainer extends Component {
       <div>
         <button onClick={this.props.closeRace}>Close</button>
         {this.props.futureRace ? <RacePreview /> : <RaceResults />}
-        {this.props.qualData.length > 0 ? <QualResults /> : null}
+        {this.props.qualData.length > 1 ? <QualResults /> : null}
         {this.props.detailedResultView ? <DetailedResult /> : null}
       </div>
     );
