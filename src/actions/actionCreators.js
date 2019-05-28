@@ -51,15 +51,36 @@ export function fetchConstructorStandings(season) {
   }
 }
 
+// Fetch race and qualifying results for specific race in specific season
+
+export function fetchEventData(season, round) {
+  return dispatch => {
+    dispatch({type: "FETCH_EVENT_DATA"})
+    return Promise.all([
+      dispatch(fetchRaceData(season, round)),
+      dispatch(fetchQualData(season, round)),
+    ]).then(() => dispatch({type:"COMPLETE_EVENT_DATA_FETCH"}))
+  }
+}
+
 export function fetchRaceData(season, round) {
   return dispatch => {
     dispatch({type: "RACE_FETCH"})
-    // console.log(`http://ergast.com/api/f1/${season}/${round}/results.json`);
     return fetch(`http://ergast.com/api/f1/${season}/${round}/results.json`)
     .then(r => r.json())
     .then(data => {
-      // console.log(data.MRData.RaceTable.Races[0]);
       return dispatch({type: "LOAD_RACE_DATA", payload: data.MRData.RaceTable.Races[0]})
+    })
+  }
+}
+
+export function fetchQualData(season, round) {
+  return dispatch => {
+    dispatch({type:"QUAL_FETCH"})
+    return fetch(`http://ergast.com/api/f1/${season}/${round}/qualifying.json`)
+    .then(r => r.json())
+    .then(data => {
+      return dispatch({type: "LOAD_QUAL_DATA", payload: data.MRData.RaceTable.Races[0]})
     })
   }
 }

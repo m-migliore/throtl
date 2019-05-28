@@ -6,7 +6,8 @@ const defaultState = {
   futureRace: false,
   loading: false,
   raceData: {},
-  raceResults: [],
+  // raceResults: [],
+  qualData: [],
   previewData: {},
   detailedResultView: false,
   detailedResultData: {},
@@ -44,22 +45,34 @@ export default function reducer(state = defaultState, action) {
       ...state,
       seasonData: action.payload,
     }
-    case "RACE_FETCH":
+    case "FETCH_EVENT_DATA":
     return {
       ...state,
       raceView: true,
       loading:true
     }
+    case "RACE_FETCH":
+    return {
+      ...state
+    }
     case "LOAD_RACE_DATA":
     return {
       ...state,
       raceData: action.payload,
-      loading: false
     }
-    case "LOAD_RACE_RESULTS":
+    case "QUAL_FETCH":
+    return {
+      ...state
+    }
+    case "LOAD_QUAL_DATA":
     return {
       ...state,
-      raceResults: action.payload
+      qualData: action.payload
+    }
+    case "COMPLETE_EVENT_DATA_FETCH":
+    return {
+      ...state,
+      loading: false
     }
     case "CREATE_RACE_PREVIEW":
     return {
