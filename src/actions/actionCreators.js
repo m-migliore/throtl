@@ -79,12 +79,17 @@ export function fetchRaceData(season, round) {
 
 export function fetchQualData(season, round) {
   return dispatch => {
-    dispatch({type:"QUAL_FETCH"})
-    return fetch(`http://ergast.com/api/f1/${season}/${round}/qualifying.json`)
-    .then(r => r.json())
-    .then(data => {
-      return dispatch({type: "LOAD_QUAL_DATA", payload: data.MRData.RaceTable.Races[0].QualifyingResults})
-    })
+    if (season === "current" || season > 2002) {
+      dispatch({type:"QUAL_FETCH"})
+      return fetch(`http://ergast.com/api/f1/${season}/${round}/qualifying.json`)
+      .then(r => r.json())
+      .then(data => {
+        return dispatch({type: "LOAD_QUAL_DATA", payload: data.MRData.RaceTable.Races[0].QualifyingResults})
+      })
+    } else {
+      return dispatch({type: "LOAD_QUAL_DATA", payload: ["No qualifying data available prior to 2003 season."]})
+    }
+
   }
 }
 
