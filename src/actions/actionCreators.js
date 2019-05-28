@@ -2,11 +2,16 @@ export function fetchAllSeasonData(season) {
   return dispatch => {
     dispatch({type: "START_ALL_SEASON_FETCH"})
     return Promise.all([
+      dispatch(setSeason(season)),
       dispatch(fetchSeasonData(season)),
       dispatch(fetchDriverStandings(season)),
       dispatch(fetchConstructorStandings(season))
     ]).then(() => dispatch({type:"COMPLETE_ALL_SEASON_FETCH"}))
   }
+}
+
+export function setSeason(season) {
+  return dispatch => dispatch({type: "SET_SEASON", payload: season})
 }
 
 export function fetchSeasonData(season) {
