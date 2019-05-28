@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
+import PitDetail from './PitDetail'
 
 class DetailedResult extends Component {
   componentDidMount() {
@@ -33,7 +34,8 @@ class DetailedResult extends Component {
           <p><strong>Average Speed:</strong> {fastestLap.AverageSpeed.speed + fastestLap.AverageSpeed.units}</p>
           <p><strong>Lap Number:</strong> {fastestLap.lap}</p>
           <p><strong>Rank:</strong> {fastestLap.rank}</p>
-          {pitstops.map(pit => <p>pitstuff</p>)}
+          <h3>Pitstops</h3>
+          {pitstops.map(pit => <PitDetail key={pit.stop} pitData={pit} />)}
         </div>
       </div>
     );
