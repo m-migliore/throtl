@@ -34,7 +34,7 @@ class DetailedResult extends Component {
           <p><strong>Lap Number:</strong> {fastestLap.lap}</p>
           <p><strong>Rank:</strong> {fastestLap.rank}</p>
           <h3>Pitstops</h3>
-          {pitstops.map(pit => <PitDetail key={pit.stop} pitData={pit} />)}
+          {this.props.season === "current" || this.props.season > 2011 ? pitstops.map(pit => <PitDetail key={pit.stop} pitData={pit} />) : null}
         </div>
       </div>
     );
@@ -44,6 +44,7 @@ class DetailedResult extends Component {
 
 const mapStateToProps = state => {
   return {
+    season: state.season,
     detailedResultData: state.detailedResultData,
     pitData: state.pitData
   }
