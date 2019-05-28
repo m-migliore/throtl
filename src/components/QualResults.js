@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
+import QualRow from './QualRow'
 
 class QualResults extends Component {
   componentDidMount() {
@@ -10,6 +11,19 @@ class QualResults extends Component {
     return (
       <div>
         <h2>Qualifying Results</h2>
+        <table>
+          <tbody>
+            <tr>
+              <th>Position</th>
+              <th>Driver</th>
+              <th>Constructor</th>
+              <th>Q1</th>
+              <th>Q2</th>
+              <th>Q3</th>
+            </tr>
+            {this.props.qualData.map(row => <QualRow key={row.number} qualData={row} />)}
+          </tbody>
+        </table>
       </div>
     );
   }
