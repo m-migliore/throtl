@@ -58,7 +58,7 @@ export function fetchEventData(season, round) {
     dispatch({type: "FETCH_EVENT_DATA"})
     return Promise.all([
       dispatch(fetchRaceData(season, round)),
-      dispatch(fetchQualData(season, round)),
+      dispatch(fetchQualData(season, round))
     ]).then(() => dispatch({type:"COMPLETE_EVENT_DATA_FETCH"}))
   }
 }
@@ -80,7 +80,7 @@ export function fetchQualData(season, round) {
     return fetch(`http://ergast.com/api/f1/${season}/${round}/qualifying.json`)
     .then(r => r.json())
     .then(data => {
-      return dispatch({type: "LOAD_QUAL_DATA", payload: data.MRData.RaceTable.Races[0]})
+      return dispatch({type: "LOAD_QUAL_DATA", payload: data.MRData.RaceTable.Races[0].QualifyingResults})
     })
   }
 }
