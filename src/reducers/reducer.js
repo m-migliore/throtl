@@ -9,6 +9,7 @@ const defaultState = {
   // raceResults: [],
   qualData: [],
   previewData: {},
+  pitData: [],
   detailedResultView: false,
   detailedResultData: {},
   driverStandings: {},
@@ -109,6 +110,15 @@ export default function reducer(state = defaultState, action) {
     return {
       ...state,
       constructorStandings: action.payload
+    }
+    case "PIT_FETCH":
+    return {
+      ...state
+    }
+    case "LOAD_PIT_DATA":
+    return {
+      ...state,
+      pitData: action.payload
     }
     default:
       return defaultState

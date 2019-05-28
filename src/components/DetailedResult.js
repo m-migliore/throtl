@@ -7,10 +7,13 @@ class DetailedResult extends Component {
   }
 
   render() {
-    let result = this.props.detailedResultData
-    let driver = this.props.detailedResultData.Driver
-    let constructor = this.props.detailedResultData.Constructor
-    let fastestLap = this.props.detailedResultData.FastestLap
+    const result = this.props.detailedResultData
+    const driver = this.props.detailedResultData.Driver
+    const constructor = this.props.detailedResultData.Constructor
+    const fastestLap = this.props.detailedResultData.FastestLap
+
+    const pitstops = this.props.pitData.filter(data => data.driverId === driver.driverId)
+    console.log(pitstops);
 
     return (
       <div>
@@ -30,6 +33,7 @@ class DetailedResult extends Component {
           <p><strong>Average Speed:</strong> {fastestLap.AverageSpeed.speed + fastestLap.AverageSpeed.units}</p>
           <p><strong>Lap Number:</strong> {fastestLap.lap}</p>
           <p><strong>Rank:</strong> {fastestLap.rank}</p>
+          {pitstops.map(pit => <p>pitstuff</p>)}
         </div>
       </div>
     );
@@ -39,7 +43,8 @@ class DetailedResult extends Component {
 
 const mapStateToProps = state => {
   return {
-    detailedResultData: state.detailedResultData
+    detailedResultData: state.detailedResultData,
+    pitData: state.pitData
   }
 }
 

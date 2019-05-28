@@ -58,7 +58,8 @@ export function fetchEventData(season, round) {
     dispatch({type: "FETCH_EVENT_DATA"})
     return Promise.all([
       dispatch(fetchRaceData(season, round)),
-      dispatch(fetchQualData(season, round))
+      dispatch(fetchQualData(season, round)),
+      dispatch(fetchPitData(season, round))
     ]).then(() => dispatch({type:"COMPLETE_EVENT_DATA_FETCH"}))
   }
 }
@@ -81,6 +82,17 @@ export function fetchQualData(season, round) {
     .then(r => r.json())
     .then(data => {
       return dispatch({type: "LOAD_QUAL_DATA", payload: data.MRData.RaceTable.Races[0].QualifyingResults})
+    })
+  }
+}
+
+export function fetchPitData(season, round) {
+  return dispatch => {
+    dispatch({type: "PIT_FETCH"})
+    return fetch(`http://ergast.com/api/f1/${season}/${round}/pitstops.json`)
+    .then(r => r.json())
+    .then(data => {
+      return dispatch({type: "LOAD_PIT_DATA", payload: data.MRData.RaceTable.Races[0].PitStops})
     })
   }
 }
