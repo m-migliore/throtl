@@ -6,7 +6,6 @@ const defaultState = {
   futureRace: false,
   loading: false,
   raceData: {},
-  // raceResults: [],
   qualData: [],
   previewData: {},
   pitData: [],
@@ -19,7 +18,6 @@ const defaultState = {
 export default function reducer(state = defaultState, action) {
   switch(action.type) {
     case "START_ALL_SEASON_FETCH":
-    console.log("START_ALL_SEASON_FETCH");
     return {
       ...state,
       loading: true

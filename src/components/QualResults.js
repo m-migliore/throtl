@@ -3,9 +3,6 @@ import {connect} from 'react-redux'
 import QualRow from './QualRow'
 
 class QualResults extends Component {
-  componentDidMount() {
-    console.log("qual", this.props.qualData);
-  }
 
   render() {
     return (

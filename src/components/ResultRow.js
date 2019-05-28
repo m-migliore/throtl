@@ -4,7 +4,6 @@ import {connect} from 'react-redux'
 class ResultRow extends Component {
 
   handleClick() {
-    console.log(this.props.resultData);
     this.props.loadDetailedResult(this.props.resultData)
   }
 

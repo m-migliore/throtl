@@ -5,10 +5,8 @@ import {fetchEventData, createRacePreview} from '../actions/actionCreators'
 class RaceLink extends Component {
   handleClick() {
     if (new Date(this.props.raceData.date) < Date.now()) {
-      console.log("past")
       this.props.fetchEventData(this.props.raceData.season, this.props.raceData.round)
     } else {
-      console.log("future");
       this.props.createRacePreview(this.props.seasonData.Races[this.props.raceData.round - 1])
     }
   }

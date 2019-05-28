@@ -14,7 +14,6 @@ class DetailedResult extends Component {
     const fastestLap = this.props.detailedResultData.FastestLap
 
     const pitstops = this.props.pitData.filter(data => data.driverId === driver.driverId)
-    console.log(pitstops);
 
     return (
       <div>

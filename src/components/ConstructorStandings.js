@@ -9,7 +9,7 @@ class ContructorStandings extends Component {
       return null
     } else {
       const standings = this.props.constructorStandings.StandingsLists[0].ConstructorStandings
-      console.log(standings);
+
       return (
         <div>
           <h3>Driver Standings</h3>

@@ -10,7 +10,6 @@ export function fetchAllSeasonData(season) {
 }
 
 export function fetchSeasonData(season) {
-  console.log("FETCH_SEASON_DATA")
   return dispatch => {
     dispatch({type: "FETCH_SEASON_DATA"})
     return fetch(`http://ergast.com/api/f1/${season}.json`)
@@ -26,7 +25,6 @@ export function fetchSeasonData(season) {
 }
 
 export function fetchDriverStandings(season) {
-  console.log("FETCH_DRIVER_STANDINGS");
   return dispatch => {
     dispatch({type: "FETCH_DRIVER_STANDINGS"})
     return fetch(`http://ergast.com/api/f1/${season}/driverStandings.json`)
@@ -39,7 +37,6 @@ export function fetchDriverStandings(season) {
 }
 
 export function fetchConstructorStandings(season) {
-  console.log("FETCH_CONSTRUCTOR_STANDINGS");
   return dispatch => {
     dispatch({type: "FETCH_CONSTRUCTOR_STANDINGS"})
     return fetch(`http://ergast.com/api/f1/${season}/constructorStandings.json`)
@@ -98,6 +95,5 @@ export function fetchPitData(season, round) {
 }
 
 export function createRacePreview(previewData) {
-  // console.log("preview", previewData);
   return dispatch => dispatch({type: "CREATE_RACE_PREVIEW", payload: previewData})
 }

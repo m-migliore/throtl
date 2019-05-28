@@ -11,7 +11,7 @@ class DriverStandings extends Component {
       return null
     } else {
       const standings = this.props.driverStandings.StandingsLists[0].DriverStandings
-      console.log(standings);
+
       return (
         <div>
           <h3>Driver Standings</h3>
