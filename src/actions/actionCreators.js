@@ -120,6 +120,19 @@ export function setCircuitData(round) {
   }
 }
 
+export function loadRacePreview(previewData) {
+  return dispatch => {
+    dispatch({type: "LOAD_RACE_PREVIEW", payload: previewData})
+  }
+}
+
 export function createRacePreview(previewData) {
-  return dispatch => dispatch({type: "CREATE_RACE_PREVIEW", payload: previewData})
+  //return dispatch => dispatch({type: "CREATE_RACE_PREVIEW", payload: previewData})
+  return dispatch => {
+    dispatch({type: "CREATE_RACE_PREVIEW"})
+    return Promise.all([
+      dispatch(loadRacePreview(previewData)),
+      dispatch(setCircuitData(previewData.round))
+    ])
+  }
 }

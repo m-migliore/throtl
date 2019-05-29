@@ -94,9 +94,13 @@ export default function reducer(state = defaultState, action) {
     case "CREATE_RACE_PREVIEW":
     return {
       ...state,
-      raceView: true,
       futureRace: true,
-      previewData: action.payload
+    }
+    case "LOAD_RACE_PREVIEW":
+    return {
+      ...state,
+      raceView: true,
+      raceData: action.payload
     }
     case "CLOSE_RACE":
     return {
