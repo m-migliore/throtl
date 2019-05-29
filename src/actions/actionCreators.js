@@ -1,3 +1,5 @@
+import store from "../index.js"
+
 export function fetchAllSeasonData(season) {
   return dispatch => {
     dispatch({type: "START_ALL_SEASON_FETCH"})
@@ -64,6 +66,7 @@ export function fetchEventData(season, round) {
     dispatch({type: "FETCH_EVENT_DATA"})
     return Promise.all([
       dispatch(fetchRaceData(season, round)),
+      dispatch(setCircuitData(round)),
       dispatch(fetchQualData(season, round)),
       dispatch(fetchPitData(season, round))
     ]).then(() => dispatch({type:"COMPLETE_EVENT_DATA_FETCH"}))
@@ -110,6 +113,12 @@ export function fetchPitData(season, round) {
       return dispatch({type: "LOAD_PIT_DATA", payload: ["Pit data not available prior to 2012 season."]})
     }
 
+  }
+}
+
+export function setCircuitData(round) {
+  return (dispatch, getState) => {
+    dispatch({type: "LOAD_CIRCUIT_DATA", payload: getState().seasonData.Races[round - 1].Circuit})
   }
 }
 

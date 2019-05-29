@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
 import {fetchAllSeasonData} from '../actions/actionCreators'
-import StandingsContainer from './StandingsContainer'
-import RaceContainer from './RaceContainer'
+// import StandingsContainer from './StandingsContainer'
+// import RaceContainer from './RaceContainer'
 import RaceList from './RaceList'
 
 class SeasonContainer extends Component {

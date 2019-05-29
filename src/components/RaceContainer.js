@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux'
 import RaceResults from './RaceResults'
 import QualResults from './QualResults'
+import CircuitInfo from './CircuitInfo'
 import RacePreview from './RacePreview'
 import DetailedResult from './DetailedResult'
 import {Redirect} from 'react-router-dom'
@@ -14,6 +15,7 @@ class RaceContainer extends Component {
       return (
         <div>
           <button onClick={this.props.closeRace}>Close</button>
+          <CircuitInfo />
           {this.props.futureRace ? <RacePreview /> : <RaceResults />}
           {this.props.qualData.length > 1 ? <QualResults /> : null}
           {this.props.detailedResultView ? <DetailedResult /> : null}

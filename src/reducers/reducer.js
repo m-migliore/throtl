@@ -9,6 +9,7 @@ const defaultState = {
   qualData: [],
   previewData: {},
   pitData: [],
+  circuitData: {},
   detailedResultView: false,
   detailedResultData: {},
   driverStandings: {},
@@ -79,6 +80,11 @@ export default function reducer(state = defaultState, action) {
     return {
       ...state,
       qualData: action.payload
+    }
+    case "LOAD_CIRCUIT_DATA":
+    return {
+      ...state,
+      circuitData: action.payload
     }
     case "COMPLETE_EVENT_DATA_FETCH":
     return {
