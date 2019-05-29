@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
-import {fetchEventData, createRacePreview} from '../actions/actionCreators'
+import {fetchEventData, createRacePreview} from '../../actions/actionCreators'
 import {Redirect} from 'react-router-dom'
 
 class RaceLink extends Component {

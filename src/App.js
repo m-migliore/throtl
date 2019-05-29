@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
 import {BrowserRouter as Router, Route} from 'react-router-dom'
-import SeasonContainer from './components/SeasonContainer'
-import RaceContainer from './components/RaceContainer'
+import SeasonContainer from './components/Season/SeasonContainer'
+import RaceContainer from './components/Race/RaceContainer'
 
 class App extends Component {
 
