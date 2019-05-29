@@ -4,7 +4,7 @@ import Moment from 'react-moment'
 import RaceResults from './RaceResults'
 import QualResults from './QualResults'
 import CircuitInfo from '../Circuit/CircuitInfo'
-import RacePreview from './RacePreview'
+// import RacePreview from './RacePreview'
 import DetailedResult from '../DetailedResult/DetailedResult'
 import {Redirect} from 'react-router-dom'
 
@@ -19,7 +19,7 @@ class RaceContainer extends Component {
           <h1>{this.props.raceData.raceName}</h1>
           <p><Moment date={this.props.raceData.date} format="LLL"/></p>
           <CircuitInfo />
-          {this.props.futureRace ? <RacePreview /> : <RaceResults />}
+          {!this.props.futureRace ? <RaceResults /> : null}
           {this.props.qualData.length > 1 ? <QualResults /> : null}
           {this.props.detailedResultView ? <DetailedResult /> : null}
         </div>
