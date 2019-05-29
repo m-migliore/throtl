@@ -25,9 +25,9 @@ class DetailedResult extends Component {
           <h3>Results</h3>
           <p><strong>Position: </strong> {result.position}</p>
           <p><strong>Grid:</strong> {result.grid}</p>
-          <p><strong>Time:</strong> {result.Time.time}</p>
           <p><strong>Points:</strong> {result.points}</p>
           <p><strong>Laps:</strong> {result.laps}</p>
+          <p><strong>Time:</strong> {result.status === "Finished" ? result.Time.time : "DNF"}</p>
           <p><strong>Status:</strong> {result.status}</p>
           {this.props.season === "current" || this.props.season > 2003 ? <FastestLap fastestLap={fastestLap}/> : null}
           {this.props.season === "current" || this.props.season > 2011 ? pitstops.map(pit => <PitDetail key={pit.stop} pitData={pit} />) : null}
