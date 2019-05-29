@@ -4,6 +4,7 @@ import RaceResults from './RaceResults'
 import QualResults from './QualResults'
 import RacePreview from './RacePreview'
 import DetailedResult from './DetailedResult'
+import {Redirect} from 'react-router-dom'
 
 class RaceContainer extends Component {
   render() {
@@ -19,7 +20,7 @@ class RaceContainer extends Component {
         </div>
       )
     } else {
-      return <h1>Race Data Not Found</h1>
+      return <Redirect to="/" />
     }
   }
 }
