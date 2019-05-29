@@ -1,5 +1,3 @@
-import store from "../index.js"
-
 export function fetchAllSeasonData(season) {
   return dispatch => {
     dispatch({type: "START_ALL_SEASON_FETCH"})
