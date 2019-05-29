@@ -3,9 +3,9 @@ import {connect} from 'react-redux'
 import Moment from 'react-moment'
 import RaceResults from './RaceResults'
 import QualResults from './QualResults'
-import CircuitInfo from './CircuitInfo'
+import CircuitInfo from '../Circuit/CircuitInfo'
 import RacePreview from './RacePreview'
-import DetailedResult from './DetailedResult'
+import DetailedResult from '../DetailedResult/DetailedResult'
 import {Redirect} from 'react-router-dom'
 
 class RaceContainer extends Component {
