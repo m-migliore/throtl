@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom'
 import SeasonContainer from './components/SeasonContainer'
+import RaceContainer from './components/RaceContainer'
 
 class App extends Component {
 
@@ -9,6 +10,7 @@ class App extends Component {
     return (
       <Router>
         <Route path="/" exact component={SeasonContainer} />
+        <Route path="/race" component={RaceContainer}/>
       </Router>
     )
   }

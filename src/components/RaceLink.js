@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
 import {fetchEventData, createRacePreview} from '../actions/actionCreators'
+import {Redirect} from 'react-router-dom'
 
 class RaceLink extends Component {
   handleClick() {
@@ -12,17 +13,23 @@ class RaceLink extends Component {
   }
 
   render() {
-    return (
-      <li onClick={this.handleClick.bind(this)}>
-        {this.props.raceData.raceName}
-      </li>
-    );
+
+    if (this.props.raceView) {
+      return <Redirect to="/race" />
+    } else {
+      return (
+        <li onClick={this.handleClick.bind(this)}>
+          {this.props.raceData.raceName}
+        </li>
+      );
+    }
   }
 }
 
 const mapStateToProps = state => {
   return {
-    seasonData: state.seasonData
+    seasonData: state.seasonData,
+    raceView: state.raceView
   }
 }
 

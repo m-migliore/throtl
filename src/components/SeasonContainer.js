@@ -46,13 +46,15 @@ class SeasonContainer extends Component {
           {this.state.error.length > 0 ? <p>{this.state.error}</p> : null}
           <button type="submit">Load Season</button>
         </form>
-        {this.props.loading ? <p>loading</p> :
+        <h1>Formula 1 {this.props.seasonData.season} Season</h1>
+        <RaceList />
+        {/* {this.props.loading ? <p>loading</p> :
           <>
             <h1>Formula 1 {this.props.seasonData.season} Season</h1>
             <StandingsContainer />
             {this.props.raceView ? <RaceContainer /> : <RaceList />}
           </>
-        }
+        } */}
 
       </div>
     );
