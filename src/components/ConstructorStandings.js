@@ -5,14 +5,20 @@ import ConstructorStandingRow from './ConstructorStandingRow'
 class ContructorStandings extends Component {
 
   render() {
-    if (!this.props.constructorStandings.StandingsLists) {
+    if (typeof this.props.constructorStandings === "string") {
+      return (
+        <div>
+          <h3>{this.props.constructorStandings}</h3>
+        </div>
+      )
+    } else if (!this.props.constructorStandings.StandingsLists){
       return null
     } else {
       const standings = this.props.constructorStandings.StandingsLists[0].ConstructorStandings
 
       return (
         <div>
-          <h3>Driver Standings</h3>
+          <h3>Constructor Standings</h3>
           <table>
             <tbody>
               <tr>

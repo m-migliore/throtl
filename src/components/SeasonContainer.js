@@ -20,7 +20,7 @@ class SeasonContainer extends Component {
   handleSubmit = e => {
     e.preventDefault()
     debugger
-    if (this.state.season === "current" || (this.state.season <= new Date().getFullYear() &&  this.state.season > 1952)) {
+    if (this.state.season === "current" || (this.state.season <= new Date().getFullYear() &&  this.state.season > 1951)) {
       this.props.fetchAllSeasonData(this.state.season)
       this.setState({
         season: "",

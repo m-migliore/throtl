@@ -44,12 +44,16 @@ export function fetchDriverStandings(season) {
 export function fetchConstructorStandings(season) {
   return dispatch => {
     dispatch({type: "FETCH_CONSTRUCTOR_STANDINGS"})
-    return fetch(`http://ergast.com/api/f1/${season}/constructorStandings.json`)
-    .then(r => r.json())
-    .then(data =>  dispatch({
-      type: "LOAD_CONSTRUCTOR_STANDINGS",
-      payload: data.MRData.StandingsTable
-    }))
+    if (season === "current" || season > 1957) {
+      return fetch(`http://ergast.com/api/f1/${season}/constructorStandings.json`)
+      .then(r => r.json())
+      .then(data =>  dispatch({
+        type: "LOAD_CONSTRUCTOR_STANDINGS",
+        payload: data.MRData.StandingsTable
+      }))
+    } else {
+      return dispatch({type: "LOAD_CONSTRUCTOR_STANDINGS", payload: "Constructor standings not available prior to 1958 season."})
+    }
   }
 }
 
@@ -87,7 +91,7 @@ export function fetchQualData(season, round) {
         return dispatch({type: "LOAD_QUAL_DATA", payload: data.MRData.RaceTable.Races[0].QualifyingResults})
       })
     } else {
-      return dispatch({type: "LOAD_QUAL_DATA", payload: ["No qualifying data available prior to 2003 season."]})
+      return dispatch({type: "LOAD_QUAL_DATA", payload: ["Qualifying data not available prior to 2003 season."]})
     }
 
   }
@@ -103,7 +107,7 @@ export function fetchPitData(season, round) {
         return dispatch({type: "LOAD_PIT_DATA", payload: data.MRData.RaceTable.Races[0].PitStops})
       })
     } else {
-      return dispatch({type: "LOAD_PIT_DATA", payload: ["No pit data available prior to 2012 season."]})
+      return dispatch({type: "LOAD_PIT_DATA", payload: ["Pit data not available prior to 2012 season."]})
     }
 
   }
