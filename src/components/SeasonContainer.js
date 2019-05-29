@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
 import {fetchAllSeasonData} from '../actions/actionCreators'
-// import StandingsContainer from './StandingsContainer'
-// import RaceContainer from './RaceContainer'
+import StandingsContainer from './StandingsContainer'
 import RaceList from './RaceList'
 
 class SeasonContainer extends Component {
@@ -19,7 +18,6 @@ class SeasonContainer extends Component {
 
   handleSubmit = e => {
     e.preventDefault()
-    debugger
     if (this.state.season === "current" || (this.state.season <= new Date().getFullYear() &&  this.state.season > 1951)) {
       this.props.fetchAllSeasonData(this.state.season)
       this.setState({
@@ -35,7 +33,9 @@ class SeasonContainer extends Component {
   }
 
   componentDidMount() {
-    this.props.fetchAllSeasonData("current")
+    if (this.props.season !== this.props.seasonData.season) {
+      this.props.fetchAllSeasonData(this.props.season)
+    }
   }
 
   render() {
@@ -48,14 +48,7 @@ class SeasonContainer extends Component {
         </form>
         <h1>Formula 1 {this.props.seasonData.season} Season</h1>
         <RaceList />
-        {/* {this.props.loading ? <p>loading</p> :
-          <>
-            <h1>Formula 1 {this.props.seasonData.season} Season</h1>
-            <StandingsContainer />
-            {this.props.raceView ? <RaceContainer /> : <RaceList />}
-          </>
-        } */}
-
+        <StandingsContainer />
       </div>
     );
   }
@@ -65,6 +58,7 @@ class SeasonContainer extends Component {
 const mapStateToProps = state => {
   return {
     loading: state.loading,
+    season: state.season,
     seasonData: state.seasonData,
     raceView: state.raceView
   }

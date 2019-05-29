@@ -8,7 +8,7 @@ class StandingsContainer extends Component {
   render() {
     return (
       <div>
-        <h2>Current Standing for the {this.props.seasonData.season} Season</h2>
+        <h2>{this.props.seasonData.season} Season Standings</h2>
         <DriverStandings />
         <ContructorStandings />
       </div>
