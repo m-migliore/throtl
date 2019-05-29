@@ -16,7 +16,11 @@ class ResultRow extends Component {
         <td>{result.Driver.givenName + " " + result.Driver.familyName}</td>
         <td>{result.Constructor.name}</td>
         <td>{result.points}</td>
-        {this.props.season === "current" || this.props.season > 2003 ? <td>{result.FastestLap.Time.time}</td> : null}
+        {this.props.season === "current" || this.props.season > 2003 ?
+          result.FastestLap ? <td>{result.FastestLap.Time.time}</td> : "-"
+          :
+          null
+        }
         <td>{result.status}</td>
         <td><button onClick={this.handleClick.bind(this)}>Full Details</button></td>
       </tr>
@@ -24,6 +28,7 @@ class ResultRow extends Component {
   }
 
 }
+
 const mapStateToProps = state => {
   return {
     season: state.season
