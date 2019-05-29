@@ -1,22 +1,28 @@
 import React, { Component } from 'react';
-import Moment from 'react-moment'
-import CircuitInfo from './CircuitInfo'
+// import {connect} from 'react-redux'
+
 
 class RaceTitle extends Component {
+  componentDidMount() {
+    debugger
+  }
   render() {
-    const titleData = this.props.titleData
+    // const titleData = this.props.titleData
 
     return (
       <div>
         <div className="race-title">
-          <h1>{titleData.raceName}</h1>
-          <p><Moment date={titleData.date} format="LLL"/></p>
+          {/* <h1>{titleData.raceName}</h1>
+          <p><Moment date={titleData.date} format="LLL"/></p> */}
+          race title
         </div>
-        <CircuitInfo circuitData={titleData.Circuit} />
       </div>
     );
   }
 
 }
-
+//
+// const mapStateToProps = state => {
+//   race
+// }
 export default RaceTitle;

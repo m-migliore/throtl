@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
+import Moment from 'react-moment'
 import RaceResults from './RaceResults'
 import QualResults from './QualResults'
 import CircuitInfo from './CircuitInfo'
@@ -15,6 +16,8 @@ class RaceContainer extends Component {
       return (
         <div>
           <button onClick={this.props.closeRace}>Close</button>
+          <h1>{this.props.raceData.raceName}</h1>
+          <p><Moment date={this.props.raceData.date} format="LLL"/></p>
           <CircuitInfo />
           {this.props.futureRace ? <RacePreview /> : <RaceResults />}
           {this.props.qualData.length > 1 ? <QualResults /> : null}
