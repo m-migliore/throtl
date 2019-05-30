@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import {Redirect} from 'react-router-dom'
 import Moment from 'react-moment'
 import {fetchDriverSeasonData} from '../../actions/actionCreators'
+import DriverSeasonResultContainer from './DriverSeasonResultContainer'
 
 class DriverContainer extends Component {
   componentDidMount() {
@@ -26,8 +27,7 @@ class DriverContainer extends Component {
           <h1>{driver.givenName + " " + driver.familyName} {driver.permanentNumber ? <span>{driver.permanentNumber }</span> : null}</h1>
           <p><strong>DOB:</strong> <Moment date={driver.dateOfBrith} format="LLL"/></p>
           <p><strong>Nationality:</strong> {driver.nationality}</p>
-
-          <h2>{this.props.driverSeasonData[0].season} Season Results</h2>
+          <DriverSeasonResultContainer /> 
         </div>
       );
     } else {
