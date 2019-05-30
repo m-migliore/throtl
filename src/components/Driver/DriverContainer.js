@@ -11,6 +11,12 @@ class DriverContainer extends Component {
       this.props.driverData.driverId
     )
   }
+  //
+  // componentDidUpdate() {
+  //   if(this.props.driverSeasonData.length > 0) {
+  //     debugger
+  //   }
+  // }
 
   render() {
     if (this.props.driverData.driverId) {
@@ -20,6 +26,8 @@ class DriverContainer extends Component {
           <h1>{driver.givenName + " " + driver.familyName} {driver.permanentNumber ? <span>{driver.permanentNumber }</span> : null}</h1>
           <p><strong>DOB:</strong> <Moment date={driver.dateOfBrith} format="LLL"/></p>
           <p><strong>Nationality:</strong> {driver.nationality}</p>
+
+          <h2>{this.props.driverSeasonData[0].season} Season Results</h2>
         </div>
       );
     } else {
