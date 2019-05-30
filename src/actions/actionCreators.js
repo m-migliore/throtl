@@ -137,3 +137,41 @@ export function createRacePreview(previewData) {
     ])
   }
 }
+
+function fetchDriverSeasonData(season, driverId) {
+  return dispatch => {
+    dispatch({type: "START_DRIVER_SEASON_DATA_FETCH"})
+    return Promise.all([
+      loadDriverRaceResults(season, driverId),
+      loadDriverQualResults(season, driverId)
+    ]).then(values => combineRaceAndQualResults(values[0],values[1]))
+
+  }
+}
+
+function loadDriverRaceResults(season, driverId) {
+  return fetch(`http://ergast.com/api/f1/${season}/drivers/${driverId}/results.json`)
+  .then(r => r.json())
+  .then(data => data.MRData.RaceTable.Races)
+}
+
+function loadDriverQualResults(season, driverId) {
+  return fetch(`http://ergast.com/api/f1/${season}/drivers/${driverId}/qualifying.json`)
+  .then(r => r.json())
+  .then(data => data.MRData.RaceTable.Races)
+}
+
+function combineRaceAndQualResults(raceResults, qualResults) {
+  return dispatch => {
+    let allRaceData = []
+
+    if (raceResults.length === qualResults.length) {
+      for (let i=0; i < raceResults.length; i++) {
+        let raceObj = Object.assign(raceResults[i], qualResults[i])
+        allRaceData.push(raceObj)
+      }
+    }
+
+    console.log(allRaceData);
+  }
+}

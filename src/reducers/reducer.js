@@ -15,7 +15,9 @@ const defaultState = {
   driverStandings: {},
   constructorStandings: {},
   driverView: false,
-  driverData: {}
+  driverData: {},
+  driverRaceResults: [],
+  driverQualResults: []
 }
 
 export default function reducer(state = defaultState, action) {
@@ -148,6 +150,12 @@ export default function reducer(state = defaultState, action) {
       driverData: action.payload,
       driverView: true
     }
+    case "START_DRIVER_SEASON_DATA_FETCH":
+    console.log("START_DRIVER_SEASON_DATA_FETCH");
+    return {
+      ...state
+    }
+    
     default:
       return defaultState
   }
