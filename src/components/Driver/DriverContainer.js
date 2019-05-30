@@ -2,8 +2,15 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux'
 import {Redirect} from 'react-router-dom'
 import Moment from 'react-moment'
+import {fetchDriverSeasonData} from '../../actions/actionCreators'
 
 class DriverContainer extends Component {
+  componentDidMount() {
+    this.props.fetchDriverSeasonData(
+      this.props.season,
+      this.props.driverData.driverId
+    )
+  }
 
   render() {
     if (this.props.driverData.driverId) {
@@ -25,8 +32,16 @@ class DriverContainer extends Component {
 
 const mapStateToProps = state => {
   return {
-    driverData: state.driverData
+    season: state.season,
+    driverData: state.driverData,
+    driverSeasonData: state.driverSeasonData
   }
 }
 
-export default connect(mapStateToProps)(DriverContainer);
+const mapDispatchToProps = dispatch => {
+  return {
+    fetchDriverSeasonData: (season, driverId) => dispatch(fetchDriverSeasonData(season, driverId))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(DriverContainer);

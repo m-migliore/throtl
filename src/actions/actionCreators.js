@@ -144,7 +144,7 @@ export function fetchDriverSeasonData(season, driverId) {
     return Promise.all([
       loadDriverRaceResults(season, driverId),
       loadDriverQualResults(season, driverId)
-    ]).then(values => combineRaceAndQualResults(values[0],values[1]))
+    ]).then(values => dispatch(combineRaceAndQualResults(values[0],values[1])))
 
   }
 }
@@ -173,7 +173,7 @@ function combineRaceAndQualResults(raceResults, qualResults) {
     if (raceResults.length !== qualResults.length) {
       allRaceData.push(qualResults.length - 1)
     }
-
-    dispatch({type: "LOAD_DRIVER_SEASON_DATA", payload: allRaceData})
+    
+    return dispatch({type: "LOAD_DRIVER_SEASON_DATA", payload: allRaceData})
   }
 }

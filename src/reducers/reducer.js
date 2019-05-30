@@ -150,7 +150,6 @@ export default function reducer(state = defaultState, action) {
       driverView: true
     }
     case "START_DRIVER_SEASON_DATA_FETCH":
-    console.log("START_DRIVER_SEASON_DATA_FETCH");
     return {
       ...state
     }
