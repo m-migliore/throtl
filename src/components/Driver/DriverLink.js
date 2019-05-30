@@ -1,19 +1,30 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
+import {Redirect} from 'react-router-dom'
 
 class DriverLink extends Component {
   handleClick() {
     console.log(this.props.driverData);
-    this.loadDriverData(this.props.driverData)
+    this.props.loadDriverData(this.props.driverData)
   }
 
   render() {
-    const driver = this.props.driverData
-    return (
-      <span onClick={this.handleClick.bind(this)}>{driver.givenName + " " + driver.familyName}</span>
-    );
+    if (this.props.driverView) {
+      return <Redirect to="/driver" />
+    } else {
+      const driver = this.props.driverData
+      return (
+        <span onClick={this.handleClick.bind(this)}>{driver.givenName + " " + driver.familyName}</span>
+      );
+    }
   }
 
+}
+
+const mapStateToProps = state => {
+  return {
+    driverView: state.driverView
+  }
 }
 
 const mapDispatchToProps = dispatch => {
@@ -22,4 +33,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(null, mapDispatchToProps)(DriverLink);
+export default connect(mapStateToProps, mapDispatchToProps)(DriverLink);
