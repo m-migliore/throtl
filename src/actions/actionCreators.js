@@ -138,7 +138,7 @@ export function createRacePreview(previewData) {
   }
 }
 
-function fetchDriverSeasonData(season, driverId) {
+export function fetchDriverSeasonData(season, driverId) {
   return dispatch => {
     dispatch({type: "START_DRIVER_SEASON_DATA_FETCH"})
     return Promise.all([
@@ -165,13 +165,15 @@ function combineRaceAndQualResults(raceResults, qualResults) {
   return dispatch => {
     let allRaceData = []
 
-    if (raceResults.length === qualResults.length) {
-      for (let i=0; i < raceResults.length; i++) {
-        let raceObj = Object.assign(raceResults[i], qualResults[i])
-        allRaceData.push(raceObj)
-      }
+    for (let i=0; i < raceResults.length; i++) {
+      let raceObj = Object.assign(raceResults[i], qualResults[i])
+      allRaceData.push(raceObj)
     }
 
-    console.log(allRaceData);
+    if (raceResults.length !== qualResults.length) {
+      allRaceData.push(qualResults.length - 1)
+    }
+
+    dispatch({type: "LOAD_DRIVER_SEASON_DATA", payload: allRaceData})
   }
 }
