@@ -13,7 +13,7 @@ class DriverSeasonResultContainer extends Component {
       return (
         <div>
           <h3>{seasonData[0].season} Season Results</h3>
-          {seasonData.map(result => <DriverSeasonResult resultData={result} />)}
+          {seasonData.map(result => <DriverSeasonResult key={result.round} resultData={result} />)}
         </div>
       );
     } else {
