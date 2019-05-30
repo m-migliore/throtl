@@ -57,8 +57,7 @@ export function fetchConstructorStandings(season) {
   }
 }
 
-// Fetch race and qualifying results for specific race in specific season
-
+// Fetch race results, qualifying results, pit data, and set circuit info for specific race in specific season
 export function fetchEventData(season, round) {
   return dispatch => {
     dispatch({type: "FETCH_EVENT_DATA"})
@@ -126,6 +125,8 @@ export function loadRacePreview(previewData) {
   }
 }
 
+// Replaces raceData with the preview information listed in fetchSeasonData
+// Consistent data for RaceContainer title information
 export function createRacePreview(previewData) {
   //return dispatch => dispatch({type: "CREATE_RACE_PREVIEW", payload: previewData})
   return dispatch => {
