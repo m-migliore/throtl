@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import DriverLink from '../Driver/DriverLink'
 
 class DriverStandingRow extends Component {
 
@@ -10,7 +11,8 @@ class DriverStandingRow extends Component {
     return (
       <tr>
         <td>{standing.position}</td>
-        <td>{driver.givenName + " " + driver.familyName}</td>
+        {/* <td>{driver.givenName + " " + driver.familyName}</td> */}
+        <td><DriverLink driverData={driver} /></td>
         <td>{constructor.name}</td>
         <td>{standing.points}</td>
         <td>{standing.wins}</td>
