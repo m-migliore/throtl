@@ -1,13 +1,26 @@
 import React, { Component } from 'react';
+import {connect} from 'react-redux'
+import {Redirect} from 'react-router-dom'
 
 class DriverContainer extends Component {
 
   render() {
-    return (
-      <div>Driver {this.props.driverData.familyName}</div>
-    );
+    if (this.props.driverData.driverId) {
+      return (
+        <div>Driver {this.props.driverData.familyName}</div>
+      );
+    } else {
+      return <Redirect to="/" />
+    }
+
   }
 
 }
 
-export default DriverContainer;
+const mapStateToProps = state => {
+  return {
+    driverData: state.driverData
+  }
+}
+
+export default connect(mapStateToProps)(DriverContainer);
