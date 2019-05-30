@@ -13,7 +13,8 @@ const defaultState = {
   detailedResultView: false,
   detailedResultData: {},
   driverStandings: {},
-  constructorStandings: {}
+  constructorStandings: {},
+  driverData: {}
 }
 
 export default function reducer(state = defaultState, action) {
@@ -139,6 +140,11 @@ export default function reducer(state = defaultState, action) {
     return {
       ...state,
       pitData: action.payload
+    }
+    case "LOAD_DRIVER_DATA":
+    return {
+      ...state,
+      driverData: action.payload
     }
     default:
       return defaultState
