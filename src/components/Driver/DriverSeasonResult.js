@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import {connect} from 'react-redux'
 import QualRow from '../Race/QualRow'
 import ResultRow from '../Race/ResultRow'
-import DetailedResult from '../DetailedResult/DetailedResult'
 
 class DriverSeasonResult extends Component {
 
@@ -42,8 +40,6 @@ class DriverSeasonResult extends Component {
               <ResultRow resultData={result.Results[0]} />
             </tbody>
           </table>
-
-          {this.props.detailedResultView ? <DetailedResult /> : null}
         </div>
       );
     } else {
@@ -53,10 +49,4 @@ class DriverSeasonResult extends Component {
 
 }
 
-const mapStateToProps = state => {
-  return {
-    detailedResultView: state.detailedResultView
-  }
-}
-
-export default connect(mapStateToProps)(DriverSeasonResult);
+export default DriverSeasonResult;
