@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
+import DriverLink from '../Driver/DriverLink'
 
 class ResultRow extends Component {
 
@@ -13,7 +14,11 @@ class ResultRow extends Component {
     return (
       <tr>
         <td>{result.position}</td>
-        <td>{result.Driver.givenName + " " + result.Driver.familyName}</td>
+        <td>{window.location.pathname !== "/driver" ?
+          <DriverLink driverData={result.Driver} />
+          :
+          result.Driver.givenName + " " + result.Driver.familyName}
+        </td>
         <td>{result.Constructor.name}</td>
         <td>{result.points}</td>
         {this.props.season === "current" || this.props.season > 2003 ?

@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
 import {Redirect} from 'react-router-dom'
+import {fetchDriverData} from '../../actions/actionCreators'
 
 class DriverLink extends Component {
   handleClick() {
-    console.log(this.props.driverData);
-    this.props.loadDriverData(this.props.driverData)
+    console.log(this.props.driverData)
+
+    if (window.location !== '/driver' ) {
+      this.props.fetchDriverData(this.props.driverData)
+    }
   }
 
   render() {
@@ -14,7 +18,7 @@ class DriverLink extends Component {
     } else {
       const driver = this.props.driverData
       return (
-        <span onClick={this.handleClick.bind(this)}>{driver.givenName + " " + driver.familyName}</span>
+        <span onClick={this.handleClick.bind(this)} className="driver-link">{driver.givenName + " " + driver.familyName}</span>
       );
     }
   }
@@ -29,7 +33,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    loadDriverData: driverData => dispatch({type: "LOAD_DRIVER_DATA", payload: driverData})
+    fetchDriverData: driverData => dispatch(fetchDriverData(driverData))
   }
 }
 

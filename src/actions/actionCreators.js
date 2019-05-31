@@ -138,6 +138,16 @@ export function createRacePreview(previewData) {
   }
 }
 
+
+export function fetchDriverData(driverData) {
+  return (dispatch, getState) => {
+    dispatch({type: "LOAD_DRIVER_DATA", payload: driverData})
+    return dispatch(fetchDriverSeasonData(getState().season, driverData.driverId))
+  }
+}
+
+
+// Fetches race and qual result for particular driver, combines them in same array for easier display
 export function fetchDriverSeasonData(season, driverId) {
   return dispatch => {
     dispatch({type: "START_DRIVER_SEASON_DATA_FETCH"})
@@ -173,7 +183,7 @@ function combineRaceAndQualResults(raceResults, qualResults) {
     if (raceResults.length !== qualResults.length) {
       allRaceData.push(qualResults.length - 1)
     }
-    
+
     return dispatch({type: "LOAD_DRIVER_SEASON_DATA", payload: allRaceData})
   }
 }
