@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
 import {Redirect} from 'react-router-dom'
-import {fetchDriverData} from '../../actions/actionCreators'
+import {fetchGrandPrixData} from '../../actions/actionCreators'
 
 class DriverLink extends Component {
   handleClick() {
     console.log(this.props.driverData)
 
     if (window.location !== '/driver' ) {
-      this.props.fetchDriverData(this.props.driverData)
+      this.props.fetchGrandPrixData(this.props.driverData, "driver")
     }
   }
 
@@ -33,7 +33,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchDriverData: driverData => dispatch(fetchDriverData(driverData))
+    fetchGrandPrixData: (data, type) => dispatch(fetchGrandPrixData(data, type))
   }
 }
 

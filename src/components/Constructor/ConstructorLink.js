@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
 import {Redirect} from 'react-router-dom'
-import {fetchConstructorData} from "../../actions/actionCreators"
+import {fetchGrandPrixData} from "../../actions/actionCreators"
 
 class ConstructorLink extends Component {
 
   handleClick() {
 
     if (window.location !== '/constructor' ) {
-      this.props.fetchConstructorData(this.props.constructorData)
+      this.props.fetchGrandPrixData(this.props.constructorData, "constructor")
     }
   }
 
@@ -34,7 +34,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchConstructorData: constructorData => dispatch(fetchConstructorData(constructorData))
+    fetchGrandPrixData: (data, type) => dispatch(fetchGrandPrixData(data, type))
   }
 }
 

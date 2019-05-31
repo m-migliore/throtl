@@ -138,40 +138,41 @@ export function createRacePreview(previewData) {
   }
 }
 
+// Fetches GrandPrix races and qualifying results for a driver or constructor
+// combines both resultsd into the same array for easier display
 
-export function fetchDriverData(driverData) {
+export function fetchGrandPrixData(data, type) {
   return (dispatch, getState) => {
-    dispatch({type: "LOAD_DRIVER_DATA", payload: driverData})
-    return dispatch(fetchDriverSeasonData(getState().season, driverData.driverId))
+    dispatch({type: `LOAD_${type.toUpperCase()}_DATA`, payload: data})
+    let typeId
+    type === "driver" ? typeId = data.driverId : typeId = data.constructorId
+    return dispatch(fetchGrandPrixSeasonData(getState().season, typeId, type))
   }
 }
 
-
-// Fetches race and qual result for particular driver, combines them in same array for easier display
-export function fetchDriverSeasonData(season, driverId) {
+export function fetchGrandPrixSeasonData(season, id, type) {
   return dispatch => {
-    dispatch({type: "START_DRIVER_SEASON_DATA_FETCH"})
     return Promise.all([
-      loadDriverRaceResults(season, driverId),
-      loadDriverQualResults(season, driverId)
-    ]).then(values => dispatch(combineRaceAndQualResults(values[0],values[1])))
+      loadRaceResults(season, id, type),
+      loadQualResults(season, id, type)
+    ]).then(values => dispatch(combineRaceAndQualResults(values[0],values[1], type)))
 
   }
 }
 
-function loadDriverRaceResults(season, driverId) {
-  return fetch(`http://ergast.com/api/f1/${season}/drivers/${driverId}/results.json`)
+function loadRaceResults(season, id, type) {
+  return fetch(`http://ergast.com/api/f1/${season}/${type}s/${id}/results.json`)
   .then(r => r.json())
   .then(data => data.MRData.RaceTable.Races)
 }
 
-function loadDriverQualResults(season, driverId) {
-  return fetch(`http://ergast.com/api/f1/${season}/drivers/${driverId}/qualifying.json`)
+function loadQualResults(season, id, type) {
+  return fetch(`http://ergast.com/api/f1/${season}/${type}s/${id}/qualifying.json`)
   .then(r => r.json())
   .then(data => data.MRData.RaceTable.Races)
 }
 
-function combineRaceAndQualResults(raceResults, qualResults) {
+function combineRaceAndQualResults(raceResults, qualResults, type) {
   return dispatch => {
     let allRaceData = []
 
@@ -184,56 +185,6 @@ function combineRaceAndQualResults(raceResults, qualResults) {
       allRaceData.push(qualResults.length - 1)
     }
 
-    return dispatch({type: "LOAD_DRIVER_SEASON_DATA", payload: allRaceData})
-  }
-}
-
-
-// Same as above but for Constructor, need to refactor and combined
-
-export function fetchConstructorData(constructorData) {
-  return (dispatch, getState) => {
-    dispatch({type: "LOAD_CONSTRUCTOR_DATA", payload: constructorData})
-    return dispatch(fetchConstructorSeasonData(getState().season, constructorData.constructorId))
-  }
-}
-
-export function fetchConstructorSeasonData(season, constructorId) {
-  return dispatch => {
-    dispatch({type: "START_CONSTRUCTOR_SEASON_DATA_FETCH"})
-    return Promise.all([
-      loadConstructorRaceResults(season, constructorId),
-      loadConstructorQualResults(season, constructorId)
-    ]).then(values => dispatch(combineConstructorRaceAndQualResults(values[0],values[1])))
-
-  }
-}
-
-function loadConstructorRaceResults(season, constructorId) {
-  return fetch(`http://ergast.com/api/f1/${season}/constructors/${constructorId}/results.json`)
-  .then(r => r.json())
-  .then(data => data.MRData.RaceTable.Races)
-}
-
-function loadConstructorQualResults(season, constructorId) {
-  return fetch(`http://ergast.com/api/f1/${season}/constructors/${constructorId}/qualifying.json`)
-  .then(r => r.json())
-  .then(data => data.MRData.RaceTable.Races)
-}
-
-function combineConstructorRaceAndQualResults(raceResults, qualResults) {
-  return dispatch => {
-    let allRaceData = []
-
-    for (let i=0; i < raceResults.length; i++) {
-      let raceObj = Object.assign(raceResults[i], qualResults[i])
-      allRaceData.push(raceObj)
-    }
-
-    if (raceResults.length !== qualResults.length) {
-      allRaceData.push(qualResults.length - 1)
-    }
-
-    return dispatch({type: "LOAD_CONSTRUCTOR_SEASON_DATA", payload: allRaceData})
+    return dispatch({type: `LOAD_${type.toUpperCase()}_SEASON_DATA`, payload: allRaceData})
   }
 }

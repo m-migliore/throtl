@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux'
 import {Redirect} from 'react-router-dom'
 import Moment from 'react-moment'
-import {fetchDriverSeasonData} from '../../actions/actionCreators'
 import DriverSeasonResultContainer from './DriverSeasonResultContainer'
 
 class DriverContainer extends Component {
@@ -40,7 +39,6 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchDriverSeasonData: (season, driverId) => dispatch(fetchDriverSeasonData(season, driverId)),
     clearDriverView: () => dispatch({type: "CLEAR_DRIVER_VIEW"})
   }
 }

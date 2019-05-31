@@ -152,10 +152,7 @@ export default function reducer(state = defaultState, action) {
       driverData: action.payload,
       driverView: true
     }
-    case "START_DRIVER_SEASON_DATA_FETCH":
-    return {
-      ...state
-    }
+
     case "LOAD_DRIVER_SEASON_DATA":
     return {
       ...state,
@@ -167,10 +164,6 @@ export default function reducer(state = defaultState, action) {
       ...state,
       constructorView: true,
       constructorData: action.payload
-    }
-    case "START_CONSTRUCTOR_SEASON_DATA_FETCH":
-    return {
-      ...state
     }
     case "LOAD_CONSTRUCTOR_SEASON_DATA":
     return {
