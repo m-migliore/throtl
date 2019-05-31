@@ -99,7 +99,6 @@ export function fetchQualData(season, round) {
 
 export function fetchPitData(season, round) {
   return dispatch => {
-    dispatch({type: "PIT_FETCH"})
     if (season === "current" || season > 2011) {
       return fetch(`http://ergast.com/api/f1/${season}/${round}/pitstops.json`)
       .then(r => r.json())
