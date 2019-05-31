@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import DriverLink from '../Driver/DriverLink'
 
 class QualRow extends Component {
 
@@ -10,7 +11,11 @@ class QualRow extends Component {
     return (
       <tr>
         <td>{result.position}</td>
-        <td>{driver.givenName + " " + driver.familyName}</td>
+        <td>{window.location.pathname !== "/driver" ?
+          <DriverLink driverData={driver} />
+          :
+          driver.givenName + " " + driver.familyName}
+        </td>
         <td>{constructor.name}</td>
         <td>{result.Q1}</td>
         <td>{result.Q2 ? result.Q2 : ""}</td>
