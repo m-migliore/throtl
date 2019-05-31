@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ConstructorLink from '../Constructor/ConstructorLink'
 
 class ConstructorStandingRow extends Component {
 
@@ -9,7 +10,7 @@ class ConstructorStandingRow extends Component {
     return (
       <tr>
         <td>{standing.position}</td>
-        <td>{constructor.name}</td>
+        <td><ConstructorLink constructorData={constructor} /></td>
         <td>{standing.points}</td>
         <td>{standing.wins}</td>
       </tr>

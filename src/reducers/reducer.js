@@ -16,7 +16,10 @@ const defaultState = {
   constructorStandings: {},
   driverView: false,
   driverData: {},
-  driverSeasonData: []
+  driverSeasonData: [],
+  constructorView: false,
+  constructorData: {},
+  constructorSeasonData: []
 }
 
 export default function reducer(state = defaultState, action) {
@@ -157,6 +160,13 @@ export default function reducer(state = defaultState, action) {
     return {
       ...state,
       driverSeasonData: action.payload
+    }
+    case "LOAD_CONSTRUCTOR_DATA":
+    console.log("meh");
+    return {
+      ...state,
+      constructorView: true,
+      constructorData: action.payload
     }
     default:
       return defaultState
