@@ -168,6 +168,15 @@ export default function reducer(state = defaultState, action) {
       constructorView: true,
       constructorData: action.payload
     }
+    case "START_CONSTRUCTOR_SEASON_DATA_FETCH":
+    return {
+      ...state
+    }
+    case "LOAD_CONSTRUCTOR_SEASON_DATA":
+    return {
+      ...state,
+      constructorSeasonData: action.payload
+    }
     default:
       return defaultState
   }

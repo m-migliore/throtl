@@ -187,3 +187,53 @@ function combineRaceAndQualResults(raceResults, qualResults) {
     return dispatch({type: "LOAD_DRIVER_SEASON_DATA", payload: allRaceData})
   }
 }
+
+
+// Same as above but for Constructor, need to refactor and combined
+
+export function fetchConstructorData(constructorData) {
+  return (dispatch, getState) => {
+    dispatch({type: "LOAD_CONSTRUCTOR_DATA", payload: constructorData})
+    return dispatch(fetchConstructorSeasonData(getState().season, constructorData.constructorId))
+  }
+}
+
+export function fetchConstructorSeasonData(season, constructorId) {
+  return dispatch => {
+    dispatch({type: "START_CONSTRUCTOR_SEASON_DATA_FETCH"})
+    return Promise.all([
+      loadConstructorRaceResults(season, constructorId),
+      loadConstructorQualResults(season, constructorId)
+    ]).then(values => dispatch(combineConstructorRaceAndQualResults(values[0],values[1])))
+
+  }
+}
+
+function loadConstructorRaceResults(season, constructorId) {
+  return fetch(`http://ergast.com/api/f1/${season}/constructors/${constructorId}/results.json`)
+  .then(r => r.json())
+  .then(data => data.MRData.RaceTable.Races)
+}
+
+function loadConstructorQualResults(season, constructorId) {
+  return fetch(`http://ergast.com/api/f1/${season}/constructors/${constructorId}/qualifying.json`)
+  .then(r => r.json())
+  .then(data => data.MRData.RaceTable.Races)
+}
+
+function combineConstructorRaceAndQualResults(raceResults, qualResults) {
+  return dispatch => {
+    let allRaceData = []
+
+    for (let i=0; i < raceResults.length; i++) {
+      let raceObj = Object.assign(raceResults[i], qualResults[i])
+      allRaceData.push(raceObj)
+    }
+
+    if (raceResults.length !== qualResults.length) {
+      allRaceData.push(qualResults.length - 1)
+    }
+
+    return dispatch({type: "LOAD_CONSTRUCTOR_SEASON_DATA", payload: allRaceData})
+  }
+}

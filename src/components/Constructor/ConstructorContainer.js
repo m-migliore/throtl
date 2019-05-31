@@ -3,6 +3,9 @@ import {connect} from 'react-redux'
 import {Redirect} from 'react-router-dom'
 
 class ConstructorContainer extends Component {
+  componentDidUpdate() {
+    console.log(this.props.constructorSeasonData);
+  }
 
   render() {
     if (this.props.constructorData.name) {
@@ -21,7 +24,8 @@ class ConstructorContainer extends Component {
 
 const mapStateToProps = state => {
   return {
-    constructorData: state.constructorData
+    constructorData: state.constructorData,
+    constructorSeasonData: state.constructorSeasonData
   }
 }
 

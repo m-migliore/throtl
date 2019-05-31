@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
 import {Redirect} from 'react-router-dom'
+import {fetchConstructorData} from "../../actions/actionCreators"
 
 class ConstructorLink extends Component {
 
   handleClick() {
-    this.props.loadConstructorData(this.props.constructorData)
+    this.props.fetchConstructorData(this.props.constructorData)
   }
 
   render() {
@@ -30,7 +31,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    loadConstructorData: constructorData => dispatch({type: "LOAD_CONSTRUCTOR_DATA", payload: constructorData})
+    fetchConstructorData: constructorData => dispatch(fetchConstructorData(constructorData))
   }
 }
 
