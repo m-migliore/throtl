@@ -6,7 +6,10 @@ import {fetchConstructorData} from "../../actions/actionCreators"
 class ConstructorLink extends Component {
 
   handleClick() {
-    this.props.fetchConstructorData(this.props.constructorData)
+
+    if (window.location !== '/constructor' ) {
+      this.props.fetchConstructorData(this.props.constructorData)
+    }
   }
 
   render() {

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import DriverLink from '../Driver/DriverLink'
+import ConstructorLink from '../Constructor/ConstructorLink'
 
 class QualRow extends Component {
 
@@ -16,7 +17,11 @@ class QualRow extends Component {
           :
           driver.givenName + " " + driver.familyName}
         </td>
-        <td>{constructor.name}</td>
+        <td>{window.location.pathname !== "/constructor" ?
+          <ConstructorLink constructorData={constructor} />
+          :
+          constructor.name}
+        </td>
         <td>{result.Q1}</td>
         <td>{result.Q2 ? result.Q2 : ""}</td>
         <td>{result.Q3 ? result.Q3 : ""}</td>

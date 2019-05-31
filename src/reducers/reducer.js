@@ -177,6 +177,16 @@ export default function reducer(state = defaultState, action) {
       ...state,
       constructorSeasonData: action.payload
     }
+    case "CLEAR_DRIVER_VIEW":
+    return {
+      ...state,
+      driverView: false
+    }
+    case "CLEAR_CONSTRUCTOR_VIEW":
+    return {
+      ...state,
+      constructorView: false
+    }
     default:
       return defaultState
   }

@@ -4,6 +4,11 @@ import {Redirect} from 'react-router-dom'
 import ConstructorSeasonResultContainer from './ConstructorSeasonResultContainer'
 
 class ConstructorContainer extends Component {
+
+  componentWillUnmount() {
+    this.props.clearConstructorView()
+  }
+
   componentDidUpdate() {
     console.log(this.props.constructorData, this.props.constructorSeasonData);
   }
@@ -32,4 +37,10 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps)(ConstructorContainer);
+const mapDispatchToProps = dispatch => {
+  return {
+    clearConstructorView: () => dispatch({type: "CLEAR_CONSTRUCTOR_VIEW"})
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ConstructorContainer);

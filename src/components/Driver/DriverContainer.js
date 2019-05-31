@@ -7,6 +7,10 @@ import DriverSeasonResultContainer from './DriverSeasonResultContainer'
 
 class DriverContainer extends Component {
 
+  componentWillUnmount() {
+    this.props.clearDriverView()
+  }
+
   render() {
     if (this.props.driverData.driverId) {
       const driver = this.props.driverData
@@ -36,7 +40,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchDriverSeasonData: (season, driverId) => dispatch(fetchDriverSeasonData(season, driverId))
+    fetchDriverSeasonData: (season, driverId) => dispatch(fetchDriverSeasonData(season, driverId)),
+    clearDriverView: () => dispatch({type: "CLEAR_DRIVER_VIEW"})
   }
 }
 

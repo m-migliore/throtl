@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
 import DriverLink from '../Driver/DriverLink'
+import ConstructorLink from '../Constructor/ConstructorLink'
 
 class ResultRow extends Component {
 
@@ -19,7 +20,11 @@ class ResultRow extends Component {
           :
           result.Driver.givenName + " " + result.Driver.familyName}
         </td>
-        <td>{result.Constructor.name}</td>
+        <td>{window.location.pathname !== "/constructor" ?
+          <ConstructorLink constructorData={result.Constructor} />
+          :
+          result.Constructor.name}
+        </td>
         <td>{result.points}</td>
         {this.props.season === "current" || this.props.season > 2003 ?
           result.FastestLap ? <td>{result.FastestLap.Time.time}</td> : "-"
