@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
 import {Redirect} from 'react-router-dom'
+import ConstructorSeasonResultContainer from './ConstructorSeasonResultContainer'
 
 class ConstructorContainer extends Component {
   componentDidUpdate() {
-    console.log(this.props.constructorSeasonData);
+    console.log(this.props.constructorData, this.props.constructorSeasonData);
   }
 
   render() {
@@ -13,6 +14,8 @@ class ConstructorContainer extends Component {
       return (
         <div>
           <h1>{constructor.name}</h1>
+          <p><strong>Nationality:</strong> {constructor.nationality}</p>
+          <ConstructorSeasonResultContainer />
         </div>
       );
     } else {

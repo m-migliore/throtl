@@ -6,9 +6,6 @@ import {fetchDriverSeasonData} from '../../actions/actionCreators'
 import DriverSeasonResultContainer from './DriverSeasonResultContainer'
 
 class DriverContainer extends Component {
-  // componentDidMount() {
-  //   this.props.fetchDriverSeasonData(this.props.season, this.props.driverData.driverId)
-  // }
 
   render() {
     if (this.props.driverData.driverId) {

@@ -22,7 +22,7 @@ class DriverSeasonResult extends Component {
                 <th>Q2</th>
                 <th>Q3</th>
               </tr>
-              <QualRow qualData={result.QualifyingResults[0]}/>
+              {result.QualifyingResults.map(qualRow => <QualRow key={qualRow.position} qualData={qualRow}/>)}
             </tbody>
           </table>
           <h4>Race Results</h4>
@@ -37,7 +37,7 @@ class DriverSeasonResult extends Component {
                 <th>Status</th>
                 <th>Detailed Results</th>
               </tr>
-              <ResultRow resultData={result.Results[0]} />
+              {result.Results.map(resultRow => <ResultRow key={resultRow.position} resultData={resultRow}/>)}
             </tbody>
           </table>
         </div>
