@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
-import DriverSeasonResult from './DriverSeasonResult'
+import GrandPrixResult from '../GrandPrixResult/GrandPrixResult'
 import DetailedResult from '../DetailedResult/DetailedResult'
 
 class DriverSeasonResultContainer extends Component {
@@ -14,7 +14,7 @@ class DriverSeasonResultContainer extends Component {
       return (
         <div>
           <h3>{seasonData[0].season} Season Results</h3>
-          {seasonData.map(result => <DriverSeasonResult key={result.round} resultData={result} />)}
+          {seasonData.map(result => <GrandPrixResult key={result.round} resultData={result} />)}
           {this.props.detailedResultView ? <DetailedResult /> : null}
         </div>
       );

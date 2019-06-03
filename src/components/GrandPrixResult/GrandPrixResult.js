@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import QualRow from '../Race/QualRow'
 import ResultRow from '../Race/ResultRow'
 
-class DriverSeasonResult extends Component {
+class GrandPrixResult extends Component {
 
   render() {
     if (this.props.resultData.Circuit) {
@@ -49,4 +49,4 @@ class DriverSeasonResult extends Component {
 
 }
 
-export default DriverSeasonResult;
+export default GrandPrixResult;
