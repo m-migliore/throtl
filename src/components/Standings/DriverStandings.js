@@ -13,7 +13,7 @@ class DriverStandings extends Component {
       const standings = this.props.driverStandings.StandingsLists[0].DriverStandings
 
       return (
-        <div>
+        <div className="w-1/2 p-4"> 
           <h3>Driver Standings</h3>
           <table>
             <tbody>

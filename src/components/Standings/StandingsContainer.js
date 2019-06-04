@@ -7,10 +7,12 @@ class StandingsContainer extends Component {
 
   render() {
     return (
-      <div>
+      <div className="container mx-auto my-5">
         <h2>{this.props.seasonData.season} Season Standings</h2>
-        <DriverStandings />
-        <ContructorStandings />
+        <div className="flex">
+          <DriverStandings />
+          <ContructorStandings />
+        </div>
       </div>
     );
   }

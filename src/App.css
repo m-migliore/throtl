@@ -1,3 +1,5 @@
+/********** TYPOGRAPHY **********/
+
 body {
   font-weight: 400;
   font-size: 1rem;
@@ -26,6 +28,8 @@ h4 {
   font-size: 1.5rem;
 }
 
+/********** GENERAL **********/
+
 button {
   padding: 5px 20px;
   text-transform: uppercase;
@@ -33,4 +37,48 @@ button {
   border-radius: 4px;
   color: #fff;
   background-color:#303f52;
+  border: 3px solid transparent;
+  -webkit-transition: all .35s ease-in-out;
+  -moz-transition: all .5s ease-in-out;
+  -ms-transition: all .5s ease-in-out;
+  -o-transition: all .5s ease-in-out;
+  transition: all .5s ease-in-out;
+}
+
+button:hover {
+  border-color: #303f52;
+  color: #303f52;
+  background-color: transparent;
+}
+
+/********** TABLES **********/
+
+table {
+  width: 100%;
+  text-align: center;
+  -webkit-box-shadow: 0 2px 8px 0 rgba(0, 0, 0, .3);
+  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, .3);
+}
+
+table tr:first-of-type {
+  background-color: #000;
+  color: #fff;
+}
+
+table tr:nth-of-type(even) {
+  background-color: #eee;
+}
+
+table tr > td {
+  border-left: 1px solid #aaa;
+  border-right: 1px solid #aaa;
+  padding: 5px 0;
+}
+
+table tr > td:first-of-type {
+  border-left: 0;
+}
+
+table tr > td:last-of-type {
+  border-right: 0;
 }

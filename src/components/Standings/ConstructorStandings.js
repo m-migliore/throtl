@@ -17,7 +17,7 @@ class ContructorStandings extends Component {
       const standings = this.props.constructorStandings.StandingsLists[0].ConstructorStandings
 
       return (
-        <div>
+        <div className="w-1/2 p-4">
           <h3>Constructor Standings</h3>
           <table>
             <tbody>
