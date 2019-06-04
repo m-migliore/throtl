@@ -19,7 +19,7 @@ class ConstructorLink extends Component {
       const constructor = this.props.constructorData
 
       return (
-        <span onClick={this.handleClick.bind(this)}>{constructor.name}</span>
+        <span onClick={this.handleClick.bind(this)} className="cursor-pointer">{constructor.name}</span>
       );
     }
   }

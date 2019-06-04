@@ -18,7 +18,7 @@ class DriverLink extends Component {
     } else {
       const driver = this.props.driverData
       return (
-        <span onClick={this.handleClick.bind(this)} className="driver-link">{driver.givenName + " " + driver.familyName}</span>
+        <span onClick={this.handleClick.bind(this)} className="cursor-pointer">{driver.givenName + " " + driver.familyName}</span>
       );
     }
   }

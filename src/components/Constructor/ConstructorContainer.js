@@ -17,7 +17,7 @@ class ConstructorContainer extends Component {
     if (this.props.constructorData.name) {
       const constructor = this.props.constructorData
       return (
-        <div>
+        <div className="container mx-auto">
           <h1>{constructor.name}</h1>
           <p><strong>Nationality:</strong> {constructor.nationality}</p>
           <ConstructorSeasonResultContainer />

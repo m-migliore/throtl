@@ -16,7 +16,11 @@ class RaceContainer extends Component {
   
   render() {
     if (this.props.loading) {
-      return <h1>Loading</h1>
+      return (
+        <div className="container mx-auto">
+          <h1>Loading</h1>
+        </div>
+      )
     } else if (this.props.raceView) {
       return (
         <div className="container mx-auto">

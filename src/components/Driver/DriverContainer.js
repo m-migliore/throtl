@@ -14,7 +14,7 @@ class DriverContainer extends Component {
     if (this.props.driverData.driverId) {
       const driver = this.props.driverData
       return (
-        <div>
+        <div className="container mx-auto">
           <h1>{driver.givenName + " " + driver.familyName} {driver.permanentNumber ? <span>{driver.permanentNumber }</span> : null}</h1>
           <p><strong>DOB:</strong> <Moment date={driver.dateOfBrith} format="LLL"/></p>
           <p><strong>Nationality:</strong> {driver.nationality}</p>
