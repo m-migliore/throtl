@@ -224,7 +224,6 @@ function loadQualResults(season, id, type) {
 }
 
 function combineRaceAndQualResults(raceResults, qualResults, type) {
-  debugger
   return dispatch => {
     let allRaceData = []
 

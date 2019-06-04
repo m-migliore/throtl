@@ -9,8 +9,8 @@ class GrandPrixResult extends Component {
       const result = this.props.resultData
       return (
 
-        <div>
-          <h3>{result.raceName}</h3>
+        <div className="my-10">
+          <h3 className="gp-race-title">{result.raceName}</h3>
           <h4>Qualifying Results</h4>
           <table>
             <tbody>

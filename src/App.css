@@ -4,11 +4,13 @@ body {
   font-weight: 400;
   font-size: 1rem;
   font-family: 'Roboto', sans-serif;
+  color: #222;
 }
 
 h1 {
   font-size: 3rem;
   font-family: 'Monoton', cursive;
+  font-style: italic
 }
 
 h2, h3, h4 {
@@ -61,7 +63,7 @@ table {
 }
 
 table tr:first-of-type {
-  background-color: #000;
+  background-color: #303f52;
   color: #fff;
 }
 
@@ -87,4 +89,23 @@ table tr > td:first-of-type {
 
 table tr > td:last-of-type {
   border-right: 0;
+}
+
+/********** GRAND PRIX RESULTS **********/
+.gp-race-title {
+  display: inline-block;
+  position: relative;
+  padding-bottom: 3px;
+}
+
+.gp-race-title::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  background-color: #222;
+  height: 5px;
+  width: 100%;
+  -webkit-box-shadow: 0 2px 8px 0 rgba(0, 0, 0, .3);
+  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, .3);
 }

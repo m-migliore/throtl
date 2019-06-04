@@ -18,7 +18,7 @@ class RaceLink extends Component {
       return <Redirect to="/race" />
     } else {
       return (
-        <li onClick={this.handleClick.bind(this)}>
+        <li onClick={this.handleClick.bind(this)} className="cursor-pointer">
           {this.props.raceData.raceName}
         </li>
       );
