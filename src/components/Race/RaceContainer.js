@@ -19,7 +19,7 @@ class RaceContainer extends Component {
       return <h1>Loading</h1>
     } else if (this.props.raceView) {
       return (
-        <div>
+        <div className="container mx-auto">
           <button onClick={this.props.closeRace}>Close</button>
           <h1>{this.props.raceData.raceName}</h1>
           <p><Moment date={this.props.raceData.date} format="LLL"/></p>

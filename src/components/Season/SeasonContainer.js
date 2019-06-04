@@ -40,7 +40,7 @@ class SeasonContainer extends Component {
 
   render() {
     return (
-      <div className={"container mx-auto"}>
+      <div className="container mx-auto">
         {/* <form onSubmit={this.handleSubmit}>
           <input type="number" name="season" value={this.state.season} onChange={this.handleChange} />
           {this.state.error.length > 0 ? <p>{this.state.error}</p> : null}

@@ -7,7 +7,7 @@ class RaceResults extends Component {
     const results = this.props.raceData.Results
 
     return (
-      <div>
+      <div className="my-5">
         <h2>Race Results</h2>
         <table>
           <tbody>

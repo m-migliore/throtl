@@ -6,7 +6,7 @@ class QualResults extends Component {
 
   render() {
     return (
-      <div>
+      <div className="my-5">
         <h2>Qualifying Results</h2>
         <table>
           <tbody>
