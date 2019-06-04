@@ -9,6 +9,11 @@ import DetailedResult from '../DetailedResult/DetailedResult'
 import {Redirect} from 'react-router-dom'
 
 class RaceContainer extends Component {
+
+  componentDidUpdate() {
+    console.log(this.props.futureRace)
+  }
+  
   render() {
     if (this.props.loading) {
       return <h1>Loading</h1>
@@ -19,7 +24,7 @@ class RaceContainer extends Component {
           <h1>{this.props.raceData.raceName}</h1>
           <p><Moment date={this.props.raceData.date} format="LLL"/></p>
           <CircuitInfo />
-          {!this.props.futureRace ? <RaceResults /> : null}
+          {!this.props.futureRace ? <RaceResults /> : null} 
           {this.props.qualData.length > 1 ? <QualResults /> : null}
           {this.props.detailedResultView ? <DetailedResult /> : null}
         </div>

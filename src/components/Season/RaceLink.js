@@ -5,8 +5,8 @@ import {Redirect} from 'react-router-dom'
 
 class RaceLink extends Component {
   handleClick() {
-    if (new Date(this.props.raceData.date) < Date.now()) {
-      debugger
+    debugger
+    if (new Date(this.props.raceData.date) < new Date()) {
       this.props.fetchEventData(this.props.raceData.season, this.props.raceData.round)
     } else {
       this.props.createRacePreview(this.props.seasonData.Races[this.props.raceData.round - 1])
