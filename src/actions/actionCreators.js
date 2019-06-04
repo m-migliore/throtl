@@ -98,6 +98,7 @@ export function fetchRaceData(season, round) {
     return fetch(`http://ergast.com/api/f1/${season}/${round}/results.json`)
       .then(r => r.json())
       .then(data => {
+        debugger
         return dispatch({
           type: "LOAD_RACE_DATA",
           payload: data.MRData.RaceTable.Races[0]
@@ -204,7 +205,9 @@ export function fetchGrandPrixSeasonData(season, id, type) {
     return Promise.all([
       loadRaceResults(season, id, type),
       loadQualResults(season, id, type)
-    ]).then(values => dispatch(combineRaceAndQualResults(values[0], values[1], type)))
+    ]).then(values => {
+      return dispatch(combineRaceAndQualResults(values[0], values[1], type))
+    })
 
   }
 }
@@ -222,6 +225,7 @@ function loadQualResults(season, id, type) {
 }
 
 function combineRaceAndQualResults(raceResults, qualResults, type) {
+  debugger
   return dispatch => {
     let allRaceData = []
 
