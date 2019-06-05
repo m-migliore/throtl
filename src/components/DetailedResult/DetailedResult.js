@@ -45,7 +45,7 @@ class DetailedResult extends Component {
             <p><strong>Time:</strong> {result.status === "Finished" ? result.Time.time : "DNF"}</p>
             <p><strong>Status:</strong> {result.status}</p>
           </div>
-          {this.props.season === "current" || this.props.season > 2003 ? <FastestLap fastestLap={fastestLap}/> : null}
+          {this.props.season > 2003 ? <FastestLap fastestLap={fastestLap}/> : null}
           <div className="my-3">
             <h3>Pit Stops</h3>
             {this.pitLoad()}

@@ -16,7 +16,7 @@ class RaceResults extends Component {
               <th>Driver</th>
               <th>Contructor</th>
               <th>Points</th>
-              {this.props.season === "current" || this.props.season > 2003 ? <th>Fastest Lap</th> : null}
+              {this.props.season > 2003 ? <th>Fastest Lap</th> : null}
               <th>Status</th>
               <th>Detailed Results</th>
             </tr>

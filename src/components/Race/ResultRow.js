@@ -26,7 +26,7 @@ class ResultRow extends Component {
           result.Constructor.name}
         </td>
         <td>{result.points}</td>
-        {this.props.season === "current" || this.props.season > 2003 ?
+        {this.props.season > 2003 ?
           result.FastestLap ? <td>{result.FastestLap.Time.time}</td> : "-"
           :
           null

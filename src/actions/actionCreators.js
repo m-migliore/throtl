@@ -57,7 +57,7 @@ export function fetchConstructorStandings(season) {
     dispatch({
       type: "FETCH_CONSTRUCTOR_STANDINGS"
     })
-    if (season === "current" || season > 1957) {
+    if (season > 1957) {
       return fetch(`http://ergast.com/api/f1/${season}/constructorStandings.json`)
         .then(r => r.json())
         .then(data => dispatch({
@@ -108,7 +108,7 @@ export function fetchRaceData(season, round) {
 
 export function fetchQualData(season, round) {
   return dispatch => {
-    if (season === "current" || season > 2002) {
+    if (season > 2002) {
       dispatch({
         type: "QUAL_FETCH"
       })
@@ -132,7 +132,7 @@ export function fetchQualData(season, round) {
 
 export function fetchPitData(season, round, driverId) {
   return dispatch => {
-    if (season === "current" || season > 2011) {
+    if (season > 2011) {
       return fetch(`http://ergast.com/api/f1/${season}/${round}/drivers/${driverId}/pitstops.json`)
         .then(r => r.json())
         .then(data => {

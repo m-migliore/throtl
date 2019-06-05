@@ -33,7 +33,7 @@ class GrandPrixResult extends Component {
                 <th>Driver</th>
                 <th>Contructor</th>
                 <th>Points</th>
-                {result.season === "current" || result.season > 2003 ? <th>Fastest Lap</th> : null}
+                {result.season > 2003 ? <th>Fastest Lap</th> : null}
                 <th>Status</th>
                 <th>Detailed Results</th>
               </tr>
