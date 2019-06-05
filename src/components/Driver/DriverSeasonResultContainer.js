@@ -9,12 +9,15 @@ class DriverSeasonResultContainer extends Component {
   }
 
   render() {
-    if (this.props.driverSeasonData.length > 0) {
-      const seasonData = this.props.driverSeasonData
+    if (this.props.driverSeasonData.results) {
+      const results = this.props.driverSeasonData.results
+      const points = this.props.driverSeasonData.points
+
       return (
         <div>
-          <h3>{seasonData[0].season} Season Results</h3>
-          {seasonData.map(result => <GrandPrixResult key={result.round} resultData={result} />)}
+          <h3>{results[0].season} Season Results</h3>
+          <h4>Points: {points}</h4>
+          {results.map(result => <GrandPrixResult key={result.round} resultData={result} />)}
           {this.props.detailedResultView ? <DetailedResult /> : null}
         </div>
       );

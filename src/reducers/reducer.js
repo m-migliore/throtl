@@ -155,7 +155,6 @@ export default function reducer(state = defaultState, action) {
       driverSeasonData: action.payload
     }
     case "LOAD_CONSTRUCTOR_DATA":
-    console.log("meh");
     return {
       ...state,
       constructorView: true,
