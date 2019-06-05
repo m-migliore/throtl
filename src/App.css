@@ -103,7 +103,7 @@ table tr > td:last-of-type {
   position: absolute;
   left: 0;
   bottom: 0;
-  background-color: #8e486b;
+  background-color: #8e0404;
   height: 5px;
   width: 100%;
   -webkit-box-shadow: 0 2px 8px 0 rgba(0, 0, 0, .3);

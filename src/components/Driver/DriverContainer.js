@@ -19,8 +19,8 @@ class DriverContainer extends Component {
       return (
         <div className="container mx-auto">
           <h1>{driver.givenName + " " + driver.familyName} {driver.permanentNumber ? <span>{driver.permanentNumber }</span> : null}</h1>
-          <p><strong>DOB:</strong> <Moment date={driver.dateOfBrith} format="LLL"/></p>
           <img src={process.env.PUBLIC_URL + `/imgs/flags/${flag}.png`} alt={`${driver.nationality} Flag`} />
+          <p><strong>DOB:</strong> <Moment date={driver.dateOfBrith} format="LLL"/></p>
           <DriverSeasonResultContainer />
         </div>
       );
