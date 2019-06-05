@@ -8,6 +8,8 @@ class RaceLink extends Component {
     if (new Date(this.props.raceData.date) < new Date()) {
       this.props.fetchEventData(this.props.raceData.season, this.props.raceData.round)
     } else {
+      console.log(this.props.raceData.date);
+      
       this.props.createRacePreview(this.props.seasonData.Races[this.props.raceData.round - 1])
     }
   }
@@ -18,9 +20,9 @@ class RaceLink extends Component {
       return <Redirect to="/race" />
     } else {
       return (
-        <li onClick={this.handleClick.bind(this)} className="cursor-pointer">
+        <span onClick={this.handleClick.bind(this)} className="cursor-pointer">
           {this.props.raceData.raceName}
-        </li>
+        </span>
       );
     }
   }

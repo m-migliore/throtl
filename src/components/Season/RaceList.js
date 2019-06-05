@@ -8,7 +8,7 @@ class RaceList extends Component {
     return (
       <div>
         <ul>
-          {this.props.seasonData.Races ? this.props.seasonData.Races.map(race => <RaceLink key={race.raceName} raceData={race} />): null}
+          {this.props.seasonData.Races ? this.props.seasonData.Races.map(race => <li key={race.raceName}><RaceLink raceData={race} /></li>): null}
         </ul>
       </div>
     );
