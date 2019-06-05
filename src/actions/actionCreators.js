@@ -29,9 +29,24 @@ export function fetchSeasonData(season) {
     return fetch(`http://ergast.com/api/f1/${season}.json`)
       .then(r => r.json())
       .then(data => {
+        const rawRaces = data.MRData.RaceTable
+        const raceData = rawRaces.map(race => {
+          if (new Date(race.date) < new Date()) {
+            return {
+              ...race,
+              futureRace: false
+            }
+          } else {
+            return {
+              ...race,
+              futureRace: true
+            }
+          }
+        })
+
         return dispatch({
           type: 'LOAD_SEASON_DATA',
-          payload: data.MRData.RaceTable
+          payload: raceData
         })
       })
   }
