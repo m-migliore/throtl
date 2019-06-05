@@ -205,7 +205,7 @@ export function fetchGrandPrixSeasonData(season, id, type) {
       loadRaceResults(season, id, type),
       loadQualResults(season, id, type)
     ]).then(values => {
-      return dispatch(combineRaceAndQualResults(values[0], values[1], type))
+      return dispatch(combineRaceAndQualResults(values[0], values[1], type, id))
     })
 
   }
@@ -223,22 +223,35 @@ function loadQualResults(season, id, type) {
     .then(data => data.MRData.RaceTable.Races)
 }
 
-function combineRaceAndQualResults(raceResults, qualResults, type) {
-  return dispatch => {
-    let allRaceData = []
+function combineRaceAndQualResults(raceResults, qualResults, type, id) {
+  return (dispatch, getState) => {
+    let combinedResults = []
+    let points 
 
     for (let i = 0; i < raceResults.length; i++) {
       let raceObj = Object.assign(raceResults[i], qualResults[i])
-      allRaceData.push(raceObj)
+      combinedResults.push(raceObj)
     }
 
     if (raceResults.length !== qualResults.length) {
-      allRaceData.push(qualResults.length - 1)
+      combinedResults.push(qualResults.length - 1)
+    }
+
+    let standings
+    if (type === "constructor") {
+      standings = getState().constructorStandings.StandingsLists[0].ConstructorStandings
+      points = standings.find(standing => standing.Constructor.constructorId === id).points
+    } else {
+      standings = getState().driverStandings.StandingsLists[0].DriverStandings
+      points = standings.find(standing => standing.Driver.driverId === id).points
     }
 
     return dispatch({
       type: `LOAD_${type.toUpperCase()}_SEASON_DATA`,
-      payload: allRaceData
+      payload: {
+        results: combinedResults,
+        points: points
+      }
     })
   }
 }

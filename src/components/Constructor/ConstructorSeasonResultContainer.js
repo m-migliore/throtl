@@ -11,12 +11,15 @@ class ConstructorSeasonResultContainer extends Component {
   }
 
   render() {
-    if (this.props.constructorSeasonData.length > 0) {
-      const seasonData = this.props.constructorSeasonData
+    if (this.props.constructorSeasonData.results) {
+      const results = this.props.constructorSeasonData.results
+      const points = this.props.constructorSeasonData.points
+
       return (
         <div>
-          <h3>{seasonData[0].season} Season Results</h3>
-          {seasonData.map(result => <GrandPrixResult key={result.round} resultData={result} />)}
+          <h3>{results[0].season} Season Results</h3>
+          <h4>Points: {points}</h4>
+          {results.map(result => <GrandPrixResult key={result.round} resultData={result} />)}
           {this.props.detailedResultView ? <DetailedResult /> : null}
         </div>
       );

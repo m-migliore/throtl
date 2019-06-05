@@ -16,10 +16,10 @@ const defaultState = {
   constructorStandings: {},
   driverView: false,
   driverData: {},
-  driverSeasonData: [],
+  driverSeasonData: {},
   constructorView: false,
   constructorData: {},
-  constructorSeasonData: []
+  constructorSeasonData: {}
 }
 
 export default function reducer(state = defaultState, action) {
