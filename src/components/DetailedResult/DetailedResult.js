@@ -1,11 +1,25 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
+import {fetchPitData} from '../../actions/actionCreators'
 import FastestLap from './FastestLap'
 import PitDetail from './PitDetail'
 
 class DetailedResult extends Component {
   componentDidMount() {
     console.log(this.props.detailedResultData);
+    this.props.fetchPitData(this.props.season, this.props.round, this.props.driverId)
+  }
+
+  pitLoad() {
+    const pitData = this.props.pitData
+
+    if (pitData.length === 0) {
+      return <p>Loading</p>
+    } else if (typeof pitData[0] === "object") {
+      return pitData.map(pit => <PitDetail key={pit.stop} pitData={pit} />)
+    } else {
+      return <p>{pitData[0]}</p>
+    }
   }
 
   render() {
@@ -31,7 +45,9 @@ class DetailedResult extends Component {
           <p><strong>Status:</strong> {result.status}</p>
           {this.props.season === "current" || this.props.season > 2003 ? <FastestLap fastestLap={fastestLap}/> : null}
           {/* {this.props.season === "current" || this.props.season > 2011 ? pitstops.map(pit => <PitDetail key={pit.stop} pitData={pit} />) : null} */}
-          {this.props.season === "current" || this.props.season > 2011 ? <PitDetail /> : null}
+          <h3>Pit Stops</h3>
+          {this.pitLoad()}
+          {/* {this.props.season === "current" || this.props.season > 2011 ? <PitDetail /> : null} */}
         </div>
       </div>
     );
@@ -43,13 +59,16 @@ const mapStateToProps = state => {
   return {
     season: state.season,
     detailedResultData: state.detailedResultData,
+    round: state.detailedResultData.round,
+    driverId: state.detailedResultData.Driver.driverId,
     pitData: state.pitData
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    closeDetailedResult: () =>  dispatch({type: "CLOSE_DETAILED_RESULT"})
+    closeDetailedResult: () =>  dispatch({type: "CLOSE_DETAILED_RESULT"}),
+    fetchPitData: (season, round, driverId) => dispatch(fetchPitData(season, round, driverId))
   }
 }
 
