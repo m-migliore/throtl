@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
+import {fetchPitData} from '../../actions/actionCreators'
 
 
 class PitDetail extends Component {
   componentDidMount() {
-    debugger
-    console.log("hit");
-    
+    this.props.fetchPitData(this.props.season, this.props.round, this.props.driverId)
   }
 
+
   render() {
-    // const pit = this.props.pitData
+    const pit = this.props.pitData
+    debugger
 
     return (
       <div>
@@ -28,13 +29,17 @@ class PitDetail extends Component {
 const mapStateToProps = state => {
   return {
     season: state.season,
-    detailedResultData: state.detailedResultData
+    round: state.detailedResultData.round,
+    driverId: state.detailedResultData.Driver.driverId,
+    pitData: state.pitData
   }
 }
 
-// const mapDispatchToProps = {
-  
-// }
+const mapDispatchToProps = dispatch => {
+  return {
+    fetchPitData: (season, round, driverId) => dispatch(fetchPitData(season, round, driverId))
+  }
+}
 
 
-export default connect(mapStateToProps)(PitDetail);
+export default connect(mapStateToProps, mapDispatchToProps)(PitDetail);

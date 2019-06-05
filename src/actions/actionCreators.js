@@ -83,7 +83,7 @@ export function fetchEventData(season, round) {
       dispatch(fetchRaceData(season, round)),
       dispatch(setCircuitData(round)),
       dispatch(fetchQualData(season, round)),
-      dispatch(fetchPitData(season, round))
+      // dispatch(fetchPitData(season, round))
     ]).then(() => dispatch({
       type: "COMPLETE_EVENT_DATA_FETCH"
     }))
@@ -130,10 +130,10 @@ export function fetchQualData(season, round) {
   }
 }
 
-export function fetchPitData(season, round) {
+export function fetchPitData(season, round, driverId) {
   return dispatch => {
     if (season === "current" || season > 2011) {
-      return fetch(`http://ergast.com/api/f1/${season}/${round}/pitstops.json`)
+      return fetch(`http://ergast.com/api/f1/${season}/${round}/drivers/${driverId}/pitstops.json`)
         .then(r => r.json())
         .then(data => {
           return dispatch({
