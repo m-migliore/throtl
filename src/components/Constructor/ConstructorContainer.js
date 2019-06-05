@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
 import {Redirect} from 'react-router-dom'
+import {NATIONS} from '../../helpers/nations.js'
 import ConstructorSeasonResultContainer from './ConstructorSeasonResultContainer'
 
 class ConstructorContainer extends Component {
@@ -16,10 +17,12 @@ class ConstructorContainer extends Component {
   render() {
     if (this.props.constructorData.name) {
       const constructor = this.props.constructorData
+      const flag = NATIONS[constructor.nationality]
+
       return (
         <div className="container mx-auto">
           <h1>{constructor.name}</h1>
-          <p><strong>Nationality:</strong> {constructor.nationality}</p>
+          <img src={process.env.PUBLIC_URL + `/imgs/flags/${flag}.png`} alt={`${constructor.nationality} Flag`} />
           <ConstructorSeasonResultContainer />
         </div>
       );

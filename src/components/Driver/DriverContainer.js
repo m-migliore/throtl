@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux'
 import {Redirect} from 'react-router-dom'
 import Moment from 'react-moment'
+import {NATIONS} from '../../helpers/nations.js'
 import DriverSeasonResultContainer from './DriverSeasonResultContainer'
 
 class DriverContainer extends Component {
@@ -13,11 +14,13 @@ class DriverContainer extends Component {
   render() {
     if (this.props.driverData.driverId) {
       const driver = this.props.driverData
+      const flag = NATIONS[driver.nationality]
+      
       return (
         <div className="container mx-auto">
           <h1>{driver.givenName + " " + driver.familyName} {driver.permanentNumber ? <span>{driver.permanentNumber }</span> : null}</h1>
           <p><strong>DOB:</strong> <Moment date={driver.dateOfBrith} format="LLL"/></p>
-          <p><strong>Nationality:</strong> {driver.nationality}</p>
+          <img src={process.env.PUBLIC_URL + `/imgs/flags/${flag}.png`} alt={`${driver.nationality} Flag`} />
           <DriverSeasonResultContainer />
         </div>
       );
