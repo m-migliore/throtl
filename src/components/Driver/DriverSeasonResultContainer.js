@@ -12,6 +12,7 @@ class DriverSeasonResultContainer extends Component {
     if (this.props.driverSeasonData.results) {
       const results = this.props.driverSeasonData.results
       const points = this.props.driverSeasonData.points
+      
 
       return (
         <div>

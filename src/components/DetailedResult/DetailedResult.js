@@ -14,11 +14,11 @@ class DetailedResult extends Component {
     const constructor = this.props.detailedResultData.Constructor
     const fastestLap = this.props.detailedResultData.FastestLap
 
-    const pitstops = this.props.pitData.filter(data => data.driverId === driver.driverId)
+    // const pitstops = this.props.pitData.filter(data => data.driverId === driver.driverId)
 
     return (
       <div className="modal-container">
-        <div className="modal-content container m-10">
+        <div className="modal-content container my-10 mx-auto">
           <button onClick={this.props.closeDetailedResult}>Close</button>
           <h2>{driver.givenName + " " + driver.familyName} <span>{driver.permanentNumber}</span></h2>
           <h4>{constructor.name}</h4>
@@ -30,7 +30,8 @@ class DetailedResult extends Component {
           <p><strong>Time:</strong> {result.status === "Finished" ? result.Time.time : "DNF"}</p>
           <p><strong>Status:</strong> {result.status}</p>
           {this.props.season === "current" || this.props.season > 2003 ? <FastestLap fastestLap={fastestLap}/> : null}
-          {this.props.season === "current" || this.props.season > 2011 ? pitstops.map(pit => <PitDetail key={pit.stop} pitData={pit} />) : null}
+          {/* {this.props.season === "current" || this.props.season > 2011 ? pitstops.map(pit => <PitDetail key={pit.stop} pitData={pit} />) : null} */}
+          {this.props.season === "current" || this.props.season > 2011 ? <PitDetail /> : null}
         </div>
       </div>
     );

@@ -37,7 +37,14 @@ class GrandPrixResult extends Component {
                 <th>Status</th>
                 <th>Detailed Results</th>
               </tr>
-              {result.Results.map(resultRow => <ResultRow key={resultRow.position} resultData={resultRow}/>)}
+              {result.Results.map(resultRow => 
+                <ResultRow 
+                  key={resultRow.position} 
+                  resultData={{
+                    ...resultRow,
+                    round: result.round
+                  }}
+                />)}
             </tbody>
           </table>
         </div>

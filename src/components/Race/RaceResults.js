@@ -20,7 +20,15 @@ class RaceResults extends Component {
               <th>Status</th>
               <th>Detailed Results</th>
             </tr>
-            {results.map(result => <ResultRow key={result.number} resultData={result} />)}
+            {results.map(result => 
+              <ResultRow 
+                key={result.number} 
+                resultData={{
+                  ...result, 
+                  round: this.props.raceData.round
+                }} 
+              />)
+            }
           </tbody>
         </table>
       </div>

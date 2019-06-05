@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {connect} from 'react-redux'
 import './App.css';
 import {BrowserRouter as Router, Route} from 'react-router-dom'
 import SeasonContainer from './components/Season/SeasonContainer'
@@ -7,6 +8,9 @@ import DriverContainer from './components/Driver/DriverContainer'
 import ConstructorContainer from './components/Constructor/ConstructorContainer'
 
 class App extends Component {
+  componentDidUpdate() {
+    console.log(this.props.pitData);
+  }
 
   render() {
     return (
@@ -19,6 +23,10 @@ class App extends Component {
     )
   }
 }
+const mapStateToProps = state => {
+  return {
+    pitData: state.pitData
+  }
+}
 
-
-export default App;
+export default connect(mapStateToProps)(App);
