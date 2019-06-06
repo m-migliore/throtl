@@ -13,12 +13,13 @@ class DriverContainer extends Component {
   }
 
   render() {
-    if (this.props.driverData.driverId) {
+    if (this.props.driverData.driverId && this.props.driverView) {
       const driver = this.props.driverData
       const flag = NATIONS[driver.nationality]
       
       return (
         <div className="container mx-auto">
+          <button onClick={this.props.clearDriverView}>Close</button>
           <h1>{driver.givenName + " " + driver.familyName} {driver.permanentNumber ? <span>{driver.permanentNumber }</span> : null}</h1>
           <Flag flagName={flag} />
           <p><strong>DOB:</strong> <Moment date={driver.dateOfBrith} format="LLL"/></p>
@@ -37,7 +38,8 @@ const mapStateToProps = state => {
   return {
     season: state.season,
     driverData: state.driverData,
-    driverSeasonData: state.driverSeasonData
+    driverSeasonData: state.driverSeasonData,
+    driverView: state.driverView
   }
 }
 

@@ -16,12 +16,13 @@ class ConstructorContainer extends Component {
   }
 
   render() {
-    if (this.props.constructorData.name) {
+    if (this.props.constructorData.name && this.props.constructorView) {
       const constructor = this.props.constructorData
       const flag = NATIONS[constructor.nationality]
 
       return (
         <div className="container mx-auto">
+          <button onClick={this.props.clearConstructorView}>Close</button>
           <h1>{constructor.name}</h1>
           <Flag flagName={flag} />
           <ConstructorSeasonResultContainer />
@@ -37,7 +38,8 @@ class ConstructorContainer extends Component {
 const mapStateToProps = state => {
   return {
     constructorData: state.constructorData,
-    constructorSeasonData: state.constructorSeasonData
+    constructorSeasonData: state.constructorSeasonData,
+    constructorView: state.constructorView
   }
 }
 
