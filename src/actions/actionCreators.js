@@ -29,9 +29,33 @@ export function fetchSeasonData(season) {
     return fetch(`http://ergast.com/api/f1/${season}.json`)
       .then(r => r.json())
       .then(data => {
+        
+        // check if race is in the future and add bool value,
+        // makes conditonal on RaceCheck dependent on obj value,
+        // instead of a value within the store
+        const rawRaces = data.MRData.RaceTable.Races
+        const timeCheckedRaces = rawRaces.map(race => {
+          if (new Date(race.date) < new Date()) {
+            return {
+              ...race,
+              future: false
+            }
+          } else {
+            return {
+              ...race,
+              future: true
+            }
+          }
+        })
+
+        // OG data fetch woudl contain object with season and races array
+        // use og season, with time checked races array
         return dispatch({
           type: 'LOAD_SEASON_DATA',
-          payload: data.MRData.RaceTable
+          payload: {
+            season: data.MRData.RaceTable.season,
+            Races: timeCheckedRaces
+          }
         })
       })
   }
