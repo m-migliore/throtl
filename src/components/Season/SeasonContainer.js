@@ -33,8 +33,13 @@ class SeasonContainer extends Component {
   }
 
   componentDidMount() {
-    if (this.props.season !== this.props.seasonData.season) {
+    if (this.props.season !== parseInt(this.props.seasonData.season)) {
       this.props.fetchAllSeasonData(this.props.season)
+      console.log("nopes");
+      
+    } else {
+      console.log("already loaded, we gucci");
+      
     }
   }
 
