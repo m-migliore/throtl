@@ -5,17 +5,27 @@ import {Redirect} from 'react-router-dom'
 
 class RaceLink extends Component {
   handleClick() {
-    if (new Date(this.props.raceData.date) < new Date()) {
-      this.props.fetchEventData(this.props.raceData.season, this.props.raceData.round)
-    } else {
-      console.log(this.props.raceData.date);
+    // debugger
+    // if (new Date(this.props.raceData.date) < new Date()) {
+    //   this.props.fetchEventData(this.props.raceData.season, this.props.raceData.round)
+    // } else {
+    //   console.log(this.props.raceData.date);
       
+    //   this.props.createRacePreview(this.props.seasonData.Races[this.props.raceData.round - 1])
+    // }
+
+    // if race is in future, create preview for race container, 
+    // otherwise fetch results for race container
+    if (this.props.raceData.future) {
       this.props.createRacePreview(this.props.seasonData.Races[this.props.raceData.round - 1])
+    } else {
+      this.props.fetchEventData(this.props.raceData.season, this.props.raceData.round)
     }
   }
 
   render() {
-
+    // raceView becomes true on successful click
+    // triggers redirect to view that race
     if (this.props.raceView) {
       return <Redirect to="/race" />
     } else {

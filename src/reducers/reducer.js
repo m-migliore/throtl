@@ -4,7 +4,7 @@ const defaultState = {
   season: currentYear,
   seasonData: {},
   raceView: false,
-  futureRace: false,
+  // futureRace: false,
   loading: false,
   raceData: {},
   qualData: [],
@@ -101,7 +101,7 @@ export default function reducer(state = defaultState, action) {
     case "CREATE_RACE_PREVIEW":
     return {
       ...state,
-      futureRace: true,
+      // futureRace: true,
     }
     case "LOAD_RACE_PREVIEW":
     return {

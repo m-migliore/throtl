@@ -48,7 +48,7 @@ export function fetchSeasonData(season) {
           }
         })
 
-        // OG data fetch woudl contain object with season and races array
+        // OG data fetch would contain object with season and races array
         // use og season, with time checked races array
         return dispatch({
           type: 'LOAD_SEASON_DATA',
