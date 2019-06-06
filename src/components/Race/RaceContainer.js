@@ -9,10 +9,6 @@ import DetailedResult from '../DetailedResult/DetailedResult'
 import {Redirect} from 'react-router-dom'
 
 class RaceContainer extends Component {
-
-  // componentDidUpdate() {
-  //   console.log(this.props.futureRace)
-  // }
   
   render() {
     if (this.props.loading) {
@@ -28,7 +24,6 @@ class RaceContainer extends Component {
           <h1>{this.props.season + " " + this.props.raceData.raceName}</h1>
           <p><Moment date={this.props.raceData.date} format="LLL"/></p>
           <CircuitInfo />
-          {/* {!this.props.futureRace ? <RaceResults /> : null}  */}
           {this.props.raceData.Results ? <RaceResults /> : null}
           {this.props.qualData.length > 1 ? <QualResults /> : null}
           {this.props.detailedResultView ? <DetailedResult /> : null}
@@ -47,7 +42,6 @@ const mapStateToProps = state => {
     raceView: state.raceView,
     raceData: state.raceData,
     qualData: state.qualData,
-    // futureRace: state.futureRace,
     detailedResultView: state.detailedResultView
   }
 }
