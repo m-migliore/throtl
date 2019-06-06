@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import {Redirect} from 'react-router-dom'
 import {NATIONS} from '../../helpers/nations.js'
 import ConstructorSeasonResultContainer from './ConstructorSeasonResultContainer'
+import Flag from '../Image/Flag'
 
 class ConstructorContainer extends Component {
 
@@ -22,7 +23,7 @@ class ConstructorContainer extends Component {
       return (
         <div className="container mx-auto">
           <h1>{constructor.name}</h1>
-          <img src={process.env.PUBLIC_URL + `/imgs/flags/${flag}.png`} alt={`${constructor.nationality} Flag`} />
+          <Flag flagName={flag} />
           <ConstructorSeasonResultContainer />
         </div>
       );

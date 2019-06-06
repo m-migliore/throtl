@@ -4,6 +4,7 @@ import {Redirect} from 'react-router-dom'
 import Moment from 'react-moment'
 import {NATIONS} from '../../helpers/nations.js'
 import DriverSeasonResultContainer from './DriverSeasonResultContainer'
+import Flag from '../Image/Flag'
 
 class DriverContainer extends Component {
 
@@ -19,7 +20,7 @@ class DriverContainer extends Component {
       return (
         <div className="container mx-auto">
           <h1>{driver.givenName + " " + driver.familyName} {driver.permanentNumber ? <span>{driver.permanentNumber }</span> : null}</h1>
-          <img src={process.env.PUBLIC_URL + `/imgs/flags/${flag}.png`} alt={`${driver.nationality} Flag`} />
+          <Flag flagName={flag} />
           <p><strong>DOB:</strong> <Moment date={driver.dateOfBrith} format="LLL"/></p>
           <DriverSeasonResultContainer />
         </div>
