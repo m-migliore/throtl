@@ -3,7 +3,6 @@ const currentYear = new Date().getFullYear()
 const defaultState = {
   season: currentYear,
   seasonData: {},
-  selectedRound: "last",
   raceView: false,
   futureRace: false,
   loading: false,

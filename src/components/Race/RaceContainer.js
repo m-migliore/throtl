@@ -25,7 +25,7 @@ class RaceContainer extends Component {
       return (
         <div className="container mx-auto">
           <button onClick={this.props.closeRace}>Close</button>
-          <h1>{this.props.raceData.raceName}</h1>
+          <h1>{this.props.season + " " + this.props.raceData.raceName}</h1>
           <p><Moment date={this.props.raceData.date} format="LLL"/></p>
           <CircuitInfo />
           {!this.props.futureRace ? <RaceResults /> : null} 
@@ -42,9 +42,8 @@ class RaceContainer extends Component {
 const mapStateToProps = state => {
   return {
     loading: state.loading,
+    season: state.season,
     raceView: state.raceView,
-    raceSeason: state.raceSeason,
-    selectedRound: state.selectedRound,
     raceData: state.raceData,
     qualData: state.qualData,
     futureRace: state.futureRace,
