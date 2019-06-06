@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import QualRow from '../Race/QualRow'
 import ResultRow from '../Race/ResultRow'
+import RaceLink from '../Season/RaceLink'
 
 class GrandPrixResult extends Component {
 
@@ -10,7 +11,7 @@ class GrandPrixResult extends Component {
       return (
 
         <div className="my-10">
-          <h3 className="gp-race-title">{result.raceName}</h3>
+          <h3 className="gp-race-title"><RaceLink raceData={result}/></h3>
           <h4>Qualifying Results</h4>
           <table>
             <tbody>
