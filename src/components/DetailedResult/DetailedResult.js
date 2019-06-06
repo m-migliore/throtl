@@ -4,7 +4,7 @@ import {fetchPitData} from '../../actions/actionCreators'
 import FastestLap from './FastestLap'
 import PitDetail from './PitDetail'
 import {NATIONS} from '../../helpers/nations.js'
-import Flag from '../Image/Flag'
+import FlagImage from '../Image/FlagImage'
 
 class DetailedResult extends Component {
   componentDidMount() {
@@ -38,7 +38,7 @@ class DetailedResult extends Component {
         <div className="modal-content container my-10 mx-auto p-5">
           <button onClick={this.props.closeDetailedResult}>Close</button>
           <h2>{driver.givenName + " " + driver.familyName} <span>{driver.permanentNumber}</span></h2>
-          <Flag flagName={flag} />
+          <FlagImage flagName={flag} />
           <h4>{constructor.name}</h4>
           <div className="my-3">
             <h3>Results</h3>

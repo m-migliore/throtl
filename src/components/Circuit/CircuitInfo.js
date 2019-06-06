@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
-import Flag from '../Image/Flag'
+import FlagImage from '../Image/FlagImage'
 
 class CircuitInfo extends Component {
   componentDidMount() {
@@ -13,7 +13,7 @@ class CircuitInfo extends Component {
       return (
         <div>
           <h2>{circuit.circuitName}</h2>
-          <Flag flagName={circuit.Location.country} />
+          <FlagImage flagName={circuit.Location.country} />
           <p>{circuit.Location.locality}, {circuit.Location.country}</p>
         </div>
       );

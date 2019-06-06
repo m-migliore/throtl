@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import {Redirect} from 'react-router-dom'
 import {NATIONS} from '../../helpers/nations.js'
 import ConstructorSeasonResultContainer from './ConstructorSeasonResultContainer'
-import Flag from '../Image/Flag'
+import FlagImage from '../Image/FlagImage'
 
 class ConstructorContainer extends Component {
 
@@ -24,7 +24,7 @@ class ConstructorContainer extends Component {
         <div className="container mx-auto">
           <button onClick={this.props.clearConstructorView}>Close</button>
           <h1>{constructor.name}</h1>
-          <Flag flagName={flag} />
+          <FlagImage flagName={flag} />
           <ConstructorSeasonResultContainer />
         </div>
       );

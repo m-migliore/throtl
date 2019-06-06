@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
- class Flag extends Component {
+ class FlagImage extends Component {
   render() {
     return (
       <div>
@@ -10,4 +10,4 @@ import React, { Component } from 'react'
   }
 }
 
-export default Flag
+export default FlagImage
