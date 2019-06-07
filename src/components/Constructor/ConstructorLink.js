@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
-import {Redirect} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 import {fetchGrandPrixData} from "../../actions/actionCreators"
 
 class ConstructorLink extends Component {
@@ -13,24 +13,15 @@ class ConstructorLink extends Component {
   }
 
   render() {
-    if (this.props.constructorView) {
-      return <Redirect to="/constructor" />
-    } else {
-      const constructor = this.props.constructorData
+    const constructor = this.props.constructorData
 
-      return (
-        <span onClick={this.handleClick.bind(this)} className="cursor-pointer">{constructor.name}</span>
-      );
-    }
+    return (
+      <Link to="/constructor" onClick={this.handleClick.bind(this)}>{constructor.name}</Link>
+    );
   }
 
 }
 
-const mapStateToProps = state => {
-  return {
-    constructorView: state.constructorView
-  }
-}
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -38,4 +29,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ConstructorLink);
+export default connect(null, mapDispatchToProps)(ConstructorLink);

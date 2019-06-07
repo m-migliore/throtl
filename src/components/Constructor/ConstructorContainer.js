@@ -1,28 +1,24 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
-import {Redirect} from 'react-router-dom'
+import {Redirect, Link} from 'react-router-dom'
 import {NATIONS} from '../../helpers/nations.js'
 import ConstructorSeasonResultContainer from './ConstructorSeasonResultContainer'
 import FlagImage from '../Image/FlagImage'
 
 class ConstructorContainer extends Component {
-
-  componentWillUnmount() {
-    this.props.clearConstructorView()
-  }
-
+  
   componentDidUpdate() {
     console.log(this.props.constructorData, this.props.constructorSeasonData);
   }
 
   render() {
-    if (this.props.constructorData.name && this.props.constructorView) {
+    if (this.props.constructorData.name) {
       const constructor = this.props.constructorData
       const flag = NATIONS[constructor.nationality]
 
       return (
         <div className="container mx-auto">
-          <button onClick={this.props.clearConstructorView}>Close</button>
+          <Link to="/">Close</Link>
           <h1>{constructor.name}</h1>
           <FlagImage flagName={flag} />
           <ConstructorSeasonResultContainer />
@@ -38,15 +34,8 @@ class ConstructorContainer extends Component {
 const mapStateToProps = state => {
   return {
     constructorData: state.constructorData,
-    constructorSeasonData: state.constructorSeasonData,
-    constructorView: state.constructorView
+    constructorSeasonData: state.constructorSeasonData
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    clearConstructorView: () => dispatch({type: "CLEAR_CONSTRUCTOR_VIEW"})
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(ConstructorContainer);
+export default connect(mapStateToProps)(ConstructorContainer);
