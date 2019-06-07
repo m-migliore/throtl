@@ -6,7 +6,10 @@ import ConstructorSeasonResultContainer from './ConstructorSeasonResultContainer
 import FlagImage from '../Image/FlagImage'
 
 class ConstructorContainer extends Component {
-  
+  componentDidMount() {
+    window.scrollTo(0, 0);
+  }
+
   componentDidUpdate() {
     console.log(this.props.constructorData, this.props.constructorSeasonData);
   }

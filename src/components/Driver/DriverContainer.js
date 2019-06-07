@@ -7,6 +7,9 @@ import DriverSeasonResultContainer from './DriverSeasonResultContainer'
 import FlagImage from '../Image/FlagImage'
 
 class DriverContainer extends Component {
+  componentDidMount() {
+    window.scrollTo(0, 0);
+  }
 
   render() {
     if (this.props.driverData.driverId) {

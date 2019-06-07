@@ -7,7 +7,7 @@ class DriverLink extends Component {
   handleClick() {
     console.log(this.props.driverData)
 
-    if (window.location !== '/driver' ) {
+    if (window.location.pathname !== '/driver' ) {
       this.props.fetchGrandPrixData(this.props.driverData, "driver")
     }
   }
