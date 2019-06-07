@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
-import {Redirect} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 import {fetchGrandPrixData} from '../../actions/actionCreators'
 
 class DriverLink extends Component {
@@ -13,22 +13,12 @@ class DriverLink extends Component {
   }
 
   render() {
-    if (this.props.driverView) {
-      return <Redirect to="/driver" />
-    } else {
-      const driver = this.props.driverData
+    const driver = this.props.driverData
       return (
-        <span onClick={this.handleClick.bind(this)} className="cursor-pointer">{driver.givenName + " " + driver.familyName}</span>
+        <Link to="/driver" onClick={this.handleClick.bind(this)}>{driver.givenName + " " + driver.familyName}</Link>
       );
-    }
   }
 
-}
-
-const mapStateToProps = state => {
-  return {
-    driverView: state.driverView
-  }
 }
 
 const mapDispatchToProps = dispatch => {
@@ -37,4 +27,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(DriverLink);
+export default connect(null, mapDispatchToProps)(DriverLink);
