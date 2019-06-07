@@ -3,7 +3,6 @@ const currentYear = new Date().getFullYear()
 const defaultState = {
   season: currentYear,
   seasonData: {},
-  raceView: false,
   loading: false,
   raceData: {},
   qualData: [],
@@ -14,10 +13,8 @@ const defaultState = {
   detailedResultData: {},
   driverStandings: {},
   constructorStandings: {},
-  driverView: false,
   driverData: {},
   driverSeasonData: {},
-  constructorView: false,
   constructorData: {},
   constructorSeasonData: {}
 }
@@ -28,7 +25,6 @@ export default function reducer(state = defaultState, action) {
     return {
       ...state,
       loading: true,
-      raceView: false,
       raceData: {},
       qualData: [],
       previewData: {},
@@ -66,7 +62,6 @@ export default function reducer(state = defaultState, action) {
     case "FETCH_EVENT_DATA":
     return {
       ...state,
-      raceView: true,
       loading:true
     }
     case "RACE_FETCH":
@@ -106,15 +101,7 @@ export default function reducer(state = defaultState, action) {
     case "LOAD_RACE_PREVIEW":
     return {
       ...state,
-      raceView: true,
       raceData: action.payload
-    }
-    case "CLOSE_RACE":
-    return {
-      ...state,
-      raceView: false,
-      raceData: {},
-      raceResults: []
     }
     case "LOAD_DETAILED_RESULT":
     return {
@@ -146,8 +133,7 @@ export default function reducer(state = defaultState, action) {
     case "LOAD_DRIVER_DATA":
     return {
       ...state,
-      driverData: action.payload,
-      driverView: true
+      driverData: action.payload
     }
 
     case "LOAD_DRIVER_SEASON_DATA":
@@ -158,23 +144,12 @@ export default function reducer(state = defaultState, action) {
     case "LOAD_CONSTRUCTOR_DATA":
     return {
       ...state,
-      constructorView: true,
       constructorData: action.payload
     }
     case "LOAD_CONSTRUCTOR_SEASON_DATA":
     return {
       ...state,
       constructorSeasonData: action.payload
-    }
-    case "CLEAR_DRIVER_VIEW":
-    return {
-      ...state,
-      driverView: false
-    }
-    case "CLEAR_CONSTRUCTOR_VIEW":
-    return {
-      ...state,
-      constructorView: false
     }
     default:
       return defaultState
