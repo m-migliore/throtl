@@ -8,6 +8,7 @@ import CircuitInfo from '../Circuit/CircuitInfo'
 import DetailedResult from '../DetailedResult/DetailedResult'
 import {Redirect, Link} from 'react-router-dom'
 
+
 class RaceContainer extends Component {
   
   render() {
