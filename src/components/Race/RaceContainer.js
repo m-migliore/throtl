@@ -6,7 +6,7 @@ import QualResults from './QualResults'
 import CircuitInfo from '../Circuit/CircuitInfo'
 // import RacePreview from './RacePreview'
 import DetailedResult from '../DetailedResult/DetailedResult'
-import {Redirect} from 'react-router-dom'
+import {Redirect, Link} from 'react-router-dom'
 
 class RaceContainer extends Component {
   
@@ -17,10 +17,10 @@ class RaceContainer extends Component {
           <h1>Loading</h1>
         </div>
       )
-    } else if (this.props.raceView) {
+    } else if (this.props.raceData.raceName) {
       return (
         <div className="container mx-auto">
-          <button onClick={this.props.closeRace}>Close</button>
+          <Link to="/">Close</Link>
           <h1>{this.props.season + " " + this.props.raceData.raceName}</h1>
           <p><Moment date={this.props.raceData.date} format="LLL"/></p>
           <CircuitInfo />
@@ -39,17 +39,10 @@ const mapStateToProps = state => {
   return {
     loading: state.loading,
     season: state.season,
-    raceView: state.raceView,
     raceData: state.raceData,
     qualData: state.qualData,
     detailedResultView: state.detailedResultView
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    closeRace: () => dispatch({type: "CLOSE_RACE"})
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(RaceContainer);
+export default connect(mapStateToProps)(RaceContainer);
