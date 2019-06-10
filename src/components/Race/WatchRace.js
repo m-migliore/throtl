@@ -5,9 +5,6 @@ import RacePosition from './RacePosition'
 import {fetchLapData} from '../../actions/actionCreators'
 
 class WatchRace extends Component {
-  state = {
-    lapAmount: spanGrandPrixLaps.length
-  }
 
   componentDidMount() {
     // this.props.fetchLapData(2019, 5)
@@ -60,8 +57,8 @@ class WatchRace extends Component {
 
     return (
       <div>
-        {this.props.watchRaceLap !== this.state.lapAmount ? <button onClick={this.handleClick.bind(this)}>Watch Race</button> : null}
-        {this.props.watchRaceLap !== this.state.lapAmount ? <h2>{`Lap ${this.props.watchRaceLap}`}</h2> : <h2>Finished</h2>}
+        {this.props.watchRaceLap === 1 ? <button onClick={this.handleClick.bind(this)}>Watch Race</button> : null}
+        {this.props.watchRaceLap !== this.props.lapData.length ? <h2>{`Lap ${this.props.watchRaceLap}`}</h2> : <h2>Finished</h2>}
         <div className="watch-race">
           {lapBreakdown.map(lap => <RacePosition key={lap.driverId} lapData={lap} />)}
         </div>
