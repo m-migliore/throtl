@@ -1,15 +1,15 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import {spanGrandPrixLaps, spanGrandPrixResults, spanGrandPrixPits} from '../../helpers/fullRaceLapFetch'
+import {spanGrandPrixLaps} from '../../helpers/fullRaceLapFetch'
 import RacePosition from './RacePosition'
 
 class WatchRace extends Component {
   state = {
-    lapAmount: spanGrandPrixLaps.Laps.length
+    lapAmount: spanGrandPrixLaps.length
   }
 
   componentDidMount() {
-    console.log(this.props.pitData)
+    console.log(this.props.raceData)
   }
 
   handleClick() {
@@ -30,7 +30,7 @@ class WatchRace extends Component {
 
   render() {
 
-    const laps = spanGrandPrixLaps.Laps
+    const laps = spanGrandPrixLaps
     const drivers = laps[0].Timings.map(lap => lap.driverId)
     const lapBreakdown = []
 
@@ -38,7 +38,8 @@ class WatchRace extends Component {
       // const driverResult = spanGrandPrixResults.find(result => result.Driver.driverId === driver)
       const driverResult = this.props.raceData.Results.find(result => result.Driver.driverId === driver)
 
-      const driverPits = spanGrandPrixPits.filter(pit => pit.driverId === driver)
+      // const driverPits = spanGrandPrixPits.filter(pit => pit.driverId === driver)
+      const driverPits = this.props.pitData.filter(pit => pit.driverId === driver)
 
       let driverLapBreakdown = laps.map(lap => {
         let info = lap.Timings.find(timing => timing.driverId === driver)

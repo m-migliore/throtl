@@ -202,6 +202,7 @@ export function fetchPitData(season, round, driverId) {
 
   }
 }
+ 
 
 export function setCircuitData(round) {
   return (dispatch, getState) => {

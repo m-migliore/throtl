@@ -1,22 +1,4 @@
-const spanGrandPrixLaps = {
-  season: "2019",
-  round: "5",
-  url: "https://en.wikipedia.org/wiki/2019_Spanish_Grand_Prix",
-  raceName: "Spanish Grand Prix",
-  Circuit: {
-    circuitId: "catalunya",
-    url: "http://en.wikipedia.org/wiki/Circuit_de_Barcelona-Catalunya",
-    circuitName: "Circuit de Barcelona-Catalunya",
-    Location: {
-      lat: "41.57",
-      long: "2.26111",
-      locality: "Montmeló",
-      country: "Spain"
-    }
-  },
-  date: "2019-05-12",
-  time: "13:10:00Z",
-  Laps: [
+const spanGrandPrixLaps =  [
     {
       number: "1",
       Timings: [
@@ -6718,7 +6700,6 @@ const spanGrandPrixLaps = {
       ]
     }
   ]
-};
 
 
 
