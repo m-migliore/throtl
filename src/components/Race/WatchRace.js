@@ -5,15 +5,14 @@ import RacePosition from './RacePosition'
 
 class WatchRace extends Component {
   state = {
-    lapAmount: spanGrandPrixLaps.Laps.length,
-    lap: 1
+    lapAmount: spanGrandPrixLaps.Laps.length
+  }
+
+  componentDidMount() {
+    console.log(this.props.raceData)
   }
 
   handleClick() {
-    // this.setState((prevState) => ({
-    //   lap: prevState.lap + 1,
-    // }));
-
     this.interval = setInterval(() => this.props.nextLap(this.props.watchRaceLap + 1), 750);
   }
 
@@ -36,7 +35,8 @@ class WatchRace extends Component {
     const lapBreakdown = []
 
     drivers.forEach(driver => {
-      const driverResult = spanGrandPrixResults.find(result => result.Driver.driverId === driver)
+      // const driverResult = spanGrandPrixResults.find(result => result.Driver.driverId === driver)
+      const driverResult = this.props.raceData.Results.find(result => result.Driver.driverId === driver)
 
       const driverPits = spanGrandPrixPits.filter(pit => pit.driverId === driver)
 
@@ -53,8 +53,6 @@ class WatchRace extends Component {
       })
     })
 
-    console.log(lapBreakdown);
-
     return (
       <div>
         {this.props.watchRaceLap !== this.state.lapAmount ? <button onClick={this.handleClick.bind(this)}>Watch Race</button> : null}
@@ -70,6 +68,7 @@ class WatchRace extends Component {
 
 const mapStateToProps = state => {
   return {
+    raceData: state.raceData,
     watchRaceLap: state.watchRaceLap
   }
 }

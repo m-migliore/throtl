@@ -7,6 +7,7 @@ import CircuitInfo from '../Circuit/CircuitInfo'
 // import RacePreview from './RacePreview'
 import DetailedResult from '../DetailedResult/DetailedResult'
 import {Redirect, Link} from 'react-router-dom'
+import WatchRace from './WatchRace'
 
 
 class RaceContainer extends Component {
@@ -28,6 +29,7 @@ class RaceContainer extends Component {
           {this.props.raceData.Results ? <RaceResults /> : null}
           {this.props.qualData.length > 1 ? <QualResults /> : null}
           {this.props.detailedResultView ? <DetailedResult /> : null}
+          {this.props.raceData.raceName === "Spanish Grand Prix" ? <WatchRace /> : null}
         </div>
       )
     } else {
