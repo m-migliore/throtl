@@ -67,7 +67,7 @@ export default function reducer(state = defaultState, action) {
       ...state,
       loading: true,
       selectedRound: action.payload,
-      watchRaceLap: 0,
+      watchRaceLap: 1,
       lapData: []
     }
     case "RACE_FETCH":
