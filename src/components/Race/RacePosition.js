@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import {connect} from 'react-redux'
 import RacePositionIndicator from './RacePositionIndicator'
 
 class RacePosition extends Component {
@@ -10,9 +11,9 @@ class RacePosition extends Component {
     const pits = lapData.pits
   
     let posStyle
-    if (lapInfo[this.props.lapNumber - 1]) {
+    if (lapInfo[this.props.watchRaceLap - 1]) {
       posStyle = {
-        top: `${parseInt(lapInfo[this.props.lapNumber - 1].position) * 30}px`
+        top: `${parseInt(lapInfo[this.props.watchRaceLap - 1].position) * 30}px`
       }
     } else {
       const finalPos = lapData.result.position
@@ -41,12 +42,18 @@ class RacePosition extends Component {
       <div className="race-pos" style={posStyle}>
         <p>
           {lapData.driverId}
-          {pits.map(pit => parseInt(pit.lap)).includes(this.props.lapNumber) ? <RacePositionIndicator iType={"pit-stop"} message={"Pit Stop"} /> : null}
-          {dnfStatus.lap <= this.props.lapNumber ? <RacePositionIndicator iType={dnfStatus.status} message={dnfStatus.details} /> : null}
+          {pits.map(pit => parseInt(pit.lap)).includes(this.props.watchRaceLap) ? <RacePositionIndicator iType={"pit-stop"} message={"Pit Stop"} /> : null}
+          {dnfStatus.lap <= this.props.watchRaceLap ? <RacePositionIndicator iType={dnfStatus.status} message={dnfStatus.details} /> : null}
         </p>
       </div>
     )
   }
 }
 
-export default RacePosition
+const mapStateToProps = state => {
+  return {
+    watchRaceLap: state.watchRaceLap
+  }
+}
+
+export default connect(mapStateToProps)(RacePosition)

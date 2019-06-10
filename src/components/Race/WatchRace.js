@@ -10,11 +10,11 @@ class WatchRace extends Component {
   }
 
   handleClick() {
-    this.setState((prevState) => ({
-      lap: prevState.lap + 1,
-    }));
+    // this.setState((prevState) => ({
+    //   lap: prevState.lap + 1,
+    // }));
 
-    this.interval = setInterval(() => this.nextLap(), 750);
+    this.interval = setInterval(() => this.props.nextLap(this.props.watchRaceLap + 1), 750);
   }
 
   nextLap() {
@@ -24,7 +24,7 @@ class WatchRace extends Component {
   }
 
   componentDidUpdate() {
-    if (this.state.lap === this.state.lapAmount) {
+    if (this.props.watchRaceLap === this.state.lapAmount) {
       clearInterval(this.interval)
     }
   }
@@ -57,10 +57,10 @@ class WatchRace extends Component {
 
     return (
       <div>
-        {this.state.lap !== this.state.lapAmount ? <h2>{`Lap ${this.state.lap}`}</h2> : <h2>Finished</h2>}
-        {this.state.lap !== this.state.lapAmount ? <button onClick={this.handleClick.bind(this)}>Watch Race</button> : null}
+        {this.props.watchRaceLap !== this.state.lapAmount ? <button onClick={this.handleClick.bind(this)}>Watch Race</button> : null}
+        {this.props.watchRaceLap !== this.state.lapAmount ? <h2>{`Lap ${this.props.watchRaceLap}`}</h2> : <h2>Finished</h2>}
         <div className="watch-race">
-          {lapBreakdown.map(lap => <RacePosition key={lap.driverId} lapData={lap} lapNumber={this.state.lap} />)}
+          {lapBreakdown.map(lap => <RacePosition key={lap.driverId} lapData={lap} />)}
         </div>
         
       </div>
@@ -74,4 +74,10 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps)(WatchRace)
+const mapDispatchToProps = dispatch => {
+  return {
+    nextLap: lapNumber => dispatch({type: "NEXT_LAP", payload: lapNumber})
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(WatchRace)
