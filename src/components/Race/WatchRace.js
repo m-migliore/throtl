@@ -30,6 +30,12 @@ class WatchRace extends Component {
     
   }
 
+  componentDidMount() {
+    console.log(spanGrandPrixResults);
+    
+  }
+
+
 
   render() {
 
@@ -38,13 +44,16 @@ class WatchRace extends Component {
     const lapBreakdown = []
 
     drivers.forEach(driver => {
+      const driverResult = spanGrandPrixResults.find(result => result.Driver.driverId === driver)
+
       let driverLapBreakdown = laps.map(lap => {
         let info = lap.Timings.find(timing => timing.driverId === driver)
         return info
       })
       lapBreakdown.push({
         driverId: driver,
-        lapInfo: driverLapBreakdown
+        lapInfo: driverLapBreakdown,
+        result: driverResult
       })
     })
 
@@ -57,9 +66,7 @@ class WatchRace extends Component {
         <h2>Lap {this.state.lap}</h2>
         <button onClick={this.handleClick.bind(this)}>Watch Race</button>
         <div className="watch-race">
-  
-
-          {lapBreakdown.map(lap => <RacePosition lapInfo={lap} lapNumber={this.state.lap} />)}
+          {lapBreakdown.map(lap => <RacePosition lapData={lap} lapNumber={this.state.lap} />)}
         </div>
         
       </div>

@@ -1,22 +1,30 @@
 import React, { Component } from 'react'
 
 class RacePosition extends Component {
+  componentDidMount() {
+    console.log(this.props.lapData)
+    
+  }
 
   render() {
+    const lapData = this.props.lapData
+    const lapInfo = lapData.lapInfo
+  
     let posStyle
-    if (this.props.lapInfo.lapInfo[this.props.lapNumber - 1]) {
+    if (lapInfo[this.props.lapNumber - 1]) {
       posStyle = {
-        top: `${parseInt(this.props.lapInfo.lapInfo[this.props.lapNumber - 1].position) * 20}px`
+        top: `${parseInt(lapInfo[this.props.lapNumber - 1].position) * 20}px`
       }
     } else {
+      const finalPos = lapData.result.position
       posStyle = {
-        top: "800px"
+        top: `${parseInt(finalPos) * 20}px`
       }
     }
 
     return (
       <div className="race-pos" style={posStyle}>
-        {this.props.lapInfo.driverId}
+        {lapData.driverId}
       </div>
     )
   }
