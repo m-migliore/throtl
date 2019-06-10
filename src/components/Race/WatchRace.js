@@ -12,7 +12,7 @@ class WatchRace extends Component {
   }
 
   handleClick() {
-    this.interval = setInterval(() => this.props.nextLap(this.props.watchRaceLap + 1), 750);
+    this.interval = setInterval(() => this.props.nextLap(this.props.watchRaceLap + 1), 1000);
   }
 
   nextLap() {
@@ -22,7 +22,7 @@ class WatchRace extends Component {
   }
 
   componentDidUpdate() {
-    if (this.props.watchRaceLap === this.props.lapData.length) {
+    if (this.props.watchRaceLap === this.props.lapData.length - 1) {
       clearInterval(this.interval)
     }
   }
@@ -46,6 +46,16 @@ class WatchRace extends Component {
           let info = lap.Timings.find(timing => timing.driverId === driver)
           return info
         })
+        
+        // Create lap zero for laps for starting watch race
+        const lapZero = {
+          driverid: driver,
+          position: driverResult.grid,
+          time: "0:00.000"
+        }
+
+        // add lap zero to lap data fetch
+        driverLapBreakdown.unshift(lapZero)
       
         lapBreakdown.push({
           driverId: driver,
@@ -57,8 +67,8 @@ class WatchRace extends Component {
 
     return (
       <div>
-        {this.props.watchRaceLap === 1 ? <button onClick={this.handleClick.bind(this)}>Watch Race</button> : null}
-        {this.props.watchRaceLap !== this.props.lapData.length ? <h2>{`Lap ${this.props.watchRaceLap}`}</h2> : <h2>Finished</h2>}
+        {this.props.watchRaceLap === 0 ? <button onClick={this.handleClick.bind(this)}>Watch Race</button> : null}
+        {this.props.watchRaceLap !== this.props.lapData.length - 1 ? <h2>{`Lap ${this.props.watchRaceLap}`}</h2> : <h2>Finished</h2>}
         <div className="watch-race">
           {lapBreakdown.map(lap => <RacePosition key={lap.driverId} lapData={lap} />)}
         </div>

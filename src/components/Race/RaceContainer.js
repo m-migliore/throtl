@@ -11,9 +11,9 @@ import WatchRace from './WatchRace'
 
 
 class RaceContainer extends Component {
-  componentDidMount() {
-    console.log(this.props.raceData)
-  }
+  // componentDidMount() {
+  //   console.log(this.props.raceData)
+  // }
   
   render() {
     if (this.props.loading) {

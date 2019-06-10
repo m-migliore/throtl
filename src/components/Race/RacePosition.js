@@ -3,9 +3,9 @@ import {connect} from 'react-redux'
 import RacePositionIndicator from './RacePositionIndicator'
 
 class RacePosition extends Component {
-  componentDidMount() {
-    console.log(this.props.lapData)
-  }
+  // componentDidMount() {
+  //   console.log(this.props.lapData)
+  // }
 
   render() {
     const lapData = this.props.lapData
@@ -14,9 +14,9 @@ class RacePosition extends Component {
     const pits = lapData.pits
   
     let posStyle
-    if (lapInfo[this.props.watchRaceLap - 1]) {
+    if (lapInfo[this.props.watchRaceLap]) {
       posStyle = {
-        top: `${parseInt(lapInfo[this.props.watchRaceLap - 1].position) * 30}px`
+        top: `${parseInt(lapInfo[this.props.watchRaceLap].position) * 30}px`
       }
     } else {
       const finalPos = lapData.result.position
