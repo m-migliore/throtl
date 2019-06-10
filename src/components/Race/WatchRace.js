@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-// import { connect } from 'react-redux'
+import { connect } from 'react-redux'
 import {spanGrandPrixLaps, spanGrandPrixResults, spanGrandPrixPits} from '../../helpers/fullRaceLapFetch'
 import RacePosition from './RacePosition'
 
@@ -27,10 +27,7 @@ class WatchRace extends Component {
     if (this.state.lap === this.state.lapAmount) {
       clearInterval(this.interval)
     }
-    
   }
-
-
 
   render() {
 
@@ -47,6 +44,7 @@ class WatchRace extends Component {
         let info = lap.Timings.find(timing => timing.driverId === driver)
         return info
       })
+      
       lapBreakdown.push({
         driverId: driver,
         lapInfo: driverLapBreakdown,
@@ -62,7 +60,7 @@ class WatchRace extends Component {
         {this.state.lap !== this.state.lapAmount ? <h2>{`Lap ${this.state.lap}`}</h2> : <h2>Finished</h2>}
         {this.state.lap !== this.state.lapAmount ? <button onClick={this.handleClick.bind(this)}>Watch Race</button> : null}
         <div className="watch-race">
-          {lapBreakdown.map(lap => <RacePosition lapData={lap} lapNumber={this.state.lap} />)}
+          {lapBreakdown.map(lap => <RacePosition key={lap.driverId} lapData={lap} lapNumber={this.state.lap} />)}
         </div>
         
       </div>
@@ -70,9 +68,10 @@ class WatchRace extends Component {
   }
 }
 
-// const mapStateToProps = (state) => ({
-  
-// })
+const mapStateToProps = state => {
+  return {
+    watchRaceLap: state.watchRaceLap
+  }
+}
 
-// export default connect(mapStateToProps)(WatchRace)
-export default WatchRace
+export default connect(mapStateToProps)(WatchRace)
