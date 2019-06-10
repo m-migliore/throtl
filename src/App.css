@@ -142,6 +142,11 @@ table tr > td:last-of-type, table tr > th:last-of-type {
   transition: all .5s ease-in-out;
 }
 
+.race-pos .dnf {
+  animation: fade-in .5s;
+  font-size:  .8rem;
+}
+
 
 
 /********** ANIMATIONS **********/

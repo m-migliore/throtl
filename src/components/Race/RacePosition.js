@@ -33,7 +33,7 @@ class RacePosition extends Component {
       <div className="race-pos" style={posStyle}>
         <p>
           {lapData.driverId}
-          {dnfStatus.lap <= this.props.lapNumber ? <span>{` - ${dnfStatus.status}`}</span> : null}
+          {dnfStatus.lap <= this.props.lapNumber ? <span className="dnf">{` ${dnfStatus.status}`}</span> : null}
         </p>
       </div>
     )
