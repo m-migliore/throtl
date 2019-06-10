@@ -2,6 +2,7 @@ const currentYear = new Date().getFullYear()
 
 const defaultState = {
   season: currentYear,
+  selectedRound: null,
   seasonData: {},
   loading: false,
   raceData: {},
@@ -64,7 +65,8 @@ export default function reducer(state = defaultState, action) {
     case "FETCH_EVENT_DATA":
     return {
       ...state,
-      loading:true
+      loading: true,
+      selectedRound: action.payload
     }
     case "RACE_FETCH":
     return {

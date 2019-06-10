@@ -11,6 +11,10 @@ import WatchRace from './WatchRace'
 
 
 class RaceContainer extends Component {
+  componentDidMount() {
+    debugger
+    console.log("hi")
+  }
   
   render() {
     if (this.props.loading) {
@@ -42,6 +46,7 @@ const mapStateToProps = state => {
   return {
     loading: state.loading,
     season: state.season,
+    selectedRound: state.selectedRound,
     raceData: state.raceData,
     qualData: state.qualData,
     detailedResultView: state.detailedResultView

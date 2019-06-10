@@ -108,7 +108,8 @@ export function fetchConstructorStandings(season) {
 export function fetchEventData(season, round) {
   return dispatch => {
     dispatch({
-      type: "FETCH_EVENT_DATA"
+      type: "FETCH_EVENT_DATA",
+      payload: parseInt(round)
     })
     return Promise.all([
       dispatch(fetchRaceData(season, round)),
