@@ -14,7 +14,7 @@ class WatchRace extends Component {
       lap: prevState.lap + 1,
     }));
 
-    this.interval = setInterval(() => this.nextLap(), 500);
+    this.interval = setInterval(() => this.nextLap(), 300);
   }
 
   nextLap() {

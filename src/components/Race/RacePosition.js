@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
 
 class RacePosition extends Component {
-  componentDidMount() {
-    console.log(this.props.lapData)
-    
+  state = {
+    dnfStatus: null
   }
 
   render() {
@@ -13,18 +12,29 @@ class RacePosition extends Component {
     let posStyle
     if (lapInfo[this.props.lapNumber - 1]) {
       posStyle = {
-        top: `${parseInt(lapInfo[this.props.lapNumber - 1].position) * 20}px`
+        top: `${parseInt(lapInfo[this.props.lapNumber - 1].position) * 30}px`
       }
     } else {
       const finalPos = lapData.result.position
       posStyle = {
-        top: `${parseInt(finalPos) * 20}px`
+        top: `${parseInt(finalPos) * 30}px`
+      }
+    }
+
+    let dnfStatus = ""
+    if(lapData.result.status !== "Finished") {
+      dnfStatus = {
+        lap: lapData.result.laps,
+        status: lapData.result.status
       }
     }
 
     return (
       <div className="race-pos" style={posStyle}>
-        {lapData.driverId}
+        <p>
+          {lapData.driverId}
+          {dnfStatus.lap <= this.props.lapNumber ? <span>{` - ${dnfStatus.status}`}</span> : null}
+        </p>
       </div>
     )
   }
