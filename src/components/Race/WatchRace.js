@@ -14,7 +14,7 @@ class WatchRace extends Component {
       lap: prevState.lap + 1,
     }));
 
-    this.interval = setInterval(() => this.nextLap(), 500);
+    this.interval = setInterval(() => this.nextLap(), 750);
   }
 
   nextLap() {
@@ -42,11 +42,6 @@ class WatchRace extends Component {
       const driverResult = spanGrandPrixResults.find(result => result.Driver.driverId === driver)
 
       const driverPits = spanGrandPrixPits.filter(pit => pit.driverId === driver)
-      // const driverPits = rawDriverPits.map(pit => {
-      //   return {
-      //     [pit.lap]: pit
-      //   }
-      // })
 
       let driverLapBreakdown = laps.map(lap => {
         let info = lap.Timings.find(timing => timing.driverId === driver)
