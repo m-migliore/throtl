@@ -40,7 +40,7 @@ class WatchRace extends Component {
 
     drivers.forEach(driver => {
       const driverResult = spanGrandPrixResults.find(result => result.Driver.driverId === driver)
-      const driverPits = spanGrandPrixPits.map(pit => pit.driverId === driver)
+      const driverPits = spanGrandPrixPits.filter(pit => pit.driverId === driver)
 
       let driverLapBreakdown = laps.map(lap => {
         let info = lap.Timings.find(timing => timing.driverId === driver)
@@ -55,8 +55,6 @@ class WatchRace extends Component {
     })
 
     console.log(lapBreakdown);
-    
-    
 
     return (
       <div>

@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
+import RacePositionIndicator from './RacePositionIndicator'
 
 class RacePosition extends Component {
-  state = {
-    dnfStatus: null
+  componentDidMount() {
+    console.log(this.props.lapData.pits)
   }
 
   render() {
@@ -41,7 +42,8 @@ class RacePosition extends Component {
       <div className="race-pos" style={posStyle}>
         <p>
           {lapData.driverId}
-          {dnfStatus.lap <= this.props.lapNumber ? <span className={`indicator ${dnfStatus.status}`}>{` ${dnfStatus.details}`}</span> : null}
+          {/* {dnfStatus.lap <= this.props.lapNumber ? <span className={`indicator ${dnfStatus.status}`}>{` ${dnfStatus.details}`}</span> : null} */}
+          {dnfStatus.lap <= this.props.lapNumber ? <RacePositionIndicator iType={dnfStatus.status} message={dnfStatus.details} /> : null}
         </p>
       </div>
     )
