@@ -202,7 +202,20 @@ export function fetchPitData(season, round, driverId) {
 
   }
 }
- 
+
+export function fetchLapData(season, round) {
+  console.log("hit lap fetch")
+  return dispatch => {
+    fetch(`http://ergast.com/api/f1/${season}/${round}/laps.json?limit=1500`)
+    .then(r => r.json())
+    .then(data => {
+      return dispatch({
+        type: "LOAD_LAP_DATA",
+        payload: data.MRData.RaceTable.Races[0].Laps
+      })
+    })
+  }
+}
 
 export function setCircuitData(round) {
   return (dispatch, getState) => {

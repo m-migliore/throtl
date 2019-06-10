@@ -18,7 +18,7 @@ const defaultState = {
   constructorData: {},
   constructorSeasonData: {},
   watchRaceLap: 1,
-
+  lapData: []
 }
 
 export default function reducer(state = defaultState, action) {
@@ -157,6 +157,11 @@ export default function reducer(state = defaultState, action) {
     return {
       ...state,
       watchRaceLap: action.payload
+    }
+    case"LOAD_LAP_DATA":
+    return {
+      ...state,
+      lapData: action.payload
     }
     default:
       return defaultState

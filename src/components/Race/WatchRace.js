@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import {spanGrandPrixLaps, spanGrandPrixResults, spanGrandPrixPits} from '../../helpers/fullRaceLapFetch'
 import RacePosition from './RacePosition'
+import {fetchLapData} from '../../actions/actionCreators'
 
 class WatchRace extends Component {
   state = {
@@ -9,7 +10,7 @@ class WatchRace extends Component {
   }
 
   componentDidMount() {
-    console.log(this.props.raceData)
+    this.props.fetchLapData(2019, 5)
   }
 
   handleClick() {
@@ -30,7 +31,8 @@ class WatchRace extends Component {
 
   render() {
 
-    const laps = spanGrandPrixLaps
+    if (this.props.lapData.length > 0) {
+      const laps = spanGrandPrixLaps
     const drivers = laps[0].Timings.map(lap => lap.driverId)
     const lapBreakdown = []
 
@@ -64,6 +66,9 @@ class WatchRace extends Component {
         
       </div>
     )
+    } else {
+      return <h1>Loading</h1>
+    }
   }
 }
 
@@ -71,13 +76,15 @@ const mapStateToProps = state => {
   return {
     raceData: state.raceData,
     pitData: state.pitData,
-    watchRaceLap: state.watchRaceLap
+    watchRaceLap: state.watchRaceLap,
+    lapData: state.lapData
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    nextLap: lapNumber => dispatch({type: "NEXT_LAP", payload: lapNumber})
+    nextLap: lapNumber => dispatch({type: "NEXT_LAP", payload: lapNumber}),
+    fetchLapData: (season, round) => dispatch(fetchLapData(season, round))
   }
 }
 

@@ -3,10 +3,13 @@ import {connect} from 'react-redux'
 import RacePositionIndicator from './RacePositionIndicator'
 
 class RacePosition extends Component {
-
+  componentDidMount() {
+    console.log(this.props.lapData)
+  }
 
   render() {
     const lapData = this.props.lapData
+    const driver = lapData.result.Driver
     const lapInfo = lapData.lapInfo
     const pits = lapData.pits
   
@@ -41,7 +44,7 @@ class RacePosition extends Component {
     return (
       <div className="race-pos" style={posStyle}>
         <p>
-          {lapData.driverId}
+          {driver.givenName + " " + driver.familyName}
           {pits.map(pit => parseInt(pit.lap)).includes(this.props.watchRaceLap) ? <RacePositionIndicator iType={"pit-stop"} message={"Pit Stop"} /> : null}
           {dnfStatus.lap <= this.props.watchRaceLap ? <RacePositionIndicator iType={dnfStatus.status} message={dnfStatus.details} /> : null}
         </p>
