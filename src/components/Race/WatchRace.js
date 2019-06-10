@@ -11,7 +11,7 @@ class WatchRace extends Component {
 
   componentDidMount() {
     // this.props.fetchLapData(2019, 5)
-    console.log(this.props.raceData)
+    this.props.fetchLapData(this.props.season, this.props.selectedRound)
   }
 
   handleClick() {
@@ -25,7 +25,7 @@ class WatchRace extends Component {
   }
 
   componentDidUpdate() {
-    if (this.props.watchRaceLap === this.state.lapAmount) {
+    if (this.props.watchRaceLap === this.props.lapData.length) {
       clearInterval(this.interval)
     }
   }
@@ -33,16 +33,17 @@ class WatchRace extends Component {
   render() {
 
     if (this.props.lapData.length > 0 ) {
-      const laps = spanGrandPrixLaps
+      //const laps = spanGrandPrixLaps
+      const laps = this.props.lapData
       const drivers = laps[0].Timings.map(lap => lap.driverId)
       const lapBreakdown = []
 
       drivers.forEach(driver => {
-        const driverResult = spanGrandPrixResults.find(result => result.Driver.driverId === driver)
-        // const driverResult = this.props.raceData.Results.find(result => result.Driver.driverId === driver)
+        // const driverResult = spanGrandPrixResults.find(result => result.Driver.driverId === driver)
+        const driverResult = this.props.raceData.Results.find(result => result.Driver.driverId === driver)
 
-        const driverPits = spanGrandPrixPits.filter(pit => pit.driverId === driver)
-        // const driverPits = this.props.pitData.filter(pit => pit.driverId === driver)
+        // const driverPits = spanGrandPrixPits.filter(pit => pit.driverId === driver)
+        const driverPits = this.props.pitData.filter(pit => pit.driverId === driver)
 
         let driverLapBreakdown = laps.map(lap => {
           let info = lap.Timings.find(timing => timing.driverId === driver)
@@ -68,15 +69,17 @@ class WatchRace extends Component {
       </div>
     )
     } else if(this.props.lapDataLoading){
-      return <h1>Loading Lap Data</h1>
+      return <h2>Loading Lap Data</h2>
     } else {
-      return <h1>Lap Data Not Found</h1>
+      return <h2>Lap Data Not Found</h2>
     }
   }
 }
 
 const mapStateToProps = state => {
   return {
+    season: state.season,
+    selectedRound: state.selectedRound,
     raceData: state.raceData,
     pitData: state.pitData,
     watchRaceLap: state.watchRaceLap,

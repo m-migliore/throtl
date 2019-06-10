@@ -30,10 +30,12 @@ class RaceContainer extends Component {
           <h1>{this.props.season + " " + this.props.raceData.raceName}</h1>
           <p><Moment date={this.props.raceData.date} format="LLL"/></p>
           <CircuitInfo />
+          <WatchRace />
           {this.props.raceData.Results ? <RaceResults /> : null}
           {this.props.qualData.length > 1 ? <QualResults /> : null}
           {this.props.detailedResultView ? <DetailedResult /> : null}
-          {this.props.raceData.raceName === "Spanish Grand Prix" ? <WatchRace /> : null}
+          {/* {this.props.raceData.raceName === "Spanish Grand Prix" ? <WatchRace /> : null} */}
+          
         </div>
       )
     } else {
