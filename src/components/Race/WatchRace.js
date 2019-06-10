@@ -63,8 +63,9 @@ class WatchRace extends Component {
 
     return (
       <div>
-        <h2>Lap {this.state.lap}</h2>
-        <button onClick={this.handleClick.bind(this)}>Watch Race</button>
+        
+        {this.state.lap !== this.state.lapAmount ? <h2>{`Lap ${this.state.lap}`}</h2> : <h2>Finished</h2>}
+        {this.state.lap !== this.state.lapAmount ? <button onClick={this.handleClick.bind(this)}>Watch Race</button> : null}
         <div className="watch-race">
           {lapBreakdown.map(lap => <RacePosition lapData={lap} lapNumber={this.state.lap} />)}
         </div>
