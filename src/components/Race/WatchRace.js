@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 // import { connect } from 'react-redux'
-import {spanGrandPrixLaps, spanGrandPrixResults} from '../../helpers/fullRaceLapFetch'
+import {spanGrandPrixLaps, spanGrandPrixResults, spanGrandPrixPits} from '../../helpers/fullRaceLapFetch'
 import RacePosition from './RacePosition'
 
 class WatchRace extends Component {
@@ -30,11 +30,6 @@ class WatchRace extends Component {
     
   }
 
-  componentDidMount() {
-    console.log(spanGrandPrixResults);
-    
-  }
-
 
 
   render() {
@@ -45,6 +40,7 @@ class WatchRace extends Component {
 
     drivers.forEach(driver => {
       const driverResult = spanGrandPrixResults.find(result => result.Driver.driverId === driver)
+      const driverPits = spanGrandPrixPits.map(pit => pit.driverId === driver)
 
       let driverLapBreakdown = laps.map(lap => {
         let info = lap.Timings.find(timing => timing.driverId === driver)
@@ -53,7 +49,8 @@ class WatchRace extends Component {
       lapBreakdown.push({
         driverId: driver,
         lapInfo: driverLapBreakdown,
-        result: driverResult
+        result: driverResult,
+        pits: driverPits
       })
     })
 
