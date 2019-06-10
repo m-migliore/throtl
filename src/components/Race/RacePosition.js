@@ -23,9 +23,17 @@ class RacePosition extends Component {
 
     let dnfStatus = ""
     if(lapData.result.status !== "Finished") {
+      let raceStatus
+      if (lapData.result.status.includes("+")) {
+        raceStatus = "lapped"
+      } else {
+        raceStatus = "dnf"
+      }
+
       dnfStatus = {
         lap: lapData.result.laps,
-        status: lapData.result.status
+        status: raceStatus,
+        details: lapData.result.status
       }
     }
 
@@ -33,7 +41,7 @@ class RacePosition extends Component {
       <div className="race-pos" style={posStyle}>
         <p>
           {lapData.driverId}
-          {dnfStatus.lap <= this.props.lapNumber ? <span className="dnf">{` ${dnfStatus.status}`}</span> : null}
+          {dnfStatus.lap <= this.props.lapNumber ? <span className={`indicator ${dnfStatus.status}`}>{` ${dnfStatus.details}`}</span> : null}
         </p>
       </div>
     )

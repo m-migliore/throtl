@@ -142,9 +142,17 @@ table tr > td:last-of-type, table tr > th:last-of-type {
   transition: all .5s ease-in-out;
 }
 
-.race-pos .dnf {
+.race-pos .indicator {
   animation: fade-in .5s;
   font-size:  .8rem;
+}
+
+.race-pos .indicator.lapped {
+  color: blue;
+}
+
+.race-pos .indicator.dnf {
+  color: red;
 }
 
 
