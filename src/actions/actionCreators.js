@@ -114,7 +114,7 @@ export function fetchEventData(season, round) {
       dispatch(fetchRaceData(season, round)),
       dispatch(setCircuitData(round)),
       dispatch(fetchQualData(season, round)),
-      // dispatch(fetchPitData(season, round))
+      dispatch(fetchRacePitData(season, round))
     ]).then(() => dispatch({
       type: "COMPLETE_EVENT_DATA_FETCH"
     }))
@@ -155,6 +155,27 @@ export function fetchQualData(season, round) {
       return dispatch({
         type: "LOAD_QUAL_DATA",
         payload: ["Qualifying data not available prior to 2003 season."]
+      })
+    }
+
+  }
+}
+
+export function fetchRacePitData(season, round) {
+  return dispatch => {
+    if (season > 2011) {
+      return fetch(`http://ergast.com/api/f1/${season}/${round}/pitstops.json`)
+        .then(r => r.json())
+        .then(data => {
+          return dispatch({
+            type: "LOAD_PIT_DATA",
+            payload: data.MRData.RaceTable.Races[0].PitStops
+          })
+        })
+    } else {
+      return dispatch({
+        type: "LOAD_PIT_DATA",
+        payload: ["Pit data not available prior to 2012 season."]
       })
     }
 

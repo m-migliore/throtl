@@ -9,7 +9,7 @@ class WatchRace extends Component {
   }
 
   componentDidMount() {
-    console.log(this.props.raceData)
+    console.log(this.props.pitData)
   }
 
   handleClick() {
@@ -69,6 +69,7 @@ class WatchRace extends Component {
 const mapStateToProps = state => {
   return {
     raceData: state.raceData,
+    pitData: state.pitData,
     watchRaceLap: state.watchRaceLap
   }
 }
