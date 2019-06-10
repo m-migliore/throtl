@@ -158,9 +158,15 @@ export default function reducer(state = defaultState, action) {
       ...state,
       watchRaceLap: action.payload
     }
+    case "START_LAP_DATA_FETCH":
+    return {
+      ...state,
+      lapDataLoading: true
+    }
     case"LOAD_LAP_DATA":
     return {
       ...state,
+      lapDataLoading: false,
       lapData: action.payload
     }
     default:
