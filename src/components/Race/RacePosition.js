@@ -2,13 +2,12 @@ import React, { Component } from 'react'
 import RacePositionIndicator from './RacePositionIndicator'
 
 class RacePosition extends Component {
-  componentDidMount() {
-    console.log(this.props.lapData.pits)
-  }
+
 
   render() {
     const lapData = this.props.lapData
     const lapInfo = lapData.lapInfo
+    const pits = lapData.pits
   
     let posStyle
     if (lapInfo[this.props.lapNumber - 1]) {
@@ -42,7 +41,7 @@ class RacePosition extends Component {
       <div className="race-pos" style={posStyle}>
         <p>
           {lapData.driverId}
-          {/* {dnfStatus.lap <= this.props.lapNumber ? <span className={`indicator ${dnfStatus.status}`}>{` ${dnfStatus.details}`}</span> : null} */}
+          {pits.map(pit => parseInt(pit.lap)).includes(this.props.lapNumber) ? <RacePositionIndicator iType={"pit-stop"} message={"Pit Stop"} /> : null}
           {dnfStatus.lap <= this.props.lapNumber ? <RacePositionIndicator iType={dnfStatus.status} message={dnfStatus.details} /> : null}
         </p>
       </div>

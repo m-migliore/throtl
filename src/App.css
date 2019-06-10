@@ -147,6 +147,10 @@ table tr > td:last-of-type, table tr > th:last-of-type {
   font-size:  .8rem;
 }
 
+.race-pos .indicator.pit-stop {
+  color: green;
+}
+
 .race-pos .indicator.lapped {
   color: blue;
 }
