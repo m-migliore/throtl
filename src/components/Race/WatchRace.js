@@ -10,34 +10,30 @@ class WatchRace extends Component {
   }
 
   handleClick() {
-    // while (this.state.lap < this.state.lapAmount) {
-    //   this.nextLap()
-    // }
-    this.setState((prevState, props) => ({
+    this.setState((prevState) => ({
+      lap: prevState.lap + 1,
+    }));
+
+    this.interval = setInterval(() => this.nextLap(), 500);
+  }
+
+  nextLap() {
+    this.setState((prevState) => ({
       lap: prevState.lap + 1
     }));
   }
 
-  // nextLap() {
-  //   this.setState((prevState) => ({
-  //     lap: prevState.lap += 1
-  //   }));
-  // }
-
-  // componentDidUpdate() {
-  //   if (this.state.lap > 1 && this.state.lap < this.state.lapAmount){
-  //     this.setState((prevState, props) => ({
-  //       lap: prevState.lap + 1
-  //     }));
-  //   }  
-  // }
+  componentDidUpdate() {
+    if (this.state.lap === this.state.lapAmount) {
+      clearInterval(this.interval)
+    }
+    
+  }
 
 
   render() {
 
-    const results = spanGrandPrixResults
     const laps = spanGrandPrixLaps.Laps
-    let lapNumber = 1
     const drivers = laps[0].Timings.map(lap => lap.driverId)
     const lapBreakdown = []
 
@@ -63,7 +59,7 @@ class WatchRace extends Component {
         <div className="watch-race">
   
 
-          {lapBreakdown.map(lap => <RacePosition lapInfo={lap} lapNumber={this.state.lap}/>)}
+          {lapBreakdown.map(lap => <RacePosition lapInfo={lap} lapNumber={this.state.lap} />)}
         </div>
         
       </div>
