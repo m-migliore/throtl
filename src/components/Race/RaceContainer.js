@@ -7,7 +7,7 @@ import CircuitInfo from '../Circuit/CircuitInfo'
 // import RacePreview from './RacePreview'
 import DetailedResult from '../DetailedResult/DetailedResult'
 import {Redirect, Link} from 'react-router-dom'
-import WatchRace from './WatchRace'
+import RaceReplay from './RaceReplay'
 
 
 class RaceContainer extends Component {
@@ -26,7 +26,7 @@ class RaceContainer extends Component {
           <h1>{this.props.season + " " + this.props.raceData.raceName}</h1>
           <p><Moment date={this.props.raceData.date} format="LLL"/></p>
           <CircuitInfo />
-          <WatchRace />
+          <RaceReplay />
           {this.props.raceData.Results ? <RaceResults /> : null}
           {this.props.qualData.length > 1 ? <QualResults /> : null}
           {this.props.detailedResultView ? <DetailedResult /> : null}

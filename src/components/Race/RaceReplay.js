@@ -4,7 +4,7 @@ import {spanGrandPrixLaps, spanGrandPrixResults, spanGrandPrixPits} from '../../
 import RacePosition from './RacePosition'
 import {fetchLapData} from '../../actions/actionCreators'
 
-class WatchRace extends Component {
+class RaceReplay extends Component {
 
   componentDidMount() {
     this.props.fetchLapData(this.props.season, this.props.selectedRound)
@@ -69,9 +69,9 @@ class WatchRace extends Component {
 
     return (
       <div>
-        {this.props.watchRaceLap === 0 ? <button onClick={this.handleClick.bind(this)}>Watch Race</button> : null}
-        {this.props.watchRaceLap !== this.props.lapData.length - 1 && this.props.watchRaceLap === 0 ? <h2>Start</h2> : <h2>{`Lap ${this.props.watchRaceLap}`}</h2>}
-        {this.props.watchRaceLap === this.props.lapData.length - 1 ?  <h2 className="fade-in">Finished</h2> : null}
+        {this.props.replayLap === 0 ? <button onClick={this.handleClick.bind(this)}>Watch Replay</button> : null}
+        {this.props.replayLap !== this.props.lapData.length - 1 && this.props.replayLap === 0 ? <h2>Start</h2> : <h2>{`Lap ${this.props.replayLap}`}</h2>}
+        {this.props.replayLap === this.props.lapData.length - 1 ?  <h2 className="fade-in">Finished</h2> : null}
         <div className="watch-race">
           {lapBreakdown.map(lap => <RacePosition key={lap.driverId} lapData={lap} />)}
         </div>
@@ -93,7 +93,7 @@ const mapStateToProps = state => {
     raceData: state.raceData,
     qualData: state.qualData,
     pitData: state.pitData,
-    watchRaceLap: state.watchRaceLap,
+    replayLap: state.replayLap,
     lapData: state.lapData,
     lapDataLoading: state.lapDataLoading
   }
@@ -106,4 +106,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(WatchRace)
+export default connect(mapStateToProps, mapDispatchToProps)(RaceReplay)

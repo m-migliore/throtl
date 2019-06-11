@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import RacePositionIndicator from './RacePositionIndicator'
 
 class RacePosition extends Component {
-  
+
   render() {
     const lapData = this.props.lapData
     const driver = lapData.result.Driver
@@ -11,9 +11,9 @@ class RacePosition extends Component {
     const pits = lapData.pits
   
     let posStyle
-    if (lapInfo[this.props.watchRaceLap]) {
+    if (lapInfo[this.props.replayLap]) {
       posStyle = {
-        top: `${parseInt(lapInfo[this.props.watchRaceLap].position) * 30}px`
+        top: `${parseInt(lapInfo[this.props.replayLap].position) * 30}px`
       }
     } else {
       const finalPos = lapData.result.position
@@ -42,8 +42,8 @@ class RacePosition extends Component {
       <div className="race-pos" style={posStyle}>
         <p>
           {driver.givenName + " " + driver.familyName}
-          {pits.map(pit => parseInt(pit.lap)).includes(this.props.watchRaceLap) ? <RacePositionIndicator iType={"pit-stop"} message={"Pit Stop"} /> : null}
-          {dnfStatus.lap <= this.props.watchRaceLap ? <RacePositionIndicator iType={dnfStatus.status} message={dnfStatus.details} /> : null}
+          {pits.map(pit => parseInt(pit.lap)).includes(this.props.replayLap) ? <RacePositionIndicator iType={"pit-stop"} message={"Pit Stop"} /> : null}
+          {dnfStatus.lap <= this.props.replayLap ? <RacePositionIndicator iType={dnfStatus.status} message={dnfStatus.details} /> : null}
         </p>
       </div>
     )
@@ -52,7 +52,7 @@ class RacePosition extends Component {
 
 const mapStateToProps = state => {
   return {
-    watchRaceLap: state.watchRaceLap
+    replayLap: state.replayLap
   }
 }
 

@@ -18,7 +18,7 @@ const defaultState = {
   driverSeasonData: {},
   constructorData: {},
   constructorSeasonData: {},
-  watchRaceLap: 0,
+  replayLap: 0,
   lapData: []
 }
 
@@ -67,7 +67,7 @@ export default function reducer(state = defaultState, action) {
       ...state,
       loading: true,
       selectedRound: action.payload,
-      watchRaceLap: 0,
+      replayLap: 0,
       lapData: []
     }
     case "RACE_FETCH":
