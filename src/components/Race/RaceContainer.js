@@ -11,10 +11,7 @@ import WatchRace from './WatchRace'
 
 
 class RaceContainer extends Component {
-  // componentDidMount() {
-  //   console.log(this.props.raceData)
-  // }
-  
+
   render() {
     if (this.props.loading) {
       return (
@@ -33,7 +30,6 @@ class RaceContainer extends Component {
           {this.props.raceData.Results ? <RaceResults /> : null}
           {this.props.qualData.length > 1 ? <QualResults /> : null}
           {this.props.detailedResultView ? <DetailedResult /> : null}
-          {/* {this.props.raceData.raceName === "Spanish Grand Prix" ? <WatchRace /> : null} */}
           
         </div>
       )

@@ -5,7 +5,6 @@ import SeasonContainer from './components/Season/SeasonContainer'
 import RaceContainer from './components/Race/RaceContainer'
 import DriverContainer from './components/Driver/DriverContainer'
 import ConstructorContainer from './components/Constructor/ConstructorContainer'
-// import WatchRace from './components/Race/WatchRace'
 
 class App extends Component {
 

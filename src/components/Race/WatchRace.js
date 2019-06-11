@@ -7,8 +7,6 @@ import {fetchLapData} from '../../actions/actionCreators'
 class WatchRace extends Component {
 
   componentDidMount() {
-    // this.props.fetchLapData(2019, 5)
-    console.log(this.props.qualData)
     this.props.fetchLapData(this.props.season, this.props.selectedRound)
   }
 
@@ -31,7 +29,6 @@ class WatchRace extends Component {
   render() {
 
     if (this.props.lapData.length > 0 ) {
-      //const laps = spanGrandPrixLaps
       const laps = this.props.lapData
       const drivers = laps[0].Timings.map(lap => lap.driverId)
       const lapBreakdown = []

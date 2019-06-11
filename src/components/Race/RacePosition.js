@@ -3,10 +3,7 @@ import {connect} from 'react-redux'
 import RacePositionIndicator from './RacePositionIndicator'
 
 class RacePosition extends Component {
-  // componentDidMount() {
-  //   console.log(this.props.lapData)
-  // }
-
+  
   render() {
     const lapData = this.props.lapData
     const driver = lapData.result.Driver

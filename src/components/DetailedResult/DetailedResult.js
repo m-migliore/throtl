@@ -29,8 +29,6 @@ class DetailedResult extends Component {
     const fastestLap = this.props.detailedResultData.FastestLap
     const flag = NATIONS[driver.nationality]
 
-    // const pitstops = this.props.pitData.filter(data => data.driverId === driver.driverId)
-
     return (
       <div className="modal-container">
         <div className="modal-content container my-10 mx-auto p-5">
