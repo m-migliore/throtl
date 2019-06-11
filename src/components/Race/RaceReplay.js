@@ -1,109 +1,105 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import {spanGrandPrixLaps, spanGrandPrixResults, spanGrandPrixPits} from '../../helpers/fullRaceLapFetch'
-import RacePosition from './RacePosition'
-import {fetchLapData} from '../../actions/actionCreators'
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { spanGrandPrixLaps, spanGrandPrixResults, spanGrandPrixPits } from "../../helpers/fullRaceLapFetch";
+import RacePosition from "./RacePosition";
+import { fetchLapData } from "../../actions/actionCreators";
 
 class RaceReplay extends Component {
+	componentDidMount() {
+		this.props.fetchLapData(this.props.season, this.props.selectedRound);
+	}
 
-  componentDidMount() {
-    this.props.fetchLapData(this.props.season, this.props.selectedRound)
-  }
+	handleClick() {
+		this.interval = setInterval(() => this.props.nextLap(this.props.replayLap + 1), 1000);
+	}
 
-  handleClick() {
-    this.interval = setInterval(() => this.props.nextLap(this.props.watchRaceLap + 1), 1000);
-  }
+	componentDidUpdate() {
+		if (this.props.replayLap === this.props.lapData.length - 1) {
+			clearInterval(this.interval);
+		}
+	}
 
-  nextLap() {
-    this.setState((prevState) => ({
-      lap: prevState.lap + 1
-    }));
-  }
+	render() {
+		if (this.props.lapData.length > 0) {
+			const laps = this.props.lapData;
+			const drivers = laps[0].Timings.map(lap => lap.driverId);
+			const lapBreakdown = [];
 
-  componentDidUpdate() {
-    if (this.props.watchRaceLap === this.props.lapData.length - 1) {
-      clearInterval(this.interval)
-    }
-  }
+			drivers.forEach(driver => {
+				// const driverResult = spanGrandPrixResults.find(result => result.Driver.driverId === driver)
+				const driverResult = this.props.raceData.Results.find(result => result.Driver.driverId === driver);
 
-  render() {
+				// add qual data for correct starting grid,
+				// edge cases for when there are starts from the pit lane
+				const driverQual = this.props.qualData.find(qual => qual.Driver.driverId === driver);
 
-    if (this.props.lapData.length > 0 ) {
-      const laps = this.props.lapData
-      const drivers = laps[0].Timings.map(lap => lap.driverId)
-      const lapBreakdown = []
+				// const driverPits = spanGrandPrixPits.filter(pit => pit.driverId === driver)
+				const driverPits = this.props.pitData.filter(pit => pit.driverId === driver);
 
-      drivers.forEach(driver => {
-        // const driverResult = spanGrandPrixResults.find(result => result.Driver.driverId === driver)
-        const driverResult = this.props.raceData.Results.find(result => result.Driver.driverId === driver)
+				let driverLapBreakdown = laps.map(lap => {
+					let info = lap.Timings.find(timing => timing.driverId === driver);
+					return info;
+				});
 
-        // add qual data for correct starting grid,
-        // edge cases for when there are starts from the pit lane 
-        const driverQual = this.props.qualData.find(qual => qual.Driver.driverId === driver)
+				// Create lap zero for laps for starting watch race
+				const lapZero = {
+					driverid: driver,
+					position: driverQual.position,
+					time: "0:00.000",
+				};
 
-        // const driverPits = spanGrandPrixPits.filter(pit => pit.driverId === driver)
-        const driverPits = this.props.pitData.filter(pit => pit.driverId === driver)
+				// add lap zero to lap data fetch
+				driverLapBreakdown.unshift(lapZero);
 
-        let driverLapBreakdown = laps.map(lap => {
-          let info = lap.Timings.find(timing => timing.driverId === driver)
-          return info
-        })
-        
-        // Create lap zero for laps for starting watch race
-        const lapZero = {
-          driverid: driver,
-          position: driverQual.position,
-          time: "0:00.000"
-        }
+				lapBreakdown.push({
+					driverId: driver,
+					lapInfo: driverLapBreakdown,
+					result: driverResult,
+					pits: driverPits,
+				});
+			});
 
-        // add lap zero to lap data fetch
-        driverLapBreakdown.unshift(lapZero)
-      
-        lapBreakdown.push({
-          driverId: driver,
-          lapInfo: driverLapBreakdown,
-          result: driverResult,
-          pits: driverPits
-        })
-     })
-
-    return (
-      <div>
-        {this.props.replayLap === 0 ? <button onClick={this.handleClick.bind(this)}>Watch Replay</button> : null}
-        {this.props.replayLap !== this.props.lapData.length - 1 && this.props.replayLap === 0 ? <h2>Start</h2> : <h2>{`Lap ${this.props.replayLap}`}</h2>}
-        {this.props.replayLap === this.props.lapData.length - 1 ?  <h2 className="fade-in">Finished</h2> : null}
-        <div className="watch-race">
-          {lapBreakdown.map(lap => <RacePosition key={lap.driverId} lapData={lap} />)}
-        </div>
-        
-      </div>
-    )
-    } else if(this.props.lapDataLoading){
-      return <h2>Loading Lap Data</h2>
-    } else {
-      return <h2>Lap Data Not Found</h2>
-    }
-  }
+			return (
+				<div>
+					{this.props.replayLap === 0 ? <button onClick={this.handleClick.bind(this)}>Watch Replay</button> : null}
+					{this.props.replayLap !== this.props.lapData.length - 1 && this.props.replayLap === 0 ? <h2>Start</h2> : <h2>{`Lap ${this.props.replayLap}`}</h2>}
+					{this.props.replayLap === this.props.lapData.length - 1 ? <h2 className="fade-in">Finished</h2> : null}
+					<div className="race-replay">
+						{lapBreakdown.map(lap => (
+							<RacePosition key={lap.driverId} lapData={lap} />
+						))}
+					</div>
+				</div>
+			);
+		} else if (this.props.lapDataLoading) {
+			return <h2>Loading Lap Data</h2>;
+		} else {
+			return <h2>Lap Data Not Found</h2>;
+		}
+	}
 }
 
 const mapStateToProps = state => {
-  return {
-    season: state.season,
-    selectedRound: state.selectedRound,
-    raceData: state.raceData,
-    qualData: state.qualData,
-    pitData: state.pitData,
-    replayLap: state.replayLap,
-    lapData: state.lapData,
-    lapDataLoading: state.lapDataLoading
-  }
-}
+	return {
+		season: state.season,
+		selectedRound: state.selectedRound,
+		raceData: state.raceData,
+		qualData: state.qualData,
+		pitData: state.pitData,
+		replayLap: state.replayLap,
+		lapData: state.lapData,
+		lapDataLoading: state.lapDataLoading,
+	};
+};
 
 const mapDispatchToProps = dispatch => {
-  return {
-    nextLap: lapNumber => dispatch({type: "NEXT_LAP", payload: lapNumber}),
-    fetchLapData: (season, round) => dispatch(fetchLapData(season, round))
-  }
-}
+	return {
+		nextLap: lapNumber => dispatch({ type: "NEXT_LAP", payload: lapNumber }),
+		fetchLapData: (season, round) => dispatch(fetchLapData(season, round)),
+	};
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(RaceReplay)
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(RaceReplay);

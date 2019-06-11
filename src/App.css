@@ -129,7 +129,7 @@ table tr > td:last-of-type, table tr > th:last-of-type {
 }
 
 /********** WATCH RACE **********/
-.watch-race {
+.race-replay {
   position: relative;
   min-height: 700px;
 }
