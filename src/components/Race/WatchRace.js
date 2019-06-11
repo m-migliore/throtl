@@ -73,7 +73,8 @@ class WatchRace extends Component {
     return (
       <div>
         {this.props.watchRaceLap === 0 ? <button onClick={this.handleClick.bind(this)}>Watch Race</button> : null}
-        {this.props.watchRaceLap !== this.props.lapData.length - 1 ? <h2>{`Lap ${this.props.watchRaceLap}`}</h2> : <h2>Finished</h2>}
+        {this.props.watchRaceLap !== this.props.lapData.length - 1 && this.props.watchRaceLap === 0 ? <h2>Start</h2> : <h2>{`Lap ${this.props.watchRaceLap}`}</h2>}
+        {this.props.watchRaceLap === this.props.lapData.length - 1 ?  <h2 className="fade-in">Finished</h2> : null}
         <div className="watch-race">
           {lapBreakdown.map(lap => <RacePosition key={lap.driverId} lapData={lap} />)}
         </div>
