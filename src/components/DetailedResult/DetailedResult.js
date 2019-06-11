@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
-import {fetchPitData} from '../../actions/actionCreators'
 import FastestLap from './FastestLap'
 import PitDetail from './PitDetail'
 import {NATIONS} from '../../helpers/nations.js'
@@ -9,12 +8,11 @@ import FlagImage from '../Image/FlagImage'
 class DetailedResult extends Component {
   componentDidMount() {
     console.log(this.props.detailedResultData);
-    this.props.fetchPitData(this.props.season, this.props.round, this.props.driverId)
   }
 
   pitLoad() {
-    const pitData = this.props.pitData
-
+    const pitData = this.props.pitData.filter(pitStops => pitStops.driverId === this.props.driverId)
+    console.log(pitData)
     if (pitData.length === 0) {
       return <p>Loading</p>
     } else if (typeof pitData[0] === "object") {
@@ -74,7 +72,6 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     closeDetailedResult: () =>  dispatch({type: "CLOSE_DETAILED_RESULT"}),
-    fetchPitData: (season, round, driverId) => dispatch(fetchPitData(season, round, driverId))
   }
 }
 

@@ -186,27 +186,6 @@ export function fetchRacePitData(season, round) {
   }
 }
 
-export function fetchPitData(season, round, driverId) {
-  return dispatch => {
-    if (season > 2011) {
-      return fetch(`http://ergast.com/api/f1/${season}/${round}/drivers/${driverId}/pitstops.json`)
-        .then(r => r.json())
-        .then(data => {
-          return dispatch({
-            type: "LOAD_PIT_DATA",
-            payload: data.MRData.RaceTable.Races[0].PitStops
-          })
-        })
-    } else {
-      return dispatch({
-        type: "LOAD_PIT_DATA",
-        payload: ["Pit data not available prior to 2012 season."]
-      })
-    }
-
-  }
-}
-
 export function fetchLapData(season, round) {
   return dispatch => {
     dispatch({type: "START_LAP_DATA_FETCH"})
