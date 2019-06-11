@@ -8,6 +8,7 @@ class WatchRace extends Component {
 
   componentDidMount() {
     // this.props.fetchLapData(2019, 5)
+    console.log(this.props.qualData)
     this.props.fetchLapData(this.props.season, this.props.selectedRound)
   }
 
@@ -39,6 +40,10 @@ class WatchRace extends Component {
         // const driverResult = spanGrandPrixResults.find(result => result.Driver.driverId === driver)
         const driverResult = this.props.raceData.Results.find(result => result.Driver.driverId === driver)
 
+        // add qual data for correct starting grid,
+        // edge cases for when there are starts from the pit lane 
+        const driverQual = this.props.qualData.find(qual => qual.Driver.driverId === driver)
+
         // const driverPits = spanGrandPrixPits.filter(pit => pit.driverId === driver)
         const driverPits = this.props.pitData.filter(pit => pit.driverId === driver)
 
@@ -50,7 +55,7 @@ class WatchRace extends Component {
         // Create lap zero for laps for starting watch race
         const lapZero = {
           driverid: driver,
-          position: driverResult.grid,
+          position: driverQual.position,
           time: "0:00.000"
         }
 
@@ -88,6 +93,7 @@ const mapStateToProps = state => {
     season: state.season,
     selectedRound: state.selectedRound,
     raceData: state.raceData,
+    qualData: state.qualData,
     pitData: state.pitData,
     watchRaceLap: state.watchRaceLap,
     lapData: state.lapData,
