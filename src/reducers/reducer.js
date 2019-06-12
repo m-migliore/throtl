@@ -18,6 +18,7 @@ const defaultState = {
 	driverSeasonData: {},
 	constructorData: {},
 	constructorSeasonData: {},
+	replayStart: false,
 	replayLap: 0,
 	lapData: [],
 };
