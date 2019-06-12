@@ -7,6 +7,10 @@ class RaceReplayContainer extends Component {
 	constructor(props) {
 		super(props)
 
+		this.state = {
+			replayStart: false
+		}
+
 		this.handleClick = this.handleClick.bind(this)
 	}
 
@@ -21,6 +25,9 @@ class RaceReplayContainer extends Component {
 	}
 
 	handleClick() {
+		this.setState({
+			replayStart: true
+		})
 		this.interval = setInterval(() => this.props.nextLap(this.props.replayLap + 1), 1000);
 	}
 
@@ -29,6 +36,13 @@ class RaceReplayContainer extends Component {
 			return (
 				<div>
 					{this.props.replayLap === 0 ? <button onClick={this.handleClick}>Watch Replay</button> : null}
+					<div className="start-lights">
+						<span className="start-light"></span>
+						<span className="start-light"></span>
+						<span className="start-light"></span>
+						<span className="start-light"></span>
+						<span className="start-light"></span>
+					</div>
 					{this.props.replayLap !== this.props.lapData.length - 1 && this.props.replayLap === 0 ? <h2>Start</h2> : <h2>{`Lap ${this.props.replayLap}`}</h2>}
 					{this.props.replayLap === this.props.lapData.length - 1 ? <h2 className="fade-in">Finished</h2> : null}
 					<RaceReplayRace />
