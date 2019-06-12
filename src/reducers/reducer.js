@@ -18,6 +18,8 @@ const defaultState = {
 	driverSeasonData: {},
 	constructorData: {},
 	constructorSeasonData: {},
+	replayStart: false,
+	replayCountdown: 6,
 	replayLap: 0,
 	lapData: [],
 };
@@ -173,6 +175,16 @@ export default function reducer(state = defaultState, action) {
 				lapDataLoading: false,
 				lapData: action.payload,
 			};
+		case "START_REPLAY":
+			return {
+				...state,
+				replayStart: true
+			}
+		case "REPLAY_COUNTDOWN_LIGHT":
+			return {
+				...state,
+				replayCountdown: action.payload
+			}
 		default:
 			return defaultState;
 	}

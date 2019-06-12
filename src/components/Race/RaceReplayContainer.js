@@ -7,11 +7,6 @@ class RaceReplayContainer extends Component {
 	constructor(props) {
 		super(props)
 
-		this.state = {
-			replayStart: false,
-			replayCountdown: 6
-		}
-
 		this.handleClick = this.handleClick.bind(this)
 	}
 
@@ -20,35 +15,19 @@ class RaceReplayContainer extends Component {
 	}
 
 	componentDidUpdate() {
-		console.log(this.state.replayCountdown)
 		if (this.props.replayLap === this.props.lapData.length - 1) {
 			clearInterval(this.interval);
 		}
 
-		if (this.state.replayCountdown === 0 && !this.state.replayStart) {
+		if (this.props.replayCountdown === 0 && !this.props.replayStart) {
 			clearInterval(this.countdownInterval)
 			this.interval = setInterval(() => this.props.nextLap(this.props.replayLap + 1), 1000);
-			this.setState({
-				replayStart: true
-			})
-
-			
+			this.props.startReplay()
 		}
-
 	}
 
 	handleClick() {
-		// this.setState({
-		// 	replayStart: true
-		// })
-	
-		this.countdownInterval = setInterval(() => this.countdown(), 1000)
-	}
-
-	countdown() {
-		this.setState((prevState) => ({
-			replayCountdown: prevState.replayCountdown - 1
-		}));
+		this.countdownInterval = setInterval(() => this.props.replayCountdownLight(this.props.replayCountdown - 1), 1000)
 	}
 
 	render() {
@@ -57,11 +36,11 @@ class RaceReplayContainer extends Component {
 				<div>
 					{this.props.replayLap === 0 ? <button onClick={this.handleClick}>Watch Replay</button> : null}
 					<div className="start-lights">
-						<span className={`start-light ${this.state.replayCountdown === 1 && this.state.replayCountdown > 0 ? "countdown" : null}`}></span>
-						<span className={`start-light ${this.state.replayCountdown === 2 && this.state.replayCountdown > 0 ? "countdown" : null}`}></span>
-						<span className={`start-light ${this.state.replayCountdown === 3 && this.state.replayCountdown > 0 ? "countdown" : null}`}></span>
-						<span className={`start-light ${this.state.replayCountdown === 4 && this.state.replayCountdown > 0 ? "countdown" : null}`}></span>
-						<span className={`start-light ${this.state.replayCountdown === 5 && this.state.replayCountdown > 0 ? "countdown" : null}`}></span>
+						<span className={`start-light ${this.props.replayCountdown === 1 && this.props.replayCountdown > 0 ? "countdown" : null}`}></span>
+						<span className={`start-light ${this.props.replayCountdown === 2 && this.props.replayCountdown > 0 ? "countdown" : null}`}></span>
+						<span className={`start-light ${this.props.replayCountdown === 3 && this.props.replayCountdown > 0 ? "countdown" : null}`}></span>
+						<span className={`start-light ${this.props.replayCountdown === 4 && this.props.replayCountdown > 0 ? "countdown" : null}`}></span>
+						<span className={`start-light ${this.props.replayCountdown === 5 && this.props.replayCountdown > 0 ? "countdown" : null}`}></span>
 					</div>
 					{this.props.replayLap !== this.props.lapData.length - 1 && this.props.replayLap === 0 ? <h2>Start</h2> : <h2>{`Lap ${this.props.replayLap}`}</h2>}
 					{this.props.replayLap === this.props.lapData.length - 1 ? <h2 className="fade-in">Finished</h2> : null}
@@ -80,6 +59,8 @@ const mapStateToProps = state => {
 	return {
 		season: state.season,
 		selectedRound: state.selectedRound,
+		replayStart: state.replayStart,
+		replayCountdown: state.replayCountdown,
 		replayLap: state.replayLap,
 		lapData: state.lapData,
 		lapDataLoading: state.lapDataLoading,
@@ -88,6 +69,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
 	return {
+		startReplay: () => dispatch({type: "START_REPLAY"}),
+		replayCountdownLight: countdownNumber => dispatch({type: "REPLAY_COUNTDOWN_LIGHT", payload: countdownNumber}),
 		nextLap: lapNumber => dispatch({ type: "NEXT_LAP", payload: lapNumber }),
 		fetchLapData: (season, round) => dispatch(fetchLapData(season, round)),
 	};
