@@ -4,6 +4,12 @@ import {Link} from 'react-router-dom'
 import {fetchGrandPrixData} from '../../actions/actionCreators'
 
 class DriverLink extends Component {
+  constructor(props) {
+    super(props)
+
+    this.handleClick = this.handleClick.bind(this)
+  }
+
   handleClick() {
     console.log(this.props.driverData)
 
@@ -15,7 +21,7 @@ class DriverLink extends Component {
   render() {
     const driver = this.props.driverData
       return (
-        <Link to="/driver" onClick={this.handleClick.bind(this)}>{driver.givenName + " " + driver.familyName}</Link>
+        <Link to="/driver" onClick={this.handleClick}>{driver.givenName + " " + driver.familyName}</Link>
       );
   }
 

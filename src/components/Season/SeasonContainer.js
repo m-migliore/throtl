@@ -10,6 +10,12 @@ class SeasonContainer extends Component {
     error: ""
   }
 
+  componentDidMount() {
+    if (this.props.season !== parseInt(this.props.seasonData.season)) {
+      this.props.fetchAllSeasonData(this.props.season)
+    }
+  }
+
   handleChange = e => {
     this.setState({
       season: e.target.value
@@ -30,12 +36,6 @@ class SeasonContainer extends Component {
       })
     }
 
-  }
-
-  componentDidMount() {
-    if (this.props.season !== parseInt(this.props.seasonData.season)) {
-      this.props.fetchAllSeasonData(this.props.season)
-    }
   }
 
   render() {

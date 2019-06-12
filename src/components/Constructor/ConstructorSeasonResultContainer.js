@@ -3,8 +3,6 @@ import {connect} from 'react-redux'
 import GrandPrixResult from '../GrandPrixResult/GrandPrixResult'
 import DetailedResult from '../DetailedResult/DetailedResult'
 
-
-
 class ConstructorSeasonResultContainer extends Component {
   componentDidUpdate() {
     console.log(this.props.constructorSeasonData);

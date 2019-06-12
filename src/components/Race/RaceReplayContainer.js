@@ -5,18 +5,24 @@ import RacePosition from "./RacePosition";
 import { fetchLapData } from "../../actions/actionCreators";
 
 class RaceReplayContainer extends Component {
-	componentDidMount() {
-		this.props.fetchLapData(this.props.season, this.props.selectedRound);
+	constructor(props) {
+		super(props)
+
+		this.handleClick = this.handleClick.bind(this)
 	}
 
-	handleClick() {
-		this.interval = setInterval(() => this.props.nextLap(this.props.replayLap + 1), 1000);
+	componentDidMount() {
+		this.props.fetchLapData(this.props.season, this.props.selectedRound);
 	}
 
 	componentDidUpdate() {
 		if (this.props.replayLap === this.props.lapData.length - 1) {
 			clearInterval(this.interval);
 		}
+	}
+
+	handleClick() {
+		this.interval = setInterval(() => this.props.nextLap(this.props.replayLap + 1), 1000);
 	}
 
 	render() {
@@ -61,7 +67,7 @@ class RaceReplayContainer extends Component {
 
 			return (
 				<div>
-					{this.props.replayLap === 0 ? <button onClick={this.handleClick.bind(this)}>Watch Replay</button> : null}
+					{this.props.replayLap === 0 ? <button onClick={this.handleClick}>Watch Replay</button> : null}
 					{this.props.replayLap !== this.props.lapData.length - 1 && this.props.replayLap === 0 ? <h2>Start</h2> : <h2>{`Lap ${this.props.replayLap}`}</h2>}
 					{this.props.replayLap === this.props.lapData.length - 1 ? <h2 className="fade-in">Finished</h2> : null}
 					<div className="race-replay">

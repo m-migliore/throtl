@@ -4,6 +4,11 @@ import DriverLink from '../Driver/DriverLink'
 import ConstructorLink from '../Constructor/ConstructorLink'
 
 class ResultRow extends Component {
+  constructor(props) {
+    super(props)
+
+    this.handleClick = this.handleClick.bind(this)
+  }
 
   handleClick() {
     this.props.loadDetailedResult(this.props.resultData)
@@ -32,7 +37,7 @@ class ResultRow extends Component {
           null
         }
         <td>{result.status}</td>
-        <td><button onClick={this.handleClick.bind(this)}>Full Details</button></td>
+        <td><button onClick={this.handleClick}>Full Details</button></td>
       </tr>
     );
   }

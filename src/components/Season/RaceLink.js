@@ -4,6 +4,13 @@ import {fetchEventData, createRacePreview} from '../../actions/actionCreators'
 import {Link} from 'react-router-dom'
 
 class RaceLink extends Component {
+
+  constructor(props) {
+    super(props)
+
+    this.handleClick = this.handleClick.bind(this)
+  }
+
   handleClick() {
     // if race is in future, create preview for race container, 
     // otherwise fetch results for race container
@@ -16,7 +23,7 @@ class RaceLink extends Component {
 
   render() {
     return (
-      <Link to="/race" onClick={this.handleClick.bind(this)}>{this.props.raceData.raceName}</Link>
+      <Link to="/race" onClick={this.handleClick}>{this.props.raceData.raceName}</Link>
     );
   }
 }
