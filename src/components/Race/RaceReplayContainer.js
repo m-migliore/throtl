@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import RaceReplayRace from "./RaceReplayRace";
 import { fetchLapData } from "../../actions/actionCreators";
+import CountdownLight from './CountdownLight'
 
 class RaceReplayContainer extends Component {
 	constructor(props) {
@@ -36,11 +37,11 @@ class RaceReplayContainer extends Component {
 				<div>
 					{this.props.replayLap === 0 ? <button onClick={this.handleClick}>Watch Replay</button> : null}
 					<div className="start-lights">
-						<span className={`start-light ${this.props.replayCountdown === 1 && this.props.replayCountdown > 0 ? "countdown" : null}`}></span>
-						<span className={`start-light ${this.props.replayCountdown === 2 && this.props.replayCountdown > 0 ? "countdown" : null}`}></span>
-						<span className={`start-light ${this.props.replayCountdown === 3 && this.props.replayCountdown > 0 ? "countdown" : null}`}></span>
-						<span className={`start-light ${this.props.replayCountdown === 4 && this.props.replayCountdown > 0 ? "countdown" : null}`}></span>
-						<span className={`start-light ${this.props.replayCountdown === 5 && this.props.replayCountdown > 0 ? "countdown" : null}`}></span>
+						<CountdownLight lightNumber={1} />
+						<CountdownLight lightNumber={2} />
+						<CountdownLight lightNumber={3} />
+						<CountdownLight lightNumber={4} />
+						<CountdownLight lightNumber={5} />
 					</div>
 					{this.props.replayLap !== this.props.lapData.length - 1 && this.props.replayLap === 0 ? <h2>Start</h2> : <h2>{`Lap ${this.props.replayLap}`}</h2>}
 					{this.props.replayLap === this.props.lapData.length - 1 ? <h2 className="fade-in">Finished</h2> : null}
