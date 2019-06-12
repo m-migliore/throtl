@@ -4,7 +4,7 @@ import { spanGrandPrixLaps, spanGrandPrixResults, spanGrandPrixPits } from "../.
 import RacePosition from "./RacePosition";
 import { fetchLapData } from "../../actions/actionCreators";
 
-class RaceReplay extends Component {
+class RaceReplayContainer extends Component {
 	componentDidMount() {
 		this.props.fetchLapData(this.props.season, this.props.selectedRound);
 	}
@@ -99,7 +99,4 @@ const mapDispatchToProps = dispatch => {
 	};
 };
 
-export default connect(
-	mapStateToProps,
-	mapDispatchToProps
-)(RaceReplay);
+export default connect(mapStateToProps,mapDispatchToProps)(RaceReplayContainer);
