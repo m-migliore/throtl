@@ -9,7 +9,8 @@ class RacePosition extends Component {
     const driver = lapData.result.Driver
     const lapInfo = lapData.lapInfo
     const pits = lapData.pits
-  
+    const result = lapData.result
+
     let posStyle
     if (lapInfo[this.props.replayLap]) {
       posStyle = {
@@ -38,12 +39,16 @@ class RacePosition extends Component {
       }
     }
 
+    let fastestLapRank = parseInt(result.FastestLap.rank)
+    let fastestLapNumber = parseInt(result.FastestLap.lap)    
+
     return (
       <div className="race-pos" style={posStyle}>
         <p>
           {driver.givenName + " " + driver.familyName}
-          {pits.map(pit => parseInt(pit.lap)).includes(this.props.replayLap) ? <RacePositionIndicator iType={"pit-stop"} message={"Pit Stop"} /> : null}
-          {dnfStatus.lap <= this.props.replayLap ? <RacePositionIndicator iType={dnfStatus.status} message={dnfStatus.details} /> : null}
+          {fastestLapRank === 1 && this.props.replayLap >= fastestLapNumber ? <RacePositionIndicator iType={"fastest-lap"} message={`Fastest Lap - ${fastestLapNumber}`} /> : null}
+          {pits.map(pit => parseInt(pit.lap)).includes(this.props.replayLap) && <RacePositionIndicator iType={"pit-stop"} message={"Pit Stop"} />}
+          {dnfStatus.lap <= this.props.replayLap && <RacePositionIndicator iType={dnfStatus.status} message={dnfStatus.details} />}
         </p>
       </div>
     )

@@ -8,7 +8,6 @@ export class RaceReplayRace extends Component {
     const laps = this.props.lapData;
     const drivers = laps[0].Timings.map(lap => lap.driverId);
     const lapBreakdown = [];
-    
     drivers.forEach(driver => {
       // const driverResult = spanGrandPrixResults.find(result => result.Driver.driverId === driver)
       const driverResult = this.props.raceData.Results.find(result => result.Driver.driverId === driver);
@@ -24,11 +23,18 @@ export class RaceReplayRace extends Component {
         let info = lap.Timings.find(timing => timing.driverId === driver);
         return info;
       });
-    
+      
+      // edge case for when driver does not have qualifying data
+      let startingPosition
+      if (driverQual) {
+        startingPosition = driverQual.position
+      } else {
+        startingPosition = driverResult.grid
+      }
       // Create lap zero for laps for starting watch race
       const lapZero = {
         driverid: driver,
-        position: driverQual.position,
+        position: startingPosition,
         time: "0:00.000",
       };
     

@@ -3,9 +3,7 @@ import {connect} from 'react-redux'
 import FlagImage from '../Image/FlagImage'
 
 class CircuitInfo extends Component {
-  componentDidMount() {
-    console.log(this.props.circuitData);
-  }
+
   render() {
     if (this.props.circuitData.circuitId) {
       const circuit = this.props.circuitData

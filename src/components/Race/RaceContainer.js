@@ -7,7 +7,7 @@ import CircuitInfo from "../Circuit/CircuitInfo";
 // import RacePreview from './RacePreview'
 import DetailedResult from "../DetailedResult/DetailedResult";
 import { Redirect, Link } from "react-router-dom";
-import RaceReplayContainer from "./RaceReplayContainer";
+import RaceReplayContainer from "../RaceReplay/RaceReplayContainer";
 
 class RaceContainer extends Component {
 	render() {

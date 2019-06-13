@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import RaceReplayRace from "./RaceReplayRace";
 import { fetchLapData } from "../../actions/actionCreators";
+import RaceReplayRace from "./RaceReplayRace";
 import StartLightContainer from "../StartLight/StartLightContainer";
 
 class RaceReplayContainer extends Component {
