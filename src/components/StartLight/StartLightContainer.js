@@ -3,12 +3,6 @@ import { connect } from 'react-redux'
 import StartLight from  './StartLight'
 
 class StartLightContainer extends Component {
-  componentDidUpdate(){
-    if (this.props.replayStart) {
-      debugger
-      console.log("hi")    
-    }
-  }
 
   render() {
     return (
