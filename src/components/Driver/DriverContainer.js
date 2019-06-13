@@ -18,7 +18,7 @@ class DriverContainer extends Component {
       
       return (
         <div className="container mx-auto">
-          <Link to="/">Close</Link>
+          <Link to="/" className="btn btn-default">Close</Link>
           <h1>{driver.givenName + " " + driver.familyName} {driver.permanentNumber ? <span>{driver.permanentNumber }</span> : null}</h1>
           <FlagImage flagName={flag} />
           <p><strong>DOB:</strong> <Moment date={driver.dateOfBrith} format="LLL"/></p>

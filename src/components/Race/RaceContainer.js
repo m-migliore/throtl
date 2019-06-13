@@ -20,7 +20,7 @@ class RaceContainer extends Component {
 		} else if (this.props.raceData.raceName) {
 			return (
 				<div className="container mx-auto">
-					<Link to="/">Close</Link>
+					<Link to="/" className="btn btn-default">Close</Link>
 					<h1>{this.props.season + " " + this.props.raceData.raceName}</h1>
 					<p>
 						<Moment date={this.props.raceData.date} format="LLL" />

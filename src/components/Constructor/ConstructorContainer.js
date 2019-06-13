@@ -21,7 +21,7 @@ class ConstructorContainer extends Component {
 
       return (
         <div className="container mx-auto">
-          <Link to="/">Close</Link>
+          <Link to="/" className="btn btn-default">Close</Link>
           <h1>{constructor.name}</h1>
           <FlagImage flagName={flag} />
           <ConstructorSeasonResultContainer />

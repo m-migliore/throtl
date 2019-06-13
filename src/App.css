@@ -31,15 +31,11 @@ h4 {
 }
 
 /********** GENERAL **********/
-
-button {
+button, .btn.btn-default {
   padding: 5px 20px;
   text-transform: uppercase;
   font-weight: 700;
   border-radius: 4px;
-  color: #fff;
-  background-color:#303f52;
-  border: 3px solid transparent;
   -webkit-transition: all .35s ease-in-out;
   -moz-transition: all .5s ease-in-out;
   -ms-transition: all .5s ease-in-out;
@@ -47,7 +43,13 @@ button {
   transition: all .5s ease-in-out;
 }
 
-button:hover {
+button, .btn.btn-default {
+  color: #fff;
+  background-color:#303f52;
+  border: 3px solid transparent;
+}
+
+button:hover, .btn.btn-default:hover {
   border-color: #303f52;
   color: #303f52;
   background-color: transparent;
