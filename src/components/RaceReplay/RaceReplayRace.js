@@ -53,7 +53,7 @@ export class RaceReplayRace extends Component {
     return (
       <div className="race-replay">
         {lapBreakdown.map(lap => (
-          <RacePosition key={lap.driverId} lapData={lap} />
+          <RacePosition key={lap.driverId} driverLapData={lap} />
         ))}
       </div>
     )
