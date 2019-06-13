@@ -69,8 +69,10 @@ export default function reducer(state = defaultState, action) {
 				...state,
 				loading: true,
 				selectedRound: action.payload,
-				replayLap: 0,
 				lapData: [],
+				replayStart: false,
+				replayCountdown: 6,
+				replayLap: 0
 			};
 		case "RACE_FETCH":
 			return {
