@@ -37,7 +37,7 @@ class ResultRow extends Component {
           null
         }
         <td>{result.status}</td>
-        <td><button onClick={this.handleClick}>Full Details</button></td>
+        <td><button onClick={this.handleClick} className="btn btn-default">Full Details</button></td>
       </tr>
     );
   }

@@ -32,7 +32,7 @@ class DetailedResult extends Component {
     return (
       <div className="modal-container">
         <div className="modal-content container my-10 mx-auto p-5">
-          <button onClick={this.props.closeDetailedResult}>Close</button>
+          <button onClick={this.props.closeDetailedResult} className="btn btn-default">Close</button>
           <h2>{driver.givenName + " " + driver.familyName} <span>{driver.permanentNumber}</span></h2>
           <FlagImage flagName={flag} />
           <h4>{constructor.name}</h4>
