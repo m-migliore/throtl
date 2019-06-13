@@ -1,6 +1,3 @@
-// use same json data for fetch for faster testing 
-import {spanGrandPrixLaps} from '../helpers/fullRaceLapFetch'
-
 export function fetchAllSeasonData(season) {
   return dispatch => {
     dispatch({
@@ -189,18 +186,13 @@ export function fetchRacePitData(season, round) {
 export function fetchLapData(season, round) {
   return dispatch => {
     dispatch({type: "START_LAP_DATA_FETCH"})
-    // replace fetch with json data from other fetch for faster testing
-    // return fetch(`http://ergast.com/api/f1/${season}/${round}/laps.json?limit=1500`)
-    // .then(r => r.json())
-    // .then(data => {
-    //   return dispatch({
-    //     type: "LOAD_LAP_DATA",
-    //     payload: data.MRData.RaceTable.Races[0].Laps
-    //   })
-    // })
-    return dispatch({
-      type: "LOAD_LAP_DATA",
-      payload: spanGrandPrixLaps
+    return fetch(`http://ergast.com/api/f1/${season}/${round}/laps.json?limit=1500`)
+    .then(r => r.json())
+    .then(data => {
+      return dispatch({
+        type: "LOAD_LAP_DATA",
+        payload: data.MRData.RaceTable.Races[0].Laps
+      })
     })
   }
 }
