@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import RaceReplayRace from "./RaceReplayRace";
 import { fetchLapData } from "../../actions/actionCreators";
-import CountdownLight from './CountdownLight'
+import StartLightContainer from "../StartLight/StartLightContainer";
 
 class RaceReplayContainer extends Component {
 	constructor(props) {
@@ -36,13 +36,7 @@ class RaceReplayContainer extends Component {
 			return (
 				<div>
 					{this.props.replayLap === 0 ? <button onClick={this.handleClick}>Watch Replay</button> : null}
-					<div className="start-lights">
-						<CountdownLight lightNumber={1} />
-						<CountdownLight lightNumber={2} />
-						<CountdownLight lightNumber={3} />
-						<CountdownLight lightNumber={4} />
-						<CountdownLight lightNumber={5} />
-					</div>
+					<StartLightContainer />
 					{this.props.replayLap !== this.props.lapData.length - 1 && this.props.replayLap === 0 ? <h2>Start</h2> : <h2>{`Lap ${this.props.replayLap}`}</h2>}
 					{this.props.replayLap === this.props.lapData.length - 1 ? <h2 className="fade-in">Finished</h2> : null}
 					<RaceReplayRace />

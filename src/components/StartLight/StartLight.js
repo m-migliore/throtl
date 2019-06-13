@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-export class CountdownLight extends Component {
+export class StartLight extends Component {
   constructor(props) {
     super(props)
 
@@ -10,15 +10,17 @@ export class CountdownLight extends Component {
 
   lightRender() {
     if (this.props.replayCountdown <= this.props.lightNumber && this.props.replayCountdown > 0) {
-      return "countdown"
+      return " countdown"
     } else if (this.props.replayCountdown === 0 && this.props.replayStart) {
-      return "start"
+      return " go"
+    } else {
+      return ""
     }
   }
 
   render() {
     return (
-      <span className={`countdown-light ${this.lightRender()}`}></span>
+      <span className={`start-light${this.lightRender()}`}></span>
     )
   }
 }
@@ -28,4 +30,4 @@ const mapStateToProps = (state) => ({
   replayStart: state.replayStart
 })
 
-export default connect(mapStateToProps)(CountdownLight)
+export default connect(mapStateToProps)(StartLight)

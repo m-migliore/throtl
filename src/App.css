@@ -160,9 +160,13 @@ table tr > td:last-of-type, table tr > th:last-of-type {
   color: red;
 }
 
-.countdown-light {
-  height: 10px;
-  width: 10px;
+/********** START LIGHTS **********/
+
+.start-light {
+  display: inline-block;
+  height: 25px;
+  width: 25px;
+  margin-right: 2px;
   border: 2px solid #222;
   background-color: #fff;
   border-radius: 50%;
@@ -173,12 +177,12 @@ table tr > td:last-of-type, table tr > th:last-of-type {
   transition: all .5s ease-out;
 }
 
-.countdown-light.countdown {
+.start-light.countdown {
   border-color: #8e0404;
   background-color: #8e0404;
 }
 
-.countdown-light.start {
+.start-light.go {
   border-color: green;
   background-color: green;
 }
