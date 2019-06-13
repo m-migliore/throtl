@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { NONAME } from 'dns';
 
 export class StartLight extends Component {
   constructor(props) {
