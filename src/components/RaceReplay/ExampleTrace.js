@@ -58,12 +58,12 @@ export class ExampleTrace extends Component {
   <circle id="circle" r="10" cx="0" cy="0" fill="tomato" />
    
   <animateMotion 
-           xlinkHref="#circle"
+           href="#circle"
            dur="3s"
            begin="0s"
            fill="freeze"
            repeatCount={this.props.lapData.length}>
-    <mpath xlinkHref="#catalunya" />
+    <mpath href="#catalunya" />
   </animateMotion>
 </svg>
     )
