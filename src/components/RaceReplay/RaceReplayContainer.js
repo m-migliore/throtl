@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { fetchLapData } from "../../actions/actionCreators";
 import RaceReplayRace from "./RaceReplayRace";
 import StartLightContainer from "../StartLight/StartLightContainer";
-import ExampleTrace from './ExampleTrace'
+import TrackTrace from './TrackTrace'
 
 class RaceReplayContainer extends Component {
 	constructor(props) {
@@ -48,7 +48,7 @@ class RaceReplayContainer extends Component {
 					{(replayLap === 0 && replayCountdown !== 6) && <StartLightContainer />}
 					{replayLap > 0 && replayLap !== this.props.lapData.length - 1  ? <h2>{`Lap ${replayLap}`}</h2> : null}
 					{replayLap === this.props.lapData.length - 1 ? <h2 className="animate-pulse">Finished</h2> : null}
-					{replayLap > 0 && replayLap !== this.props.lapData.length - 1  ? <ExampleTrace /> : null}
+					{replayLap > 0 && replayLap !== this.props.lapData.length - 1  ? <TrackTrace /> : null}
 					
 					<RaceReplayRace />
 				</div>
