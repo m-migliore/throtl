@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import Animation from './Animation'
 
 export class ExampleTrace extends Component {
   static propTypes = {
@@ -56,15 +57,8 @@ export class ExampleTrace extends Component {
         </path>
   
   <circle id="circle" r="10" cx="0" cy="0" fill="tomato" />
-   
-  <animateMotion 
-           href="#circle"
-           dur="3s"
-           begin="0s"
-           fill="freeze"
-           repeatCount={this.props.lapData.length}>
-    <mpath href="#catalunya" />
-  </animateMotion>
+   {this.props.replayStart && <Animation />}
+  
 </svg>
     )
   }
@@ -72,6 +66,7 @@ export class ExampleTrace extends Component {
 
 const mapStateToProps = state => {
   return {
+    replayStart: state.replayStart,
     replayLap: state.replayLap,
     lapData: state.lapData
   }
