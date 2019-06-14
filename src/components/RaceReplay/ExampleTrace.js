@@ -6,7 +6,8 @@ export class ExampleTrace extends Component {
   static propTypes = {
     prop: PropTypes
   }
-
+  
+  // https://css-tricks.com/guide-svg-animations-smil/
   render() {
     return (
       <svg width="565" height="800" viewBox="0 0 500 350">
