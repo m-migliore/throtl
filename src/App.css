@@ -187,12 +187,16 @@ table tr > td:last-of-type, table tr > th:last-of-type {
 .start-light.countdown {
   border-color: #8e0404;
   background-color: #8e0404;
+  -webkit-box-shadow: 0 2px 5px 0 rgba(142, 4, 4 .3);
+  box-shadow: 0 2px 5px 0 rgba(142, 4, 4 .3);
   animation: pulse .5s;
 }
 
 .start-light.go {
   border-color: green;
   background-color: green;
+  -webkit-box-shadow: 0 2px 5px 0 rgba(0, 128, 0, .3);
+  box-shadow: 0 2px 5px 0 rgba(0, 128, 0, .3);
   animation: start .5s;
   opacity: 0;
 }
@@ -237,6 +241,10 @@ table tr > td:last-of-type, table tr > th:last-of-type {
 }
 
 /*** PULSE ***/
+.animate-pulse {
+animation: start .5s;
+}
+
 @-webkit-keyframes pulse {
   100% { 
     -moz-transform: scale(1);
