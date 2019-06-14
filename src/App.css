@@ -201,6 +201,11 @@ table tr > td:last-of-type, table tr > th:last-of-type {
   opacity: 0;
 }
 
+/********** TRACK TRACE **********/
+#track {
+  width: 565px;
+  height: 800px;
+}
 
 /********** ANIMATIONS **********/
 
