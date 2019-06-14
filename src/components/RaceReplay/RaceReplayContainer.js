@@ -23,7 +23,7 @@ class RaceReplayContainer extends Component {
 
 		if (this.props.replayCountdown === 0 && !this.props.replayStart) {
 			clearInterval(this.countdownInterval)
-			this.lapInterval = setInterval(() => this.props.nextLap(this.props.replayLap + 1), 1000);
+			this.lapInterval = setInterval(() => this.props.nextLap(this.props.replayLap + 1), 3000);
 			this.props.startReplay()
 		}
 	}
