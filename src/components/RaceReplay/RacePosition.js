@@ -55,15 +55,19 @@ class RacePosition extends Component {
     if (this.props.replayLap > 0) {
       leader = this.props.lapData[this.props.replayLap].Timings[0]
       leaderTimeInSeconds = this.convertTimeToSeconds(leader.time)
-      driverTimeInSeconds = this.convertTimeToSeconds(lapInfo[this.props.replayLap].time)
 
+      // prevents error when lap data unavailable,lapped or crash
+      if (lapInfo[this.props.replayLap]) {
+        driverTimeInSeconds = this.convertTimeToSeconds(lapInfo[this.props.replayLap].time)
+      }
+    
       isLeader = leader.driverId === driver.driverId
 
-    
-
       if(!isLeader && driverTimeInSeconds) {
-        lapInterval = (driverTimeInSeconds - leaderTimeInSeconds).toFixed(3)
+        let initLapInterval = (driverTimeInSeconds - leaderTimeInSeconds).toFixed(3)
+        initLapInterval > 0 ? lapInterval = "+" + initLapInterval : lapInterval = initLapInterval
       }
+
     }
 
     let fastestLapRank = parseInt(result.FastestLap.rank)
@@ -73,7 +77,7 @@ class RacePosition extends Component {
       <div className="race-pos" style={posStyle}>
         <p>
           {driver.givenName + " " + driver.familyName}
-          {this.props.replayLap > 0 && driverTimeInSeconds ? <span className="lap-interval">{isLeader ? leader.time : "+" + lapInterval}</span> : null}
+          {this.props.replayLap > 0 && driverTimeInSeconds ? <span className="lap-interval">{isLeader ? leader.time : lapInterval}</span> : null}
           {fastestLapRank === 1 && this.props.replayLap >= fastestLapNumber ? <RacePositionIndicator iType={"fastest-lap"} message={`Fastest Lap - ${fastestLapNumber}`} /> : null}
           {pits.map(pit => parseInt(pit.lap)).includes(this.props.replayLap) && <RacePositionIndicator iType={"pit-stop"} message={"Pit Stop"} />}
           {dnfStatus.lap <= this.props.replayLap && <RacePositionIndicator iType={dnfStatus.status} message={dnfStatus.details} />}
