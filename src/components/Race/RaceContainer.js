@@ -13,13 +13,13 @@ class RaceContainer extends Component {
 	render() {
 		if (this.props.loading) {
 			return (
-				<div className="container mx-auto">
+				<div className="container mx-auto my-5">
 					<h1>Loading</h1>
 				</div>
 			);
 		} else if (this.props.raceData.raceName) {
 			return (
-				<div className="container mx-auto">
+				<div className="container mx-auto my-5">
 					<Link to="/" className="btn btn-default">Close</Link>
 					<h1>{this.props.season + " " + this.props.raceData.raceName}</h1>
 					<p>

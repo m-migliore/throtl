@@ -17,7 +17,7 @@ class DriverContainer extends Component {
       const flag = NATIONS[driver.nationality]
       
       return (
-        <div className="container mx-auto">
+        <div className="container mx-auto my-5">
           <Link to="/" className="btn btn-default">Close</Link>
           <h1>{driver.givenName + " " + driver.familyName} {driver.permanentNumber ? <span>{driver.permanentNumber }</span> : null}</h1>
           <FlagImage flagName={flag} />

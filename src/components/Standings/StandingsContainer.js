@@ -7,7 +7,7 @@ class StandingsContainer extends Component {
 
   render() {
     return (
-      <div className="container mx-auto my-5">
+      <div className="container mx-auto my-5 my-5">
         <h2>{this.props.seasonData.season} Season Standings</h2>
         <div className="flex">
           <DriverStandings />

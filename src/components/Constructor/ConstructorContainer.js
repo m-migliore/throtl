@@ -20,7 +20,7 @@ class ConstructorContainer extends Component {
       const flag = NATIONS[constructor.nationality]
 
       return (
-        <div className="container mx-auto">
+        <div className="container mx-auto my-5">
           <Link to="/" className="btn btn-default">Close</Link>
           <h1>{constructor.name}</h1>
           <FlagImage flagName={flag} />
