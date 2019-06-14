@@ -37,13 +37,16 @@ class RaceReplayContainer extends Component {
 	}
 
 	render() {
+		const replayLap = this.props.replayLap
+		const replayCountdown = this.props.replayCountdown
+
 		if (this.props.lapData.length > 0) {
 			return (
 				<div className="my-5">
-					{this.props.replayCountdown === 6 && <button onClick={this.handleClick} className="btn btn-defualt">Watch Replay</button>}
-					{(this.props.replayLap === 0 && this.props.replayCountdown !== 6) && <StartLightContainer />}
-					{this.props.replayLap !== 0 && <h2>{`Lap ${this.props.replayLap}`}</h2>}
-					{this.props.replayLap === this.props.lapData.length - 1 ? <h2 className="fade-in">Finished</h2> : null}
+					{replayCountdown === 6 && <button onClick={this.handleClick} className="btn btn-defualt">Watch Replay</button>}
+					{(replayLap === 0 && replayCountdown !== 6) && <StartLightContainer />}
+					{replayLap > 0 && replayLap !== this.props.lapData.length - 1  ? <h2>{`Lap ${replayLap}`}</h2> : null}
+					{replayLap === this.props.lapData.length - 1 ? <h2 className="fade-in">Finished</h2> : null}
 					<RaceReplayRace />
 				</div>
 			);
