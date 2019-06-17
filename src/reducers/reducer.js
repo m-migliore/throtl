@@ -23,7 +23,9 @@ const defaultState = {
 	replayLap: 0,
 	lapData: [],
 	driverLapData: [],
-	driverLapLoading: false
+	driverLapLoading: false,
+	driverPitData: [],
+	driverPitLoading: false
 };
 
 export default function reducer(state = defaultState, action) {
@@ -199,6 +201,17 @@ export default function reducer(state = defaultState, action) {
 				...state,
 				driverLapData: action.payload,
 				driverLapLoading: false
+			}
+		case "START_DRIVER_PIT_FETCH":
+			return {
+				...state,
+				driverPitLoading: true
+			}
+		case "LOAD_DRIVER_PIT_DATA":
+			return {
+				...state,
+				driverPitData: action.payload,
+				driverPitLoading: false
 			}
 		default:
 			return defaultState;

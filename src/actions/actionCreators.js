@@ -312,10 +312,19 @@ function combineRaceAndQualResults(raceResults, qualResults, type, id) {
   }
 }
 
-export function fetchDriverLaps(season, round, driverId) {
+export function fetchDriverLapAndPitData(season, round, driverId) {
+  return dispatch => {
+    return Promise.all([
+      dispatch(fetchDriverLapData(season, round, driverId)),
+      dispatch(fetchDriverPitData(season, round, driverId))
+    ])
+  }
+}
+
+function fetchDriverLapData(season, round, driverId) {
   return dispatch => {
     dispatch({type: "START_DRIVER_LAP_FETCH"})
-
+  
     return fetch(`http://ergast.com/api/f1/${season}/${round}/drivers/${driverId}/laps.json?limit=80`)
     .then(r => r.json())
     .then(data => {
@@ -329,6 +338,23 @@ export function fetchDriverLaps(season, round, driverId) {
       return dispatch({
         type: "LOAD_DRIVER_LAP_DATA",
         payload: driverLaps
+      })
+    })
+  }
+}
+
+function fetchDriverPitData(season, round, driverId) {
+  return dispatch => {
+    dispatch({type: "START_DRIVER_PIT_FETCH"})
+   
+    return fetch(`http://ergast.com/api/f1/${season}/${round}/drivers/${driverId}/pitstops.json`)
+    .then(r => r.json())
+    .then(data => {
+      const driverPits = data.MRData.RaceTable.Races[0].PitStops
+    
+      return dispatch({
+        type: "LOAD_DRIVER_LAP_DATA",
+        payload: driverPits
       })
     })
   }

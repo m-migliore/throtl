@@ -4,12 +4,12 @@ import FastestLap from './FastestLap'
 import PitDetail from './PitDetail'
 import {NATIONS} from '../../helpers/nations.js'
 import FlagImage from '../Image/FlagImage'
-import { fetchDriverLaps } from '../../actions/actionCreators'
+import { fetchDriverLapAndPitData } from '../../actions/actionCreators'
 
 class DetailedResult extends Component {
 
   componentDidMount() {
-    this.props.fetchDriverLaps(this.props.season, this.props.round, this.props.driverId)
+    this.props.fetchDriverLapAndPitData(this.props.season, this.props.round, this.props.driverId)
   }
 
   componentDidUpdate() {
@@ -78,7 +78,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     closeDetailedResult: () =>  dispatch({type: "CLOSE_DETAILED_RESULT"}),
-    fetchDriverLaps: (season, round, driverId) => dispatch(fetchDriverLaps(season, round, driverId))
+    fetchDriverLapAndPitData: (season, round, driverId) => dispatch(fetchDriverLapAndPitData(season, round, driverId))
   }
 }
 
