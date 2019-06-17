@@ -5,6 +5,7 @@ import Moment from 'react-moment'
 import {NATIONS} from '../../helpers/nations.js'
 import DriverSeasonResultContainer from './DriverSeasonResultContainer'
 import FlagImage from '../Image/FlagImage'
+import TrackTrace from '../LapAnimations/TrackTrace'
 
 class DriverContainer extends Component {
   componentDidMount() {

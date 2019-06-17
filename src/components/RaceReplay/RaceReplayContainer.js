@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { fetchLapData } from "../../actions/actionCreators";
 import RaceReplayRace from "./RaceReplayRace";
 import StartLightContainer from "../StartLight/StartLightContainer";
-import TrackTrace from './TrackTrace'
+import TrackTrace from '../LapAnimations/TrackTrace'
 
 class RaceReplayContainer extends Component {
 	constructor(props) {
