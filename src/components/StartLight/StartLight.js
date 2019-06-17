@@ -11,7 +11,7 @@ export class StartLight extends Component {
   lightRender() {
     if (this.props.replayCountdown <= this.props.lightNumber && this.props.replayCountdown > 0) {
       return " countdown"
-    } else if (this.props.replayCountdown === 0 && this.props.replayStart) {
+    } else if (this.props.replayCountdown === 0 ) {
       return " go"
     } else {
       return ""

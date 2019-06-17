@@ -353,7 +353,7 @@ function fetchDriverPitData(season, round, driverId) {
       const driverPits = data.MRData.RaceTable.Races[0].PitStops
     
       return dispatch({
-        type: "LOAD_DRIVER_LAP_DATA",
+        type: "LOAD_DRIVER_PIT_DATA",
         payload: driverPits
       })
     })

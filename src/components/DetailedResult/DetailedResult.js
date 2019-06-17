@@ -5,7 +5,7 @@ import FastestLap from './FastestLap'
 import PitDetail from './PitDetail'
 import {NATIONS} from '../../helpers/nations.js'
 import FlagImage from '../Image/FlagImage'
-import TrackTrace from '../LapAnimations/TrackTrace'
+import ReplayStart from '../RaceReplay/ReplayStart'
 
 
 class DetailedResult extends Component {
@@ -60,13 +60,7 @@ class DetailedResult extends Component {
           </div>
           <div className="my-3">
             <h3>Race Replay</h3>
-            {this.props.driverPitLoading ? <p>Loading</p> 
-            : 
-            <>
-              <button>Watch Replay</button> 
-              <TrackTrace /> 
-            </>
-            }
+            {this.props.driverPitLoading ? <p>Loading</p> : <ReplayStart />}
 
           </div>
         </div>
@@ -85,7 +79,7 @@ const mapStateToProps = state => {
     driverLapLoading: state.driverLapLoading,
     driverLapData: state.driverLapData,
     driverPitLoading: state.driverPitLoading,
-    driverPitData: state.driverLapData
+    driverPitData: state.driverPitData
   }
 }
 
