@@ -65,9 +65,7 @@ export class TrackTrace extends Component {
 
 const mapStateToProps = state => {
   return {
-    replayStart: state.replayStart,
-    replayLap: state.replayLap,
-    lapData: state.lapData
+    replayStart: state.replayStart
   }
 }
 

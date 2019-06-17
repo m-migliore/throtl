@@ -10,7 +10,6 @@ class PitDetail extends Component {
         <h4>Stop {pit.stop}</h4>
         <p><strong>Lap:</strong> {pit.lap}</p>
         <p><strong>Duration:</strong> {pit.duration}</p>
-        <p><strong>Time:</strong> {pit.time}</p>
       </div>
     );
   }

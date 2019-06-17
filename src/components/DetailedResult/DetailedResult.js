@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
+import { fetchDriverLapAndPitData } from '../../actions/actionCreators'
 import FastestLap from './FastestLap'
 import PitDetail from './PitDetail'
 import {NATIONS} from '../../helpers/nations.js'
 import FlagImage from '../Image/FlagImage'
-import { fetchDriverLapAndPitData } from '../../actions/actionCreators'
+import TrackTrace from '../LapAnimations/TrackTrace'
+
 
 class DetailedResult extends Component {
 
@@ -17,7 +19,7 @@ class DetailedResult extends Component {
   }
 
   pitLoad() {
-    const pitData = this.props.pitData.filter(pitStops => pitStops.driverId === this.props.driverId)
+    const pitData = this.props.driverPitData
     console.log(pitData)
     if (pitData.length === 0) {
       return <p>Loading</p>
@@ -56,6 +58,17 @@ class DetailedResult extends Component {
             <h3>Pit Stops</h3>
             {this.pitLoad()}
           </div>
+          <div className="my-3">
+            <h3>Race Replay</h3>
+            {this.props.driverPitLoading ? <p>Loading</p> 
+            : 
+            <>
+              <button>Watch Replay</button> 
+              <TrackTrace /> 
+            </>
+            }
+
+          </div>
         </div>
       </div>
     );
@@ -69,9 +82,10 @@ const mapStateToProps = state => {
     detailedResultData: state.detailedResultData,
     round: state.detailedResultData.round,
     driverId: state.detailedResultData.Driver.driverId,
-    pitData: state.pitData,
     driverLapLoading: state.driverLapLoading,
-    driverLapData: state.driverLapData
+    driverLapData: state.driverLapData,
+    driverPitLoading: state.driverPitLoading,
+    driverPitData: state.driverLapData
   }
 }
 
