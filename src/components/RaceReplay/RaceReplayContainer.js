@@ -3,7 +3,8 @@ import { connect } from "react-redux";
 import { fetchLapData } from "../../actions/actionCreators";
 import RaceReplayRace from "./RaceReplayRace";
 import StartLightContainer from "../StartLight/StartLightContainer";
-import TrackTrace from '../LapAnimations/TrackTrace'
+// import ReplayStart from './ReplayStart'
+// import TrackTrace from '../LapAnimations/TrackTrace'
 
 class RaceReplayContainer extends Component {
 	constructor(props) {
@@ -23,7 +24,7 @@ class RaceReplayContainer extends Component {
 
 		if (this.props.replayCountdown === 0 && !this.props.replayStart) {
 			clearInterval(this.countdownInterval)
-			this.lapInterval = setInterval(() => this.props.nextLap(this.props.replayLap + 1), 3000);
+			this.lapInterval = setInterval(() => this.props.nextLap(this.props.replayLap + 1), 1000);
 			this.props.startReplay()
 		}
 	}
@@ -46,10 +47,11 @@ class RaceReplayContainer extends Component {
 				<div className="my-5">
 					{replayCountdown === 6 && <button onClick={this.handleClick} className="btn btn-defualt">Watch Replay</button>}
 					{(replayLap === 0 && replayCountdown !== 6) && <StartLightContainer />}
-					{replayLap > 0 && replayLap !== this.props.lapData.length - 1  ? <h2>{`Lap ${replayLap}`}</h2> : null}
+					{/* <ReplayStart /> */}
+					{replayLap > 0 && replayLap !== this.props.lapData.length - 1  ? <h2>{`Lap ${replayLap}`}</h2> : <h2>Start</h2>}
 					{replayLap === this.props.lapData.length - 1 ? <h2 className="animate-pulse">Finished</h2> : null}
-					{replayLap > 0 && replayLap !== this.props.lapData.length - 1  ? <TrackTrace /> : null}
-					
+					{/* {replayLap > 0 && replayLap !== this.props.lapData.length - 1  ? <TrackTrace /> : null} */}
+					{/* <TrackTrace /> */}
 					<RaceReplayRace />
 				</div>
 			);
