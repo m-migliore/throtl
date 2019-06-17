@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchLapData } from "../../actions/actionCreators";
 import RaceReplayRace from "./RaceReplayRace";
-import StartLightContainer from "../StartLight/StartLightContainer";
-import TrackTrace from '../LapAnimations/TrackTrace'
 import ReplayStart from './ReplayStart'
 
 class RaceReplayContainer extends Component {
@@ -22,12 +20,6 @@ class RaceReplayContainer extends Component {
 			clearInterval(this.lapInterval);
 		}
 
-		// if (this.props.replayCountdown === 0 && !this.props.replayStart) {
-		// 	clearInterval(this.countdownInterval)
-		// 	this.lapInterval = setInterval(() => this.props.nextLap(this.props.replayLap + 1), 1000);
-		// 	this.props.startReplay()
-		// }
-
 		if (this.props.replayCountdown === 0 && this.props.replayLap === 0 && this.props.replayStart) {
 			this.lapInterval = setInterval(() => this.props.nextLap(this.props.replayLap + 1), 1000);
 			console.log("hit")
@@ -35,8 +27,7 @@ class RaceReplayContainer extends Component {
 	}
 
 	componentWillUnmount() {
-		clearInterval(this.lapInterval);
-		// clearInterval(this.countdownInterval)
+		clearInterval(this.lapInterval)
 	}
 
 	handleClick() {
@@ -45,18 +36,13 @@ class RaceReplayContainer extends Component {
 
 	render() {
 		const replayLap = this.props.replayLap
-		// const replayCountdown = this.props.replayCountdown
 
 		if (this.props.lapData.length > 0) {
 			return (
 				<div className="my-5">
-					{/* {replayCountdown === 6 && <button onClick={this.handleClick} className="btn btn-defualt">Watch Replay</button>}
-					{(replayLap === 0 && replayCountdown !== 6) && <StartLightContainer />} */}
 					<ReplayStart />
 					{replayLap > 0 && replayLap !== this.props.lapData.length - 1  ? <h2>{`Lap ${replayLap}`}</h2> : null}
 					{replayLap === this.props.lapData.length - 1 ? <h2 className="animate-pulse">Finished</h2> : null}
-					{/* {replayLap > 0 && replayLap !== this.props.lapData.length - 1  ? <TrackTrace /> : null} */}
-					
 					<RaceReplayRace />
 				</div>
 			);
@@ -73,8 +59,8 @@ const mapStateToProps = state => {
 		season: state.season,
 		selectedRound: state.selectedRound,
 		replayStart: state.replayStart,
-		replayCountdown: state.replayCountdown,
 		replayLap: state.replayLap,
+		replayCountdown: state.replayCountdown,
 		lapData: state.lapData,
 		lapDataLoading: state.lapDataLoading,
 	};
@@ -82,8 +68,6 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
 	return {
-		startReplay: () => dispatch({type: "START_REPLAY"}),
-		replayCountdownLight: countdownNumber => dispatch({type: "REPLAY_COUNTDOWN_LIGHT", payload: countdownNumber}),
 		nextLap: lapNumber => dispatch({ type: "NEXT_LAP", payload: lapNumber }),
 		fetchLapData: (season, round) => dispatch(fetchLapData(season, round)),
 	};
