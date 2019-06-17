@@ -30,9 +30,6 @@ class RaceReplayContainer extends Component {
 		clearInterval(this.lapInterval)
 	}
 
-	handleClick() {
-		this.countdownInterval = setInterval(() => this.props.replayCountdownLight(this.props.replayCountdown - 1), 1000)
-	}
 
 	render() {
 		const replayLap = this.props.replayLap
