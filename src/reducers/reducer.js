@@ -22,6 +22,8 @@ const defaultState = {
 	replayCountdown: 6,
 	replayLap: 0,
 	lapData: [],
+	driverLapData: [],
+	driverLapLoading: false
 };
 
 export default function reducer(state = defaultState, action) {
@@ -186,6 +188,17 @@ export default function reducer(state = defaultState, action) {
 			return {
 				...state,
 				replayCountdown: action.payload
+			}
+		case "START_DRIVER_LAP_FETCH":
+			return {
+				...state,
+				driverLapLoading: true
+			}
+		case "LOAD_DRIVER_LAP_DATA":
+			return {
+				...state,
+				driverLapData: action.payload,
+				driverLapLoading: false
 			}
 		default:
 			return defaultState;

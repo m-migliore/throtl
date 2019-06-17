@@ -311,3 +311,19 @@ function combineRaceAndQualResults(raceResults, qualResults, type, id) {
     })
   }
 }
+
+export function fetchDriverLaps(season, round, driverId) {
+  return dispatch => {
+    dispatch({type: "START_DRIVER_LAP_FETCH"})
+
+    return fetch(`http://ergast.com/api/f1/${season}/${round}/drivers/${driverId}/laps.json?limit=80`)
+    .then(r => r.json())
+    .then(data => {
+      const driverLaps = data.MRData.RaceTable.Races[0].Laps
+      return dispatch({
+        type: "LOAD_DRIVER_LAP_DATA",
+        payload: driverLaps
+      })
+    })
+  }
+}

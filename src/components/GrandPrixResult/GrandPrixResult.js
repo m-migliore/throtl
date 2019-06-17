@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
 import QualRow from '../Race/QualRow'
 import ResultRow from '../Race/ResultRow'
 import RaceLink from '../Season/RaceLink'
@@ -43,7 +44,7 @@ class GrandPrixResult extends Component {
                   key={resultRow.position} 
                   resultData={{
                     ...resultRow,
-                    round: result.round
+                    round: parseInt(result.round)
                   }}
                 />)}
             </tbody>
@@ -57,4 +58,10 @@ class GrandPrixResult extends Component {
 
 }
 
-export default GrandPrixResult;
+const mapStateToProps = state => {
+  return {
+    season: state.season
+  }
+}
+
+export default connect(mapStateToProps)(GrandPrixResult);
