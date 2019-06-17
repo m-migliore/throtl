@@ -18,7 +18,7 @@ class DriverLapAnimation extends Component {
     return (
       <animateMotion 
         href="#circle"
-        dur={animateTime}
+        dur="2s"
         begin="0s"
         fill="freeze"
         repeatCount={this.props.driverLapData.length}>
