@@ -319,7 +319,13 @@ export function fetchDriverLaps(season, round, driverId) {
     return fetch(`http://ergast.com/api/f1/${season}/${round}/drivers/${driverId}/laps.json?limit=80`)
     .then(r => r.json())
     .then(data => {
-      const driverLaps = data.MRData.RaceTable.Races[0].Laps
+      const rawDriverLaps = data.MRData.RaceTable.Races[0].Laps
+      const driverLaps = rawDriverLaps.map(lap => {
+        return {
+          lapNumber: lap.number,
+          lapInfo: lap.Timings[0]
+        }
+      })
       return dispatch({
         type: "LOAD_DRIVER_LAP_DATA",
         payload: driverLaps
