@@ -5,12 +5,7 @@ import RaceReplayRace from "./RaceReplayRace";
 import ReplayStart from './ReplayStart'
 
 class RaceReplayContainer extends Component {
-	constructor(props) {
-		super(props)
-
-		this.handleClick = this.handleClick.bind(this)
-	}
-
+	
 	componentDidMount() {
 		this.props.fetchLapData(this.props.season, this.props.selectedRound);
 	}
