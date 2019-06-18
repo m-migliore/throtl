@@ -33,7 +33,7 @@ class RaceReplayContainer extends Component {
 			return (
 				<div className="my-5">
 					<ReplayStart />
-					{replayLap > 0 && replayLap !== this.props.lapData.length - 1  ? <h2>{`Lap ${replayLap}`}</h2> : null}
+					{replayLap > 0 && replayLap !== this.props.lapData.length - 1 ? <h2>{`Lap ${replayLap}`}</h2> : null}
 					{replayLap === this.props.lapData.length - 1 ? <h2 className="animate-pulse">Finished</h2> : null}
 					<RaceReplayRace />
 				</div>

@@ -6,6 +6,7 @@ import PitDetail from './PitDetail'
 import {NATIONS} from '../../helpers/nations.js'
 import FlagImage from '../Image/FlagImage'
 import ReplayStart from '../RaceReplay/ReplayStart'
+import StartLine from '../LapAnimations/StartLine'
 import DriverLapAnimation from '../LapAnimations/DriverLapAnimation'
 
 class DetailedResult extends Component {

@@ -4,16 +4,16 @@ import { connect } from 'react-redux'
 class DriverLapAnimation extends Component {
 
   render() {
-    let animateTime
+    // let animateTime
   
-    if (this.props.replayLap === 0) {
-      animateTime = 0
-    } else {
-      const rawLapTime = this.props.driverLapData[this.props.replayLap - 1].lapInfo.time.split(":")
-      const baseSec = parseInt(rawLapTime[0]) * 1000
-      const remainSec = parseFloat(rawLapTime[0]).toFixed(2)* 100
-      animateTime = baseSec + remainSec + "ms"
-    }
+    // if (this.props.replayLap === 0) {
+    //   animateTime = 0
+    // } else {
+    //   const rawLapTime = this.props.driverLapData[this.props.replayLap - 1].lapInfo.time.split(":")
+    //   const baseSec = parseInt(rawLapTime[0]) * 1000
+    //   const remainSec = parseFloat(rawLapTime[0]).toFixed(2)* 100
+    //   animateTime = baseSec + remainSec + "ms"
+    // }
 
     return (
       <animateMotion 
@@ -31,7 +31,7 @@ class DriverLapAnimation extends Component {
 const mapStateToProps = state => {
   return {
     driverLapData: state.driverLapData,
-    replayLap: state.replayLap
+    replayLap: state.replayLap,
   }
 }
 

@@ -133,6 +133,8 @@ table tr > td:last-of-type, table tr > th:last-of-type {
   height: 90vh;
   margin: 5vh auto;
   overflow-y: scroll;
+  -webkit-box-shadow: 0 2px 8px 0 rgba(0, 0, 0, .3);
+  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, .3);
 }
 
 /********** WATCH RACE **********/
