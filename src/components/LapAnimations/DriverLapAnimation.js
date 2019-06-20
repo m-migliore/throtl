@@ -18,10 +18,10 @@ class DriverLapAnimation extends Component {
     return (
       <animateMotion 
         href="#circle"
-        dur="2s"
+        dur="1389ms"
         begin="0s"
         fill="freeze"
-        repeatCount={this.props.driverLapData.length}>
+        repeatCount="50">
         <mpath href="#catalunya" />
       </animateMotion>
     )
