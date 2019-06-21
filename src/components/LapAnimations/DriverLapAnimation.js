@@ -14,6 +14,7 @@ class DriverLapAnimation extends Component {
       }
 
       while (lapNumber <= this.props.driverLapData.length && lapNumber !== this.props.driverLapData.length - 1) {
+        let timer = 0
         const lapTime = this.props.driverLapData[lapNumber].lapInfo.time
         // const nextLapTime = this.props.driverLapData[lapNumber + 1].lapInfo.time
 
@@ -27,8 +28,15 @@ class DriverLapAnimation extends Component {
 
         // lapNumber++
         this.renderLapAnimation(animationTime, trackOutline)
+        while (timer < parseInt(animationTime.split("ms")[0]) - 10) {
+          timer++
+        }
 
-        setTimeout(nextLap, animationTime)
+        if(timer === parseInt(animationTime.split("ms")[0]) - 10) {
+          lapNumber++
+        }
+
+        // setTimeout(nextLap, animationTime)
 
         // function(lapNumber) {
         //   const lapTime = this.props.driverLapData[lapNumber].lapInfo.time
