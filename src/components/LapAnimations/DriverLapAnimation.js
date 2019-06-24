@@ -33,6 +33,10 @@ class DriverLapAnimation extends Component {
       //   }
       // }
 
+      
+    }
+
+    if (this.props.driverLapData.length > 0 && this.props.driverPitData.length > 0) {
       this.createAnimationQueue()
     }
   }
@@ -40,20 +44,51 @@ class DriverLapAnimation extends Component {
   createAnimationQueue() {
     if(this.props.driverLapData.length > 0 && this.props.driverLapData) {
       let animationBlocks = []
-
       let sliceStart = 0
-      this.props.driverPitData.forEach(pit => {
-        const block = this.props.driverLapData.slice(sliceStart, parseInt(pit.lap))
+
+      // this.props.driverPitData.forEach(pit => {
+      //   const block = this.props.driverLapData.slice(sliceStart, parseInt(pit.lap) - 1)
+      //   animationBlocks.push(this.createAnimationBlocks(block))
+      //   const pitTime = this.createPitTime(pit.duration)
+      //   animationBlocks.push({
+      //     aniType: "pit",
+      //     duration: "1ms",
+      //     repeatCount: "1",
+      //     pitTime: pitTime
+      //   })
+      //   sliceStart = parseInt(pit.lap) 
+      // })
+
+
+
+      let driverPits = [...this.props.driverPitData]
+
+      while (driverPits.length > 0) {
+        const pitStop = driverPits.shift()
+        if (sliceStart === 0) {
+          sliceStart -= 1
+        }
+        const block = this.props.driverLapData.slice(sliceStart + 1, parseInt(pitStop.lap))
         animationBlocks.push(this.createAnimationBlocks(block))
+        const pitTime = this.createPitTime(pitStop.duration)
         animationBlocks.push({
           aniType: "pit",
           duration: "1ms",
-          repeatCount: "1"
+          repeatCount: "1",
+          pitTime: pitTime
         })
-        sliceStart = parseInt(pit.lap) + 1
-      })
+        sliceStart = parseInt(pitStop.lap) 
+      }
+
+      if (sliceStart < this.props.driverLapData.length) {
+        const block = this.props.driverLapData.slice(sliceStart + 1, this.props.driverLapData.length + 1)
+        animationBlocks.push(this.createAnimationBlocks(block))
+      }
+
+    
 
       console.log(animationBlocks)
+      debugger
     }
   }
 
