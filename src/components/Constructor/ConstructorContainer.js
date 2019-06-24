@@ -10,10 +10,6 @@ class ConstructorContainer extends Component {
     window.scrollTo(0, 0);
   }
 
-  componentDidUpdate() {
-    console.log(this.props.constructorData, this.props.constructorSeasonData);
-  }
-
   render() {
     if (this.props.constructorData.name) {
       const constructor = this.props.constructorData

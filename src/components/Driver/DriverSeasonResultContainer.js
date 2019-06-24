@@ -4,10 +4,7 @@ import GrandPrixResult from '../GrandPrixResult/GrandPrixResult'
 import DetailedResult from '../DetailedResult/DetailedResult'
 
 class DriverSeasonResultContainer extends Component {
-  componentDidUpdate() {
-    console.log(this.props.driverSeasonData);
-  }
-
+  
   render() {
     if (this.props.driverSeasonData.results) {
       const results = this.props.driverSeasonData.results

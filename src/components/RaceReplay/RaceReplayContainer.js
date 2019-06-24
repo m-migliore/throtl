@@ -17,7 +17,6 @@ class RaceReplayContainer extends Component {
 
 		if (this.props.replayCountdown === 0 && this.props.replayLap === 0 && this.props.replayStart) {
 			this.lapInterval = setInterval(() => this.props.nextLap(this.props.replayLap + 1), 1000);
-			console.log("hit")
 		}
 	}
 
