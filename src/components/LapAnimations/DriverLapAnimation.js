@@ -18,29 +18,27 @@ class DriverLapAnimation extends Component {
       const baseSec = parseInt(lapTimeArr[0]) * 1000
       const remainSec = parseFloat(lapTimeArr[1]).toFixed(2) * 10
       animateTime = baseSec + remainSec + "ms"
-      outline.innerHTML = catalunya(animateTime)
-    }
 
-    
-
-    if (this.props.driverPitData.length > 0) {
-      const pitLaps = this.props.driverPitData.map(pit => parseInt(pit.lap))
-
-      if (pitLaps.includes(this.props.replayLap)) {
-        alert("pitstop lap " + this.props.replayLap)
+      if (this.props.driverPitData.length > 0) {
+        const pitLaps = this.props.driverPitData.map(pit => parseInt(pit.lap))
+  
+        if (pitLaps.includes(this.props.replayLap)) {
+          // // eslint-disable-next-line eqeqeq
+          // const pitStop  = this.props.driverPitData.find(pit => pit.lap == this.props.replayLap)
+          // const pitTime = parseFloat(pitStop.dur).toFixed(2).replace(".","") * .25
+          // outline.innerHTML = "<h3>Pit Stop</h3>" + catalunya(animateTime, pitTime)
+          outline.innerHTML = "<h3>Pit Stop</h3>" + catalunya(animateTime)
+        } else {
+          outline.innerHTML = catalunya(animateTime)
+        }
       }
     }
-
-  
   }
 
   render() {
   
     return (
-      <>
-        <h3></h3>
-        <div id="catalunya-outline"></div>
-      </>
+      <div id="catalunya-outline"></div>
     )
   }
 }

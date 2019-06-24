@@ -1,4 +1,6 @@
-const catalunya = (animationTime) => {
+// constants for each track, with a parameter for the animation time, and a delay to simulate pitstop
+
+const catalunya = (animationTime, delay="0ms") => {
   return `
     <svg width="600" height="300" viewBox="0 0 500 350">
       <path
@@ -55,7 +57,7 @@ const catalunya = (animationTime) => {
       <animateMotion
         href="#circle"
         dur=${animationTime}
-        begin="0s"
+        begin=${delay}
         fill="freeze"
         repeatCount="1">
         <mpath href="#catalunya" />
