@@ -20,12 +20,27 @@ class DriverLapAnimation extends Component {
       animateTime = baseSec + remainSec + "ms"
       outline.innerHTML = catalunya(animateTime)
     }
+
+    
+
+    if (this.props.driverPitData.length > 0) {
+      const pitLaps = this.props.driverPitData.map(pit => parseInt(pit.lap))
+
+      if (pitLaps.includes(this.props.replayLap)) {
+        alert("pitstop lap " + this.props.replayLap)
+      }
+    }
+
+  
   }
 
   render() {
   
     return (
-      <div id="catalunya-outline"></div>
+      <>
+        <h3></h3>
+        <div id="catalunya-outline"></div>
+      </>
     )
   }
 }
@@ -35,7 +50,8 @@ const mapStateToProps = state => {
     replayStart: state.replayStart,
     replayCountdown: state.replayCountdown,
     replayLap: state.replayLap,
-    driverLapData: state.driverLapData
+    driverLapData: state.driverLapData,
+    driverPitData: state.driverPitData
   }
 }
 
