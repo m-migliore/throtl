@@ -25,7 +25,9 @@ const defaultState = {
 	driverLapData: [],
 	driverLapLoading: false,
 	driverPitData: [],
-	driverPitLoading: false
+	driverPitLoading: false,
+	driverLapAnimations: [],
+	driverLapAnimationCount: 0
 };
 
 export default function reducer(state = defaultState, action) {
@@ -212,6 +214,16 @@ export default function reducer(state = defaultState, action) {
 				...state,
 				driverPitData: action.payload,
 				driverPitLoading: false
+			}
+		case "LOAD_DRIVER_LAP_ANIMATIONS":
+			return {
+				...state,
+				driverLapAnimations: action.payload
+			}
+		case "NEXT_DRIVER_LAP_ANIMATION":
+			return {
+				...state,
+				driverLapAnimationCount: action.payload
 			}
 		default:
 			return defaultState;

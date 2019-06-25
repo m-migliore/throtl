@@ -3,13 +3,19 @@ import { connect } from 'react-redux'
 import{ catalunya } from '../../helpers/tracks'
 
 class DriverLapAnimation extends Component {
+  state = {
+    started: false,
+    animations: [],
+    animationCount: 0
+  }
+
   componentDidMount() {
     const outline = document.getElementById("catalunya-outline")
     outline.innerHTML = catalunya("1ms")
   }
 
   componentDidUpdate() {
-    if (this.props.replayCountdown === 0 && this.props.replayLap < this.props.driverLapData.length && this.props.replayStart) {
+    // if (this.props.replayCountdown === 0 && this.props.replayLap < this.props.driverLapData.length && this.props.replayStart) {
       // const outline = document.getElementById("catalunya-outline")
       // outline.innerHTML = ""
       // const lapTime = this.props.driverLapData[this.props.replayLap].lapInfo.time
@@ -32,35 +38,51 @@ class DriverLapAnimation extends Component {
       //     outline.innerHTML = catalunya(animateTime)
       //   }
       // }
+  // }
 
+    if (this.props.driverLapData.length > 0 && this.props.driverPitData.length > 0 && this.props.driverLapAnimations.length === 0) {
+      this.createAnimations()
+    }
+
+
+    if (this.props.replayCountdown === 0 && !this.state.started) {
+      if (this.props.driverLapData.length > 0 && this.props.driverPitData.length > 0 && this.props.driverLapAnimations.length > 0) {
+        this.setState({
+          started: true
+        })
+        const outline = document.getElementById("catalunya-outline")
+        debugger
+        // let animationNum = 0
+  
+        // while (animationNum < animations.length) {
+        //   const animation = animations[animationNum]
+  
+        //   if (animation.aniType === "laps") {
+        //     outline.innerHTML = catalunya(animation.duration, animation.repeatCount)
+        //     animationNum++
+        //   } else {
+        //     outline.innerHTML = catalunya(animation.duration, animation.repeatCount, true)
+        //     setTimeout(() => animationNum++, animation.pitTime)
+        //   }
+          
+        // }
+
+
+      
+      }
       
     }
 
-    if (this.props.driverLapData.length > 0 && this.props.driverPitData.length > 0) {
-      this.createAnimationQueue()
-    }
+
+    
+
+    
   }
 
-  createAnimationQueue() {
+  createAnimations() {
     if(this.props.driverLapData.length > 0 && this.props.driverLapData) {
       let animationBlocks = []
       let sliceStart = 0
-
-      // this.props.driverPitData.forEach(pit => {
-      //   const block = this.props.driverLapData.slice(sliceStart, parseInt(pit.lap) - 1)
-      //   animationBlocks.push(this.createAnimationBlocks(block))
-      //   const pitTime = this.createPitTime(pit.duration)
-      //   animationBlocks.push({
-      //     aniType: "pit",
-      //     duration: "1ms",
-      //     repeatCount: "1",
-      //     pitTime: pitTime
-      //   })
-      //   sliceStart = parseInt(pit.lap) 
-      // })
-
-
-
       let driverPits = [...this.props.driverPitData]
 
       while (driverPits.length > 0) {
@@ -68,6 +90,8 @@ class DriverLapAnimation extends Component {
         if (sliceStart === 0) {
           sliceStart -= 1
         }
+        
+        // create a block of laps that inbetween pits
         const block = this.props.driverLapData.slice(sliceStart + 1, parseInt(pitStop.lap))
         animationBlocks.push(this.createAnimationBlocks(block))
         const pitTime = this.createPitTime(pitStop.duration)
@@ -85,16 +109,14 @@ class DriverLapAnimation extends Component {
         animationBlocks.push(this.createAnimationBlocks(block))
       }
 
-    
-
-      console.log(animationBlocks)
-      debugger
+      this.props.loadDriverLapAnimations(animationBlocks)
     }
   }
 
   createAnimationBlocks(block) {
     const lapTimes = block.map(lap => this.calcAnimationTime(lap.lapInfo.time))
     const reducer = (total, lapTime) => total + lapTime
+    // get average lap time to use as animation time
     const averageLapTime = Math.round(lapTimes.reduce(reducer) / lapTimes.length) + "ms"
 
     return {
@@ -104,6 +126,7 @@ class DriverLapAnimation extends Component {
     }
   }
 
+  // use to easily calculate avergae lap time
   calcAnimationTime(stringTime) {
     const lapTimeArr = stringTime.split(":")
     const baseSec = parseInt(lapTimeArr[0]) * 1000
@@ -111,13 +134,16 @@ class DriverLapAnimation extends Component {
     return baseSec + remainSec
   }
   
+  // use to create a 'pause' time to indicate a pit stop in the animation 
   createPitTime(stringTime) {
     return parseFloat(stringTime).toFixed(2).replace(".","") * .25 + "ms"
   }
 
 
   render() {
-  
+    if (this.props.replayCountdown === 0) {
+      this.createAnimations()
+    }
     return (
       <div id="catalunya-outline"></div>
     )
@@ -130,8 +156,17 @@ const mapStateToProps = state => {
     replayCountdown: state.replayCountdown,
     replayLap: state.replayLap,
     driverLapData: state.driverLapData,
-    driverPitData: state.driverPitData
+    driverPitData: state.driverPitData,
+    driverLapAnimations: state.driverLapAnimations,
+    driverLapAnimationCount: state.driverLapAnimationCount
   }
 }
 
-export default connect(mapStateToProps)(DriverLapAnimation)
+const mapDispatchToProps = dispatch => {
+  return {
+    loadDriverLapAnimations: animations => dispatch({type: "LOAD_DRIVER_LAP_ANIMATIONS", payload: animations}),
+    nextDriverAnimation: animationCount => dispatch({type: "NEXT_DRIVER_ANIMATION", payload: animationCount})
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(DriverLapAnimation)
