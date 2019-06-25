@@ -15,6 +15,7 @@ class DriverLapAnimation extends Component {
   }
 
   componentDidUpdate(prevProps) {
+    console.log(this.props.driverLapAnimations)
     if (this.props.driverLapData.length > 0 && this.props.driverPitData.length > 0 && this.props.driverLapAnimations.length === 0) {
       this.createAnimations()
     }
@@ -55,7 +56,9 @@ class DriverLapAnimation extends Component {
         
         // create a block of laps that inbetween pits
         const block = this.props.driverLapData.slice(sliceStart + 1, parseInt(pitStop.lap))
-        animationBlocks.push(this.createAnimationBlocks(block))
+        // animationBlocks.push(this.createAnimationBlocks(block))
+        const lapAnimations = this.createAnimationBlocks(block)
+        lapAnimations.forEach(lap => animationBlocks.push(lap))
         const pitTime = this.createPitTime(pitStop.duration)
         animationBlocks.push({
           aniType: "pit",
@@ -68,7 +71,9 @@ class DriverLapAnimation extends Component {
 
       if (sliceStart < this.props.driverLapData.length) {
         const block = this.props.driverLapData.slice(sliceStart + 1, this.props.driverLapData.length + 1)
-        animationBlocks.push(this.createAnimationBlocks(block))
+        // animationBlocks.push(this.createAnimationBlocks(block))
+        const lapAnimations = this.createAnimationBlocks(block)
+        lapAnimations.forEach(lap => animationBlocks.push(lap))
       }
 
       this.props.loadDriverLapAnimations(animationBlocks)
@@ -76,16 +81,26 @@ class DriverLapAnimation extends Component {
   }
 
   createAnimationBlocks(block) {
-    const lapTimes = block.map(lap => this.calcAnimationTime(lap.lapInfo.time))
-    const reducer = (total, lapTime) => total + lapTime
+    // const lapTimes = block.map(lap => this.calcAnimationTime(lap.lapInfo.time))
+    // const reducer = (total, lapTime) => total + lapTime
     // get average lap time to use as animation time
-    const averageLapTime = Math.round(lapTimes.reduce(reducer) / lapTimes.length) + "ms"
+    // const averageLapTime = Math.round(lapTimes.reduce(reducer) / lapTimes.length) + "ms"
 
-    return {
-      aniType: "laps",
-      duration: averageLapTime,
-      repeatCount: block.length
-    }
+    // return {
+    //   aniType: "laps",
+    //   duration: averageLapTime,
+    //   repeatCount: block.length
+    // }
+
+
+    return block.map(lap => {
+      const lapTime = this.calcAnimationTime(lap.lapInfo.time)
+      return {
+        aniType: "laps",
+        duration: lapTime,
+        repeatCount: "1"
+      }
+    })
   }
 
   // use to easily calculate avergae lap time
