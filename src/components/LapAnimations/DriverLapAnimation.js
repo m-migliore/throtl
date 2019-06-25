@@ -45,31 +45,33 @@ class DriverLapAnimation extends Component {
     }
 
 
-    if (this.props.replayCountdown === 0 && !this.state.started) {
-      if (this.props.driverLapData.length > 0 && this.props.driverPitData.length > 0 && this.props.driverLapAnimations.length > 0) {
-        this.setState({
-          started: true
-        })
-        const outline = document.getElementById("catalunya-outline")
-        debugger
-        // let animationNum = 0
-  
-        // while (animationNum < animations.length) {
-        //   const animation = animations[animationNum]
-  
-        //   if (animation.aniType === "laps") {
-        //     outline.innerHTML = catalunya(animation.duration, animation.repeatCount)
-        //     animationNum++
-        //   } else {
-        //     outline.innerHTML = catalunya(animation.duration, animation.repeatCount, true)
-        //     setTimeout(() => animationNum++, animation.pitTime)
-        //   }
-          
-        // }
-
+    if (this.props.replayCountdown === 0 && this.props.driverLapAnimationCount !== 1) {
+      // if (this.props.driverLapData.length > 0 && this.props.driverPitData.length > 0 && this.props.driverLapAnimations.length > 0) {
+        
 
       
-      }
+      // }
+   
+      const outline = document.getElementById("catalunya-outline")
+      const animations = this.props.driverLapAnimations
+      const count = this.props.driverLapAnimationCount
+      outline.innerHTML = catalunya(animations[count].duration, animations[count].repeatCount)
+      this.props.nextDriverAnimation(count + 1)
+      
+      // while (this.props.driverLapAnimationCount < this.props.driverLapAnimations.length) {
+      //   const animations = this.props.driverLapAnimations
+      //   const count = this.props.driverLapAnimationCount
+      
+      //   if (animations[count].aniType === "laps") {
+      //     outline.innerHTML = catalunya(animations[count].duration, animations[count].repeatCount)
+      //     this.props.nextDriverAnimation(count + 1)
+      //   } else {
+      //     // add true argument to indicate pit stop
+      //     outline.innerHTML = catalunya(animations[count].duration, animations[count].repeatCount, true)
+      //   }
+         
+      // }
+      
       
     }
 
@@ -141,9 +143,6 @@ class DriverLapAnimation extends Component {
 
 
   render() {
-    if (this.props.replayCountdown === 0) {
-      this.createAnimations()
-    }
     return (
       <div id="catalunya-outline"></div>
     )
@@ -165,7 +164,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     loadDriverLapAnimations: animations => dispatch({type: "LOAD_DRIVER_LAP_ANIMATIONS", payload: animations}),
-    nextDriverAnimation: animationCount => dispatch({type: "NEXT_DRIVER_ANIMATION", payload: animationCount})
+    nextDriverAnimation: animationCount => dispatch({type: "NEXT_DRIVER_LAP_ANIMATION", payload: animationCount})
   }
 }
 
