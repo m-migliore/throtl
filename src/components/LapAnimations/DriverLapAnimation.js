@@ -14,70 +14,30 @@ class DriverLapAnimation extends Component {
     outline.innerHTML = catalunya("1ms")
   }
 
-  componentDidUpdate() {
-    // if (this.props.replayCountdown === 0 && this.props.replayLap < this.props.driverLapData.length && this.props.replayStart) {
-      // const outline = document.getElementById("catalunya-outline")
-      // outline.innerHTML = ""
-      // const lapTime = this.props.driverLapData[this.props.replayLap].lapInfo.time
-      // let animateTime
-      // const lapTimeArr = lapTime.split(":")
-      // const baseSec = parseInt(lapTimeArr[0]) * 1000
-      // const remainSec = parseFloat(lapTimeArr[1]).toFixed(2) * 10
-      // animateTime = baseSec + remainSec + "ms"
-
-      // if (this.props.driverPitData.length > 0) {
-      //   const pitLaps = this.props.driverPitData.map(pit => parseInt(pit.lap))
-  
-      //   if (pitLaps.includes(this.props.replayLap)) {
-      //     // // eslint-disable-next-line eqeqeq
-      //     // const pitStop  = this.props.driverPitData.find(pit => pit.lap == this.props.replayLap)
-      //     // const pitTime = parseFloat(pitStop.dur).toFixed(2).replace(".","") * .25
-      //     // outline.innerHTML = "<h3>Pit Stop</h3>" + catalunya(animateTime, pitTime)
-      //     outline.innerHTML = "<h3>Pit Stop</h3>" + catalunya(animateTime)
-      //   } else {
-      //     outline.innerHTML = catalunya(animateTime)
-      //   }
-      // }
-  // }
-
+  componentDidUpdate(prevProps) {
     if (this.props.driverLapData.length > 0 && this.props.driverPitData.length > 0 && this.props.driverLapAnimations.length === 0) {
       this.createAnimations()
     }
 
-
-    if (this.props.replayCountdown === 0 && this.props.driverLapAnimationCount !== 1) {
-      // if (this.props.driverLapData.length > 0 && this.props.driverPitData.length > 0 && this.props.driverLapAnimations.length > 0) {
-        
-
-      
-      // }
-   
+    if (this.props.replayCountdown === 0 && this.props.driverLapAnimationCount < this.props.driverLapAnimations.length) {
       const outline = document.getElementById("catalunya-outline")
       const animations = this.props.driverLapAnimations
       const count = this.props.driverLapAnimationCount
-      outline.innerHTML = catalunya(animations[count].duration, animations[count].repeatCount)
-      this.props.nextDriverAnimation(count + 1)
       
-      // while (this.props.driverLapAnimationCount < this.props.driverLapAnimations.length) {
-      //   const animations = this.props.driverLapAnimations
-      //   const count = this.props.driverLapAnimationCount
-      
-      //   if (animations[count].aniType === "laps") {
-      //     outline.innerHTML = catalunya(animations[count].duration, animations[count].repeatCount)
-      //     this.props.nextDriverAnimation(count + 1)
-      //   } else {
-      //     // add true argument to indicate pit stop
-      //     outline.innerHTML = catalunya(animations[count].duration, animations[count].repeatCount, true)
-      //   }
-         
-      // }
-      
-      
+      if (animations[count].aniType === "laps") {
+        outline.innerHTML = catalunya(animations[count].duration, animations[count].repeatCount)
+
+        const track = document.querySelector('animateMotion');
+        track.addEventListener("endEvent", () => {
+          this.props.nextDriverAnimation(count + 1)
+        })
+
+      } else {
+        // add true argument to indicate pit stop
+        outline.innerHTML = catalunya(animations[count].duration, animations[count].repeatCount, true)
+        setTimeout(() => this.props.nextDriverAnimation(count + 1), animations[count].pitTime)
+      }      
     }
-
-
-    
-
     
   }
 
@@ -153,7 +113,7 @@ const mapStateToProps = state => {
   return {
     replayStart: state.replayStart,
     replayCountdown: state.replayCountdown,
-    replayLap: state.replayLap,
+    // replayLap: state.replayLap,
     driverLapData: state.driverLapData,
     driverPitData: state.driverPitData,
     driverLapAnimations: state.driverLapAnimations,

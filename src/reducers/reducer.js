@@ -221,6 +221,7 @@ export default function reducer(state = defaultState, action) {
 				driverLapAnimations: action.payload
 			}
 		case "NEXT_DRIVER_LAP_ANIMATION":
+			console.log("next lap animaiton hit")
 			return {
 				...state,
 				driverLapAnimationCount: action.payload
