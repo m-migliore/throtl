@@ -20,12 +20,12 @@ class DriverLapAnimation extends Component {
       this.createAnimations()
     }
 
-    if (this.props.replayCountdown === 0 && this.props.driverLapAnimationCount < this.props.driverLapAnimations.length) {
+    if (this.props.replayCountdown === 0 && this.props.driverLapAnimationCount < this.props.driverLapData.length) {
       const outline = document.getElementById("catalunya-outline")
       const animations = this.props.driverLapAnimations
       const count = this.props.driverLapAnimationCount
       
-      if (animations[count].aniType === "laps") {
+      if (animations[count].aniType === "lap") {
         outline.innerHTML = catalunya(animations[count].duration, animations[count].repeatCount)
 
         const track = document.querySelector('animateMotion');
@@ -96,7 +96,7 @@ class DriverLapAnimation extends Component {
     return block.map(lap => {
       const lapTime = this.calcAnimationTime(lap.lapInfo.time)
       return {
-        aniType: "laps",
+        aniType: "lap",
         duration: lapTime,
         repeatCount: "1"
       }
@@ -107,8 +107,8 @@ class DriverLapAnimation extends Component {
   calcAnimationTime(stringTime) {
     const lapTimeArr = stringTime.split(":")
     const baseSec = parseInt(lapTimeArr[0]) * 1000
-    const remainSec = parseFloat(lapTimeArr[1]).toFixed(2) * 10
-    return baseSec + remainSec
+    const remainSec = parseFloat(lapTimeArr[1]) * 10
+    return Math.round(baseSec + remainSec) + "ms"
   }
   
   // use to create a 'pause' time to indicate a pit stop in the animation 
