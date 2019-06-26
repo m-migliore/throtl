@@ -11,7 +11,11 @@ class DriverLapAnimation extends Component {
 
   componentDidMount() {
     const outline = document.getElementById("catalunya-outline")
-    outline.innerHTML = catalunya("1ms")
+    outline.innerHTML = catalunya({
+      lapNumber: 0,
+      animationDuration: "1ms",
+      pitTime: "0ms"
+    })
   }
 
   componentDidUpdate(prevProps) {
@@ -26,11 +30,12 @@ class DriverLapAnimation extends Component {
       const count = this.props.driverLapAnimationCount
       console.log(this.props.driverLapData[count].lapNumber)
 
-      if (animations[count].pitStop) {
-        outline.innerHTML = catalunya(animations[count].duration, animations[count].pitTime)
-      } else {
-        outline.innerHTML = catalunya(animations[count].duration)
-      }
+      // if (animations[count].pitStop) {
+      //   outline.innerHTML = catalunya(animations[count].duration, animations[count].pitTime)
+      // } else {
+      //   outline.innerHTML = catalunya(animations[count].duration)
+      // }
+      outline.innerHTML = catalunya(animations[count])
 
       const track = document.querySelector('animateMotion');
       track.addEventListener("endEvent", this.props.nextDriverAnimation)
@@ -42,26 +47,34 @@ class DriverLapAnimation extends Component {
 
     if (pitData.length > 0) {
       lapData.forEach(lap => {
-        const lapTime = this.calcAnimationTime(lap.lapInfo.time)
+        let animationObj = this.createAnimationObj(lap)
+
         const pitStop = pitData.find(pit => pit.lap === lap.lapNumber)
         if (pitStop) {
           const pitTime = this.createPitTime(pitStop.duration)
           // if there was a pit on that lap, add pitTime for delayed animation
-          lapAnimations.push({
-            duration: lapTime,
-            pitStop: true,
+          animationObj = {
+            ...animationObj,
             pitTime: pitTime
-          })
-        } else {
-          lapAnimations.push({
-            duration: lapTime,
-            pitStop: false
-          })
+          }
         }
+
+        lapAnimations.push(animationObj)
       })
     }
 
     this.props.loadDriverLapAnimations(lapAnimations)
+  }
+
+  createAnimationObj(lap) {
+    const animationTime = this.calcAnimationTime(lap.lapInfo.time)
+    return {
+      lapNumber: lap.lapNumber,
+      position: lap.lapInfo.position,
+      lapTime: lap.lapInfo.time,
+      animationDuration: animationTime,
+      pitTime: "0ms"
+    }
   }
 
   // use to easily calculate avergae lap time
