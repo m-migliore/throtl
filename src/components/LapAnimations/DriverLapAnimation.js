@@ -16,7 +16,8 @@ class DriverLapAnimation extends Component {
 
   componentDidUpdate(prevProps) {
     if (this.props.driverLapData.length > 0 && this.props.driverPitData.length > 0 && this.props.driverLapAnimations.length === 0) {
-      this.createAnimations()
+      // this.createAnimations()
+      this.createLapAnimations(this.props.driverLapData, this.props.driverPitData)
     }
 
     if (this.props.replayCountdown === 0 && this.props.driverLapAnimationCount < this.props.driverLapData.length) {
@@ -25,20 +26,31 @@ class DriverLapAnimation extends Component {
       const count = this.props.driverLapAnimationCount
       console.log(count)
       
-      if (animations[count].aniType === "lap") {
-        outline.innerHTML = catalunya(animations[count].duration, animations[count].repeatCount)
-        const track = document.querySelector('animateMotion');
-        track.addEventListener("endEvent", this.props.nextDriverAnimation)
+      // if (animations[count].aniType === "lap") {
+      //   outline.innerHTML = catalunya(animations[count].duration, animations[count].repeatCount)
+      //   const track = document.querySelector('animateMotion');
+      //   track.addEventListener("endEvent", this.props.nextDriverAnimation)
 
+      // } else {
+      //   // remove event listener to prevent immediate next lap
+      //   const track = document.querySelector('animateMotion');
+      //   track.removeEventListener("endEvent", this.props.nextDriverAnimation, true)
+      //   // add true argument to indicate pit stop
+      //   outline.innerHTML = catalunya(animations[count].duration, animations[count].repeatCount, true)
+      //   setTimeout(this.props.nextDriverAnimation, animations[count].pitTime)
+      // } 
+
+      if (animations[count].pitStop) {
+        outline.innerHTML = catalunya(animations[count].duration, animations[count].pitTime)
       } else {
-        // remove event listener to prevent immediate next lap
-        const track = document.querySelector('animateMotion');
-        track.removeEventListener("endEvent", this.props.nextDriverAnimation, true)
-        // add true argument to indicate pit stop
-        outline.innerHTML = catalunya(animations[count].duration, animations[count].repeatCount, true)
-        setTimeout(this.props.nextDriverAnimation, animations[count].pitTime)
-      }      
+        outline.innerHTML = catalunya(animations[count].duration)
+      }
+
+      const track = document.querySelector('animateMotion');
+      track.addEventListener("endEvent", this.props.nextDriverAnimation)
+  
     }
+    
     
   }
 
@@ -101,6 +113,33 @@ class DriverLapAnimation extends Component {
         repeatCount: "1"
       }
     })
+  }
+
+  createLapAnimations(lapData, pitData) {
+    let lapAnimations = []
+
+    if (pitData.length > 0) {
+      const pitLapNumbers = pitData.map(pit => pit.lap)
+      lapData.forEach(lap => {
+        const lapTime = this.calcAnimationTime(lap.lapInfo.time)
+        if (pitLapNumbers.includes(lap.lapNumber)) {
+          const pitStop = pitData.find(pit => pit.lap === lap.lapNumber)
+          const pitTime = this.createPitTime(pitStop.duration)
+          lapAnimations.push({
+            duration: lapTime,
+            pitStop: true,
+            pitTime: pitTime
+          })
+        } else {
+          lapAnimations.push({
+            duration: lapTime,
+            pitStop: false
+          })
+        }
+      })
+    }
+
+    this.props.loadDriverLapAnimations(lapAnimations)
   }
 
   // use to easily calculate avergae lap time
