@@ -24,21 +24,7 @@ class DriverLapAnimation extends Component {
       const outline = document.getElementById("catalunya-outline")
       const animations = this.props.driverLapAnimations
       const count = this.props.driverLapAnimationCount
-      console.log(count)
-      
-      // if (animations[count].aniType === "lap") {
-      //   outline.innerHTML = catalunya(animations[count].duration, animations[count].repeatCount)
-      //   const track = document.querySelector('animateMotion');
-      //   track.addEventListener("endEvent", this.props.nextDriverAnimation)
-
-      // } else {
-      //   // remove event listener to prevent immediate next lap
-      //   const track = document.querySelector('animateMotion');
-      //   track.removeEventListener("endEvent", this.props.nextDriverAnimation, true)
-      //   // add true argument to indicate pit stop
-      //   outline.innerHTML = catalunya(animations[count].duration, animations[count].repeatCount, true)
-      //   setTimeout(this.props.nextDriverAnimation, animations[count].pitTime)
-      // } 
+      console.log(this.props.driverLapData[count].lapNumber)
 
       if (animations[count].pitStop) {
         outline.innerHTML = catalunya(animations[count].duration, animations[count].pitTime)
@@ -48,83 +34,19 @@ class DriverLapAnimation extends Component {
 
       const track = document.querySelector('animateMotion');
       track.addEventListener("endEvent", this.props.nextDriverAnimation)
-  
     }
-    
-    
-  }
-
-  createAnimations() {
-    if(this.props.driverLapData.length > 0 && this.props.driverLapData) {
-      let animationBlocks = []
-      let sliceStart = 0
-      let driverPits = [...this.props.driverPitData]
-
-      while (driverPits.length > 0) {
-        const pitStop = driverPits.shift()
-        if (sliceStart === 0) {
-          sliceStart -= 1
-        }
-        
-        // create a block of laps that inbetween pits
-        const block = this.props.driverLapData.slice(sliceStart + 1, parseInt(pitStop.lap))
-        // animationBlocks.push(this.createAnimationBlocks(block))
-        const lapAnimations = this.createAnimationBlocks(block)
-        lapAnimations.forEach(lap => animationBlocks.push(lap))
-        const pitTime = this.createPitTime(pitStop.duration)
-        animationBlocks.push({
-          aniType: "pit",
-          duration: "1ms",
-          repeatCount: "1",
-          pitTime: pitTime
-        })
-        sliceStart = parseInt(pitStop.lap) 
-      }
-
-      if (sliceStart < this.props.driverLapData.length) {
-        const block = this.props.driverLapData.slice(sliceStart + 1, this.props.driverLapData.length + 1)
-        // animationBlocks.push(this.createAnimationBlocks(block))
-        const lapAnimations = this.createAnimationBlocks(block)
-        lapAnimations.forEach(lap => animationBlocks.push(lap))
-      }
-
-      this.props.loadDriverLapAnimations(animationBlocks)
-    }
-  }
-
-  createAnimationBlocks(block) {
-    // const lapTimes = block.map(lap => this.calcAnimationTime(lap.lapInfo.time))
-    // const reducer = (total, lapTime) => total + lapTime
-    // get average lap time to use as animation time
-    // const averageLapTime = Math.round(lapTimes.reduce(reducer) / lapTimes.length) + "ms"
-
-    // return {
-    //   aniType: "laps",
-    //   duration: averageLapTime,
-    //   repeatCount: block.length
-    // }
-
-
-    return block.map(lap => {
-      const lapTime = this.calcAnimationTime(lap.lapInfo.time)
-      return {
-        aniType: "lap",
-        duration: lapTime,
-        repeatCount: "1"
-      }
-    })
   }
 
   createLapAnimations(lapData, pitData) {
     let lapAnimations = []
 
     if (pitData.length > 0) {
-      const pitLapNumbers = pitData.map(pit => pit.lap)
       lapData.forEach(lap => {
         const lapTime = this.calcAnimationTime(lap.lapInfo.time)
-        if (pitLapNumbers.includes(lap.lapNumber)) {
-          const pitStop = pitData.find(pit => pit.lap === lap.lapNumber)
+        const pitStop = pitData.find(pit => pit.lap === lap.lapNumber)
+        if (pitStop) {
           const pitTime = this.createPitTime(pitStop.duration)
+          // if there was a pit on that lap, add pitTime for delayed animation
           lapAnimations.push({
             duration: lapTime,
             pitStop: true,
