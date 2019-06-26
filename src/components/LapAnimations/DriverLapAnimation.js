@@ -18,9 +18,8 @@ class DriverLapAnimation extends Component {
     })
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate() {
     if (this.props.driverLapData.length > 0 && this.props.driverPitData.length > 0 && this.props.driverLapAnimations.length === 0) {
-      // this.createAnimations()
       this.createLapAnimations(this.props.driverLapData, this.props.driverPitData)
     }
 
@@ -28,17 +27,19 @@ class DriverLapAnimation extends Component {
       const outline = document.getElementById("catalunya-outline")
       const animations = this.props.driverLapAnimations
       const count = this.props.driverLapAnimationCount
-      console.log(this.props.driverLapData[count].lapNumber)
 
-      // if (animations[count].pitStop) {
-      //   outline.innerHTML = catalunya(animations[count].duration, animations[count].pitTime)
-      // } else {
-      //   outline.innerHTML = catalunya(animations[count].duration)
-      // }
       outline.innerHTML = catalunya(animations[count])
-
       const track = document.querySelector('animateMotion');
       track.addEventListener("endEvent", this.props.nextDriverAnimation)
+    }
+
+    if (this.props.replayCountdown === 0 && this.props.driverLapAnimationCount === this.props.driverLapData.length) {
+      const outline = document.getElementById("catalunya-outline")
+      outline.innerHTML = catalunya({
+        lapNumber: "Finished",
+        animationDuration: "1ms",
+        pitTime: "0ms"
+      })
     }
   }
 
@@ -102,7 +103,6 @@ const mapStateToProps = state => {
   return {
     replayStart: state.replayStart,
     replayCountdown: state.replayCountdown,
-    // replayLap: state.replayLap,
     driverLapData: state.driverLapData,
     driverPitData: state.driverPitData,
     driverLapAnimations: state.driverLapAnimations,

@@ -11,6 +11,8 @@ const catalunya = (animationObj) => {
       <h4>Position: ${animationObj.position}</h4>
       <h4>Time: ${animationObj.lapTime}</h4>
     `
+  } else if (animationObj.lapNumber === "Finished") {
+    lapTitle = "<h3>Finished</h3>"
   } else {
     lapTitle = `
       <h3>Pit Stop</h3>
