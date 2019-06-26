@@ -15,7 +15,6 @@ class DriverLapAnimation extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    console.log(this.props.driverLapAnimations)
     if (this.props.driverLapData.length > 0 && this.props.driverPitData.length > 0 && this.props.driverLapAnimations.length === 0) {
       this.createAnimations()
     }
@@ -24,19 +23,20 @@ class DriverLapAnimation extends Component {
       const outline = document.getElementById("catalunya-outline")
       const animations = this.props.driverLapAnimations
       const count = this.props.driverLapAnimationCount
+      console.log(count)
       
       if (animations[count].aniType === "lap") {
         outline.innerHTML = catalunya(animations[count].duration, animations[count].repeatCount)
-
         const track = document.querySelector('animateMotion');
-        track.addEventListener("endEvent", () => {
-          this.props.nextDriverAnimation(count + 1)
-        })
+        track.addEventListener("endEvent", this.props.nextDriverAnimation)
 
       } else {
+        // remove event listener to prevent immediate next lap
+        const track = document.querySelector('animateMotion');
+        track.removeEventListener("endEvent", this.props.nextDriverAnimation, true)
         // add true argument to indicate pit stop
         outline.innerHTML = catalunya(animations[count].duration, animations[count].repeatCount, true)
-        setTimeout(() => this.props.nextDriverAnimation(count + 1), animations[count].pitTime)
+        setTimeout(this.props.nextDriverAnimation, animations[count].pitTime)
       }      
     }
     
@@ -113,7 +113,7 @@ class DriverLapAnimation extends Component {
   
   // use to create a 'pause' time to indicate a pit stop in the animation 
   createPitTime(stringTime) {
-    return parseFloat(stringTime).toFixed(2).replace(".","") * .25 + "ms"
+    return parseFloat(stringTime).toFixed(2).replace(".","") + "ms"
   }
 
 
@@ -139,7 +139,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     loadDriverLapAnimations: animations => dispatch({type: "LOAD_DRIVER_LAP_ANIMATIONS", payload: animations}),
-    nextDriverAnimation: animationCount => dispatch({type: "NEXT_DRIVER_LAP_ANIMATION", payload: animationCount})
+    nextDriverAnimation: () => dispatch({type: "NEXT_DRIVER_LAP_ANIMATION"})
   }
 }
 
