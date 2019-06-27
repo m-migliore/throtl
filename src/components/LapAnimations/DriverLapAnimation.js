@@ -33,6 +33,8 @@ class DriverLapAnimation extends Component {
 
     if (this.props.replayCountdown === 0 && this.props.driverLapAnimationCount === this.props.driverLapData.length) {
       const outline = document.getElementById("catalunya-outline")
+      const track = document.querySelector('animateMotion');
+      track.removeEventListener("endEvent", this.props.nextDriverAnimation, true)
       outline.innerHTML = this.state.lapRender({
         lapNumber: "Finished",
         animationDuration: "1ms",

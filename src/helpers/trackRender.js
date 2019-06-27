@@ -5,17 +5,18 @@ const trackRender = trackName => {
   return animationObj => {
     let lapTitle
     let trackPath
+
   
     if (animationObj.lapNumber === 0) {
       lapTitle = ""
+    } else if (animationObj.lapNumber === "Finished") {
+      lapTitle = "<h3>Finished</h3>"
     } else if (animationObj.pitTime === "0ms") {
       lapTitle = `
         <h3>Lap ${animationObj.lapNumber}</h3>
         <h4>Position: ${animationObj.position}</h4>
         <h4>Time: ${animationObj.lapTime}</h4>
       `
-    } else if (animationObj.lapNumber === "Finished") {
-      lapTitle = "<h3>Finished</h3>"
     } else {
       lapTitle = `
         <h3>Pit Stop</h3>
