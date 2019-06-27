@@ -16,6 +16,10 @@ class SeasonContainer extends Component {
     }
   }
 
+  componentDidUpdate() {
+    console.log(this.props.seasonData)
+  }
+
   handleChange = e => {
     this.setState({
       season: e.target.value
