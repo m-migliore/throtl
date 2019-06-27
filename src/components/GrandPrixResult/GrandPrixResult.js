@@ -44,7 +44,8 @@ class GrandPrixResult extends Component {
                   key={resultRow.position} 
                   resultData={{
                     ...resultRow,
-                    round: parseInt(result.round)
+                    round: parseInt(result.round),
+                    circuitId: result.Circuit.circuitId
                   }}
                 />)}
             </tbody>
