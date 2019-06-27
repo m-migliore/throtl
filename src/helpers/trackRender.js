@@ -5,7 +5,6 @@ const trackRender = trackName => {
   return animationObj => {
     let lapTitle
     let trackPath
-    let trackPathName = "catalunya"
   
     if (animationObj.lapNumber === 0) {
       lapTitle = ""
