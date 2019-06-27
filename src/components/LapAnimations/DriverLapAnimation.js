@@ -4,7 +4,7 @@ import{ trackRender } from '../../helpers/tracks'
 
 class DriverLapAnimation extends Component {
   state = {
-    lapRender: trackRender("catalunya")
+    lapRender: trackRender(this.props.detailedResultData.circuitId)
   }
 
   componentDidMount() {
@@ -99,6 +99,7 @@ class DriverLapAnimation extends Component {
 
 const mapStateToProps = state => {
   return {
+    detailedResultData: state.detailedResultData,
     replayStart: state.replayStart,
     replayCountdown: state.replayCountdown,
     driverLapData: state.driverLapData,

@@ -15,7 +15,6 @@ class DetailedResult extends Component {
   }
 
   componentDidUpdate() {
-    console.log(this.props.detailedResultData.circuitId)
     if (this.props.replayLap === this.props.driverLapData.length - 1) {
       clearInterval(this.lapInterval);
     }

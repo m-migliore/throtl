@@ -4,6 +4,7 @@ const trackRender = trackName => {
   return animationObj => {
     let lapTitle
     let trackPath
+    let trackPathName = "catalunya"
   
     if (animationObj.lapNumber === 0) {
       lapTitle = ""
@@ -43,7 +44,7 @@ const trackRender = trackName => {
           begin=${animationObj.pitTime}
           fill="freeze"
           repeatCount="1">
-          <mpath href="#${trackName}" />
+          <mpath href="#${trackPathName}" />
         </animateMotion>   
       </svg>
     `
