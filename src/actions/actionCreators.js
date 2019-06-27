@@ -350,7 +350,11 @@ function fetchDriverPitData(season, round, driverId) {
     return fetch(`http://ergast.com/api/f1/${season}/${round}/drivers/${driverId}/pitstops.json`)
     .then(r => r.json())
     .then(data => {
-      const driverPits = data.MRData.RaceTable.Races[0].PitStops
+      let driverPits = ["No Pit Data Available"]
+
+      if (data.MRData.RaceTable.Races.length !== 0) {
+        driverPits = data.MRData.RaceTable.Races[0].PitStops
+      }
     
       return dispatch({
         type: "LOAD_DRIVER_PIT_DATA",
