@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import{ trackRender } from '../../helpers/tracks'
+import{ trackRender } from '../../helpers/trackRender'
 
 class DriverLapAnimation extends Component {
   state = {
