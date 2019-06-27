@@ -1,17 +1,12 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import{ catalunya } from '../../helpers/tracks'
+import{ trackRender } from '../../helpers/tracks'
 
 class DriverLapAnimation extends Component {
-  state = {
-    started: false,
-    animations: [],
-    animationCount: 0
-  }
 
   componentDidMount() {
     const outline = document.getElementById("catalunya-outline")
-    outline.innerHTML = catalunya({
+    outline.innerHTML = trackRender("catalunya", {
       lapNumber: 0,
       animationDuration: "1ms",
       pitTime: "0ms"
@@ -28,14 +23,14 @@ class DriverLapAnimation extends Component {
       const animations = this.props.driverLapAnimations
       const count = this.props.driverLapAnimationCount
 
-      outline.innerHTML = catalunya(animations[count])
+      outline.innerHTML = trackRender("catalunya", animations[count])
       const track = document.querySelector('animateMotion');
       track.addEventListener("endEvent", this.props.nextDriverAnimation)
     }
 
     if (this.props.replayCountdown === 0 && this.props.driverLapAnimationCount === this.props.driverLapData.length) {
       const outline = document.getElementById("catalunya-outline")
-      outline.innerHTML = catalunya({
+      outline.innerHTML = trackRender("catalunya", {
         lapNumber: "Finished",
         animationDuration: "1ms",
         pitTime: "0ms"
