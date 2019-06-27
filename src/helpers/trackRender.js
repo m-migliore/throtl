@@ -1,5 +1,6 @@
 // constants for each track, with a parameter for the animation time, and a delay to simulate pitstop
-import {catalunya} from './trackpaths'
+import {catalunya, albertPark} from './trackpaths'
+
 const trackRender = trackName => {
   return animationObj => {
     let lapTitle
@@ -29,6 +30,9 @@ const trackRender = trackName => {
       case "catalunya":
         trackPath = catalunya
         break
+      case "albert_park":
+        trackPath = albertPark
+        break
       default:
         trackPath = catalunya
     }
@@ -44,7 +48,7 @@ const trackRender = trackName => {
           begin=${animationObj.pitTime}
           fill="freeze"
           repeatCount="1">
-          <mpath href="#${trackPathName}" />
+          <mpath href="#${trackName}" />
         </animateMotion>   
       </svg>
     `
