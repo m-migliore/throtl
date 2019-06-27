@@ -3,10 +3,13 @@ import { connect } from 'react-redux'
 import{ trackRender } from '../../helpers/tracks'
 
 class DriverLapAnimation extends Component {
+  state = {
+    lapRender: trackRender("catalunya")
+  }
 
   componentDidMount() {
     const outline = document.getElementById("catalunya-outline")
-    outline.innerHTML = trackRender("catalunya", {
+    outline.innerHTML = this.state.lapRender({
       lapNumber: 0,
       animationDuration: "1ms",
       pitTime: "0ms"
@@ -23,14 +26,14 @@ class DriverLapAnimation extends Component {
       const animations = this.props.driverLapAnimations
       const count = this.props.driverLapAnimationCount
 
-      outline.innerHTML = trackRender("catalunya", animations[count])
+      outline.innerHTML = this.state.lapRender(animations[count])
       const track = document.querySelector('animateMotion');
       track.addEventListener("endEvent", this.props.nextDriverAnimation)
     }
 
     if (this.props.replayCountdown === 0 && this.props.driverLapAnimationCount === this.props.driverLapData.length) {
       const outline = document.getElementById("catalunya-outline")
-      outline.innerHTML = trackRender("catalunya", {
+      outline.innerHTML = this.state.lapRender({
         lapNumber: "Finished",
         animationDuration: "1ms",
         pitTime: "0ms"
