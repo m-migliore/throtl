@@ -174,13 +174,11 @@ export default function reducer(state = defaultState, action) {
 				replayLap: action.payload,
 			};
 		case "START_LAP_DATA_FETCH":
-			console.log("start lap data fetch")
 			return {
 				...state,
 				lapDataLoading: true,
 			};
 		case "LOAD_LAP_DATA":
-			console.log("load lap data")
 			return {
 				...state,
 				lapDataLoading: false,
