@@ -1,7 +1,9 @@
 // constants for each track, with a parameter for the animation time, and a delay to simulate pitstop
-import {catalunya, albertPark, bahrain} from './trackpaths'
+import {catalunya, albertPark, bahrain, shanghai, monaco} from './trackpaths'
 
 const trackRender = trackName => {
+  console.log(trackName);
+  
   return animationObj => {
     let lapTitle
     let trackPath
@@ -35,6 +37,12 @@ const trackRender = trackName => {
         break
       case "bahrain":
         trackPath = bahrain
+        break
+      case "shanghai":
+        trackPath = shanghai
+        break
+      case "monaco":
+        trackPath = monaco
         break
       default:
         trackPath = catalunya
