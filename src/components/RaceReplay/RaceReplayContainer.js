@@ -6,9 +6,9 @@ import ReplayStart from './ReplayStart'
 
 class RaceReplayContainer extends Component {
 	
-	componentDidMount() {
-		this.props.fetchLapData(this.props.season, this.props.selectedRound);
-	}
+	// componentDidMount() {
+	// 	this.props.fetchLapData(this.props.season, this.props.selectedRound);
+	// }
 
 	componentDidUpdate() {
 		if (this.props.replayLap === this.props.lapData.length - 1) {
