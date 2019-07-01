@@ -32,7 +32,7 @@ class RaceReplayContainer extends Component {
 			return (
 				<div className="modal-container">
 					<div className="modal-content container p-5">
-						<button onClick={this.props.closeRaceReplay} className="btn btn-default">Close Replay</button>
+						<button onClick={this.props.closeRaceReplay} className="btn btn-close">Close Replay</button>
 						<ReplayStart /> 
 						{replayLap > 0 && replayLap !== this.props.lapData.length - 1 ? <h2>{`Lap ${replayLap}`}</h2> : null}
 						{replayLap === this.props.lapData.length - 1 ? <h2 className="animate-pulse">Finished</h2> : null}
