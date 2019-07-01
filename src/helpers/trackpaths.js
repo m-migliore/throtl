@@ -1,4 +1,4 @@
-const catalunya = 
+export const catalunya = 
   `<path
     id="catalunya"
     d="M 488.08795166015625 274.4076843261719
@@ -48,7 +48,7 @@ const catalunya =
     stoke-miterlimit="10">
   </path>`
 
-  const albertPark =
+  export const albertPark =
   `<path 
     id="albert_park"
     d="M 302.09869384765625 259.6311950683594 
@@ -90,7 +90,7 @@ const catalunya =
     stroke-miterlimit="10">
   </path>`
 
-  const bahrain = 
+  export const bahrain = 
   `<path 
     id="bahrain"
     d="M 356.7491760253906 287.1389465332031 
@@ -144,5 +144,3 @@ const catalunya =
     stroke="#000000" 
     stroke-miterlimit="10" >
   </path>`
-
-export {catalunya, albertPark, bahrain}
