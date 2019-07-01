@@ -1,14 +1,12 @@
 // constants for each track, with a parameter for the animation time, and a delay to simulate pitstop
-import {catalunya, albertPark, bahrain, shanghai, monaco, villeneuve, richard, redBullRing} from './trackpaths'
+import { trackpaths } from './trackpaths'
 
 const trackRender = trackName => {
   console.log(trackName);
   
   return animationObj => {
     let lapTitle
-    let trackPath
 
-  
     if (animationObj.lapNumber === 0) {
       lapTitle = ""
     } else if (animationObj.lapNumber === "Finished") {
@@ -28,39 +26,10 @@ const trackRender = trackName => {
       `
     }
   
-    switch(trackName) {
-      case "catalunya":
-        trackPath = catalunya
-        break
-      case "albert_park":
-        trackPath = albertPark
-        break
-      case "bahrain":
-        trackPath = bahrain
-        break
-      case "shanghai":
-        trackPath = shanghai
-        break
-      case "monaco":
-        trackPath = monaco
-        break
-      case "villeneuve":
-        trackPath = villeneuve
-        break
-      case "richard":
-        trackPath = richard
-        break
-      case "red_bull_ring":
-        trackPath = redBullRing
-        break
-      default:
-        trackPath = catalunya
-    }
-  
    return `
       ${lapTitle}
       <svg width="600" height="300" viewBox="0 0 500 350">
-        ${trackPath}
+        ${trackpaths[trackName]}
         <circle id="circle" r="10" cx="0" cy="0" fill="tomato" />
         <animateMotion
           href="#circle"
