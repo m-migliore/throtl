@@ -26,14 +26,7 @@ class RaceContainer extends Component {
 						<Moment date={this.props.raceData.date} format="LLL" />
 					</p>
 					<CircuitInfo />
-					
-					{this.props.raceData.Results ? 
-						this.props.replayView ? <RaceReplayContainer /> 
-						:
-						<button onClick={this.props.viewRaceReplay} className="btn btn-default">Watch Replay</button>
-						:
-						null
-					}
+					{this.props.raceData.Results && <RaceReplayContainer />}
 					{this.props.raceData.Results && <RaceResults />}
 					{this.props.qualData.length > 1 && <QualResults />}
 					{this.props.detailedResultView && <DetailedResult />}
@@ -53,14 +46,7 @@ const mapStateToProps = state => {
 		raceData: state.raceData,
 		qualData: state.qualData,
 		detailedResultView: state.detailedResultView,
-		replayView: state.replayView
 	};
 };
 
-const mapDispatchToProps = dispatch => {
-	return {
-		viewRaceReplay: () => dispatch({type: "VIEW_RACE_REPLAY"})
-	}
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(RaceContainer);
+export default connect(mapStateToProps)(RaceContainer);
