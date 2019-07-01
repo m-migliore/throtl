@@ -8,7 +8,7 @@ class DriverLapAnimation extends Component {
   }
 
   componentDidMount() {
-    const outline = document.getElementById("catalunya-outline")
+    const outline = document.getElementById("track-outline")
     outline.innerHTML = this.state.lapRender({
       lapNumber: 0,
       animationDuration: "1ms",
@@ -22,7 +22,7 @@ class DriverLapAnimation extends Component {
     }
 
     if (this.props.replayCountdown === 0 && this.props.driverLapAnimationCount < this.props.driverLapData.length) {
-      const outline = document.getElementById("catalunya-outline")
+      const outline = document.getElementById("track-outline")
       const animations = this.props.driverLapAnimations
       const count = this.props.driverLapAnimationCount
 
@@ -32,7 +32,7 @@ class DriverLapAnimation extends Component {
     }
 
     if (this.props.replayCountdown === 0 && this.props.driverLapAnimationCount === this.props.driverLapData.length) {
-      const outline = document.getElementById("catalunya-outline")
+      const outline = document.getElementById("track-outline")
       const track = document.querySelector('animateMotion');
       track.removeEventListener("endEvent", this.props.nextDriverAnimation, true)
       outline.innerHTML = this.state.lapRender({
@@ -97,7 +97,7 @@ class DriverLapAnimation extends Component {
 
   render() {
     return (
-      <div id="catalunya-outline"></div>
+      <div id="track-outline"></div>
     )
   }
 }
