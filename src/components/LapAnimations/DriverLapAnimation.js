@@ -43,6 +43,7 @@ class DriverLapAnimation extends Component {
     }
   }
 
+  // used to create all of the animations for laps and pit data 
   createLapAnimations(lapData, pitData) {
     let lapAnimations = []
 
@@ -67,6 +68,8 @@ class DriverLapAnimation extends Component {
     this.props.loadDriverLapAnimations(lapAnimations)
   }
 
+  // create an object to pass data into the lap animation display
+  // if there is no pit stop the pitTime will be 0ms
   createAnimationObj(lap) {
     const animationTime = this.calcAnimationTime(lap.lapInfo.time)
     return {
