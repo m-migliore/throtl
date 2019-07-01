@@ -30,11 +30,14 @@ class RaceReplayContainer extends Component {
 
 		if (this.props.lapData.length > 0) {
 			return (
-				<div className="my-5">
-					<ReplayStart />
-					{replayLap > 0 && replayLap !== this.props.lapData.length - 1 ? <h2>{`Lap ${replayLap}`}</h2> : null}
-					{replayLap === this.props.lapData.length - 1 ? <h2 className="animate-pulse">Finished</h2> : null}
-					<RaceReplayRace />
+				<div className="modal-container">
+					<div className="modal-content container p-5">
+						<button onClick={this.props.closeRaceReplay} className="btn btn-default">Close Replay</button>
+						<ReplayStart /> 
+						{replayLap > 0 && replayLap !== this.props.lapData.length - 1 ? <h2>{`Lap ${replayLap}`}</h2> : null}
+						{replayLap === this.props.lapData.length - 1 ? <h2 className="animate-pulse">Finished</h2> : null}
+						<RaceReplayRace />
+					</div>	
 				</div>
 			);
 		} else if (this.props.lapDataLoading) {
@@ -53,7 +56,7 @@ const mapStateToProps = state => {
 		replayLap: state.replayLap,
 		replayCountdown: state.replayCountdown,
 		lapData: state.lapData,
-		lapDataLoading: state.lapDataLoading,
+		lapDataLoading: state.lapDataLoading
 	};
 };
 
@@ -61,6 +64,7 @@ const mapDispatchToProps = dispatch => {
 	return {
 		nextLap: lapNumber => dispatch({ type: "NEXT_LAP", payload: lapNumber }),
 		fetchLapData: (season, round) => dispatch(fetchLapData(season, round)),
+		closeRaceReplay: () => dispatch({type: "CLOSE_RACE_REPLAY"})
 	};
 };
 

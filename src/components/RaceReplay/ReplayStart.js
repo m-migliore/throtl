@@ -31,7 +31,7 @@ export class ReplayStart extends Component {
   
     return (
       <>
-        {this.props.replayCountdown === 6 && <button onClick={this.handleClick} className="btn btn-defualt">Watch Replay</button>}
+        {this.props.replayCountdown === 6 && <button onClick={this.handleClick} className="btn btn-defualt">Start Replay</button>}
         {this.props.replayCountdown < 6 && this.props.replayLap < 2 ?	<StartLightContainer /> : null}
       </>
     )
@@ -49,7 +49,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps =  dispatch => {
   return {
     startReplay: () => dispatch({type: "START_REPLAY"}),
-    replayCountdownLight: countdownNumber => dispatch({type: "REPLAY_COUNTDOWN_LIGHT", payload: countdownNumber}),
+    replayCountdownLight: countdownNumber => dispatch({type: "REPLAY_COUNTDOWN_LIGHT", payload: countdownNumber})
   }
 }
 
