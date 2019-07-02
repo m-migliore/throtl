@@ -11,7 +11,7 @@ class CircuitInfo extends Component {
       
       return (
         <div>
-          <h2>{circuit.circuitName}</h2>
+          <h2><a href={circuit.url} rel="noopener noreferrer" target="_blank">{circuit.circuitName}</a></h2>
           <FlagImage flagName={circuit.Location.country} />
           <p>{circuit.Location.locality}, {circuit.Location.country}</p>
           <TrackSVG trackName={circuit.circuitId} />
