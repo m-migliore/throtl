@@ -28,7 +28,52 @@ const defaultState = {
 	driverPitData: [],
 	driverPitLoading: false,
 	driverLapAnimations: [],
-	driverLapAnimationCount: 0
+	driverLapAnimationCount: 0,
+
+	driver1LapAnimationCount: 0,
+	driver2LapAnimationCount: 0,
+	driver3LapAnimationCount: 0,
+	driver4LapAnimationCount: 0,
+	driver5LapAnimationCount: 0,
+	driver6LapAnimationCount: 0,
+	driver7LapAnimationCount: 0,
+	driver8LapAnimationCount: 0,
+	driver9LapAnimationCount: 0,
+	driver10LapAnimationCount: 0,
+	driver11LapAnimationCount: 0,
+	driver12LapAnimationCount: 0,
+	driver13LapAnimationCount: 0,
+	driver14LapAnimationCount: 0,
+	driver15LapAnimationCount: 0,
+	driver16LapAnimationCount: 0,
+	driver17LapAnimationCount: 0,
+	driver18LapAnimationCount: 0,
+	driver19LapAnimationCount: 0,
+	driver20LapAnimationCount: 0,
+	driver1LapAnimations: [],
+	driver2LapAnimations: [],
+	driver3LapAnimations: [],
+	driver4LapAnimations: [],
+	driver5LapAnimations: [],
+	driver6LapAnimations: [],
+	driver7LapAnimations: [],
+	driver8LapAnimations: [],
+	driver9LapAnimations: [],
+	driver10LapAnimations: [],
+	driver11LapAnimations: [],
+	driver12LapAnimations: [],
+	driver13LapAnimations: [],
+	driver14LapAnimations: [],
+	driver15LapAnimations: [],
+	driver16LapAnimations: [],
+	driver17LapAnimations: [],
+	driver18LapAnimations: [],
+	driver19LapAnimations: [],
+	driver20LapAnimations: []
+
+
+
+
 };
 
 export default function reducer(state = defaultState, action) {
