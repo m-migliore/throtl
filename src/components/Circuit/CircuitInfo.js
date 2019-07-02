@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
 import FlagImage from '../Image/FlagImage'
+import TrackSVG from './TrackSVG'
 
 class CircuitInfo extends Component {
 
@@ -13,6 +14,7 @@ class CircuitInfo extends Component {
           <h2>{circuit.circuitName}</h2>
           <FlagImage flagName={circuit.Location.country} />
           <p>{circuit.Location.locality}, {circuit.Location.country}</p>
+          <TrackSVG trackName={circuit.circuitId} />
         </div>
       );
 
