@@ -184,16 +184,14 @@ export function fetchRacePitData(season, round) {
 }
 
 export function fetchLapData(season, round) {
-  return dispatch => {
+  return async dispatch => {
     dispatch({type: "START_LAP_DATA_FETCH"})
-    return fetch(`http://ergast.com/api/f1/${season}/${round}/laps.json?limit=1500`)
-    .then(r => r.json())
-    .then(data => {
-      return dispatch({
-        type: "LOAD_LAP_DATA",
-        payload: data.MRData.RaceTable.Races[0].Laps
-      })
-    })
+    const r = await fetch(`http://ergast.com/api/f1/${season}/${round}/laps.json?limit=1500`);
+    const data = await r.json();
+    return dispatch({
+      type: "LOAD_LAP_DATA",
+      payload: data.MRData.RaceTable.Races[0].Laps
+    });
   }
 }
 
