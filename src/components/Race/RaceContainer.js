@@ -8,6 +8,7 @@ import CircuitInfo from "../Circuit/CircuitInfo";
 import DetailedResult from "../DetailedResult/DetailedResult";
 import { Redirect, Link } from "react-router-dom";
 import RaceReplayContainer from "../RaceReplay/RaceReplayContainer";
+import MultiDriverAnimationContainer from '../LapAnimations/MultiDriverAnimationContainer'
 
 class RaceContainer extends Component {
 	render() {
@@ -30,6 +31,7 @@ class RaceContainer extends Component {
 					{this.props.raceData.Results && <RaceResults />}
 					{this.props.qualData.length > 1 && <QualResults />}
 					{this.props.detailedResultView && <DetailedResult />}
+					<MultiDriverAnimationContainer />
 				</div>
 			);
 		} else {

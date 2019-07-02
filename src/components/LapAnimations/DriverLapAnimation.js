@@ -27,13 +27,15 @@ class DriverLapAnimation extends Component {
       const count = this.props.driverLapAnimationCount
 
       outline.innerHTML = this.state.lapRender(animations[count])
-      const track = document.querySelector('animateMotion');
+      // const track = document.querySelector('animateMotion');
+      const track = document.getElementById("testest");
       track.addEventListener("endEvent", this.props.nextDriverAnimation)
     }
 
     if (this.props.replayCountdown === 0 && this.props.driverLapAnimationCount === this.props.driverLapData.length) {
       const outline = document.getElementById("track-outline")
-      const track = document.querySelector('animateMotion');
+      // const track = document.querySelector('animateMotion');
+      const track = document.getElementById("testest");
       track.removeEventListener("endEvent", this.props.nextDriverAnimation, true)
       outline.innerHTML = this.state.lapRender({
         lapNumber: "Finished",
