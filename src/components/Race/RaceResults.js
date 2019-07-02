@@ -25,7 +25,8 @@ class RaceResults extends Component {
                 key={result.number} 
                 resultData={{
                   ...result, 
-                  round: this.props.raceData.round
+                  round: this.props.raceData.round,
+                  circuitId: this.props.raceData.Circuit.circuitId
                 }} 
               />)
             }

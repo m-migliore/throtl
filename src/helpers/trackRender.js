@@ -2,7 +2,6 @@
 import { trackpaths } from './trackpaths'
 
 const trackRender = trackName => {
-  console.log(trackName);
   
   return animationObj => {
     let lapTitle
