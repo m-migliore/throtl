@@ -31,7 +31,7 @@ export class ReplayStart extends Component {
   
     return (
       <>
-        {this.props.replayCountdown === 6 && <button onClick={this.handleClick} className="btn btn-defualt">Watch Replay</button>}
+        {this.props.replayCountdown === 6 && <button onClick={this.handleClick} className="btn btn-default">Watch Replay</button>}
         {this.props.replayCountdown < 6 && this.props.replayLap < 2 ?	<StartLightContainer /> : null}
       </>
     )
