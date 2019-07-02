@@ -1,5 +1,3 @@
-import {spanGrandPrixLaps} from '../helpers/fullRaceLapFetch'
-
 export function fetchAllSeasonData(season) {
   return dispatch => {
     dispatch({
