@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { fetchLapData } from "../../actions/actionCreators";
 import RaceReplayRace from "./RaceReplayRace";
 import ReplayStart from './ReplayStart'
 
@@ -57,7 +56,6 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
 	return {
 		nextLap: lapNumber => dispatch({ type: "NEXT_LAP", payload: lapNumber }),
-    fetchLapData: (season, round) => dispatch(fetchLapData(season, round)),
     closeRaceReplay: () => dispatch({type:  "CLOSE_RACE_REPLAY"})
 	};
 };
