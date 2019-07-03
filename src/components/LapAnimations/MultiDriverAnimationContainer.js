@@ -24,26 +24,27 @@ export class MultiDriverAnimationContainer extends Component {
     driver18LapAnimationCount: 0,
     driver19LapAnimationCount: 0,
     driver20LapAnimationCount: 0,
-    driver1LapAnimations: [],
-    driver2LapAnimations: [],
-    driver3LapAnimations: [],
-    driver4LapAnimations: [],
-    driver5LapAnimations: [],
-    driver6LapAnimations: [],
-    driver7LapAnimations: [],
-    driver8LapAnimations: [],
-    driver9LapAnimations: [],
-    driver10LapAnimations: [],
-    driver11LapAnimations: [],
-    driver12LapAnimations: [],
-    driver13LapAnimations: [],
-    driver14LapAnimations: [],
-    driver15LapAnimations: [],
-    driver16LapAnimations: [],
-    driver17LapAnimations: [],
-    driver18LapAnimations: [],
-    driver19LapAnimations: [],
-    driver20LapAnimations: []
+    driverLapAnimations1: [],
+    driverLapAnimations2: [],
+    driverLapAnimations3: [],
+    driverLapAnimations4: [],
+    driverLapAnimations5: [],
+    driverLapAnimations6: [],
+    driverLapAnimations7: [],
+    driverLapAnimations8: [],
+    driverLapAnimations9: [],
+    driverLapAnimations10: [],
+    driverLapAnimations11: [],
+    driverLapAnimations12: [],
+    driverLapAnimations13: [],
+    driverLapAnimations14: [],
+    driverLapAnimations15: [],
+    driverLapAnimations16: [],
+    driverLapAnimations17: [],
+    driverLapAnimations18: [],
+    driverLapAnimations19: [],
+    driverLapAnimations20: [],
+    driverLapAnimations: {}
   }
   componentDidUpdate() {
     console.log(this.state)
@@ -142,8 +143,15 @@ export class MultiDriverAnimationContainer extends Component {
           }
         })
       }
+
+      let updatedAllAnimations = [...this.state.driverLapAnimations]
+      updatedAllAnimations.push({
+        driverNumber: driverNumberCount,
+        animations: lapAnimations
+      })
+      
       this.setState({
-        [`driver${driverNumberCount}LapAnimations`]: lapAnimations
+        driverLapAnimations: updatedAllAnimations
       })
    
       //this.props.loadDriverLapAnimations(lapAnimations)
