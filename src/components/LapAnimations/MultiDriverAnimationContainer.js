@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import MultiDriverAnimation from './MultiDriverAnimation';
 
 export class MultiDriverAnimationContainer extends Component {
   state = {
     animationsLoaded: false,
-    driverLapAnimations: {}
+    driverLapAnimations: []
   }
   componentDidUpdate() {
     console.log(this.state)
@@ -102,7 +103,7 @@ export class MultiDriverAnimationContainer extends Component {
       })
     }
 
-    let updatedAllAnimations = [...this.state.driverLapAnimations]
+    let updatedAllAnimations = this.state.driverLapAnimations
     updatedAllAnimations.push({
       driverNumber: driverNumberCount,
       animations: lapAnimations
@@ -141,10 +142,20 @@ export class MultiDriverAnimationContainer extends Component {
     return parseFloat(stringTime).toFixed(2).replace(".","") + "ms"
   }
 
+  renderAnimationContainers() {
+    if (this.state.animationsLoaded) {
+      this.state.driverLapAnimations.map(driverAnimation => {
+        return <MultiDriverAnimation driverAnimation={driverAnimation} />
+      })
+    } else {
+      return null
+    }
+  }
+
   render() {
     return (
       <div id="svg-holder">
-        multi driver animationz
+        {this.renderAnimationContainers()}
       </div>
     )
   }
