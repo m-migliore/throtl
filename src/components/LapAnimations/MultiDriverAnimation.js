@@ -11,6 +11,7 @@ class MultiDriverAnimation extends Component {
       lapRender: multiDriverTrackRender("albert_park", this.props.driverAnimation.driverNumber),
       animationCount: 0
     }
+    this.nextAnimation = this.nextAnimation.bind(this)
   }
 
   componentDidMount() {
@@ -23,7 +24,7 @@ class MultiDriverAnimation extends Component {
   }
 
   componentDidUpdate() {
-    if (this.props.replayStart && this.state.animationCount < this.props.driverAnimation.animation.length - 1) {
+    if (this.props.replayStart && this.state.animationCount < this.props.driverAnimation.animations.length - 1) {
       const outline = document.getElementById(`track-outline-${this.props.driverAnimation.driverNumber}`)
       const animations = this.props.driverAnimation.animations
       const count = this.state.animationCount
@@ -33,7 +34,7 @@ class MultiDriverAnimation extends Component {
 
       const track = document.getElementById(`animation${driverNumber}`)
       track.addEventListener("endEvent", this.nextAnimation)
-    } else if (this.props.replayStart && this.state.animationCount === this.props.driverAnimation.animation.length - 1) {
+    } else if (this.props.replayStart && this.state.animationCount === this.props.driverAnimation.animations.length - 1) {
       const outline = document.getElementById(`track-outline-${this.props.driverAnimation.driverNumber}`)
       outline.remove()
       
@@ -49,9 +50,9 @@ class MultiDriverAnimation extends Component {
 
   render() {
     return (
-      <div id={`track-outline-${this.props.driverAnimation.driverNumber}`} className="multi-driver-animation">
-        
-      </div>
+      <>
+        <div id={`track-outline-${this.props.driverAnimation.driverNumber}`} className="multi-driver-animation"></div>
+      </>
     )
   }
 }

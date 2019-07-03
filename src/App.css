@@ -214,6 +214,16 @@ table tr > td:last-of-type, table tr > th:last-of-type {
   height: 800px;
 }
 
+/********** MULTI DRIVER ANIMATIONS **********/
+#svg-holder {
+  position: relative;
+}
+
+.multi-driver-animation {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
 /********** ANIMATIONS **********/
 
 /*** FADE-IN ***/

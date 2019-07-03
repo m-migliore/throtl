@@ -1,12 +1,22 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import MultiDriverAnimation from './MultiDriverAnimation';
+import { trackpaths } from '../../helpers/trackpaths'
 
 export class MultiDriverAnimationContainer extends Component {
   state = {
     animationsLoaded: false,
     driverLapAnimations: []
   }
+
+  componentDidMount() {
+    const mainTrack = document.getElementById("main-track")
+    mainTrack.innerHTML = `
+    <svg width="600" height="300" viewBox="0 0 500 350">
+      ${trackpaths["albert_park"]}
+    </svg>`
+  }
+
   componentDidUpdate() {
     console.log(this.state)
 
@@ -144,7 +154,8 @@ export class MultiDriverAnimationContainer extends Component {
 
   render() {
     return (
-      <div id="svg-holder">
+      <div id="svg-holder" onClick={this.props.startReplay}>
+        <div id="main-track"></div>
         {this.state.animationsLoaded && this.state.driverLapAnimations.map(driverAnimation => {
           return <MultiDriverAnimation driverAnimation={driverAnimation} />
         })}
@@ -162,4 +173,10 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps)(MultiDriverAnimationContainer)
+const mapDispatchToProps = dispatch => {
+  return {
+    startReplay: () => dispatch({type: "START_REPLAY"})
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(MultiDriverAnimationContainer)
