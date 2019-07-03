@@ -4,46 +4,6 @@ import { connect } from 'react-redux'
 export class MultiDriverAnimationContainer extends Component {
   state = {
     animationsLoaded: false,
-    driver1LapAnimationCount: 0,
-    driver2LapAnimationCount: 0,
-    driver3LapAnimationCount: 0,
-    driver4LapAnimationCount: 0,
-    driver5LapAnimationCount: 0,
-    driver6LapAnimationCount: 0,
-    driver7LapAnimationCount: 0,
-    driver8LapAnimationCount: 0,
-    driver9LapAnimationCount: 0,
-    driver10LapAnimationCount: 0,
-    driver11LapAnimationCount: 0,
-    driver12LapAnimationCount: 0,
-    driver13LapAnimationCount: 0,
-    driver14LapAnimationCount: 0,
-    driver15LapAnimationCount: 0,
-    driver16LapAnimationCount: 0,
-    driver17LapAnimationCount: 0,
-    driver18LapAnimationCount: 0,
-    driver19LapAnimationCount: 0,
-    driver20LapAnimationCount: 0,
-    driverLapAnimations1: [],
-    driverLapAnimations2: [],
-    driverLapAnimations3: [],
-    driverLapAnimations4: [],
-    driverLapAnimations5: [],
-    driverLapAnimations6: [],
-    driverLapAnimations7: [],
-    driverLapAnimations8: [],
-    driverLapAnimations9: [],
-    driverLapAnimations10: [],
-    driverLapAnimations11: [],
-    driverLapAnimations12: [],
-    driverLapAnimations13: [],
-    driverLapAnimations14: [],
-    driverLapAnimations15: [],
-    driverLapAnimations16: [],
-    driverLapAnimations17: [],
-    driverLapAnimations18: [],
-    driverLapAnimations19: [],
-    driverLapAnimations20: [],
     driverLapAnimations: {}
   }
   componentDidUpdate() {
@@ -91,9 +51,6 @@ export class MultiDriverAnimationContainer extends Component {
           position: startingPosition,
           time: "0:00.000",
         };
-
-        const holder = document.getElementById("svg-holder")
-        let allSVGs = ""
         
         this.createLapAnimations(driverLapBreakdown, driverPits, driverNumberCount)
        
@@ -117,71 +74,72 @@ export class MultiDriverAnimationContainer extends Component {
 
       
     }
+
     
   }
 
-    // used to create all of the animations for laps and pit data 
-    createLapAnimations(lapData, pitData, driverNumberCount) {
-      let lapAnimations = []
+  // used to create all of the animations for laps and pit data 
+  createLapAnimations(lapData, pitData, driverNumberCount) {
+    let lapAnimations = []
    
-      if (pitData.length > 0) {
-        lapData.forEach(lap => {
-          if (lap.time) {
-            let animationObj = this.createAnimationObj(lap)
-   
-          const pitStop = pitData.find(pit => pit.lap === lap.lapNumber)
-          if (pitStop) {
-            const pitTime = this.createPitTime(pitStop.duration)
-            // if there was a pit on that lap, add pitTime for delayed animation
-            animationObj = {
-              ...animationObj,
-              pitTime: pitTime
-            }
+    if (pitData.length > 0) {
+      lapData.forEach(lap => {
+        if (lap.time) {
+          let animationObj = this.createAnimationObj(lap)
+ 
+        const pitStop = pitData.find(pit => pit.lap === lap.lapNumber)
+        if (pitStop) {
+          const pitTime = this.createPitTime(pitStop.duration)
+          // if there was a pit on that lap, add pitTime for delayed animation
+          animationObj = {
+            ...animationObj,
+            pitTime: pitTime
           }
-   
-          lapAnimations.push(animationObj)
-          }
-        })
-      }
+        }
+ 
+        lapAnimations.push(animationObj)
+        }
+      })
+    }
 
-      let updatedAllAnimations = [...this.state.driverLapAnimations]
-      updatedAllAnimations.push({
-        driverNumber: driverNumberCount,
-        animations: lapAnimations
-      })
-      
-      this.setState({
-        driverLapAnimations: updatedAllAnimations
-      })
-   
-      //this.props.loadDriverLapAnimations(lapAnimations)
+    let updatedAllAnimations = [...this.state.driverLapAnimations]
+    updatedAllAnimations.push({
+      driverNumber: driverNumberCount,
+      animations: lapAnimations
+    })
+
+    this.setState({
+      driverLapAnimations: updatedAllAnimations
+    })
+ 
+    //this.props.loadDriverLapAnimations(lapAnimations)
+  }
+ 
+  // create an object to pass data into the lap animation display
+  // if there is no pit stop the pitTime will be 0ms
+  createAnimationObj(lap) {
+    const animationTime = this.calcAnimationTime(lap.time)
+    return {
+      // lapNumber: lap.lapNumber,
+      // position: lap.lapInfo.position,
+      lapTime: lap.time,
+      animationDuration: animationTime,
+      pitTime: "0ms"
     }
+  }
    
-    // create an object to pass data into the lap animation display
-    // if there is no pit stop the pitTime will be 0ms
-    createAnimationObj(lap) {
-      const animationTime = this.calcAnimationTime(lap.time)
-      return {
-        // lapNumber: lap.lapNumber,
-        // position: lap.lapInfo.position,
-        lapTime: lap.time,
-        animationDuration: animationTime,
-        pitTime: "0ms"
-      }
-    }
-   
-    // use to easily calculate avergae lap time
-    calcAnimationTime(stringTime) {
-      const lapTimeArr = stringTime.split(":")
-      const baseSec = parseInt(lapTimeArr[0]) * 1000
-      const remainSec = parseFloat(lapTimeArr[1]) * 10
-      return Math.round(baseSec + remainSec) + "ms"
-    }
+  // use to easily calculate avergae lap time
+  calcAnimationTime(stringTime) {
+    const lapTimeArr = stringTime.split(":")
+    const baseSec = parseInt(lapTimeArr[0]) * 1000
+     const remainSec = parseFloat(lapTimeArr[1]) * 10
+     return Math.round(baseSec + remainSec) + "ms"
+  }
      
-    // use to create a 'pause' time to indicate a pit stop in the animation
-    createPitTime(stringTime) {
-      return parseFloat(stringTime).toFixed(2).replace(".","") + "ms"
-    }
+  // use to create a 'pause' time to indicate a pit stop in the animation
+  createPitTime(stringTime) {
+    return parseFloat(stringTime).toFixed(2).replace(".","") + "ms"
+  }
 
   render() {
     return (
