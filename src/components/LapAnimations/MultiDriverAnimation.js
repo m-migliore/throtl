@@ -1,9 +1,16 @@
 import React, { Component } from 'react'
-import{ trackRender } from '../../helpers/trackRender'
+import { connect } from 'react-redux'
+import{ multiDriverTrackRender } from '../../helpers/multiDriverTrackRender'
 
 class MultiDriverAnimation extends Component {
-  state = {
-    lapRender: trackRender("albert_park")
+
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      lapRender: multiDriverTrackRender("albert_park", this.props.driverAnimation.driverNumber),
+      animationCount: 0
+    }
   }
 
   componentDidMount() {
@@ -15,13 +22,57 @@ class MultiDriverAnimation extends Component {
     })
   }
 
+  componentDidUpdate() {
+    if (this.props.replayStart && this.state.animationCount < this.props.driverAnimation.animation.length - 1) {
+      const outline = document.getElementById(`track-outline-${this.props.driverAnimation.driverNumber}`)
+      const animations = this.props.driverAnimation.animations
+      const count = this.state.animationCount
+      const driverNumber = this.props.driverAnimation.driverNumber
+
+      outline.innerHTML = this.state.lapRender(animations[count])
+
+      const track = document.getElementById(`animation${driverNumber}`)
+      track.addEventListener("endEvent", this.nextAnimation)
+    } else if (this.props.replayStart && this.state.animationCount === this.props.driverAnimation.animation.length - 1) {
+      const outline = document.getElementById(`track-outline-${this.props.driverAnimation.driverNumber}`)
+      outline.remove()
+      
+    }
+  }
+
+  nextAnimation() {
+    const nextCount = this.state.animationCount + 1
+    this.setState({
+      animationCount: nextCount
+    })
+  }
+
   render() {
     return (
-      <div id={`track-outline-${this.props.driverAnimation.driverNumber}`}className="multi-driver-animation">
+      <div id={`track-outline-${this.props.driverAnimation.driverNumber}`} className="multi-driver-animation">
         
       </div>
     )
   }
 }
 
-export default MultiDriverAnimation
+const mapStateToProps = state => {
+  return {
+    detailedResultData: state.detailedResultData,
+    replayStart: state.replayStart,
+    replayCountdown: state.replayCountdown,
+    driverLapData: state.driverLapData,
+    driverPitData: state.driverPitData,
+    driverLapAnimations: state.driverLapAnimations,
+    driverLapAnimationCount: state.driverLapAnimationCount
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    loadDriverLapAnimations: animations => dispatch({type: "LOAD_DRIVER_LAP_ANIMATIONS", payload: animations}),
+    nextDriverAnimation: () => dispatch({type: "NEXT_DRIVER_LAP_ANIMATION"})
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(MultiDriverAnimation)
