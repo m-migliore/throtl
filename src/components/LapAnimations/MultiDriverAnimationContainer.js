@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 
 export class MultiDriverAnimationContainer extends Component {
   state = {
+    animationsLoaded: false,
     driver1LapAnimationCount: 0,
     driver2LapAnimationCount: 0,
     driver3LapAnimationCount: 0,
@@ -45,8 +46,9 @@ export class MultiDriverAnimationContainer extends Component {
     driver20LapAnimations: []
   }
   componentDidUpdate() {
-    if (this.props.lapData.length > 0 && this.props.pitData) {
-      debugger
+    console.log(this.state)
+
+    if (this.props.lapData.length > 0 && this.props.pitData && !this.state.animationsLoaded) {
       console.log("hit")
 
       let driverNumberCount = 1
@@ -56,6 +58,7 @@ export class MultiDriverAnimationContainer extends Component {
       const drivers = laps[0].Timings.map(lap => lap.driverId);
       const lapBreakdown = [];
       drivers.forEach(driver => {
+        console.log(driver)
         // const driverResult = spanGrandPrixResults.find(result => result.Driver.driverId === driver)
         const driverResult = this.props.raceData.Results.find(result => result.Driver.driverId === driver);
        
@@ -68,7 +71,10 @@ export class MultiDriverAnimationContainer extends Component {
        
         let driverLapBreakdown = laps.map(lap => {
           let info = lap.Timings.find(timing => timing.driverId === driver);
-          return info;
+          return {
+            ...info,
+            lapNumber: parseInt(lap.number)
+          }
         });
          
         // edge case for when driver does not have qualifying data
@@ -85,7 +91,10 @@ export class MultiDriverAnimationContainer extends Component {
           time: "0:00.000",
         };
 
-        debugger
+        const holder = document.getElementById("svg-holder")
+        let allSVGs = ""
+        
+        this.createLapAnimations(driverLapBreakdown, driverPits, driverNumberCount)
        
         // // add lap zero to lap data fetch
         // driverLapBreakdown.unshift(lapZero);
@@ -96,18 +105,28 @@ export class MultiDriverAnimationContainer extends Component {
         //   result: driverResult,
         //   pits: driverPits,
         // });
+        if (driverNumberCount === 20) {
+          this.setState({
+            animationsLoaded: true
+          })
+        }
+        driverNumberCount++
+
       });
+
+      
     }
     
   }
 
     // used to create all of the animations for laps and pit data 
-    createLapAnimations(lapData, pitData) {
+    createLapAnimations(lapData, pitData, driverNumberCount) {
       let lapAnimations = []
    
       if (pitData.length > 0) {
         lapData.forEach(lap => {
-          let animationObj = this.createAnimationObj(lap)
+          if (lap.time) {
+            let animationObj = this.createAnimationObj(lap)
    
           const pitStop = pitData.find(pit => pit.lap === lap.lapNumber)
           if (pitStop) {
@@ -120,20 +139,24 @@ export class MultiDriverAnimationContainer extends Component {
           }
    
           lapAnimations.push(animationObj)
+          }
         })
       }
+      this.setState({
+        [`driver${driverNumberCount}LapAnimations`]: lapAnimations
+      })
    
-      this.props.loadDriverLapAnimations(lapAnimations)
+      //this.props.loadDriverLapAnimations(lapAnimations)
     }
    
     // create an object to pass data into the lap animation display
     // if there is no pit stop the pitTime will be 0ms
     createAnimationObj(lap) {
-      const animationTime = this.calcAnimationTime(lap.lapInfo.time)
+      const animationTime = this.calcAnimationTime(lap.time)
       return {
-        lapNumber: lap.lapNumber,
-        position: lap.lapInfo.position,
-        lapTime: lap.lapInfo.time,
+        // lapNumber: lap.lapNumber,
+        // position: lap.lapInfo.position,
+        lapTime: lap.time,
         animationDuration: animationTime,
         pitTime: "0ms"
       }
@@ -154,7 +177,7 @@ export class MultiDriverAnimationContainer extends Component {
 
   render() {
     return (
-      <div>
+      <div id="svg-holder">
         multi driver animationz
       </div>
     )
