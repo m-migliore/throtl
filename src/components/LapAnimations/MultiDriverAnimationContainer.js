@@ -142,20 +142,12 @@ export class MultiDriverAnimationContainer extends Component {
     return parseFloat(stringTime).toFixed(2).replace(".","") + "ms"
   }
 
-  renderAnimationContainers() {
-    if (this.state.animationsLoaded) {
-      this.state.driverLapAnimations.map(driverAnimation => {
-        return <MultiDriverAnimation driverAnimation={driverAnimation} />
-      })
-    } else {
-      return null
-    }
-  }
-
   render() {
     return (
       <div id="svg-holder">
-        {this.renderAnimationContainers()}
+        {this.state.animationsLoaded && this.state.driverLapAnimations.map(driverAnimation => {
+          return <MultiDriverAnimation driverAnimation={driverAnimation} />
+        })}
       </div>
     )
   }
