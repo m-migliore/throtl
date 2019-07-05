@@ -147,7 +147,7 @@ export class MultiDriverAnimationContainer extends Component {
       if (lap.time) {
         let animationObj = this.createAnimationObj(lap)
         if (pitData.length > 0) {
-          const pitStop = pitData.find(pit => pit.lap === lap.lapNumber)
+          const pitStop = pitData.find(pit => parseInt(pit.lap) === parseInt(lap.lapNumber) - 1)
           if (pitStop) {
             const pitTime = this.createPitTime(pitStop.duration)
             // if there was a pit on that lap, add pitTime for delayed animation
@@ -194,12 +194,12 @@ export class MultiDriverAnimationContainer extends Component {
     const lapTimeArr = stringTime.split(":")
     const baseSec = parseInt(lapTimeArr[0]) * 2000
      const remainSec = parseFloat(lapTimeArr[1]) * 10
-     return Math.round(baseSec + remainSec) + "ms"
+     return (baseSec + remainSec) + "ms"
   }
      
   // use to create a 'pause' time to indicate a pit stop in the animation
   createPitTime(stringTime) {
-    return parseFloat(stringTime).toFixed(2).replace(".","") + "ms"
+    return parseFloat(stringTime).toFixed(2).replace(".","") * .25 + "ms"
   }
 
   render() {
