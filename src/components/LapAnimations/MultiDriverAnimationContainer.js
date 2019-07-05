@@ -39,8 +39,7 @@ export class MultiDriverAnimationContainer extends Component {
             lapNumber: lap.number
           })
         })
-
-
+        
         this.createLapAnimations(driverLaps, driverPits, driverNumberCount)
        
         const driverColors = {
@@ -84,11 +83,7 @@ export class MultiDriverAnimationContainer extends Component {
 
         driverNumberCount++
       });
-
-      
     }
-
-    
   }
 
   // used to create all of the animations for laps and pit data 
@@ -119,13 +114,10 @@ export class MultiDriverAnimationContainer extends Component {
       driverNumber: driverNumberCount,
       animations: lapAnimations
     })
-    console.log(updatedAllAnimations)
 
     this.setState({
       driverLapAnimations: updatedAllAnimations
     })
- 
-    //this.props.loadDriverLapAnimations(lapAnimations)
   }
  
   // create an object to pass data into the lap animation display
@@ -133,8 +125,6 @@ export class MultiDriverAnimationContainer extends Component {
   createAnimationObj(lap) {
     const animationTime = this.calcAnimationTime(lap.time)
     return {
-      // lapNumber: lap.lapNumber,
-      // position: lap.lapInfo.position,
       lapTime: lap.time,
       animationDuration: animationTime,
       pitTime: 0

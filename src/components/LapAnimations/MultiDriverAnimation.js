@@ -42,16 +42,9 @@ class MultiDriverAnimation extends Component {
   }
 
   nextAnimation() {
-    //const animations = this.props.driverAnimation.animations
     const count = this.state.animationCount
     const nextCount = count + 1
-    console.log(count);
-    
-    // setTimeout(function () {
-    //   this.setState({
-    //     animationCount: nextCount
-    //   })
-    // }.bind(this), animations[count].pitTime)
+
     this.setState({
       animationCount: nextCount
     })
@@ -68,15 +61,8 @@ class MultiDriverAnimation extends Component {
 
 const mapStateToProps = state => {
   return {
-    //detailedResultData: state.detailedResultData,
     replayStart: state.replayStart,
     trackName: state.raceData.Circuit.circuitId
-    // replayCountdown: state.replayCountdown,
-    // driverLapData: state.driverLapData,
-    // driverPitData: state.driverPitData,
-    // driverLapAnimations: state.driverLapAnimations,
-    // driverLapAnimationCount: state.driverLapAnimationCount,
-
   }
 }
 

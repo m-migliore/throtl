@@ -26,8 +26,6 @@ const multiDriverTrackRender = (trackName, driverNumber) => {
   }
   let color = driverColors[driverNumber]
   
-  console.log(trackName);
-  
   return animationObj => {
     
    return `
