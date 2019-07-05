@@ -42,7 +42,7 @@ class MultiDriverAnimation extends Component {
   }
 
   nextAnimation() {
-    const animations = this.props.driverAnimation.animations
+    //const animations = this.props.driverAnimation.animations
     const count = this.state.animationCount
     const nextCount = count + 1
     console.log(count);
