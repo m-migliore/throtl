@@ -14,9 +14,10 @@ export class MultiDriverAnimationContainer extends Component {
 
   componentDidMount() {
     const mainTrack = document.getElementById("main-track")
+    const trackName = this.props.raceData.Circuit.circuitId
     mainTrack.innerHTML = `
     <svg width="600" height="300" viewBox="0 0 500 350">
-      ${trackpaths["albert_park"]}
+      ${trackpaths[trackName]}
     </svg>`
   }
 
@@ -46,8 +47,11 @@ export class MultiDriverAnimationContainer extends Component {
 
         let driverLaps = []
         laps.forEach(lap => {
-          const timing = lap.Timings.find(time => time.driverId === driver)
-          driverLaps.push(timing)
+          let timing = lap.Timings.find(time => time.driverId === driver)
+          driverLaps.push({
+            ...timing,
+            lapNumber: lap.number
+          })
         })
        
         // let driverLapBreakdown = laps.map(lap => {
@@ -72,7 +76,7 @@ export class MultiDriverAnimationContainer extends Component {
           position: startingPosition,
           time: "0:00.000",
         };
-        
+
         this.createLapAnimations(driverLaps, driverPits, driverNumberCount)
        
         // // add lap zero to lap data fetch
@@ -115,7 +119,7 @@ export class MultiDriverAnimationContainer extends Component {
         })
 
         this.setState({
-          driverColors: updatedDriverIndicators
+          driverIndicators: updatedDriverIndicators
         })
 
         if (driverNumberCount === 20) {
@@ -140,30 +144,30 @@ export class MultiDriverAnimationContainer extends Component {
     let lapAnimations = []
 
     lapData.forEach(lap => {
-      if (lap) {
+      if (lap.time) {
         let animationObj = this.createAnimationObj(lap)
-
-      if (pitData.length > 0) {
-        const pitStop = pitData.find(pit => pit.lap === lap.lapNumber)
-        if (pitStop) {
-          const pitTime = this.createPitTime(pitStop.duration)
-          // if there was a pit on that lap, add pitTime for delayed animation
-          animationObj = {
-            ...animationObj,
-            pitTime: pitTime
+        if (pitData.length > 0) {
+          const pitStop = pitData.find(pit => pit.lap === lap.lapNumber)
+          if (pitStop) {
+            const pitTime = this.createPitTime(pitStop.duration)
+            // if there was a pit on that lap, add pitTime for delayed animation
+            animationObj = {
+              ...animationObj,
+              pitTime: pitTime
+            }
           }
         }
-      }
 
-      lapAnimations.push(animationObj)
+        lapAnimations.push(animationObj)
       }
     })
-
+    
     let updatedAllAnimations = this.state.driverLapAnimations
     updatedAllAnimations.push({
       driverNumber: driverNumberCount,
       animations: lapAnimations
     })
+    console.log(updatedAllAnimations)
 
     this.setState({
       driverLapAnimations: updatedAllAnimations
@@ -188,7 +192,7 @@ export class MultiDriverAnimationContainer extends Component {
   // use to easily calculate avergae lap time
   calcAnimationTime(stringTime) {
     const lapTimeArr = stringTime.split(":")
-    const baseSec = parseInt(lapTimeArr[0]) * 1000
+    const baseSec = parseInt(lapTimeArr[0]) * 2000
      const remainSec = parseFloat(lapTimeArr[1]) * 10
      return Math.round(baseSec + remainSec) + "ms"
   }
@@ -203,7 +207,7 @@ export class MultiDriverAnimationContainer extends Component {
       <div className="container my-5">
         <h4>Drivers</h4>
         <ul>
-          {this.state.driverIndicators.map(driver => <DriverIndicator driver={driver.driver} color={driver.color} />)}
+          {this.state.driverIndicators.length > 0 && this.state.driverIndicators.map(driver => <DriverIndicator key={driver.driver} driver={driver.driver} color={driver.color} />)}
         </ul>
         <div id="svg-holder" onClick={this.props.startReplay}>
           <div id="main-track"></div>

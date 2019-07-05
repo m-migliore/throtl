@@ -11,6 +11,11 @@ import RaceReplayContainer from "../RaceReplay/RaceReplayContainer";
 import MultiDriverAnimationContainer from '../LapAnimations/MultiDriverAnimationContainer'
 
 class RaceContainer extends Component {
+
+	componentDidUpdate() {
+		console.log(this.props)
+	}
+
 	render() {
 		if (this.props.loading) {
 			return (

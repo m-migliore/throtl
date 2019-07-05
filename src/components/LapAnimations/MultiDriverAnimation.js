@@ -8,7 +8,7 @@ class MultiDriverAnimation extends Component {
     super(props)
 
     this.state = {
-      lapRender: multiDriverTrackRender("albert_park", this.props.driverAnimation.driverNumber),
+      lapRender: multiDriverTrackRender(this.props.trackName, this.props.driverAnimation.driverNumber),
       animationCount: 0
     }
     this.nextAnimation = this.nextAnimation.bind(this)
@@ -59,13 +59,15 @@ class MultiDriverAnimation extends Component {
 
 const mapStateToProps = state => {
   return {
-    detailedResultData: state.detailedResultData,
+    //detailedResultData: state.detailedResultData,
     replayStart: state.replayStart,
-    replayCountdown: state.replayCountdown,
-    driverLapData: state.driverLapData,
-    driverPitData: state.driverPitData,
-    driverLapAnimations: state.driverLapAnimations,
-    driverLapAnimationCount: state.driverLapAnimationCount
+    trackName: state.raceData.Circuit.circuitId
+    // replayCountdown: state.replayCountdown,
+    // driverLapData: state.driverLapData,
+    // driverPitData: state.driverPitData,
+    // driverLapAnimations: state.driverLapAnimations,
+    // driverLapAnimationCount: state.driverLapAnimationCount,
+
   }
 }
 
