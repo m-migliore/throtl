@@ -1,13 +1,15 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import MultiDriverAnimation from './MultiDriverAnimation';
 import { trackpaths } from '../../helpers/trackpaths'
+import MultiDriverAnimation from './MultiDriverAnimation';
+import DriverIndicator from './DriverIndicator'
+
 
 export class MultiDriverAnimationContainer extends Component {
   state = {
     animationsLoaded: false,
     driverLapAnimations: [],
-    driverColors: []
+    driverIndicators: []
   }
 
   componentDidMount() {
@@ -107,13 +109,13 @@ export class MultiDriverAnimationContainer extends Component {
           20: "dodgerblue"
         }
 
-        let updatedDriverColors = this.state.driverColors.push({
+        let updatedDriverIndicators = this.state.driverIndicators.push({
           driver: driver,
-          color: driverColors.driverNumberCount
+          color: driverColors[driverNumberCount]
         })
 
         this.setState({
-          driverColors: updatedDriverColors
+          driverColors: updatedDriverIndicators
         })
 
         if (driverNumberCount === 20) {
@@ -201,7 +203,7 @@ export class MultiDriverAnimationContainer extends Component {
       <div className="container my-5">
         <h4>Drivers</h4>
         <ul>
-        
+          {this.state.driverIndicators.map(driver => <DriverIndicator driver={driver.driver} color={driver.color} />)}
         </ul>
         <div id="svg-holder" onClick={this.props.startReplay}>
           <div id="main-track"></div>

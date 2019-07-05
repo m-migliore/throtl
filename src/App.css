@@ -224,6 +224,15 @@ table tr > td:last-of-type, table tr > th:last-of-type {
   top: 0;
   left: 0;
 }
+
+.driver-indicator {
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  margin-right: 5px;
+  vertical-align: middle;
+}
 /********** ANIMATIONS **********/
 
 /*** FADE-IN ***/
