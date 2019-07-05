@@ -29,7 +29,6 @@ export class MultiDriverAnimationContainer extends Component {
 
       let driverNumberCount = 1
 
-
       const laps = this.props.lapData;
       const drivers = laps[0].Timings.map(lap => lap.driverId);
       drivers.forEach(driver => {       
@@ -43,9 +42,6 @@ export class MultiDriverAnimationContainer extends Component {
             lapNumber: lap.number
           })
         })
-       
-         
-
 
 
         this.createLapAnimations(driverLaps, driverPits, driverNumberCount)
