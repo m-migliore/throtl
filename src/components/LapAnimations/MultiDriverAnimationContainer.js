@@ -22,10 +22,7 @@ export class MultiDriverAnimationContainer extends Component {
   }
 
   componentDidUpdate() {
-    console.log(this.state)
-
     if (this.props.lapData.length > 0 && this.props.pitData && !this.state.animationsLoaded) {
-      console.log("hit")
 
       let driverNumberCount = 1
 
@@ -85,9 +82,7 @@ export class MultiDriverAnimationContainer extends Component {
           })
         }
 
-        console.log(this.state.driverColors)
         driverNumberCount++
-
       });
 
       
@@ -150,8 +145,8 @@ export class MultiDriverAnimationContainer extends Component {
   calcAnimationTime(stringTime) {
     const lapTimeArr = stringTime.split(":")
     const baseSec = parseInt(lapTimeArr[0]) * 2000
-     const remainSec = parseFloat(lapTimeArr[1]) * 10
-     return (baseSec + remainSec) + "ms"
+    const remainSec = parseFloat(lapTimeArr[1]) * 10
+    return (baseSec + remainSec) + "ms"
   }
      
   // use to create a 'pause' time to indicate a pit stop in the animation
