@@ -47,4 +47,4 @@ const multiDriverTrackRender = (trackName, driverNumber) => {
   }
 }
 
-export {multiDriverTrackRender}
+export {multiDriverTrackRender} 

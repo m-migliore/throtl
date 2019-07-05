@@ -80,7 +80,6 @@ export class MultiDriverAnimationContainer extends Component {
         })
 
         if (driverNumberCount === 20) {
-          debugger
           this.setState({
             animationsLoaded: true
           })
@@ -152,12 +151,12 @@ export class MultiDriverAnimationContainer extends Component {
     const lapTimeArr = stringTime.split(":")
     const baseSec = parseInt(lapTimeArr[0]) * 2000
      const remainSec = parseFloat(lapTimeArr[1]) * 10
-     return (baseSec + remainSec) 
+     return (baseSec + remainSec) + "ms"
   }
      
   // use to create a 'pause' time to indicate a pit stop in the animation
   createPitTime(stringTime) {
-    return parseFloat(stringTime).toFixed(2).replace(".","") * .25 
+    return parseFloat(stringTime).toFixed(2).replace(".","") * .25 + "ms"
   }
 
 
