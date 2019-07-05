@@ -19,7 +19,7 @@ class MultiDriverAnimation extends Component {
     outline.innerHTML = this.state.lapRender({
       lapNumber: 0,
       animationDuration: "1ms",
-      pitTime: "0ms"
+      pitTime: 0
     })
   }
 
@@ -34,15 +34,24 @@ class MultiDriverAnimation extends Component {
 
       const track = document.getElementById(`animation${driverNumber}`)
       track.addEventListener("endEvent", this.nextAnimation)
+      
     } else if (this.props.replayStart && this.state.animationCount === this.props.driverAnimation.animations.length - 1) {
       const outline = document.getElementById(`track-outline-${this.props.driverAnimation.driverNumber}`)
       outline.remove()
-      
     }
   }
 
   nextAnimation() {
-    const nextCount = this.state.animationCount + 1
+    const animations = this.props.driverAnimation.animations
+    const count = this.state.animationCount
+    const nextCount = count + 1
+    console.log(count);
+    
+    // setTimeout(function () {
+    //   this.setState({
+    //     animationCount: nextCount
+    //   })
+    // }.bind(this), animations[count].pitTime)
     this.setState({
       animationCount: nextCount
     })

@@ -113,7 +113,8 @@ export class MultiDriverAnimationContainer extends Component {
           20: "dodgerblue"
         }
 
-        let updatedDriverIndicators = this.state.driverIndicators.push({
+        let updatedDriverIndicators = this.state.driverIndicators
+        updatedDriverIndicators.push({
           driver: driver,
           color: driverColors[driverNumberCount]
         })
@@ -123,6 +124,7 @@ export class MultiDriverAnimationContainer extends Component {
         })
 
         if (driverNumberCount === 20) {
+          debugger
           this.setState({
             animationsLoaded: true
           })
@@ -185,7 +187,7 @@ export class MultiDriverAnimationContainer extends Component {
       // position: lap.lapInfo.position,
       lapTime: lap.time,
       animationDuration: animationTime,
-      pitTime: "0ms"
+      pitTime: 0
     }
   }
    
@@ -199,15 +201,18 @@ export class MultiDriverAnimationContainer extends Component {
      
   // use to create a 'pause' time to indicate a pit stop in the animation
   createPitTime(stringTime) {
-    return parseFloat(stringTime).toFixed(2).replace(".","") * .25 + "ms"
+    return parseFloat(stringTime).toFixed(2).replace(".","") * .25 
   }
 
+  renderDriverIndicators() {
+    
+  }
   render() {
     return (
       <div className="container my-5">
         <h4>Drivers</h4>
         <ul>
-          {this.state.driverIndicators.length > 0 && this.state.driverIndicators.map(driver => <DriverIndicator key={driver.driver} driver={driver.driver} color={driver.color} />)}
+          {this.state.driverIndicators.map(driver => <DriverIndicator key={driver.driver} driver={driver.driver} color={driver.color} />)}
         </ul>
         <div id="svg-holder" onClick={this.props.startReplay}>
           <div id="main-track"></div>
