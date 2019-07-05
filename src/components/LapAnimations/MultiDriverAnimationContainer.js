@@ -40,14 +40,21 @@ export class MultiDriverAnimationContainer extends Component {
        
         // const driverPits = spanGrandPrixPits.filter(pit => pit.driverId === driver)
         const driverPits = this.props.pitData.filter(pit => pit.driverId === driver);
+
+        let driverLaps = []
+        laps.forEach(lap => {
+          const timing = lap.Timings.find(time => time.driverId === driver)
+          driverLaps.push(timing)
+        })
        
-        let driverLapBreakdown = laps.map(lap => {
-          let info = lap.Timings.find(timing => timing.driverId === driver);
-          return {
-            ...info,
-            lapNumber: parseInt(lap.number)
-          }
-        });
+        // let driverLapBreakdown = laps.map(lap => {
+        //   let info = lap.Timings.find(timing => timing.driverId === driver);
+
+        //   return {
+        //     ...info,
+        //     lapNumber: parseInt(lap.number)
+        //   }
+        // });
          
         // edge case for when driver does not have qualifying data
         let startingPosition
@@ -63,7 +70,7 @@ export class MultiDriverAnimationContainer extends Component {
           time: "0:00.000",
         };
         
-        this.createLapAnimations(driverLapBreakdown, driverPits, driverNumberCount)
+        this.createLapAnimations(driverLaps, driverPits, driverNumberCount)
        
         // // add lap zero to lap data fetch
         // driverLapBreakdown.unshift(lapZero);
@@ -93,11 +100,31 @@ export class MultiDriverAnimationContainer extends Component {
   createLapAnimations(lapData, pitData, driverNumberCount) {
     let lapAnimations = []
    
-    if (pitData.length > 0) {
-      lapData.forEach(lap => {
-        if (lap.time) {
-          let animationObj = this.createAnimationObj(lap)
+    // if (pitData.length > 0) {
+    //   lapData.forEach(lap => {
+    //     if (lap) {
+    //       let animationObj = this.createAnimationObj(lap)
  
+    //     const pitStop = pitData.find(pit => pit.lap === lap.lapNumber)
+    //     if (pitStop) {
+    //       const pitTime = this.createPitTime(pitStop.duration)
+    //       // if there was a pit on that lap, add pitTime for delayed animation
+    //       animationObj = {
+    //         ...animationObj,
+    //         pitTime: pitTime
+    //       }
+    //     }
+ 
+    //     lapAnimations.push(animationObj)
+    //     }
+    //   })
+    // }
+
+    lapData.forEach(lap => {
+      if (lap) {
+        let animationObj = this.createAnimationObj(lap)
+
+      if (pitData.length > 0) {
         const pitStop = pitData.find(pit => pit.lap === lap.lapNumber)
         if (pitStop) {
           const pitTime = this.createPitTime(pitStop.duration)
@@ -107,12 +134,16 @@ export class MultiDriverAnimationContainer extends Component {
             pitTime: pitTime
           }
         }
- 
-        lapAnimations.push(animationObj)
-        }
-      })
-    }
+      }
 
+      lapAnimations.push(animationObj)
+      }
+    })
+
+    
+
+    
+    
     let updatedAllAnimations = this.state.driverLapAnimations
     updatedAllAnimations.push({
       driverNumber: driverNumberCount,
@@ -157,7 +188,7 @@ export class MultiDriverAnimationContainer extends Component {
       <div id="svg-holder" onClick={this.props.startReplay}>
         <div id="main-track"></div>
         {this.state.animationsLoaded && this.state.driverLapAnimations.map(driverAnimation => {
-          return <MultiDriverAnimation driverAnimation={driverAnimation} />
+          return <MultiDriverAnimation key={driverAnimation.driverNumber} driverAnimation={driverAnimation} />
         })}
       </div>
     )
