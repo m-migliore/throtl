@@ -32,6 +32,7 @@ const trackRender = trackName => {
         ${trackpaths[trackName]}
         <circle id="circle" r="10" cx="0" cy="0" fill="tomato" />
         <animateMotion
+          id="testest"
           href="#circle"
           dur=${animationObj.animationDuration}
           begin=${animationObj.pitTime}
