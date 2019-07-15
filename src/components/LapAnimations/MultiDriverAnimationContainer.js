@@ -79,6 +79,11 @@ export class MultiDriverAnimationContainer extends Component {
           this.setState({
             animationsLoaded: true
           })
+
+          const oneTest = this.state.driverLapAnimations.slice(0,1)
+          this.setState({
+            driverLapAnimations: oneTest
+          })
         }
 
         driverNumberCount++
@@ -141,7 +146,7 @@ export class MultiDriverAnimationContainer extends Component {
      
   // use to create a 'pause' time to indicate a pit stop in the animation
   createPitTime(stringTime) {
-    return parseFloat(stringTime).toFixed(2).replace(".","") * .25 + "ms"
+    return parseFloat(stringTime).toFixed(2).replace(".","") * .25
   }
 
 

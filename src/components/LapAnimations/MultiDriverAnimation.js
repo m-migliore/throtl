@@ -42,9 +42,40 @@ class MultiDriverAnimation extends Component {
   }
 
   nextAnimation() {
+    const animations = this.props.driverAnimation.animations
     const count = this.state.animationCount
     const nextCount = count + 1
+    const driverNumber = this.props.driverAnimation.driverNumber
 
+    if (animations[count].pitTime !== 0) {
+      const outline = document.getElementById(`track-outline-${this.props.driverAnimation.driverNumber}`)
+      
+      outline.innerHTML = this.state.lapRender({
+        animationDuration: "1ms",
+        pitTime: 0
+      })
+
+      const track = document.getElementById(`animation${driverNumber}`)
+      track.addEventListener("endEvent", this.renderPitStop.bind(this))
+    } else {
+      this.setState({
+        animationCount: nextCount
+      })
+    }
+
+
+    
+  }
+
+  renderPitStop() {
+    const animations = this.props.driverAnimation.animations
+    const count = this.state.animationCount
+    setTimeout(this.nextLap.bind(this), animations[count].pitTime)
+  }
+
+  nextLap() {
+    const count = this.state.animationCount
+    const nextCount = count + 1
     this.setState({
       animationCount: nextCount
     })
