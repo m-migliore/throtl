@@ -79,11 +79,6 @@ export class MultiDriverAnimationContainer extends Component {
           this.setState({
             animationsLoaded: true
           })
-
-          const oneTest = this.state.driverLapAnimations.slice(0,1)
-          this.setState({
-            driverLapAnimations: oneTest
-          })
         }
 
         driverNumberCount++
