@@ -35,7 +35,7 @@ const multiDriverTrackRender = (trackName, driverNumber) => {
           id="animation${driverNumber}"
           href="#circle${driverNumber}"
           dur=${animationObj.animationDuration}
-          begin=${animationObj.pitTime}
+          begin="0ms"
           fill="freeze"
           repeatCount="1">
           <mpath href="#${trackName}" />

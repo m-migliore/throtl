@@ -141,7 +141,7 @@ export class MultiDriverAnimationContainer extends Component {
      
   // use to create a 'pause' time to indicate a pit stop in the animation
   createPitTime(stringTime) {
-    return parseFloat(stringTime).toFixed(2).replace(".","") * .25 + "ms"
+    return parseFloat(stringTime).toFixed(2).replace(".","") * .25
   }
 
 
