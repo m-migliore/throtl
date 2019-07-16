@@ -134,14 +134,14 @@ export class MultiDriverAnimationContainer extends Component {
   // use to easily calculate avergae lap time
   calcAnimationTime(stringTime) {
     const lapTimeArr = stringTime.split(":")
-    const baseSec = parseInt(lapTimeArr[0]) * 2000
-    const remainSec = parseFloat(lapTimeArr[1]) * 10
-    return (baseSec + remainSec) + "ms"
+    const baseSec = parseInt(lapTimeArr[0]) * 1000
+    const remainSec = parseFloat(lapTimeArr[1])
+    return ((baseSec + remainSec) * 4) + "ms"
   }
      
   // use to create a 'pause' time to indicate a pit stop in the animation
   createPitTime(stringTime) {
-    return parseFloat(stringTime).toFixed(2).replace(".","") * .25
+    return parseFloat(stringTime) * 4
   }
 
 
