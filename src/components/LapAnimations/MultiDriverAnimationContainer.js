@@ -68,6 +68,7 @@ export class MultiDriverAnimationContainer extends Component {
         let updatedDriverIndicators = this.state.driverIndicators
         updatedDriverIndicators.push({
           driver: driver,
+          driverNumber: driverNumberCount,
           color: driverColors[driverNumberCount]
         })
 
@@ -152,7 +153,15 @@ export class MultiDriverAnimationContainer extends Component {
       <div className="container my-5">
         <h4>Drivers</h4>
         <ul>
-          {this.state.driverIndicators.map(driver => <DriverIndicator key={driver.driver} driver={driver.driver} color={driver.color} lapData={this.state.driverLapAnimations} />)}
+          {this.state.driverIndicators.map(driver => 
+            <DriverIndicator 
+              key={driver.driver} 
+              driver={driver.driver}
+              driverNumber={driver.driverNumber} 
+              color={driver.color} 
+              lapData={this.state.driverLapAnimations} 
+            />
+          )}
         </ul>
         <div id="svg-holder" onClick={this.props.startReplay}>
           <div id="main-track"></div>

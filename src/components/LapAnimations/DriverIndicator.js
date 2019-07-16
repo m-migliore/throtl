@@ -4,7 +4,7 @@ class DriverIndicator extends Component {
 
   render() {
     return (
-      <li>
+      <li id={"driver" + this.props.driverNumber}>
         <span className="driver-indicator" style={{'backgroundColor' : this.props.color}}></span>
         {this.props.driver}
       </li>
