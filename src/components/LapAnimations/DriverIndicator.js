@@ -7,6 +7,8 @@ class DriverIndicator extends Component {
       <li id={"driver" + this.props.driverNumber}>
         <span className="driver-indicator" style={{'backgroundColor' : this.props.color}}></span>
         {this.props.driver}
+        <span id={`driver${this.props.driverNumber}-time`}></span>
+        <span id={`driver${this.props.driverNumber}-pit`}></span>
       </li>
     )
   }

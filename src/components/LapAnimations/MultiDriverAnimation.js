@@ -46,25 +46,28 @@ class MultiDriverAnimation extends Component {
     const count = this.state.animationCount
     const nextCount = count + 1
     const driverNumber = this.props.driverAnimation.driverNumber
+    const timeDisplay = document.getElementById(`driver${driverNumber}-time`)
+    const pitDisplay = document.getElementById(`driver${driverNumber}-pit`)
+    
 
     if (animations[count].pitTime !== 0) {
-      const outline = document.getElementById(`track-outline-${this.props.driverAnimation.driverNumber}`)
-      
+      const outline = document.getElementById(`track-outline-${driverNumber}`)
+      pitDisplay.innerHTML = "Pit Stop"
       outline.innerHTML = this.state.lapRender({
         animationDuration: "1ms",
         pitTime: 0
       })
+      
+      setTimeout(this.removePitMessage.bind(this), (animations[count].pitTime * 4))
 
       const track = document.getElementById(`animation${driverNumber}`)
       track.addEventListener("endEvent", this.renderPitStop.bind(this))
     } else {
+      timeDisplay.innerHTML = animations[count].lapTime
       this.setState({
         animationCount: nextCount
       })
     }
-
-
-    
   }
 
   renderPitStop() {
@@ -79,6 +82,12 @@ class MultiDriverAnimation extends Component {
     this.setState({
       animationCount: nextCount
     })
+  }
+
+  removePitMessage() {
+    const driverNumber = this.props.driverAnimation.driverNumber
+    const pitDisplay = document.getElementById(`driver${driverNumber}-pit`)
+    pitDisplay.innerHTML = ""
   }
 
   render() {
