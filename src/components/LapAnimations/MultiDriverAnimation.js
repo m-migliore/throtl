@@ -58,7 +58,7 @@ class MultiDriverAnimation extends Component {
         pitTime: 0
       })
       
-      setTimeout(this.removePitMessage.bind(this), (animations[count].pitTime * 4))
+      setTimeout(this.removePitMessage.bind(this), (animations[count].pitTime * 3))
 
       const track = document.getElementById(`animation${driverNumber}`)
       track.addEventListener("endEvent", this.renderPitStop.bind(this))
