@@ -28,11 +28,11 @@ class RaceContainer extends Component {
 						<Moment date={this.props.raceData.date} format="LLL" />
 					</p>
 					<CircuitInfo />
+					{this.props.raceData.Results && <MultiDriverAnimationContainer />}
 					{this.props.raceData.Results && <RaceReplayContainer />}
 					{this.props.raceData.Results && <RaceResults />}
 					{this.props.qualData.length > 1 && <QualResults />}
 					{this.props.detailedResultView && <DetailedResult />}
-					<MultiDriverAnimationContainer />
 				</div>
 			);
 		} else {

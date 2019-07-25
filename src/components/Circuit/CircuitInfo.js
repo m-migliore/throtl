@@ -14,7 +14,7 @@ class CircuitInfo extends Component {
           <h2><a href={circuit.url} rel="noopener noreferrer" target="_blank">{circuit.circuitName}</a></h2>
           <FlagImage flagName={circuit.Location.country} />
           <p>{circuit.Location.locality}, {circuit.Location.country}</p>
-          <TrackSVG trackName={circuit.circuitId} />
+          {!this.props.raceData.Results && <TrackSVG trackName={circuit.circuitId} />}
         </div>
       );
 
@@ -27,7 +27,8 @@ class CircuitInfo extends Component {
 
 const mapStateToProps = state => {
   return {
-    circuitData: state.circuitData
+    circuitData: state.circuitData,
+    raceData: state.raceData
   }
 }
 

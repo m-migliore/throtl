@@ -44,7 +44,7 @@ export class MultiDriverAnimationContainer extends Component {
        
         const driverColors = {
           1: "red",
-          2 :"blue",
+          2: "blue",
           3: "yellow",
           4: "orange",
           5: "purple",
@@ -151,23 +151,27 @@ export class MultiDriverAnimationContainer extends Component {
   render() {
     return (
       <div className="container my-5">
-        <h4>Drivers</h4>
-        <ul>
-          {this.state.driverIndicators.map(driver => 
-            <DriverIndicator 
-              key={driver.driver} 
-              driver={driver.driver}
-              driverNumber={driver.driverNumber} 
-              color={driver.color} 
-              lapData={this.state.driverLapAnimations} 
-            />
-          )}
-        </ul>
-        <div id="svg-holder" onClick={this.props.startReplay}>
-          <div id="main-track"></div>
-          {this.state.animationsLoaded && this.state.driverLapAnimations.map(driverAnimation => {
-            return <MultiDriverAnimation key={driverAnimation.driverNumber} driverAnimation={driverAnimation} />
-          })}
+        <div className="flex">
+          <div>
+            <h4>Drivers</h4>
+            <ul>
+              {this.state.driverIndicators.map(driver =>
+                <DriverIndicator
+                  key={driver.driver}
+                  driver={driver.driver}
+                  driverNumber={driver.driverNumber}
+                  color={driver.color}
+                  lapData={this.state.driverLapAnimations}
+                />
+              )}
+            </ul>
+          </div>
+          <div id="svg-holder" onClick={this.props.startReplay}>
+            <div id="main-track"></div>
+            {this.state.animationsLoaded && this.state.driverLapAnimations.map(driverAnimation => {
+              return <MultiDriverAnimation key={driverAnimation.driverNumber} driverAnimation={driverAnimation} />
+            })}
+          </div>
         </div>
       </div>
      
