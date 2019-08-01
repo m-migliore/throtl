@@ -236,12 +236,18 @@ table tr > td:last-of-type, table tr > th:last-of-type {
 
 .multi-driver-indicator-holder {
   position: relative;
+  height: 500px;
 }
 
-.mutli-drier-indicator {
+.multi-driver-indicator {
   position: absolute;
   top: 0;
   left: 0;
+  -webkit-transition: all 1s ease-in-out;
+  -moz-transition: all 1s ease-in-out;
+  -ms-transition: all 1s ease-in-out;
+  -o-transition: all 1s ease-in-out;
+  transition: all 1s ease-in-out;
 }
 /********** ANIMATIONS **********/
 

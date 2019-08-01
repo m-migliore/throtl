@@ -41,7 +41,7 @@ export class MultiDriverAnimationContainer extends Component {
           })
         })
         
-        this.createLapAnimations(driverLaps, driverPits, driverNumberCount)
+        this.createLapAnimations(driver, driverLaps, driverPits, driverNumberCount)
        
         const driverColors = {
           1: "red",
@@ -89,7 +89,7 @@ export class MultiDriverAnimationContainer extends Component {
   }
 
   // used to create all of the animations for laps and pit data 
-  createLapAnimations(lapData, pitData, driverNumberCount) {
+  createLapAnimations(driverId, lapData, pitData, driverNumberCount) {
     let lapAnimations = []
 
     lapData.forEach(lap => {
@@ -102,8 +102,7 @@ export class MultiDriverAnimationContainer extends Component {
             // if there was a pit on that lap, add pitTime for delayed animation
             animationObj = {
               ...animationObj,
-              pitTime: pitTime,
-              position: parseInt(lap.position)
+              pitTime: pitTime
             }
           }
         }
@@ -114,6 +113,7 @@ export class MultiDriverAnimationContainer extends Component {
     
     let updatedAllAnimations = this.state.driverLapAnimations
     updatedAllAnimations.push({
+      driverId: driverId,
       driverNumber: driverNumberCount,
       animations: lapAnimations
     })
