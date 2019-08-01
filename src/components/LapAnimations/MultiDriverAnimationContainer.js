@@ -22,6 +22,7 @@ export class MultiDriverAnimationContainer extends Component {
   }
 
   componentDidUpdate() {
+    //console.log(this.state.driverLapAnimations)
     if (this.props.lapData.length > 0 && this.props.pitData && !this.state.animationsLoaded) {
 
       let driverNumberCount = 1
@@ -101,7 +102,8 @@ export class MultiDriverAnimationContainer extends Component {
             // if there was a pit on that lap, add pitTime for delayed animation
             animationObj = {
               ...animationObj,
-              pitTime: pitTime
+              pitTime: pitTime,
+              position: parseInt(lap.position)
             }
           }
         }
@@ -128,7 +130,8 @@ export class MultiDriverAnimationContainer extends Component {
     return {
       lapTime: lap.time,
       animationDuration: animationTime,
-      pitTime: 0
+      pitTime: 0,
+      position: parseInt(lap.position)
     }
   }
    
@@ -154,7 +157,7 @@ export class MultiDriverAnimationContainer extends Component {
         <div className="flex">
           <div>
             <h4>Drivers</h4>
-            <ul>
+            <ul className="multi-driver-indicator-holder">
               {this.state.driverIndicators.map(driver =>
                 <DriverIndicator
                   key={driver.driver}

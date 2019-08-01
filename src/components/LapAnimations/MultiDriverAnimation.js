@@ -49,6 +49,8 @@ class MultiDriverAnimation extends Component {
     const timeDisplay = document.getElementById(`driver${driverNumber}-time`)
     const pitDisplay = document.getElementById(`driver${driverNumber}-pit`)
     
+    const indicator = document.getElementById(`driver${driverNumber}`)
+    indicator.style.top = `${animations[count].position * 30}px`
 
     if (animations[count].pitTime !== 0) {
       const outline = document.getElementById(`track-outline-${driverNumber}`)

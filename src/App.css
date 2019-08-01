@@ -225,13 +225,23 @@ table tr > td:last-of-type, table tr > th:last-of-type {
   left: 0;
 }
 
-.driver-indicator {
+.driver-indicator-color {
   display: inline-block;
   width: 5px;
   height: 5px;
   border-radius: 50%;
   margin-right: 5px;
   vertical-align: middle;
+}
+
+.multi-driver-indicator-holder {
+  position: relative;
+}
+
+.mutli-drier-indicator {
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 /********** ANIMATIONS **********/
 
