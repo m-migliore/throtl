@@ -22,7 +22,7 @@ export class MultiDriverAnimationContainer extends Component {
   }
 
   componentDidUpdate() {
-    //console.log(this.state.driverLapAnimations)
+    console.log(this.state.driverLapAnimations)
     if (this.props.lapData.length > 0 && this.props.pitData && !this.state.animationsLoaded) {
 
       let driverNumberCount = 1
@@ -86,6 +86,8 @@ export class MultiDriverAnimationContainer extends Component {
         driverNumberCount++
       });
     }
+
+    console.log(this.state.driverLapAnimations)
   }
 
   // used to create all of the animations for laps and pit data 
@@ -154,27 +156,25 @@ export class MultiDriverAnimationContainer extends Component {
   render() {
     return (
       <div className="container my-5">
-        <div className="flex">
-          <div>
-            <h4>Drivers</h4>
-            <ul className="multi-driver-indicator-holder">
-              {this.state.driverIndicators.map(driver =>
-                <DriverIndicator
-                  key={driver.driver}
-                  driver={driver.driver}
-                  driverNumber={driver.driverNumber}
-                  color={driver.color}
-                  lapData={this.state.driverLapAnimations}
-                />
-              )}
-            </ul>
+        <div>
+          <h4>Drivers</h4>
+          <div className="multi-driver-indicator-holder">
+            {this.state.driverIndicators.map(driver =>
+              <DriverIndicator
+                key={driver.driver}
+                driver={driver.driver}
+                driverNumber={driver.driverNumber}
+                color={driver.color}
+                lapData={this.state.driverLapAnimations}
+              />
+            )}
           </div>
-          <div id="svg-holder" onClick={this.props.startReplay}>
-            <div id="main-track"></div>
-            {this.state.animationsLoaded && this.state.driverLapAnimations.map(driverAnimation => {
-              return <MultiDriverAnimation key={driverAnimation.driverNumber} driverAnimation={driverAnimation} />
-            })}
-          </div>
+        </div>
+        <div id="svg-holder" onClick={this.props.startReplay}>
+          <div id="main-track"></div>
+          {this.state.animationsLoaded && this.state.driverLapAnimations.map(driverAnimation => {
+            return <MultiDriverAnimation key={driverAnimation.driverNumber} driverAnimation={driverAnimation} />
+          })}
         </div>
       </div>
      

@@ -9,7 +9,8 @@ class MultiDriverAnimation extends Component {
 
     this.state = {
       lapRender: multiDriverTrackRender(this.props.trackName, this.props.driverAnimation.driverNumber),
-      animationCount: 0
+      animationCount: 0,
+      driverResult: {}
     }
     this.nextAnimation = this.nextAnimation.bind(this)
   }
@@ -18,6 +19,10 @@ class MultiDriverAnimation extends Component {
     const driver = this.props.driverAnimation.driverId
     let result = this.props.raceData.Results.find(result =>  result.Driver.driverId === driver)
     // sometimes result does not have a grid position, take from qual results instead
+    this.setState({
+      driverResult: result
+    })
+
     let startingPosition
     if (!!result.grid) {
       startingPosition = parseInt(result.grid)
@@ -37,7 +42,7 @@ class MultiDriverAnimation extends Component {
   }
 
   componentDidUpdate() {
-    if (this.props.replayStart && this.state.animationCount < this.props.driverAnimation.animations.length - 1) {
+    if (this.props.replayStart && this.state.animationCount < this.props.driverAnimation.animations.length ) {
       const outline = document.getElementById(`track-outline-${this.props.driverAnimation.driverNumber}`)
       const animations = this.props.driverAnimation.animations
       const count = this.state.animationCount
@@ -48,36 +53,53 @@ class MultiDriverAnimation extends Component {
       const track = document.getElementById(`animation${driverNumber}`)
       track.addEventListener("endEvent", this.nextAnimation)
       
-    } else if (this.props.replayStart && this.state.animationCount === this.props.driverAnimation.animations.length - 1) {
+    } else if (this.props.replayStart && this.state.animationCount === this.props.driverAnimation.animations.length ) {
+      
       const outline = document.getElementById(`track-outline-${this.props.driverAnimation.driverNumber}`)
       outline.remove()
-    }
+    } 
+    
   }
 
   nextAnimation() {
-   //const animations = this.props.driverAnimation.animations
+    if (this.props.driverAnimation.animations.driverId === "perez") {
+      debugger
+      console.log("hit")
+    }
+    const animations = this.props.driverAnimation.animations
     const count = this.state.animationCount
-    const animation = this.props.driverAnimation.animations[this.state.animationCount]
+    const animation = animations[this.state.animationCount]
     const nextCount = count + 1
     const driverNumber = this.props.driverAnimation.driverNumber
     const timeDisplay = document.getElementById(`driver${driverNumber}-time`)
-    const pitDisplay = document.getElementById(`driver${driverNumber}-pit`)
-    
+    const statusDisplay = document.getElementById(`driver${driverNumber}-status`)
+   
     const indicator = document.getElementById(`driver${driverNumber}`)
     indicator.style.top = `${animation.position * 30}px`
 
     if (animation.pitTime !== 0) {
       const outline = document.getElementById(`track-outline-${driverNumber}`)
-      pitDisplay.innerHTML = "Pit Stop"
+      statusDisplay.innerHTML = "Pit Stop"
       outline.innerHTML = this.state.lapRender({
         animationDuration: "1ms",
         pitTime: 0
       })
       
-      setTimeout(this.removePitMessage.bind(this), (animation.pitTime * 3))
+      setTimeout(this.removeStatusMessage.bind(this), (animation.pitTime * 3))
 
       const track = document.getElementById(`animation${driverNumber}`)
       track.addEventListener("endEvent", this.renderPitStop.bind(this))
+    } else if (animations[nextCount] === undefined) {
+
+      const finishStatus = {
+        position: this.state.driverResult.position,
+        status: this.state.driverResult.status
+      }
+      const indicator = document.getElementById(`driver${driverNumber}`)
+      indicator.style.top = `${finishStatus.position * 30}px`
+      
+      const statusDisplay = document.getElementById(`driver${driverNumber}-status`)
+      statusDisplay.innerHTML = finishStatus.status
     } else {
       timeDisplay.innerHTML = animation.lapTime
       this.setState({
@@ -100,10 +122,10 @@ class MultiDriverAnimation extends Component {
     })
   }
 
-  removePitMessage() {
+  removeStatusMessage() {
     const driverNumber = this.props.driverAnimation.driverNumber
-    const pitDisplay = document.getElementById(`driver${driverNumber}-pit`)
-    pitDisplay.innerHTML = ""
+    const statusDisplay = document.getElementById(`driver${driverNumber}-status`)
+    statusDisplay.innerHTML = ""
   }
 
   render() {
