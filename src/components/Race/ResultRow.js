@@ -31,11 +31,7 @@ class ResultRow extends Component {
           result.Constructor.name}
         </td>
         <td>{result.points}</td>
-        {this.props.season > 2003 ?
-          result.FastestLap ? <td>{result.FastestLap.Time.time}</td> : "-"
-          :
-          null
-        }
+        {this.props.season > 2003 && result.FastestLap ? <td>{result.FastestLap.Time.time}</td> : <td>-</td>}
         <td>{result.status}</td>
         <td><button onClick={this.handleClick} className="btn btn-default">Full Details</button></td>
       </tr>

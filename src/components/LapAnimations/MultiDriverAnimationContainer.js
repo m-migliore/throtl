@@ -67,8 +67,9 @@ export class MultiDriverAnimationContainer extends Component {
         }
 
         let updatedDriverIndicators = this.state.driverIndicators
+        const driverData = this.props.raceData.Results.find(result => result.Driver.driverId === driver).Driver
         updatedDriverIndicators.push({
-          driver: driver,
+          driver: driverData,
           driverNumber: driverNumberCount,
           color: driverColors[driverNumberCount]
         })
@@ -156,7 +157,7 @@ export class MultiDriverAnimationContainer extends Component {
   render() {
     return (
       <div className="container my-5">
-        <div>
+        <div className={this.state.animationsLoaded ? "multi-driver-leaderboard loaded": "multi-driver-leaderboard"}>
           <h4>Drivers</h4>
           <div className="multi-driver-indicator-holder">
             {this.state.driverIndicators.map(driver =>

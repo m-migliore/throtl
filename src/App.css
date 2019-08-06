@@ -219,6 +219,14 @@ table tr > td:last-of-type, table tr > th:last-of-type {
   position: relative;
 }
 
+.multi-driver-leaderboard {
+  display: none;
+}
+
+.multi-driver-leaderboard.loaded {
+  display: block;
+}
+
 .multi-driver-animation {
   position: absolute;
   top: 0;

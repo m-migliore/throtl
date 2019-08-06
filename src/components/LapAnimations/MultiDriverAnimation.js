@@ -42,7 +42,7 @@ class MultiDriverAnimation extends Component {
   }
 
   componentDidUpdate() {
-    if (this.props.replayStart && this.state.animationCount < this.props.driverAnimation.animations.length ) {
+    if (this.props.replayStart && this.state.animationCount < this.props.driverAnimation.animations.length) {
       const outline = document.getElementById(`track-outline-${this.props.driverAnimation.driverNumber}`)
       const animations = this.props.driverAnimation.animations
       const count = this.state.animationCount
@@ -52,20 +52,11 @@ class MultiDriverAnimation extends Component {
 
       const track = document.getElementById(`animation${driverNumber}`)
       track.addEventListener("endEvent", this.nextAnimation)
-      
-    } else if (this.props.replayStart && this.state.animationCount === this.props.driverAnimation.animations.length ) {
-      
-      const outline = document.getElementById(`track-outline-${this.props.driverAnimation.driverNumber}`)
-      outline.remove()
-    } 
-    
+    }
   }
 
   nextAnimation() {
-    if (this.props.driverAnimation.animations.driverId === "perez") {
-      debugger
-      console.log("hit")
-    }
+    
     const animations = this.props.driverAnimation.animations
     const count = this.state.animationCount
     const animation = animations[this.state.animationCount]
@@ -73,7 +64,6 @@ class MultiDriverAnimation extends Component {
     const driverNumber = this.props.driverAnimation.driverNumber
     const timeDisplay = document.getElementById(`driver${driverNumber}-time`)
     const statusDisplay = document.getElementById(`driver${driverNumber}-status`)
-   
     const indicator = document.getElementById(`driver${driverNumber}`)
     indicator.style.top = `${animation.position * 30}px`
 
@@ -90,6 +80,9 @@ class MultiDriverAnimation extends Component {
       const track = document.getElementById(`animation${driverNumber}`)
       track.addEventListener("endEvent", this.renderPitStop.bind(this))
     } else if (animations[nextCount] === undefined) {
+
+      const outline = document.getElementById(`track-outline-${this.props.driverAnimation.driverNumber}`)
+      outline.remove()
 
       const finishStatus = {
         position: this.state.driverResult.position,
