@@ -87,8 +87,6 @@ export class MultiDriverAnimationContainer extends Component {
         driverNumberCount++
       });
     }
-
-    console.log(this.state.driverLapAnimations)
   }
 
   // used to create all of the animations for laps and pit data 
@@ -160,12 +158,12 @@ export class MultiDriverAnimationContainer extends Component {
         <div className={this.state.animationsLoaded ? "multi-driver-leaderboard loaded": "multi-driver-leaderboard"}>
           <h4>Drivers</h4>
           <div className="multi-driver-indicator-holder">
-            {this.state.driverIndicators.map(driver =>
+            {this.state.driverIndicators.map(driverIndicator =>
               <DriverIndicator
-                key={driver.driver}
-                driver={driver.driver}
-                driverNumber={driver.driverNumber}
-                color={driver.color}
+                key={driverIndicator.driver.driverId}
+                driver={driverIndicator.driver}
+                driverNumber={driverIndicator.driverNumber}
+                color={driverIndicator.color}
                 lapData={this.state.driverLapAnimations}
               />
             )}
