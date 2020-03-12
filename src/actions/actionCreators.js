@@ -27,7 +27,8 @@ export function fetchSeasonData(season) {
     dispatch({
       type: "FETCH_SEASON_DATA"
     })
-    const r = await fetch(`http://ergast.com/api/f1/${season}.json`);
+    // const r = await fetch(`http://ergast.com/api/f1/${season}.json`);
+    const r = await fetch(`http://ergast.com/api/f1/2019.json`);
     const data = await r.json();
     const rawRaces = data.MRData.RaceTable.Races;
     const timeCheckedRaces = timeCheckRaces(rawRaces);
@@ -70,7 +71,8 @@ export function fetchDriverStandings(season) {
     dispatch({
       type: "FETCH_DRIVER_STANDINGS"
     })
-    const r = await fetch(`http://ergast.com/api/f1/${season}/driverStandings.json`);
+    // const r = await fetch(`http://ergast.com/api/f1/${season}/driverStandings.json`);
+    const r = await fetch(`http://ergast.com/api/f1/2019/driverStandings.json`);
     const data = await r.json();
     return dispatch({
       type: "LOAD_DRIVER_STANDINGS",
@@ -85,7 +87,8 @@ export function fetchConstructorStandings(season) {
       type: "FETCH_CONSTRUCTOR_STANDINGS"
     })
     if (season > 1957) {
-      return fetch(`http://ergast.com/api/f1/${season}/constructorStandings.json`)
+      // return fetch(`http://ergast.com/api/f1/${season}/constructorStandings.json`)
+      return fetch(`http://ergast.com/api/f1/2019/constructorStandings.json`)
         .then(r => r.json())
         .then(data => dispatch({
           type: "LOAD_CONSTRUCTOR_STANDINGS",
@@ -124,7 +127,8 @@ export function fetchRaceData(season, round) {
     dispatch({
       type: "RACE_FETCH"
     })
-    const r = await fetch(`http://ergast.com/api/f1/${season}/${round}/results.json`);
+    // const r = await fetch(`http://ergast.com/api/f1/${season}/${round}/results.json`);
+    const r = await fetch(`http://ergast.com/api/f1/2019/${round}/results.json`);
     const data = await r.json();
     return dispatch({
       type: "LOAD_RACE_DATA",
@@ -139,7 +143,8 @@ export function fetchQualData(season, round) {
       dispatch({
         type: "QUAL_FETCH"
       })
-      return fetch(`http://ergast.com/api/f1/${season}/${round}/qualifying.json`)
+      // return fetch(`http://ergast.com/api/f1/${season}/${round}/qualifying.json`)
+      return fetch(`http://ergast.com/api/f1/2019/${round}/qualifying.json`)
         .then(r => r.json())
         .then(data => {
           return dispatch({
@@ -160,7 +165,8 @@ export function fetchQualData(season, round) {
 export function fetchRacePitData(season, round) {
   return dispatch => {
     if (season > 2011) {
-      return fetch(`http://ergast.com/api/f1/${season}/${round}/pitstops.json`)
+      // return fetch(`http://ergast.com/api/f1/${season}/${round}/pitstops.json`)
+      return fetch(`http://ergast.com/api/f1/2019/${round}/pitstops.json`)
         .then(r => r.json())
         .then(data => {
           return dispatch({
@@ -181,7 +187,8 @@ export function fetchRacePitData(season, round) {
 export function fetchLapData(season, round) {
   return async dispatch => {
     dispatch({type: "START_LAP_DATA_FETCH"})
-    const r = await fetch(`http://ergast.com/api/f1/${season}/${round}/laps.json?limit=1500`);
+    // const r = await fetch(`http://ergast.com/api/f1/${season}/${round}/laps.json?limit=1500`);
+    const r = await fetch(`http://ergast.com/api/f1/2019/${round}/laps.json?limit=1500`);
     const data = await r.json();
     return dispatch({
       type: "LOAD_LAP_DATA",
@@ -250,14 +257,16 @@ export function fetchGrandPrixSeasonData(season, id, type) {
 }
 
 async function loadRaceResults(season, id, type) {
-  const r = await fetch(`http://ergast.com/api/f1/${season}/${type}s/${id}/results.json`);
+  // const r = await fetch(`http://ergast.com/api/f1/${season}/${type}s/${id}/results.json`);
+  const r = await fetch(`http://ergast.com/api/f1/2019/${type}s/${id}/results.json`);
   const data = await r.json();
   const timeCheckedRaces = timeCheckRaces(data.MRData.RaceTable.Races);
   return timeCheckedRaces;
 }
 
 async function loadQualResults(season, id, type) {
-  const r = await fetch(`http://ergast.com/api/f1/${season}/${type}s/${id}/qualifying.json`);
+  // const r = await fetch(`http://ergast.com/api/f1/${season}/${type}s/${id}/qualifying.json`);
+  const r = await fetch(`http://ergast.com/api/f1/2019/${type}s/${id}/qualifying.json`);
   const data = await r.json();
   return data.MRData.RaceTable.Races;
 }
@@ -308,7 +317,8 @@ function fetchDriverLapData(season, round, driverId) {
   return async dispatch => {
     dispatch({type: "START_DRIVER_LAP_FETCH"})
   
-    const r = await fetch(`http://ergast.com/api/f1/${season}/${round}/drivers/${driverId}/laps.json?limit=80`);
+    // const r = await fetch(`http://ergast.com/api/f1/${season}/${round}/drivers/${driverId}/laps.json?limit=80`);
+    const r = await fetch(`http://ergast.com/api/f1/2019/${round}/drivers/${driverId}/laps.json?limit=80`);
     const data = await r.json();
     const rawDriverLaps = data.MRData.RaceTable.Races[0].Laps;
     const driverLaps = rawDriverLaps.map(lap => {
@@ -328,7 +338,8 @@ function fetchDriverPitData(season, round, driverId) {
   return async dispatch => {
     dispatch({type: "START_DRIVER_PIT_FETCH"})
    
-    const r = await fetch(`http://ergast.com/api/f1/${season}/${round}/drivers/${driverId}/pitstops.json`);
+    // const r = await fetch(`http://ergast.com/api/f1/${season}/${round}/drivers/${driverId}/pitstops.json`);
+    const r = await fetch(`http://ergast.com/api/f1/2019/${round}/drivers/${driverId}/pitstops.json`);
     const data = await r.json();
     let driverPits = ["No Pit Data Available"];
     if (data.MRData.RaceTable.Races.length !== 0) {
